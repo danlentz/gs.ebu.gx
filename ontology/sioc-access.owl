@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:sioc="http://rdfs.org/sioc/ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://rdfs.org/sioc/access">
+  <owl:Class rdf:ID="Permission">
+    <rdfs:isDefinedBy>
+      <owl:Thing rdf:about="#">
+        <owl:imports rdf:resource="http://rdfs.org/sioc/ns#"/>
+        <rdfs:seeAlso rdf:resource="http://rdfs.org/sioc/spec/#sec-modules"/>
+        <dcterms:description>Extends the SIOC Core Ontology (Semantically-Interlinked Online Communities) by defining basic information on permissions and access rights.</dcterms:description>
+        <dcterms:title>SIOC Access Ontology Module</dcterms:title>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+      </owl:Thing>
+    </rdfs:isDefinedBy>
+    <rdfs:comment xml:lang="en">A Permission describes a type of action that can be performed on an object that is within the scope of a Role, e.g. a Site, Forum, etc.</rdfs:comment>
+    <rdfs:label xml:lang="en">Permission</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Status">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:comment xml:lang="en">A Status can be assign to content Item to indicate its publication status (e.g. public, draft, etc.). This class is used to define different types of status.</rdfs:comment>
+    <rdfs:label xml:lang="en">Status</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="has_permission">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Permission"/>
+    <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Role"/>
+    <rdfs:comment xml:lang="en">A Permission assigned to a Role.</rdfs:comment>
+    <rdfs:label xml:lang="en">has permission</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_status">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Status"/>
+    <rdfs:domain rdf:resource="http://rdfs.org/sioc/ns#Item"/>
+    <rdfs:comment xml:lang="en">The Status of a content Item (e.g. public, draft).</rdfs:comment>
+    <rdfs:label xml:lang="en">has status</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </owl:ObjectProperty>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->

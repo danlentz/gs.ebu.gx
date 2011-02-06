@@ -1,0 +1,832 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:wot="http://xmlns.com/wot/0.1/"
+    xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:sioc="http://rdfs.org/sioc/ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://rdfs.org/sioc/ns">
+  <owl:Class rdf:ID="Site">
+    <rdfs:isDefinedBy>
+      <owl:Thing rdf:about="#">
+        <rdfs:seeAlso>
+          <rdf:Description rdf:about="http://rdfs.org/sioc/spec">
+            <rdfs:label>SIOC Core Ontology Specification</rdfs:label>
+          </rdf:Description>
+        </rdfs:seeAlso>
+        <dcterms:description xml:lang="en">SIOC (Semantically-Interlinked Online Communities) is an ontology for describing the information in online communities. 
+This information can be used to export information from online communities and to link them together. The scope of the application areas that SIOC can be used for includes (and is not limited to) weblogs, message boards, mailing lists and chat channels.</dcterms:description>
+        <owl:versionInfo>Revision: 1.35</owl:versionInfo>
+        <dcterms:title xml:lang="en">SIOC Core Ontology Namespace</dcterms:title>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+      </owl:Thing>
+    </rdfs:isDefinedBy>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Space"/>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">A Site can be the location of an online community or set of communities, with UserAccounts and Usergroups creating Items in a set of Containers. It can be thought of as a web-accessible data Space.</rdfs:comment>
+    <rdfs:label xml:lang="en">Site</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Role">
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Usergroup"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="UserAccount"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Space"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Item"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Container"/>
+    </owl:disjointWith>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:comment xml:lang="en">A Role is a function of a UserAccount within a scope of a particular Forum, Site, etc.</rdfs:comment>
+    <rdfs:label xml:lang="en">Role</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Agent"/>
+  <owl:Class rdf:ID="Community">
+    <owl:disjointWith>
+      <owl:Class rdf:about="#UserAccount"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#Role"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Item"/>
+    </owl:disjointWith>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:comment xml:lang="en">Community is a high-level concept that defines an online community and what it consists of.</rdfs:comment>
+    <rdfs:label xml:lang="en">Community</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Space">
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Usergroup"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#UserAccount"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#Role"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Item"/>
+    </owl:disjointWith>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:comment xml:lang="en">A Space is a place where data resides, e.g. on a website, desktop, fileshare, etc.</rdfs:comment>
+    <rdfs:label xml:lang="en">Space</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Forum">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Container"/>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">A discussion area on which Posts or entries are made.</rdfs:comment>
+    <rdfs:label xml:lang="en">Forum</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#UserAccount">
+    <owl:disjointWith rdf:resource="#Role"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://xmlns.com/foaf/0.1/OnlineAccount"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Usergroup"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#Space"/>
+    <rdfs:comment xml:lang="en">A user account in an online community site.</rdfs:comment>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Container"/>
+    </owl:disjointWith>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:label xml:lang="en">User Account</rdfs:label>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Item"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:about="#Container">
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Usergroup"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#UserAccount"/>
+    <owl:disjointWith rdf:resource="#Role"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Item"/>
+    </owl:disjointWith>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:comment xml:lang="en">An area in which content Items are contained.</rdfs:comment>
+    <rdfs:label xml:lang="en">Container</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Post">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Document"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Item"/>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">An article or message that can be posted to a Forum.</rdfs:comment>
+    <rdfs:label xml:lang="en">Post</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Usergroup">
+    <owl:disjointWith rdf:resource="#UserAccount"/>
+    <owl:disjointWith rdf:resource="#Space"/>
+    <owl:disjointWith rdf:resource="#Role"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Item"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#Container"/>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:comment xml:lang="en">A set of UserAccounts whose owners have a common purpose or interest. Can be used for access control purposes.</rdfs:comment>
+    <rdfs:label xml:lang="en">Usergroup</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Thread">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:subClassOf rdf:resource="#Container"/>
+    <rdfs:comment xml:lang="en">A container for a series of threaded discussion Posts or Items.</rdfs:comment>
+    <rdfs:label xml:lang="en">Thread</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Item">
+    <owl:disjointWith rdf:resource="#Usergroup"/>
+    <owl:disjointWith rdf:resource="#UserAccount"/>
+    <owl:disjointWith rdf:resource="#Space"/>
+    <owl:disjointWith rdf:resource="#Role"/>
+    <owl:disjointWith rdf:resource="#Container"/>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:comment xml:lang="en">An Item is something which can be in a Container.</rdfs:comment>
+    <rdfs:label xml:lang="en">Item</rdfs:label>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="has_moderator">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#UserAccount"/>
+    <rdfs:domain rdf:resource="#Forum"/>
+    <rdfs:comment xml:lang="en">A UserAccount that is a moderator of this Forum.</rdfs:comment>
+    <rdfs:label xml:lang="en">has moderator</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="next_version">
+    <rdfs:subPropertyOf>
+      <owl:TransitiveProperty rdf:ID="later_version"/>
+    </rdfs:subPropertyOf>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Item"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">Links to the next revision of this Item or Post.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="previous_version"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">next version</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="topic">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://purl.org/dc/terms/subject"/>
+    </rdfs:subPropertyOf>
+    <rdfs:comment xml:lang="en">A topic of interest, linking to the appropriate URI, e.g. in the Open Directory Project or of a SKOS category.</rdfs:comment>
+    <rdfs:label xml:lang="en">topic</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_subscriber">
+    <rdfs:seeAlso>
+      <owl:ObjectProperty rdf:ID="feed"/>
+    </rdfs:seeAlso>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#UserAccount"/>
+    <rdfs:domain rdf:resource="#Container"/>
+    <rdfs:comment xml:lang="en">A UserAccount that is subscribed to this Container.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="subscriber_of"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">has subscriber</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="links_to">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://purl.org/dc/terms/references"/>
+    </rdfs:subPropertyOf>
+    <rdfs:comment xml:lang="en">Links extracted from hyperlinks within a SIOC concept, e.g. Post or Site.</rdfs:comment>
+    <rdfs:label xml:lang="en">links to</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="reference">
+    <owl:versionInfo>Renamed to sioc:links_to.</owl:versionInfo>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Post"/>
+    <rdfs:comment xml:lang="en">Links either created explicitly or extracted implicitly on the HTML level from the Post.</rdfs:comment>
+    <rdfs:label xml:lang="en">reference</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DeprecatedProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_administrator">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#UserAccount"/>
+    <rdfs:domain rdf:resource="#Site"/>
+    <rdfs:comment xml:lang="en">A UserAccount that is an administrator of this Site.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="administrator_of"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">has administrator</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_reply">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Item"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">Points to an Item or Post that is a reply or response to this Item or Post.</rdfs:comment>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="related_to"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="reply_of"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">has reply</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_scope">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Role"/>
+    <rdfs:comment xml:lang="en">A resource that this Role applies to.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="scope_of"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">has scope</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_usergroup">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Usergroup"/>
+    <rdfs:domain rdf:resource="#Space"/>
+    <rdfs:comment xml:lang="en">Points to a Usergroup that has certain access to this Space.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="usergroup_of"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">has usergroup</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_modifier">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#UserAccount"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">A UserAccount that modified this Item.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="modifier_of"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">has modifier</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="member_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Usergroup"/>
+    <rdfs:domain rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">A Usergroup that this UserAccount is a member of.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="has_member"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">member of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="group_of">
+    <owl:versionInfo>This property has been renamed. Use sioc:usergroup_of instead.</owl:versionInfo>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="has_group"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">group of</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DeprecatedProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="creator_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">A resource that the UserAccount is a creator of.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="has_creator"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">creator of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="link">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:comment xml:lang="en">A URI of a document which contains this SIOC object.</rdfs:comment>
+    <rdfs:label xml:lang="en">link</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_function">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Role"/>
+    <rdfs:comment xml:lang="en">A Role that this UserAccount has.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="function_of"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">has function</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="previous_by_date">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Item"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">Previous Item or Post in a given Container sorted by date.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="next_by_date"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">previous by date</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="avatar">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://xmlns.com/foaf/0.1/depiction"/>
+    </rdfs:subPropertyOf>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">An image or depiction used to represent this UserAccount.</rdfs:comment>
+    <rdfs:label xml:lang="en">avatar</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="attachment">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">The URI of a file attached to an Item.</rdfs:comment>
+    <rdfs:label xml:lang="en">attachment</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_host">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Site"/>
+    <rdfs:domain rdf:resource="#Forum"/>
+    <rdfs:comment xml:lang="en">The Site that hosts this Forum.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="host_of"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">has host</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="part_of">
+    <owl:versionInfo>This property is deprecated. Use dcterms:isPartOf from the Dublin Core ontology instead.</owl:versionInfo>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:comment xml:lang="en">A resource that the subject is a part of.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="has_part"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">part of</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DeprecatedProperty"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="space_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Space"/>
+    <rdfs:comment xml:lang="en">A resource which belongs to this data Space.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="has_space"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">space of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="parent_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Container"/>
+    <rdfs:domain rdf:resource="#Container"/>
+    <rdfs:comment xml:lang="en">A child Container or Forum that this Container or Forum is a parent of.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="has_parent"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">parent of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#administrator_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Site"/>
+    <rdfs:domain rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">A Site that the UserAccount is an administrator of.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#has_administrator"/>
+    <rdfs:label xml:lang="en">administrator of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_owner">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">A UserAccount that this resource is owned by.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="owner_of"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">has owner</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="addressed_to">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">Refers to who (e.g. a UserAccount, e-mail address, etc.) a particular Item is addressed to.</rdfs:comment>
+    <rdfs:label xml:lang="en">addressed to</rdfs:label>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#modifier_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Item"/>
+    <rdfs:domain rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">An Item that this UserAccount has modified.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#has_modifier"/>
+    <rdfs:label xml:lang="en">modifier of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="latest_version">
+    <rdfs:range rdf:resource="#Item"/>
+    <rdfs:label xml:lang="en">latest version</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">Links to the latest revision of this Item or Post.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#previous_version">
+    <rdfs:subPropertyOf>
+      <owl:TransitiveProperty rdf:ID="earlier_version"/>
+    </rdfs:subPropertyOf>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Item"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">Links to the previous revision of this Item or Post.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#next_version"/>
+    <rdfs:label xml:lang="en">previous version</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#usergroup_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Space"/>
+    <rdfs:domain rdf:resource="#Usergroup"/>
+    <rdfs:comment xml:lang="en">A Space that the Usergroup has access to.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#has_usergroup"/>
+    <rdfs:label xml:lang="en">usergroup of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#related_to">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:comment xml:lang="en">Related Posts for this Post, perhaps determined implicitly from topics or references.</rdfs:comment>
+    <rdfs:label xml:lang="en">related to</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="moderator_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Forum"/>
+    <rdfs:domain rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">A Forum that a UserAccount is a moderator of.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#has_moderator"/>
+    <rdfs:label xml:lang="en">moderator of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#next_by_date">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Item"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">Next Item or Post in a given Container sorted by date.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#previous_by_date"/>
+    <rdfs:label xml:lang="en">next by date</rdfs:label>
+  </owl:ObjectProperty>
+
+ 
+  <owl:ObjectProperty rdf:ID="embeds_knowledge">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2004/03/trix/rdfg-1/Graph"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">This links Items to embedded statements, facts and structured content.</rdfs:comment>
+    <rdfs:label xml:lang="en">embeds knowledge</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_container">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Container"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">The Container to which this Item belongs.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="container_of"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">has container</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#subscriber_of">
+    <rdfs:seeAlso>
+      <owl:ObjectProperty rdf:about="#feed"/>
+    </rdfs:seeAlso>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Container"/>
+    <rdfs:domain rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">A Container that a UserAccount is subscribed to.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#has_subscriber"/>
+    <rdfs:label xml:lang="en">subscriber of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#host_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Forum"/>
+    <rdfs:domain rdf:resource="#Site"/>
+    <rdfs:comment xml:lang="en">A Forum that is hosted on this Site.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#has_host"/>
+    <rdfs:label xml:lang="en">host of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="follows">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#UserAccount"/>
+    <rdfs:domain rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">Indicates that one UserAccount follows another UserAccount (e.g. for microblog posts or other content item updates).</rdfs:comment>
+    <rdfs:label xml:lang="en">follows</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has_parent">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Container"/>
+    <rdfs:domain rdf:resource="#Container"/>
+    <rdfs:comment xml:lang="en">A Container or Forum that this Container or Forum is a child of.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#parent_of"/>
+    <rdfs:label xml:lang="en">has parent</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="account_of">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="http://xmlns.com/foaf/0.1/account"/>
+    </owl:inverseOf>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+    <rdfs:domain rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">Refers to the foaf:Agent or foaf:Person who owns this sioc:UserAccount.</rdfs:comment>
+    <rdfs:label xml:lang="en">account of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#container_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Item"/>
+    <rdfs:domain rdf:resource="#Container"/>
+    <rdfs:comment xml:lang="en">An Item that this Container contains.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#has_container"/>
+    <rdfs:label xml:lang="en">container of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has_member">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#UserAccount"/>
+    <rdfs:domain rdf:resource="#Usergroup"/>
+    <rdfs:comment xml:lang="en">A UserAccount that is a member of this Usergroup.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#member_of"/>
+    <rdfs:label xml:lang="en">has member</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#owner_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">A resource owned by a particular UserAccount, for example, a weblog or image gallery.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#has_owner"/>
+    <rdfs:label xml:lang="en">owner of</rdfs:label>
+  </owl:ObjectProperty>
+
+  
+  <owl:ObjectProperty rdf:ID="email">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">An electronic mail address of the UserAccount.</rdfs:comment>
+    <rdfs:label xml:lang="en">email</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#feed">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:comment xml:lang="en">A feed (e.g. RSS, Atom, etc.) pertaining to this resource (e.g. for a Forum, Site, UserAccount, etc.).</rdfs:comment>
+    <rdfs:label xml:lang="en">feed</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#reply_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Item"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">Links to an Item or Post which this Item or Post is a reply to.</rdfs:comment>
+    <rdfs:subPropertyOf rdf:resource="#related_to"/>
+    <owl:inverseOf rdf:resource="#has_reply"/>
+    <rdfs:label xml:lang="en">reply of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#function_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Role"/>
+    <rdfs:comment xml:lang="en">A UserAccount that has this Role.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#has_function"/>
+    <rdfs:label xml:lang="en">function of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_discussion">
+    <rdfs:label xml:lang="en">has discussion</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">The discussion that is related to this Item.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="about">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">Specifies that this Item is about a particular resource, e.g. a Post describing a book, hotel, etc.</rdfs:comment>
+    <rdfs:label xml:lang="en">about</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="modified_at">
+    <owl:versionInfo>This property is deprecated. Use dcterms:modified from the Dublin Core ontology instead.</owl:versionInfo>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="#Post"/>
+    <rdfs:comment xml:lang="en">When this was modified, in ISO 8601 format.</rdfs:comment>
+    <rdfs:label xml:lang="en">modified at</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DeprecatedProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="content_encoded">
+    <owl:versionInfo>This property is deprecated. Use content:encoded from the RSS 1.0 content module instead.</owl:versionInfo>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="#Post"/>
+    <rdfs:comment xml:lang="en">The encoded content of the Post, contained in CDATA areas.</rdfs:comment>
+    <rdfs:label xml:lang="en">content encoded</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DeprecatedProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="last_activity_date">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://purl.org/dc/terms/date"/>
+    </rdfs:subPropertyOf>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:comment xml:lang="en">The date and time of the last activity associated with a SIOC concept instance, and expressed in ISO 8601 format. This could be due to a reply Post or Comment, a modification to an Item, etc.</rdfs:comment>
+    <rdfs:label xml:lang="en">last activity date</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="id">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:comment xml:lang="en">An identifier of a SIOC concept instance. For example, a user ID. Must be unique for instances of each type of SIOC concept within the same site.</rdfs:comment>
+    <rdfs:label xml:lang="en">id</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="last_item_date">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="#Container"/>
+    <rdfs:comment xml:lang="en">The date and time of the last Post (or Item) in a Forum (or a Container), in ISO 8601 format.</rdfs:comment>
+    <rdfs:label xml:lang="en">last item date</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="description">
+    <owl:versionInfo>This property is deprecated. Use sioc:content or other methods (AtomOwl, content:encoded from RSS 1.0, etc.) instead.</owl:versionInfo>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="#Post"/>
+    <rdfs:comment xml:lang="en">The content of the Post.</rdfs:comment>
+    <rdfs:label xml:lang="en">description</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DeprecatedProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="email_sha1">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">An electronic mail address of the UserAccount, encoded using SHA1.</rdfs:comment>
+    <rdfs:label xml:lang="en">email sha1</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="first_name">
+    <owl:versionInfo>This property is deprecated. Use foaf:name or foaf:firstName from the FOAF vocabulary instead.</owl:versionInfo>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">First (real) name of this User. Synonyms include given name or christian name.</rdfs:comment>
+    <rdfs:label xml:lang="en">first name</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DeprecatedProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://purl.org/dc/terms/title"/>
+  <owl:DatatypeProperty rdf:ID="ip_address">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">The IP address used when creating this Item. This can be associated with a creator. Some wiki articles list the IP addresses for the creator or modifiers when the usernames are absent.</rdfs:comment>
+    <rdfs:label xml:lang="en">ip address</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="content">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">The content of the Item in plain text format.</rdfs:comment>
+    <rdfs:label xml:lang="en">content</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="title">
+    <owl:versionInfo>This property is deprecated. Use dcterms:title from the Dublin Core ontology instead.</owl:versionInfo>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="#Post"/>
+    <rdfs:comment xml:lang="en">This is the title (subject line) of the Post. Note that for a Post within a threaded discussion that has no parents, it would detail the topic thread.</rdfs:comment>
+    <rdfs:label xml:lang="en">title</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DeprecatedProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="last_reply_date">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:comment xml:lang="en">The date and time of the last reply Post or Comment, which could be associated with a starter Item or Post or with a Thread, and expressed in ISO 8601 format.</rdfs:comment>
+    <rdfs:label xml:lang="en">last reply date</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="last_name">
+    <owl:versionInfo>This property is deprecated. Use foaf:name or foaf:surname from the FOAF vocabulary instead.</owl:versionInfo>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">Last (real) name of this user. Synonyms include surname or family name.</rdfs:comment>
+    <rdfs:label xml:lang="en">last name</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DeprecatedProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="num_threads">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    <rdfs:domain rdf:resource="#Forum"/>
+    <rdfs:comment xml:lang="en">The number of Threads (AKA discussion topics) in a Forum.</rdfs:comment>
+    <rdfs:label xml:lang="en">num threads</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="num_authors">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    <rdfs:comment xml:lang="en">The number of unique authors (UserAccounts and unregistered posters) who have contributed to this Item, Thread, Post, etc.</rdfs:comment>
+    <rdfs:label xml:lang="en">num authors</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="num_replies">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    <rdfs:comment xml:lang="en">The number of replies that this Item, Thread, Post, etc. has. Useful for when the reply structure is absent.</rdfs:comment>
+    <rdfs:label xml:lang="en">num replies</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="num_views">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    <rdfs:comment xml:lang="en">The number of times this Item, Thread, UserAccount profile, etc. has been viewed.</rdfs:comment>
+    <rdfs:label xml:lang="en">num views</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="created_at">
+    <owl:versionInfo>This property is deprecated. Use dcterms:created from the Dublin Core ontology instead.</owl:versionInfo>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="#Post"/>
+    <rdfs:comment xml:lang="en">When this was created, in ISO 8601 format.</rdfs:comment>
+    <rdfs:label xml:lang="en">created at</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DeprecatedProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="note">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:comment xml:lang="en">A note associated with this resource, for example, if it has been edited by a UserAccount.</rdfs:comment>
+    <rdfs:label xml:lang="en">note</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="num_items">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    <rdfs:domain rdf:resource="#Container"/>
+    <rdfs:comment xml:lang="en">The number of Posts (or Items) in a Forum (or a Container).</rdfs:comment>
+    <rdfs:label xml:lang="en">num items</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="subject">
+    <owl:versionInfo>This property is deprecated. Use dcterms:subject from the Dublin Core ontology for text keywords and sioc:topic if the subject can be represented by a URI instead.</owl:versionInfo>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="#Post"/>
+    <rdfs:comment xml:lang="en">Keyword(s) describing subject of the Post.</rdfs:comment>
+    <rdfs:label xml:lang="en">subject</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DeprecatedProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="name">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:comment xml:lang="en">The name of a SIOC concept instance, e.g. a username for a UserAccount, group name for a Usergroup, etc.</rdfs:comment>
+    <rdfs:label xml:lang="en">name</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://purl.org/dc/terms/description"/>
+  <owl:TransitiveProperty rdf:about="#later_version">
+    <owl:inverseOf>
+      <owl:TransitiveProperty rdf:about="#earlier_version"/>
+    </owl:inverseOf>
+    <rdfs:range rdf:resource="#Item"/>
+    <rdfs:label xml:lang="en">later version</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">Links to a later (newer) revision of this Item or Post.</rdfs:comment>
+  </owl:TransitiveProperty>
+  <owl:TransitiveProperty rdf:about="#earlier_version">
+    <owl:inverseOf rdf:resource="#later_version"/>
+    <rdfs:range rdf:resource="#Item"/>
+    <rdfs:label xml:lang="en">earlier version</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">Links to a previous (older) revision of this Item or Post.</rdfs:comment>
+  </owl:TransitiveProperty>
+  
+  <owl:ObjectProperty rdf:about="#has_creator">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#UserAccount"/>
+    <rdfs:comment xml:lang="en">This is the UserAccount that made this resource.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#creator_of"/>
+    <rdfs:label xml:lang="en">has creator</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="#has_space">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Space"/>
+    <rdfs:comment xml:lang="en">A data Space which this resource is a part of.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#space_of"/>
+    <rdfs:label xml:lang="en">has space</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:SymmetricProperty rdf:ID="sibling">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Item"/>
+    <rdfs:domain rdf:resource="#Item"/>
+    <rdfs:comment xml:lang="en">An Item may have a sibling or a twin that exists in a different Container, but the siblings may differ in some small way (for example, language, category, etc.). The sibling of this Item should be self-describing (that is, it should contain all available information).</rdfs:comment>
+    <rdfs:label xml:lang="en">sibling</rdfs:label>
+  </owl:SymmetricProperty>
+
+  <owl:ObjectProperty rdf:about="#scope_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Role"/>
+    <rdfs:comment xml:lang="en">A Role that has a scope of this resource.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#has_scope"/>
+    <rdfs:label xml:lang="en">scope of</rdfs:label>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="#has_part">
+  <!--   # <owl:versionInfo>This property is deprecated. Use dcterms:hasPart from the Dublin Core ontology instead.</owl:versionInfo> -->
+  <!--   # <rdfs:isDefinedBy rdf:resource="#"/> -->
+  <!--   # <rdfs:comment xml:lang="en">An resource that is a part of this subject.</rdfs:comment> -->
+  <!--   # <owl:inverseOf rdf:resource="#part_of"/> -->
+  <!--   # <rdfs:label xml:lang="en">has part</rdfs:label> -->
+  <!--   # <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DeprecatedProperty"/> -->
+   </owl:ObjectProperty>
+  
+ <owl:ObjectProperty rdf:about="#has_group">
+    <!-- <owl:versionInfo>This property has been renamed. Use sioc:has_usergroup instead.</owl:versionInfo> -->
+    <!-- <owl:inverseOf rdf:resource="#group_of"/> -->
+    <!-- <rdfs:label xml:lang="en">has group</rdfs:label> -->
+    <!-- <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DeprecatedProperty"/> -->
+  </owl:ObjectProperty>  
+  <owl:DeprecatedClass rdf:ID="User">
+    <owl:disjointWith rdf:resource="#Role"/>
+    <rdfs:label xml:lang="en">User</rdfs:label>
+    <owl:disjointWith rdf:resource="#Usergroup"/>
+    <owl:disjointWith rdf:resource="#Container"/>
+    <owl:disjointWith rdf:resource="#Item"/>
+    <owl:equivalentClass rdf:resource="#UserAccount"/>
+    <owl:versionInfo>This class is deprecated. Use sioc:UserAccount from the SIOC ontology instead.</owl:versionInfo>
+    <owl:disjointWith rdf:resource="#Space"/>
+    <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/OnlineAccount"/>
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:comment xml:lang="en">UserAccount is now preferred. This is a deprecated class for a User in an online community site.</rdfs:comment>
+  </owl:DeprecatedClass>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->

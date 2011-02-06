@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:sioc="http://rdfs.org/sioc/ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://rdfs.org/sioc/services">
+  <owl:Class rdf:ID="Service">
+    <rdfs:isDefinedBy>
+      <owl:Thing rdf:about="#">
+        <owl:imports rdf:resource="http://rdfs.org/sioc/ns#"/>
+        <rdfs:seeAlso rdf:resource="http://rdfs.org/sioc/spec/#sec-modules"/>
+        <dcterms:description>Extends the SIOC Core Ontology (Semantically-Interlinked Online Communities) by defining basic information on community-related web services.</dcterms:description>
+        <dcterms:title>SIOC Services Ontology Module Namespace</dcterms:title>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+      </owl:Thing>
+    </rdfs:isDefinedBy>
+    <rdfs:comment xml:lang="en">A Service is web service associated with a Site or part of it.</rdfs:comment>
+    <rdfs:label xml:lang="en">Service</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="service_of">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Service"/>
+    <rdfs:comment xml:lang="en">A SIOC object this Service is associated with.</rdfs:comment>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="has_service"/>
+    </owl:inverseOf>
+    <rdfs:label xml:lang="en">service of</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="service_definition">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Service"/>
+    <rdfs:comment xml:lang="en">Links to a web service definition of this sioc:Service.</rdfs:comment>
+    <rdfs:label xml:lang="en">service definition</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has_service">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="#Service"/>
+    <rdfs:comment xml:lang="en">A Service associated with this SIOC object.</rdfs:comment>
+    <owl:inverseOf rdf:resource="#service_of"/>
+    <rdfs:label xml:lang="en">has service</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="service_protocol">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Service"/>
+    <rdfs:comment xml:lang="en">A protocol used by a web service. Possible protocol values include SOAP, REST, SPARQL-QUERY, GData and OpenSearch. These will be added to this module later.</rdfs:comment>
+    <rdfs:label xml:lang="en">service protocol</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="service_endpoint">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Service"/>
+    <rdfs:comment xml:lang="en">URL of a web service endpoint.</rdfs:comment>
+    <rdfs:label xml:lang="en">service endpoint</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="results_format">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:domain rdf:resource="#Service"/>
+    <rdfs:comment xml:lang="en">Format of results returned by a web service.</rdfs:comment>
+    <rdfs:label xml:lang="en">results format</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="max_results">
+    <rdfs:isDefinedBy rdf:resource="#"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:domain rdf:resource="#Service"/>
+    <rdfs:comment xml:lang="en">Maximum number of results results returned by a web service.</rdfs:comment>
+    <rdfs:label xml:lang="en">max results</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </owl:DatatypeProperty>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->

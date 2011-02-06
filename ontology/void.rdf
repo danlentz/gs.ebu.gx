@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:vann="http://purl.org/vocab/vann/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:talis="http://kwijibo.talis.com/"
+    xmlns:swapp="http://sw-app.org/"
+    xml:base="http://vocab.deri.ie/void" 
+    >
+  <!-- "http://rdfs.org/ns/void" -->
+  <owl:Ontology rdf:about="">
+    <dc:creator>
+      <foaf:Person rdf:about="http://vocab.deri.ie/void#Michael%20Hausenblas">
+        <!-- <foaf:mbox rdf:resource="mailto:michael.hausenblas@deri.org"/> -->
+        <foaf:homepage rdf:resource="http://sw-app.org/about.html"/>
+        <foaf:name>Michael Hausenblas</foaf:name>
+      </foaf:Person>
+    </dc:creator>
+    <dc:creator>
+      <foaf:Person rdf:about="http://vocab.deri.ie/void#keiale">
+        <!-- <foaf:mbox rdf:resource="mailto:Keith.Alexander@talis.com"/> 
+        <foaf:homepage rdf:resource="http://kwijibo.talis.com/"/>-->
+        <foaf:name>Keith Alexander</foaf:name>
+      </foaf:Person>
+    </dc:creator>
+    <dc:creator>
+      <foaf:Person rdf:about="http://vocab.deri.ie/void#junzha">
+        <!-- <foaf:mbox rdf:resource="mailto:jun.zhao@zoo.ox.ac.uk"/> -->
+        <!-- <foaf:homepage rdf:resource="http://users.ox.ac.uk/~zool0770/"/> -->
+        <foaf:name>Jun Zhao</foaf:name>
+      </foaf:Person>
+    </dc:creator>
+    <dc:creator>
+      <foaf:Person rdf:about="http://vocab.deri.ie/void#cygri">
+        <!-- <foaf:mbox rdf:resource="mailto:richard.cyganiak@deri.org"/> -->
+        <!-- <foaf:homepage rdf:resource="http://richard.cyganiak.de/"/> -->
+        <foaf:name>Richard Cyganiak</foaf:name>
+      </foaf:Person>
+    </dc:creator>
+    <vann:preferredNamespacePrefix>void</vann:preferredNamespacePrefix>
+    <vann:preferredNamespaceUri>http://rdfs.org/ns/void#</vann:preferredNamespaceUri>
+    <dc:description>The Vocabulary of Interlinked Datasets (voiD) is a vocabulary and a set of instructions that enables the discovery and usage of linked datasets. A linked dataset is a collection of data, published and maintained by a single provider, available as RDF on the Web, where at least some of the resources in the dataset are identified by dereferencable URIs.</dc:description>
+    <dc:title>Vocabulary of Interlinked Datasets (voiD)</dc:title>
+  </owl:Ontology>
+  <owl:Class rdf:ID="Dataset">
+    <rdfs:subClassOf rdf:resource="http://purl.org/dc/dcmitype/Dataset"/>
+    <rdfs:label>dataset</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Linkset">
+    <rdfs:subClassOf rdf:resource="#Dataset"/>
+    <rdfs:label>linkset</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </owl:Class>
+  <owl:Class rdf:ID="TechnicalFeature">
+    <rdfs:label>technical feature</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </owl:Class>
+  <rdf:Property rdf:ID="dataDump">
+    <rdfs:domain rdf:resource="#Dataset"/>
+    <rdfs:comment>Announcement of an RDF dump of the dataset.</rdfs:comment>
+    <rdfs:label>has data dump at</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="statItem">
+    <rdfs:range rdf:resource="http://purl.org/NET/scovo#Item"/>
+    <rdfs:domain rdf:resource="#Dataset"/>
+    <rdfs:label>statistical item</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="uriRegexPattern">
+    <rdfs:domain rdf:resource="#Dataset"/>
+    <rdfs:comment>Defines a regular expression pattern matching URIs in the dataset.</rdfs:comment>
+    <rdfs:label>has URI regular expression pattern</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="linkPredicate">
+    <rdfs:range rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:domain rdf:resource="#Linkset"/>
+    <rdfs:label>a link predicate</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="subset">
+    <rdfs:range rdf:resource="#Dataset"/>
+    <rdfs:domain rdf:resource="#Dataset"/>
+    <rdfs:label>has subset</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="vocabulary">
+    <rdfs:domain rdf:resource="#Dataset"/>
+    <rdfs:comment>A vocabulary that is used in the dataset.</rdfs:comment>
+    <rdfs:label>vocabulary</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="sparqlEndpoint">
+    <rdfs:domain rdf:resource="#Dataset"/>
+    <rdfs:label>has a SPARQL endpoint at</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="exampleResource">
+    <rdfs:domain rdf:resource="#Dataset"/>
+    <rdfs:label>example resource of dataset</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="uriLookupEndpoint">
+    <rdfs:domain rdf:resource="#Dataset"/>
+    <rdfs:comment>Defines a simple URI look-up protocol for accessing a dataset.</rdfs:comment>
+    <rdfs:label>has an URI look-up endpoint at</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="feature">
+    <rdfs:range rdf:resource="#TechnicalFeature"/>
+    <rdfs:domain rdf:resource="#Dataset"/>
+    <rdfs:label>feature</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="target">
+    <rdfs:range rdf:resource="#Dataset"/>
+    <rdfs:domain rdf:resource="#Linkset"/>
+    <rdfs:label>has target</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+  </rdf:Property>
+  <owl:FunctionalProperty rdf:ID="objectsTarget">
+    <rdfs:subPropertyOf rdf:resource="#target"/>
+    <rdfs:range rdf:resource="#Dataset"/>
+    <rdfs:domain rdf:resource="#Linkset"/>
+    <rdfs:comment>The sink target of an interlinking </rdfs:comment>
+    <rdfs:label>has target where objects are located </rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="subjectsTarget">
+    <rdfs:subPropertyOf rdf:resource="#target"/>
+    <rdfs:range rdf:resource="#Dataset"/>
+    <rdfs:domain rdf:resource="#Linkset"/>
+    <rdfs:comment>The source target of an interlinking</rdfs:comment>
+    <rdfs:label>has target where subjects are located</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://vocab.deri.ie/void"/>
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </owl:FunctionalProperty>
+  <!-- <foaf:Organization rdf:about="http://vocab.deri.ie/void#LiDRC"> -->
+  <!--   <foaf:homepage rdf:resource="http://linkeddata.deri.ie/"/> -->
+  <!--   <foaf:name>LiDRC</foaf:name> -->
+  <!--   <foaf:member rdf:resource="http://vocab.deri.ie/void#Michael%20Hausenblas"/> -->
+  <!-- </foaf:Organization> -->
+  <!-- <foaf:Organization rdf:about="http://vocab.deri.ie/void#Department%20of%20Zoology%2C%20University%20of%20Oxford"> -->
+  <!--   <foaf:homepage rdf:resource="http://www.zoo.ox.ac.uk/"/> -->
+  <!--   <foaf:name>Department of Zoology, University of Oxford</foaf:name> -->
+  <!--   <foaf:member rdf:resource="http://vocab.deri.ie/void#junzha"/> -->
+  <!-- </foaf:Organization> -->
+  <!-- <foaf:Organization rdf:about="http://vocab.deri.ie/void#Talis"> -->
+  <!--   <foaf:homepage rdf:resource="http://www.talis.com/"/> -->
+  <!--   <foaf:name>Talis</foaf:name> -->
+  <!--   <foaf:member rdf:resource="http://vocab.deri.ie/void#keiale"/> -->
+  <!-- </foaf:Organization> -->
+  <!-- <foaf:Organization rdf:about="http://vocab.deri.ie/void#Digital%20Enterprise%20Research%20Institute%2C%20NUI%20Galway"> -->
+  <!--   <foaf:homepage rdf:resource="http://www.deri.ie/"/> -->
+  <!--   <foaf:name>Digital Enterprise Research Institute, NUI Galway</foaf:name> -->
+  <!--   <foaf:member rdf:resource="http://vocab.deri.ie/void#cygri"/> -->
+  <!-- </foaf:Organization> -->
+</rdf:RDF>
+
+<!-- Created with TopBraid -->
