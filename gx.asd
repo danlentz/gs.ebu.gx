@@ -141,7 +141,7 @@
                     (:file "porcelain")
                     (:file "readtable")
 ;;                    (:file "unify")
-                    (:file "nnf")
+   ;;                 (:file "nnf")
                     (:file "infix")))
     
     (:module ONTOLOGY :depends-on (UTILITY)

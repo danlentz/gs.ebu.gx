@@ -79,7 +79,7 @@
   (:documentation "http://www.ifi.unizh.ch/ddis/evoont/2008/11/som#"))
 (set-uri-namedspace-from-pkg :som)
 ;;(read-rdf-file #'addRdfXml #p"gx:ontology;http.rdf")
-(read-rdf-file #'addRdfXml #p"gx:data;som.owl")
+(read-rdf-file #'addRdfXml #p"gx:ontology;som.owl")
 ;;(read-rdf-file #'addRdfXml #p"gx:data;doap;redland-doap.rdf")
 
 ;;;;;
