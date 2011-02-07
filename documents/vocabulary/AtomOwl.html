@@ -1,0 +1,1305 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>AtomOwl Vocabulary Specification</title>
+  <link href="http://xmlns.com/xmlns-style.css" rel="stylesheet" type="text/css" />
+  <!--<link href="xmlns-style.css" rel="stylesheet" type="text/css" />-->
+  <style type="text/css">
+
+div.rdf-proplist {
+	background-color: #ddf;
+	border: 1px solid black;
+	float: left;
+	width: 26%;
+	margin: 0.3em 1%; 
+}
+img { border: 0 } 
+/* .glance {
+	border: 1px dotted black;
+} */
+
+ .example {
+	border: 1px dotted black;
+        background-color: #D9E3E9;
+        padding: 5px;
+}
+
+code {
+/*	border: 1px dotted black;
+        background-color: #D9E3E9;
+        padding: 5px; */
+}
+
+ .editorial {
+	border: 2px solid green;
+	padding: 5px;
+}
+
+div.rdf-classlist {
+	background-color: #eef;
+	border: 1px solid black;
+	float: left;
+	margin: 0.3em 1%;
+	width: 26%;
+}
+
+div.rdf-proplist ul {
+/*	margin: 0.3em 0.3em 1em; */
+}
+
+div.rdf-proplist h3 {
+	background-color: #bbf;
+	font-size: 100%;
+	margin: 0;
+	padding: 2px;
+}
+
+div.rdf-classlist h3 {
+	background-color: #ccf;
+	font-size: 100%;
+	margin: 0;
+	padding: 2px;
+}
+
+specterm.h3 {
+/*	foreground-color: #000; */
+	background-color: #bbf;
+	font-size: 100%;
+	margin: 0;
+	padding: 2px;
+}
+
+div.specterm {
+/*	background-color: #ccc; */
+	padding: 10px;
+	border: 1px solid black;
+}
+
+          .http\:\/\/www\.w3\.org\/1999\/02\/22-rdf-syntax-ns\# { color: black }
+          .http\:\/\/www\.w3\.org\/2000\/01\/rdf-schema\# { color: blue }
+          .http\:\/\/www\.w3\.org\/2002\/07\/owl\# { color: purple }
+          .http\:\/\/xmlns\.com\/foaf\/0.1\/ {color: red }
+          .http\:\/\/xmlns\.com\/wot\/0.1\/ {color: yellow }
+          .http\:\/\/purl\.org\/dc\/elements\/1\.1\/ {color: grey }
+          .http\:\/\/purl\.org\/rss\/1\.0\/modules\/syndication\/ { color: red }
+          .http\:\/\/www\.w3\.org\/2003\/06\/sw-vocab-status\/ns\# { color: orange }
+
+
+  </style>
+</head>
+<body>
+  <img align="right" src="img/AtomOwl.jpg" alt="AtomOwl logo"/>  
+  <h1>AtomOwl Vocabulary Specification <br />
+</h1>
+ <h2>Namespace Document - 26 Jun 2006</h2>
+<dl>
+  <dt>Latest version:</dt>
+  <dd> <a href="http://bblfish.net/work/atom-owl/2006-06-06/">http://bblfish.net/work/atom-owl/2006-06-06/#</a>(todo: find a permanent home) [<a href="AtomOwl.n3">N3</a>],[<a href="AtomOwl.ttl">Turtle</a>],[<a href="AtomOwl.ntriples">NTriples</a>],[<a href="AtomOwl.rdf">rdf/xml</a>]</dd>
+  <dt>Last update:</dt>
+  <dd>$Date: 2006/06/26 16:50:54 $</dd>
+  <dt>Revision:</dt>
+  <dd>$Revision: 0.8 $</dd>
+  <dt>Editors:</dt>
+  <dd><a href="http://bblfish.net/" title="Henry Story">Henry Story</a> - <a href="http://www.sun.com/" title="Sun Microsystems">Sun Microsystems</a><br/></dd>
+  <dt>Authors:</dt>
+  <dd>
+	<a href="http://dannyayers.com/" title="Danny Ayers">Danny Ayers</a><br/>
+<a href="http://bblfish.net/" title="Henry Story">Henry Story</a> - <a href="http://www.sun.com/" title="Sun Microsystems">Sun Microsystems</a><br/>
+  </dd>
+  <dt>Contributors:</dt>
+<dd> <a href="http://gmuer.ch/me" title="Reto Bachmann-Gmür">Reto Bachmann-Gmür</a> - currently working with <a href="http://www.hpl.hp.com/bristol/">HP Laboratories Bristol</a><br/>
+     <a href="http://torrez.us/" title="Elias Torres">Elias Torres</a> - <a href="http://ibm.com/">IBM</a><br/>
+     <a href="http://djpowell.net/" title="David Powell">David Powell</a><br/>
+     <a href="http://leighnet.ca/" title="James Leigh">James Leigh</a><br/>
+  </dd>
+</dl>
+<p class="copyright"> Copyright © 2004-2006 by(who knows?)</p>
+<p>Development of AtomOwl is supported by <a href="http://www.sun.com/">Sun Microsystems</a>.</p>
+<!-- Creative Commons License -->
+<a href="http://creativecommons.org/licenses/by/1.0/"><img
+ alt="Creative Commons License" style="border: 0pt none ; float: right;"
+ src="img/somerights.gif" /></a>This work is licensed under a <a
+ href="http://creativecommons.org/licenses/by/1.0/">Creative Commons
+License</a>. This copyright applies to the <em>AtomOwl Vocabulary Specification</em>
+and accompanying documentation and does not apply to AtomOwl data formats,
+vocabulary terms, or technology. Regarding underlying technology, AtomOwl 
+relies heavily on W3C's <a href="http://www.w3.org/RDF/">RDF</a>
+technology, an open Web standard
+that can be freely used by anyone.
+<br />
+<a href="http://validator.w3.org/check/referer"><img src="img/valid-xhtml10"
+ style="float: right;" alt="Valid XHTML 1.0!" height="31" width="88" /> </a>
+<br />
+This visual layout and structure of the
+specification was adapted from the <a href="http://xmlns.com/foaf/0.1/">FOAF
+Vocabulary Specification</a> by Dan Brickley and Libby Miller.
+<!-- Commented out so we can XHTML validate. Very unfortunate way of doing things... <rdf:RDF xmlns="http://web.resource.org/cc/"    xmlns:dc="http://purl.org/dc/elements/1.1/"    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><Work rdf:about=""><license rdf:resource="http://creativecommons.org/licenses/by/1.0/" /></Work><License rdf:about="http://creativecommons.org/licenses/by/1.0/">   <requires rdf:resource="http://web.resource.org/cc/Attribution" />   <permits rdf:resource="http://web.resource.org/cc/Reproduction" />   <permits rdf:resource="http://web.resource.org/cc/Distribution" />   <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks" />   <requires rdf:resource="http://web.resource.org/cc/Notice" /></License></rdf:RDF>-->
+<hr />
+<div class="status">
+<h2>
+<a name="sec-status" class="mozTocH2" id="sec-status"></a>Status of This Document</h2>
+<p><strong>NOTE:</strong> This specification is an evolving document. This document is generated by combining the RDFS/OWL machine-readable <a href="AtomOwl.n3">AtomOwl ontology</a> with a specification template and a set of 
+<a href="doc/">per-term documents</a>.</p>
+<p>
+    <!-- TODO list includes: 
+PRI:
+ - verify correctness of example and its explanation
+ - divide detailed description into subsections - classes and properties
+ - add info about the developer community (in "AtomOwl & RDF" or elsewhere)
+SEC:
+ - create list of AtomOwl terms by broad categories / generate categories automatically
+ - add examples
+ - add status metadata for ontology
+ - extend spec-generation scripts:
+   - to generate an index of AtomOwl terms organised by status (ie. 'unstable','testing' or 'stable')
+   - to expose OWL information about classes and properties (e.g., 'mutually disjoint' classes, 'inverse' properties, ...) 
+-->
+    For more information on the specification issues, descisions, etc. see: </p>
+<ol>
+    <li><a href="http://esw.w3.org/topic/AtomOwl/UseCases">http://esw.w3.org/topic/AtomOwl/UseCases</a></li>
+    <li><a href="http://esw.w3.org/topic/AtomOwl/IdeasAndThoughts">http://esw.w3.org/topic/AtomOwl/IdeasAndThoughts</a></li>
+    <li><a href="http://esw.w3.org/topic/AtomOwl/OntologyIssues">http://esw.w3.org/topic/AtomOwl/OntologyIssues</a></li>
+    <li><a href="http://esw.w3.org/topic/AtomOwl/Todo">http://esw.w3.org/topic/AtomOwl/Todo</a></li>
+</ol>
+<p><em>This section describes the status of this document at the time
+of its publication. Other documents may supersede this document. </em>
+</p>
+<p>Authors welcome suggestions on the <a href="AtomOwl.n3">AtomOwl ontology</a> and this document. Please send comments
+to the <a href="http://groups.google.com/group/atom-owl/">AtomOwl Mailing list</a>; public archives are
+available. This document may be updated or
+added to based on implementation experience, but no commitment is made
+by the authors regarding future updates.</p>
+<h2><a name="sec-changes" class="mozTocH2" id="sec-changes"></a>Recent Changes</h2>
+<ul>
+  <li>Danny's first version</li>
+  <li><a href="http://bblfish.net/work/atom-owl/2004-06-22/">2004-06-22</a>:  version of the AtomOwl Specification</li>
+  <li><a href="http://bblfish.net/work/atom-owl/2004-08-12/">2004-08-12</a>:  another</li>
+  <li><a href="http://bblfish.net/work/atom-owl/2004-11-09/">2004-11-09</a>: another </li>
+<li><a href="http://bblfish.net/work/atom-owl/2005-10-23/">2005-10-23</a>: First version made with final Atom spec.</li>
+<li><a href="http://bblfish.net/work/atom-owl/2006-06-06/">2006-06-06</a>: First simplified version, with XSLT 2.0, XQuery 1.0 transforms. Working towards a final release. </li>
+</ul>
+</div>
+<h2 id="toc"><a name="sec-toc" class="mozTocH2" id="sec-toc"></a>Table of Contents</h2>
+<ul>
+  <li><a href="#sec-siocfor">What's AtomOwl for?</a></li>
+  <li><a href="#sec-glance">AtomOwl At A Glance</a></li>
+  <li><a href="#sec-tools">AtomOwl Tools</a></li>
+  <li><a href="#sec-overview">AtomOwl Overview</a>
+    <ul>
+	  <li><a href="#sec-example">Example</a></li>
+<!--      <li><a href="#sec-basics">AtomOwl Basic Feed</a></li>
+      <li><a href="#sec-accounts">AtomOwl Advanced Feed</a></li>
+       -->
+    </ul>
+  </li>
+  <li><a href="#sec-vocab">The AtomOwl Vocabulary Description</a>
+    <ul>
+      <li><a href="#sec-evolution">Evolution and Extension of AtomOwl</a></li>
+        <li><a href="#sec-modules">AtomOwl Modules </a></li>
+        <li><a href="#sec-standards">AtomOwl and Standards</a></li>
+        <li><a href="#sec-sioc-rdf">AtomOwl and RDF</a></li>
+    </ul>
+  </li>
+  <!-- AtomOwl Implementations: authoring / editing tools aggregators / harvesters -->
+  <li><a href="#sec-xref">AtomOwl cross-reference: Listing AtomOwl Classes and Properties</a></li>
+  <li><a href="#sec-ack">Acknowledgments</a></li>
+</ul>
+<hr />
+<h2><a name="sec-siocfor" class="mozTocH2" id="sec-siocfor"></a>What's AtomOwl for?</h2>
+<p> AtomOwl is an ontology whose aim is to capture the semantics of <a href="http://www.atompub.org/rfc4287.html">rfc4287</a>. RFC4287 is a format to syndicate online content, such as weblogs, podcasts, videocasts, etc. Syndication is a helpful way to alert interested
+readers to changes to a web site, be it to new content or changed content.</p>
+<p>As AtomOwl captures the semantics of rfc4287 it is easy to convert rfc4287 feeds to AtomOwl statements and thus add them to a triple database, which can the be queried using a SPARQL endpoint.  This should then help make very powerful searched for updated content possible.  </p>
+<p>Atom being built on RDF is very easily extensible. It meshes very well with other Ontologies such as foaf or sioc. (todo: examples of both).</p>
+<h2>AtomOwl At A Glance</h2>
+<p>A simple UML like diagram to get an immediate overview of the relation between the classes described here.
+<img src="img/AtomOwl-UML.jpg" alt="UML diagram of AtomOwl"/>
+<a href="img/AtomOwl-UML.pdf">[pdf]</a>
+</p>
+
+<p>An alphabetical index of AtomOwl terms, by class (categories or types) and by
+property.
+</p>
+<div style="padding: 5px; border: dotted; background-color: #ddd;">
+<p>Classes: | <a href="#Category">Category</a> |  <a href="#Content">Content</a> |  <a href="#Entry">Entry</a> |  <a href="#Feed">Feed</a> |  <a href="#FeedOrEntry">FeedOrEntry</a> |  <a href="#Generator">Generator</a> |  <a href="#HTML">HTML</a> |  <a href="#Link">Link</a> |  <a href="#Person">Person</a> |  <a href="#PlainText">PlainText</a> |  <a href="#RelationType">RelationType</a> |  <a href="#TextContent">TextContent</a> |  <a href="#Version">Version</a> |  <a href="#XHTML">XHTML</a> |  <a href="#XML">XML</a> | 
+</p>
+<p>Properties: | <a href="#aggregates">aggregates</a> |  <a href="#author">author</a> |  <a href="#body">body</a> |  <a href="#category">category</a> |  <a href="#contains">contains</a> |  <a href="#content">content</a> |  <a href="#contributor">contributor</a> |  <a href="#email">email</a> |  <a href="#entry">entry</a> |  <a href="#generator">generator</a> |  <a href="#generatorVersion">generatorVersion</a> |  <a href="#html">html</a> |  <a href="#http://www.iana.org/assignments/relation/alternate">http://www.iana.org/assignments/relation/alternate</a> |  <a href="#icon">icon</a> |  <a href="#id">id</a> |  <a href="#label">label</a> |  <a href="#lang">lang</a> |  <a href="#length">length</a> |  <a href="#link">link</a> |  <a href="#logo">logo</a> |  <a href="#name">name</a> |  <a href="#published">published</a> |  <a href="#rel">rel</a> |  <a href="#rights">rights</a> |  <a href="#scheme">scheme</a> |  <a href="#source">source</a> |  <a href="#src">src</a> |  <a href="#subject">subject</a> |  <a href="#subtitle">subtitle</a> |  <a href="#summary">summary</a> |  <a href="#term">term</a> |  <a href="#text">text</a> |  <a href="#title">title</a> |  <a href="#to">to</a> |  <a href="#type">type</a> |  <a href="#updated">updated</a> |  <a href="#uri">uri</a> |  <a href="#xhtml">xhtml</a> |  <a href="#xml">xml</a> | 
+</p>
+</div>
+<div class="glance">
+<h2><a name="sec-overview" class="mozTocH2" id="sec-tools"></a>AtomOwl Tools</h2>
+<p>There are a number of tools available for converting rfc4287 atom xml feeds into AtomOwl. A short list of some provided here:
+</p>
+<ul>
+<li><a href="transform/atom2turtle.xquery">Atom to turtle XQuery 1</a>: This produces the most readable output. I will probably put most of my effort into the xquery transform as I find it easier to program in. It has a dependency on the <a href="http://saxon.sourceforge.net/">Saxon 8.7.x</a> java library</li>. You have to specify the format property, as either "n3" or "turtle". <code>saxonq -s $atm transform/atom2turtle.xquery format=turtle</code>.
+        <li><a href="transform/atom2turtle.xsl">Atom to turtle xslt 2.0</a> generated by the really excellent <a href="http://monet.nag.co.uk/xq2xml/index.html">xq2xsl</a> script from the above XQuery. It retains a small dependency on Saxon.</li> 
+        <li><a href="transform/atom2turtle.old.xsl">Hand written Atom to turtle xslt 2.0</a>. This is out of date, but may be the basis for a transform that is less dependent on Saxon. </li>
+</ul>
+<h2><a name="sec-overview" class="mozTocH2" id="sec-overview"></a>AtomOwl Overview</h2>
+<p>Since syndication is about changes, the core of AtomOwl is the :Version class. There
+are two types of :Version subclasses, the :Feed and :Entry classes.  :Entry objects contains metadata about a resource  that changes. :Feed ojects contain collections of such :Entry objects.  The resource that identifies the metadata of a :Version is its :id. An id can have many :Versions objects associated with it. Hence we can track changes to metadata about
+content. Each version is uniquely identified by the combination of an :id and :updated time stamp. </p> 
+<p>rfc4287 was built with careful attention to the Web architecture. The types of thing described by an atom entry is its :Content. The :Content of an object is a description of
+a representation. A Representation is uniquely identified by its mime type, body, language,... </p>
+<p>So an Entry is a collection of metadata about a :Content.</p> 
+<p>todo: Make that a lot clearer!</p>
+</div>
+<p>
+The AtomOwl Vocabulary definitions presented here are written using
+a computer language (RDF/OWL) that makes it easy for software to
+process some basic facts about the terms in the AtomOwl vocabulary, and
+consequently about the things described in AtomOwl documents. A AtomOwl 
+document, unlike a traditional Web page, can be combined with other
+RDF documents to create a unified database of information.</p>
+<h3><a name="sec-example" class="mozTocH2" id="sec-example"></a>Example</h3>
+<p>Here is a simple transformation of the first example in rfc4287
+</p>
+<div class="example">
+<!-- include sime example file -->
+<pre>
+ 
+@prefix : &lt;http://bblfish.net/work/atom-owl/2006-06-06/#&gt; .
+@prefix iana: &lt;http://www.iana.org/assignments/relation/&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
+
+[] a :Feed;
+ :title [ a :Content; :type "text/plain";
+         :body "Example Feed";
+         ];
+ :link [ a :Link;
+           :rel iana:alternate ;
+           :to [ :src &lt;http://example.org/&gt;;]
+           ];
+ :updated "2003-12-13T18:30:02Z"^^xsd:dateTime;
+ :author [ a :Person;
+           owl:sameAs _:author1;
+            :name "John Doe";
+          ];
+ :id "urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"^^xsd:anyURI;
+ :entry [  a :Entry;
+           :author _:author1;
+           :title [ a :Content; :type "text/plain";
+                   :body "Atom-Powered Robots Run Amok";
+                   ];
+           :link [ a :Link;
+                   :rel iana:alternate ;
+                   :to [ :src &lt;http://example.org/2003/12/13/atom03&gt;;]
+                   ];
+           :id "urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"^^xsd:anyURI;
+           :updated "2003-12-13T18:30:02Z"^^xsd:dateTime;
+           :summary [ a :Content; :type "text/plain";
+                   :body "Some text.";
+                   ];
+ ];
+ .
+
+</pre>
+<!-- end include -->
+</div>
+<p>This brief example introduces the basics of AtomOwl.<br />
+</p>
+<p>It says of courrse exactly what the first example of rfc4287 says, namely:
+</p>
+<ol>
+  <li>There is a <code>awol:Feed</code> object, with an :id relation to <code>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</code>, that was updated on the 13th of December 2003, and whose author is John Doe. <br />
+<br/>
+  </li>
+  <li>The above feed contains just one :entry relation to an :Entry object. Ie. This feed has
+only one entry. The entry has an author, that is the same as the author of the feed, a title "Atom-Powered Robots Run Amok" and an :alternate representation at <code>http://example.org/2003/12/13/atom03</code>
+  </li>
+</ol>
+<p>There are a number of examples of transformations available:</p>
+<!-- fill out info by parsing examples directory -->
+<table><tr><th>Atom original</th><th>N3 transformed</th><th>Trutle version</th><th>comment</th></tr><tr><td><a href='examples/bblfish.atom'>bblfish.atom</a></td><td><a href='examples/bblfish.atom.n3'>bblfish.atom.n3</a></td><td><a href='examples/bblfish.atom.ttl'>bblfish.atom.ttl</a></td></tr><tr><td><a href='examples/entry-example.atom'>entry-example.atom</a></td><td><a href='examples/entry-example.atom.n3'>entry-example.atom.n3</a></td><td><a href='examples/entry-example.atom.ttl'>entry-example.atom.ttl</a></td></tr><tr><td><a href='examples/example-1.atom'>example-1.atom</a></td><td><a href='examples/example-1.atom.n3'>example-1.atom.n3</a></td><td><a href='examples/example-1.atom.ttl'>example-1.atom.ttl</a></td></tr><tr><td><a href='examples/example-2.atom'>example-2.atom</a></td><td><a href='examples/example-2.atom.n3'>example-2.atom.n3</a></td><td><a href='examples/example-2.atom.ttl'>example-2.atom.ttl</a></td></tr><tr><td><a href='examples/example-3.atom'>example-3.atom</a></td><td><a href='examples/example-3.atom.n3'>example-3.atom.n3</a></td><td><a href='examples/example-3.atom.ttl'>example-3.atom.ttl</a></td></tr></table>
+<!-- done -->
+<h2><a name="sec-background" class="mozTocH2" id="sec-background"></a>Background</h2>
+<p>
+AtomOwl is managed as a collaborative effort.More resources on AtomOwl are available on the <a href="https://sommer.dev.java.net/atom/">AtomOwl Project page</a>.</p>
+<p>The remainder of this specification describes how to publish and interpret descriptions such as these on the Web, using RDF/XML for syntax (file format) and terms from AtomOwl. It introduces a number of  classes (such as 'Entry', 'Feed' and 'Content') and properties (relationship and attribute types such as 'updated' or 'author'). Each term definition is provided in both human and machine-readable form, hyperlinked for quick reference, and a reference to rfc4287 spec.</p>
+<p>The specific contents of the AtomOwl vocabulary are detailed in the <a
+ href="http://bblfish.net/work/atom-owl/2006-06-06/AtomOwl.html">AtomOwl namespace document</a>.</p>
+<p>Related publications:</p>
+<ul>
+  <li>rfc4287<br/>
+<a class="small" href="http://www.atompub.org/rfc4287.html">[html]</a><br />
+  </li>
+</ul>
+<h2><a name="sec-vocab" class="mozTocH2" id="sec-vocab"></a>The AtomOwl Vocabulary Description</h2>
+<p>This specification serves as the AtomOwl "namespace document". As such
+it describes the AtomOwl vocabulary and the terms (<a
+ href="http://www.w3.org/RDF/">RDF</a> classes and properties) that
+constitute it, so that <a href="http://www.w3.org/2001/sw/">Semantic
+Web</a> applications can use those terms in a variety of RDF-compatible
+document formats and applications.
+</p>
+<p>This document presents AtomOwl as a <a
+ href="http://www.w3.org/2001/sw/">Semantic Web</a> vocabulary or <em>Ontology</em>.
+</p>
+<h3><a name="sec-evolution" class="mozTocH3" id="sec-evolution"></a>Evolution and
+Extension of AtomOwl</h3>
+The AtomOwl vocabulary is identified by the namespace URI
+'http://bblfish.net/work/atom-owl/2006-06-06/'. (todo: this is unstable)
+<p>Revisions and extensions of AtomOwl are conducted through edits to the namespace document which is stored in a subversion repository at <a href="https://sommer.dev.java.net/atom/">https://sommer.dev.java.net/atom/</a>, and is then published in the Web at the namespace
+URI.</p>
+<!-- The evolution of SIOC is best considered in terms of the stability
+of individual vocabulary terms, rather than the specification as a
+whole. As terms stabilise in usage and documentation, they progress
+through the categories '<strong>unstable</strong>', '<strong>testing</strong>'
+and '<strong>stable</strong>'. -->
+<!--STATUSINFO-->
+<!--p>The properties and types defined here provide some basic 
+concepts for use in SIOC descriptions. Other vocabularies (e.g. the
+<a href="http://dublincore.org/">Dublin Core</a> metadata elements for
+simple bibliographic description, <a href="http://xmlns.com/foaf/0.1/">FOAF</a>,
+<a href="http://purl.org/rss/1.0/spec">RSS
+1.0</a>, etc.) can also be mixed in with SIOC terms, as can local
+extensions. SIOC is designed to be extended, and modules may be added
+at a later date. </p>
+<h3><a name="sec-modules" class="mozTocH3" id="sec-modules"></a>SIOC Modules <br />
+</h3>
+<p>SIOC modules may be used to extend the ontology and avoid makeing
+the base ontology too complex.</p>
+During development
+of
+SIOC ontology, the sub-classes of Forum, Post and User are becoming
+unwieldy. Therefore, it has been decided to move these sub-classes into
+a “Types” module of SIOC. Also, the User sub-classes will be moved to a
+new top-level concept of Role, whereby Roles will be functions of a
+User and will have the scope of Forum, Site, Post, etc. <br />
+<br />
+Examples of types are:
+<ul><li>Forum: BB, Weblog, Mailing List, USENET Newsgroup, Calendar...</li>
+<li>Post: Announcements, Events, Stickies, Polls...</li>
+<li>Roles: Administrator, Moderator, Subscriber...</li>
+</ul>
+<p>
+Rather than restrict users to our pre-defined types, we should allow
+flexibility where people can define their own types of Forum, Post and
+Role (and Site or Usergroup). Some sample types would be made available
+using the “Types” module (e.g., for novices to work with initially),
+and a page can be created listing these at http://rdfs.org/sioc/types/
+in the future. The types defined for roles could have recommended scope
+destinations:</p>
+<ul><li>Administrator (→ has_scope →
+Site)</li>
+<li>Moderator (→ has_scope → Forum, Usergroup)</li>
+<li>Subscriber (→ has_scope → Site, Forum)</li>
+<li>Registered (→ has_scope → Site, Forum)</li>
+<li>Banned (→ has_scope → Site, Forum)</li>
+</ul>
+<h3><a name="sec-standards" class="mozTocH3" id="sec-standards"></a>SIOC and Standards</h3>
+<p>It is important to understand that the <em>SIOC vocabulary</em> as specified in this document is not a standard 
+in the sense of <a href="http://www.iso.ch/iso/en/ISOOnline.openerpage">ISO Standardisation</a>, 
+or that associated with <a href="http://www.w3.org/Consortium/Process/">W3C Process</a>.
+</p>
+<p>SIOC depends heavily on W3C's standards work, specifically on XML, XML Namespaces, RDF, and OWL. 
+All <em>SIOC documents</em> must be well-formed RDF/XML documents.
+</p>
+<p>This specification contributes a vocabulary, "SIOC", to the Semantic
+Web, specifying it using W3C's <a href="http://www.w3.org/RDF/">Resource
+Description Framework</a> (RDF). As such, SIOC adopts by reference both
+a syntax (using XML), a data model (RDF graphs) and a mathematically
+grounded definition for the rules that underpin the RDF design.</p>
+<h3><a name="sec-sioc-rdf" class="mozTocH2" id="sec-sioc-rdf"></a>SIOC and RDF</h3>
+<p>Why does SIOC use <a href="http://www.w3.org/RDF/">RDF</a>? </p>
+<p>SIOC is an application of the Resource Description Framework (RDF)
+because the subject area we're describing -online communities - has
+so many
+competing requirements that a standalone format would not capture them
+or would lead to trying to describe these requirements in a number of
+incompatible formats. By using RDF, SIOC gains a powerful extensibility
+mechanism,
+allowing SIOC-based descriptions to be mixed with claims made in <em>any
+other RDF vocabulary.</em>
+</p>
+<p>People are the things that link together most of the other kinds of
+things we describe in the Web: they make documents, attend meetings,
+are depicted in photos, and so on. Consequently, there are many many
+things that we might want to say about people, not to mention these
+related objects (ie. documents, photos, meetings etc). </p>
+<p>SIOC as a vocabulary cannot incorporate everything we might want to
+talk about that is related to communities, people in these communities
+and content that people have created, or it would be as large as a full
+dictionary. Instead of covering all topics within SIOC itself, we
+describe the basic topics and build into a larger framework - RDF -
+that allows us to take advantage of
+work elsewhere on more specific description vocabularies.
+</p>
+<p>RDF provides SIOC with a way to mix together different
+descriptive vocabularies in a consistent way. Vocabularies can be
+created by different communites and groups as appropriate and mixed
+together as required, without needing any centralised agreement on how
+terms from different vocabularies can be written down in XML.<br />
+</p>
+<p>This mixing happens in two ways: firstly, RDF provides an underlying
+model of (typed) objects and their attributes or relationships. <code>sioc:Post</code>
+is an example of a type of object (a "<em>class</em>"),
+while <span style="font-family: monospace;">sioc</span><code>:has_creator</code>
+and <code>sioc:topic</code> are examples
+of a relationship and an attribute of an <span
+ style="font-family: monospace;">sioc</span><code>:Post</code>; in
+RDF we call these "<em>properties</em>". Any vocabulary described in
+RDF shares this basic model, which is discernable in the syntax for
+RDF, and which removes one level of confusion in <em>understanding</em>
+a given vocabulary, making it simpler to comprehend and therefore reuse
+a vocabulary that you have not written yourself. This is the minimal <em>self-documentation</em>
+that RDF gives you.
+</p>
+<p>Secondly, there are mechanisms for saying which RDF properties are
+connected to which classes, and how different classes are related to
+each other, using RDF Syntax and OWL. These can be quite general (all
+RDF properties by default come from an <code>rdf:Resource</code> for
+example) or very specific and precise (for example by using <a
+ href="http://www.w3.org/2001/sw/WebOnt/">OWL</a> constructs). This is
+another form of
+self-documentation, which allows you to connect different vocabularies
+together as you please.
+</p>
+<p>In summary then, RDF is self-documenting in ways which enable the
+creation and combination of vocabularies in a devolved manner. This is
+particularly important for a vocabulary which describes communities,
+since
+online communities connect to many other domains of interest, which it
+would be
+impossible (as well as suboptimal) for a single group to describe
+adequately in non-geological time. </p-->
+<p>RDF is usually written using XML syntax, but behaves in rather
+different ways to 'vanilla' XML: the same RDF can be written in many
+different ways in XML. This means that SAX and DOM XML parsers are not
+adequate to deal with RDF/XML. If you want to process the data, you
+will need to use one of the many RDF toolkits available, such as Jena
+(Java) or Redland (C). <a href="http://groups.google.com/group/atom-owl/">AtomOwl mailing list</a> is the main discussion list for questions about AtomOwl; <a href="http://lists.w3.org/Archives/Public/semantic-web/">Semantic Web Interest Group</a> members can help with semantic web and RDF related issues which may arise; and there is the active and
+friendly <a href="irc://irc.freenode.net/#swig">#swig</a>  <a href="http://esw.w3.org/topic/InternetRelayChat">IRC</a> channel on  <a
+ href="http://www.freenode.net/">freenode</a>. </p>
+<h2><a name="sec-xref" class="mozTocH2" id="sec-xref"></a>AtomOwl cross-reference:
+Listing AtomOwl Classes and Properties</h2>
+<p>AtomOwl introduces the following classes and properties. View <a
+ style="font-style: italic;" href="http://bblfish.net/work/atom-owl/2006-06-06/AtomOwl.n3">AtomOwl namespace document</a> to see the N3 version. </p>
+<!-- the following is the script-generated list of classes and properties -->
+<h3>Classes and Properties (full detail)</h3><div class="specterm" id="Category">
+<h3>Class: awol:Category</h3>
+<p><em>Category Class</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.2'>§4.2.2</a> of rfc 4287. A Category Type <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#category">awol:category</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#label">awol:label</a> <a href="#scheme">awol:scheme</a> <a href="#term">awol:term</a> </td></tr></table><br/>
+<i>Reto's Note</i>:  The construct with term and scheme looks very much like a URI-Ref used in RDF. Isn't this just any rdfs:Resource? Maybe skos:Concept could be used as range of :category.<br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="Content">
+<h3>Class: awol:Content</h3>
+<p><em>Content Class</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.1.3'>§4.1.3</a> in rfc 4287 One way to think of this is as a class that represents what one can get from an HTTP connection. It has a body, and a number of headers, info such as mime-type, content-lenght, etc... . <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#content">awol:content</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#body">awol:body</a> <a href="#lang">awol:lang</a> <a href="#length">awol:length</a> <a href="#src">awol:src</a> <a href="#type">awol:type</a> </td></tr></table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="Entry">
+<h3>Class: awol:Entry</h3>
+<p><em>Entry Class</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.1.2'>§4.1.2</a> of the rfc 4287 spec <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#aggregates">awol:aggregates</a> <a href="#contains">awol:contains</a> <a href="#entry">awol:entry</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#content">awol:content</a> <a href="#published">awol:published</a> <a href="#source">awol:source</a> <a href="#summary">awol:summary</a> </td></tr></table><br/>
+<p>
+An Entry is an Entry, and that's all you need to know!
+</p>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="Feed">
+<h3>Class: awol:Feed</h3>
+<p><em>Feed Class</em> - Container for feed metadata. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#source">awol:source</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#aggregates">awol:aggregates</a> <a href="#contains">awol:contains</a> <a href="#entry">awol:entry</a> <a href="#generator">awol:generator</a> <a href="#icon">awol:icon</a> <a href="#logo">awol:logo</a> <a href="#subtitle">awol:subtitle</a> </td></tr></table><br/>
+<p>
+An Entry is an Entry, and that's all you need to know!
+</p>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="FeedOrEntry">
+<h3>Class: awol:FeedOrEntry</h3>
+<p><em>FeedOrEntry Class</em> - Union of the Feed and Entry class. Simplifies writing the ontology. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-domain-of:</th><td><a href="#author">awol:author</a> <a href="#category">awol:category</a> <a href="#contributor">awol:contributor</a> <a href="#email">awol:email</a> <a href="#link">awol:link</a> <a href="#rights">awol:rights</a> </td></tr></table><br/>
+<i>Editor's Note</i>:  This class should probably be anonymous. It is really only used to make it easier to write the ontology, as it is helps regroup all the relations that are in common between a :Feed and an :Entry.<br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="Generator">
+<h3>Class: awol:Generator</h3>
+<p><em>Generator of feed</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.4'>§4.2.4</a> of rfc 4287 spec. Generator for the Feed. It has many properties in common with :Person <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#generator">awol:generator</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#generatorVersion">awol:generatorVersion</a> </td></tr></table><br/>
+<i>Reto's Note</i>:  is this an instance of the piece of software or the program itself? which is the agent<br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="HTML">
+<h3>Class: awol:HTML</h3>
+<p><em>Html content class</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.3.1.1.2'>§3.1.1.2</a> of rfc 4287. The class of html strings <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-domain-of:</th><td><a href="#html">awol:html</a> </td></tr></table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="Link">
+<h3>Class: awol:Link</h3>
+<p><em>Link Class</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.7'>§4.2.7</a> of rfc 4287 spec. Note that the href, hreflang and lengtlength attributes of rfc 4287 have been moved to the content class and a content relation from the Link to a Content class has been made. The href is translated onto the :src relation of the Content class. A link is a reified relation between an entry an a content, for the purpose of adding some metadata such as a title. If it is a reified statement, it is a special type of such a statement, one that implies always the reified statement itself (see N3 rule) <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#link">awol:link</a> </td></tr><tr><th>in-domain-of:</th><td><a href="#rel">awol:rel</a> </td></tr></table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="Person">
+<h3>Class: awol:Person</h3>
+<p><em>Person Class</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.3.2'>§3.2</a> of rfc 4287 spec. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#author">awol:author</a> <a href="#contributor">awol:contributor</a> <a href="#email">awol:email</a> </td></tr></table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="PlainText">
+<h3>Class: awol:PlainText</h3>
+<p><em>Plain text content class</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.3.1.1.1'>§3.1.1.1</a> of rfc 4287. The datatype of simple text elements. Essentially this is the class of all plain text literals. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-domain-of:</th><td><a href="#text">awol:text</a> </td></tr></table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="RelationType">
+<h3>Class: awol:RelationType</h3>
+<p><em>Relation Type Class</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.7.2'>§4.2.7.2</a> of rfc 4287. Relation types are registered, or can be created as described in rfc 4287. They are special types of properties that relate :Versions to :Contents. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#rel">awol:rel</a> </td></tr></table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="TextContent">
+<h3>Class: awol:TextContent</h3>
+<p><em>All Text Content Class</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.3.1'>§3.1</a> of rfc 4287. The text constructs. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-range-of:</th><td><a href="#rights">awol:rights</a> <a href="#subtitle">awol:subtitle</a> <a href="#summary">awol:summary</a> <a href="#title">awol:title</a> </td></tr></table><br/>
+<i>Editor's Note</i>:  Should :TextContent really be a sublcass of :Content ? If it is then all the properties that apply to text will also apply to :Content. If we want a :Content to be able to take properties such as :etag, this does not seem quite relevant to anything that is related to what should be the object of :title, :subtitle or :summary. Neither does :src really seem to be a relation that really makes sense there<br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="Version">
+<h3>Class: awol:Version</h3>
+<p><em>Version Class</em> - Metadata about the state of  a resource with given :id at an :updated time. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-domain-of:</th><td><a href="#id">awol:id</a> <a href="#updated">awol:updated</a> http://www.iana.org/assignments/relation/alternate http://www.iana.org/assignments/relation/related http://www.iana.org/assignments/relation/self http://www.iana.org/assignments/relation/via </td></tr></table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="XHTML">
+<h3>Class: awol:XHTML</h3>
+<p><em>Xhtml content class</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.3.1.1.3'>§3.1.1.3</a> of rfc 4287. The datatype of xhtml strings <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-domain-of:</th><td><a href="#xhtml">awol:xhtml</a> </td></tr></table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="XML">
+<h3>Class: awol:XML</h3>
+<p><em>XML content class</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.1.3.3'>§4.1.3.3</a> of rfc 4287. The datatype of xml content <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+<tr><th>in-domain-of:</th><td><a href="#xml">awol:xml</a> </td></tr></table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="aggregates">
+<h3>Property: awol:aggregates</h3>
+<p><em>aggregates</em> - The feed aggregates this given Entry.  See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.1.1'>§4.1.1</a> of rfc4287. This means that the entry does not have the feed as its source. The entry was taken from a different feed. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Feed">awol:Feed</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#Entry">awol:Entry</a></td></tr>
+</table><br/>
+<i>Editor's Note</i>:  This relation is not visible in the rfc4287 xml. It is not clear that it is needed either, though it can help simplify queries. See also N3 rule that defines this precisely <br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="author">
+<h3>Property: awol:author</h3>
+<p><em>author</em> - See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.1'>§4.2.1</a> rfc 4287 spec. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#FeedOrEntry">awol:FeedOrEntry</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#Person">awol:Person</a></td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="body">
+<h3>Property: awol:body</h3>
+<p><em>body relation</em> - the body of the content. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Content">awol:Content</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2000/01/rdf-schema#Literal</td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="category">
+<h3>Property: awol:category</h3>
+<p><em>category</em> - See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.2.'>§4.2.2.</a> A category with which the conainer is associated. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#FeedOrEntry">awol:FeedOrEntry</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#Category">awol:Category</a></td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="contains">
+<h3>Property: awol:contains</h3>
+<p><em>contains relation</em> - The feed contains the given Entry. See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.1.1'>§4.1.1</a> of rfc4287. This makes no statement about whether that Entry has the :Feed as its source. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Feed">awol:Feed</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#Entry">awol:Entry</a></td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="content">
+<h3>Property: awol:content</h3>
+<p><em>content</em> - See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.1.3'>§4.1.3</a> of rfc 4287 spec. The content of an Entry, a Link or any of the relation types that are the object of :rel properties <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Entry">awol:Entry</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#Content">awol:Content</a></td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="contributor">
+<h3>Property: awol:contributor</h3>
+<p><em>contributor</em> - See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.3'>§4.2.3</a> of rfc 4287 spec. Someone who contributed to the Version. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#FeedOrEntry">awol:FeedOrEntry</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#Person">awol:Person</a></td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="email">
+<h3>Property: awol:email</h3>
+<p><em>email address</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.3.2.3'>§3.2.3</a> of rfc 4287. A mailbox of the Person <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#FeedOrEntry">awol:FeedOrEntry</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#Person">awol:Person</a></td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="entry">
+<h3>Property: awol:entry</h3>
+<p><em>entry relation</em> - The feed contains the given Entry and that Entry has the feed as its source. See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.1.1'>§4.1.1</a> of rfc 4287. This relation is a little bit more specialised than the rfc 4287 entry element. It relates only :Feed objects to :Entry objects where the :Feed is a :source of the :Entry. See also the :source and :contains relations.  <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Feed">awol:Feed</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#Entry">awol:Entry</a></td></tr>
+</table><br/>
+<p>
+An Entry is an Entry, and that's all you need to know!
+</p>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="generator">
+<h3>Property: awol:generator</h3>
+<p><em>generator</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.4'>§4.2.4</a> of rfc 4287. The generator of the object <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Feed">awol:Feed</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#Generator">awol:Generator</a></td></tr>
+</table><br/>
+<i>Editor's Note</i>:  The domain should really just be :Version. I don't see why Entries can't have an generator too (especially as atom:entry can be a top level content).<br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="generatorVersion">
+<h3>Property: awol:generatorVersion</h3>
+<p><em>generatorVersion</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.4'>§4.2.4</a> of rfc 4287. Indicates the version of the Generator <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Generator">awol:Generator</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2001/XMLSchema#string</td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="html">
+<h3>Property: awol:html</h3>
+<p><em>html value</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.3.1.1.2'>§3.1.1.2</a> of rfc 4287. The datatype of html text elements. It is considered to be a relation to the text. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>OWL Type:</th>
+	<td>An InverseFunctionalProperty (uniquely identifying property)</td></tr>
+	<tr><th>Domain:</th>
+	<td><a href="#HTML">awol:HTML</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2001/XMLSchema#string</td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="http://www.iana.org/assignments/relation/alternate">
+<h3>Property: awol:http://www.iana.org/assignments/relation/alternate</h3>
+<p><em></em> -  <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="icon">
+<h3>Property: awol:icon</h3>
+<p><em>icon</em> - see 4.2.5 of rfc 4287. An icon associated with the object <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Feed">awol:Feed</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://xmlns.com/foaf/0.1/Image</td></tr>
+</table><br/>
+<i>Editor's Note</i>:  The domain should really just be :Version. I don't see why Entries can't have an icon.<br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="id">
+<h3>Property: awol:id</h3>
+<p><em>id</em> - See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.6'>§4.2.6</a> rfc 4287 spec. All Versions with the same id can be considered to be versions of the resource identified by the id. The id mentions the resource of which it is a representation.  <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Version">awol:Version</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2001/XMLSchema#anyURI</td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="label">
+<h3>Property: awol:label</h3>
+<p><em>label</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.2.3'>§4.2.2.3</a> of rfc 4287. A Human readable label for display. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Category">awol:Category</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2001/XMLSchema#string</td></tr>
+</table><br/>
+<i>Editor's Note</i>:  Should this be functional? Given the language sensitivity of the label<br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="lang">
+<h3>Property: awol:lang</h3>
+<p><em>language</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.7.4'>§4.2.7.4</a> of rfc 4287. The language of the representation. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Content">awol:Content</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2001/XMLSchema#language</td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="length">
+<h3>Property: awol:length</h3>
+<p><em>length in bytes</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.7.6'>§4.2.7.6</a> of rfc 4287. The length in bytes of the representation. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Content">awol:Content</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2001/XMLSchema#int</td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="link">
+<h3>Property: awol:link</h3>
+<p><em>link</em> - See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.7'>§4.2.7</a> of rfc 4287 spec. A link associated with the container. If the link is unreified, we have a relation from the container to some resource <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#FeedOrEntry">awol:FeedOrEntry</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#Link">awol:Link</a></td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="logo">
+<h3>Property: awol:logo</h3>
+<p><em>logo</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.8'>§4.2.8</a> of rfc 4287. An icon associated with the object <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Feed">awol:Feed</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://xmlns.com/foaf/0.1/Image</td></tr>
+</table><br/>
+<i>Editor's Note</i>:  The domain should really just be :Version. I don't see why Entries can't have a logo too.<br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="name">
+<h3>Property: awol:name</h3>
+<p><em>name</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.3.2.1'>§3.2.1</a> of rfc 4287. A human readable name for the Person. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="published">
+<h3>Property: awol:published</h3>
+<p><em>publication date</em> - See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.9'>§4.2.9</a> of rfc 4287 spec. A date associated with an event early in the lifecyle of the subject. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Entry">awol:Entry</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2001/XMLSchema#dateTime</td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="rel">
+<h3>Property: awol:rel</h3>
+<p><em>relation type</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.7.2'>§4.2.7.2</a> of rfc 4287. The relationship type. The relationship type is a property that relates a :Version to a :Content  <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Link">awol:Link</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#RelationType">awol:RelationType</a></td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="rights">
+<h3>Property: awol:rights</h3>
+<p><em>rights</em> - See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.10'>§4.2.10</a> of rfc 4287 spec. Rights held over a Version. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#FeedOrEntry">awol:FeedOrEntry</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#TextContent">awol:TextContent</a></td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="scheme">
+<h3>Property: awol:scheme</h3>
+<p><em>catgegorization scheme</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.2.2'>§4.2.2.2</a> of rfc 4287. Identifies a categorization scheme. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Category">awol:Category</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://sw.nokia.com/WebArch-1/InformationResource</td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="source">
+<h3>Property: awol:source</h3>
+<p><em>source feed</em> - See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.11'>§4.2.11</a> of rfc 4287 spec. The source feed where the entry was found <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Entry">awol:Entry</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#Feed">awol:Feed</a></td></tr>
+</table><br/>
+<i>Elias's Note</i>:  This relation is not strictly necessary.<br/>
+<i>Editor's Note</i>:  This is indeed not really needed. But it is useful for explaining the relation between the source element in rfc 4287 and the :entry relation. It has educational value.<br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="src">
+<h3>Property: awol:src</h3>
+<p><em>source</em> - a source of the representation <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Content">awol:Content</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://sw.nokia.com/WebArch-1/InformationResource</td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="subject">
+<h3>Property: awol:subject</h3>
+<p><em>the object of the link</em> - the inverse of the :link relation, not specified in rfc 4287, but added here for convenience <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="subtitle">
+<h3>Property: awol:subtitle</h3>
+<p><em>subtitle</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.12'>§4.2.12</a> of rfc 4287. Subtitle of the feed. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Feed">awol:Feed</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#TextContent">awol:TextContent</a></td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="summary">
+<h3>Property: awol:summary</h3>
+<p><em>summary</em> - See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.13'>§4.2.13</a> of rfc 4287 spec. A summary of the content of the Entry <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Entry">awol:Entry</a></td></tr>
+	<tr><th>Range:</th>
+	<td><a href="#TextContent">awol:TextContent</a></td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="term">
+<h3>Property: awol:term</h3>
+<p><em>term</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.2.1'>§4.2.2.1</a> of rfc 4287. Identifies the category <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Category">awol:Category</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2001/XMLSchema#string</td></tr>
+</table><br/>
+<i>Editor's Note</i>:  should specify that there is exactly one term<br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="text">
+<h3>Property: awol:text</h3>
+<p><em>text type</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.3.1.1.1'>§3.1.1.1</a> of rfc 4287. The datatype of xhtml text elements <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>OWL Type:</th>
+	<td>An InverseFunctionalProperty (uniquely identifying property)</td></tr>
+	<tr><th>Domain:</th>
+	<td><a href="#PlainText">awol:PlainText</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2001/XMLSchema#string</td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="title">
+<h3>Property: awol:title</h3>
+<p><em>title</em> - See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.14.'>§4.2.14.</a> Title of a container <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Range:</th>
+	<td><a href="#TextContent">awol:TextContent</a></td></tr>
+</table><br/>
+<i>Editor's Note</i>:  Reto argues that a Title should have any content attached to it. One should for example allow picture for people who can't read or audio titles for people who cannot write. This would of course make the semantics be a lot more lax that the rfc 4287 syntax allows. <br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="to">
+<h3>Property: awol:to</h3>
+<p><em>to</em> - the object of a link. We interpret here a Link to be a re-ified relation from a :Version to a :Content object. The relation is re-ified in order to add a :title relation to the link. This can probably usually be safely ignored <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="type">
+<h3>Property: awol:type</h3>
+<p><em>mime type</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.7.3'>§4.2.7.3</a> of rfc 4287. The mime type of the representation. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Content">awol:Content</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2001/XMLSchema#string</td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="updated">
+<h3>Property: awol:updated</h3>
+<p><em>updated</em> - See <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.2.15'>§4.2.15</a> of rfc 4287 spec. Indicates the most recent instant in time when a resource with the given id was modified in a way the publisher considers significant. Therefore, not all modifications necessarily result in a changed atom:updated value. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Domain:</th>
+	<td><a href="#Version">awol:Version</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2001/XMLSchema#dateTime</td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="uri">
+<h3>Property: awol:uri</h3>
+<p><em>a uri</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.3.2.2'>§3.2.2</a> of rfc 4287. A uri associated the Person <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2001/XMLSchema#anyURI</td></tr>
+</table><br/>
+<i>Editor's Note</i>:  the uri with subject :Agent and :Generator are really the same relation<br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="xhtml">
+<h3>Property: awol:xhtml</h3>
+<p><em>xhtml type</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.3.1.1.3'>§3.1.1.3</a> of rfc 4287. The datatype of xhtml text elements. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>OWL Type:</th>
+	<td>An InverseFunctionalProperty (uniquely identifying property)</td></tr>
+	<tr><th>Domain:</th>
+	<td><a href="#XHTML">awol:XHTML</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/2001/XMLSchema#string</td></tr>
+</table><br/>
+<i>Editor's Note</i>:  Note that there is a tricky question concerning the xml div element. The xml:lang and xml:base elements are not in fact part of xhtml and it has been argued on the atom mailing list (28 June 2006) that the div is *not* part of the xhtml. We could have this be a special literal with the div, or we could remove the div and push the xml:lang and xml:base down (this would work only if there is one element beneath I suppose) or we would have to use the :lang and :base relations on the :Content object. <br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+<div class="specterm" id="xml">
+<h3>Property: awol:xml</h3>
+<p><em>xml type relation</em> - see <a href='http://www.atompub.org/rfc4287.html#rfc.section.4.1.3.1'>§4.1.3.1</a> of rfc 4287. Relates an :XML object to its content. <br /></p><table style="th { float: top; }">
+	<!--<tr><th>Status:</th>
+	<td>None</td></tr>-->
+	<tr><th>OWL Type:</th>
+	<td>An InverseFunctionalProperty (uniquely identifying property)</td></tr>
+	<tr><th>Domain:</th>
+	<td><a href="#XML">awol:XML</a></td></tr>
+	<tr><th>Range:</th>
+	<td>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</td></tr>
+</table><br/>
+<p style="float: right; font-size: small;">[<a href="#glance">back to top</a>]</p>
+
+
+<br/>
+</div>
+
+
+<!-- end of termlist -->
+<address> <a href="mailto:henry.story@bblfish.net">henry.story@bblfish.net</a> </address>
+</body>
+</html>
+<!-- specification regenerated at 12:44:29 03/05/07 CET -->

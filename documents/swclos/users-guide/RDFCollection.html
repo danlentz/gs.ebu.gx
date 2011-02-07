@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<META http-equiv="Content-Style-Type" content="text/css">
+  <title>RDF Collection</title>
+  <link>
+  <link href="manual.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<h2>7. &nbsp;RDF Collection</h2>
+
+<h3>7.1 &nbsp;RDF Container</h3>
+
+<p>To represent collections of resources, RDF provides three ways as subclass of rdfs:Container.
+</p>
+
+<ul>
+<li>rdf:Bag is a collection type without ordering elements.</li>
+<li>rdf:Alt is a collection type without ordering elements. The first of elements is 
+to be selected alternatively among them.</li>
+<li>rdf:Seq is a collection type with ordering elements.</li>
+</ul>
+
+<p>The first member of container is the value of the property rdf:_1, 
+the second member is the value of the property rdf:_2, and so on. 
+This kind of property, rdf:_<i>nnn</i>, is called an <i>ordinal property</i>.</p>
+
+<p><b>Figure 7.1</b> is an example of a collection of rdf:Bag, which is taken from 
+Jena tutorial.</p>
+
+<p align="center">
+<a id="figure7.1" name="figure7.1">
+<img border="0" src="FIGURES/BagEx.PNG" 
+ alt="An Example of rdfs:Bag">
+</a>
+</p>
+<P class=caption align=center>
+<B>Figure 7.1 An Example of rdfs:Bag (from Jena Tutorial)
+</B></P>
+
+<p>Then, the followings encode Figure 7.1.</p>
+
+<b>
+<pre><code>gx-user(3): (defpackage somewhere)
+#&lt;The somewhere package&gt;
+gx-user(4): (defpackage vCard)
+#&lt;The vCard package&gt;
+gx-user(5): (defIndividual somewhere::JohnSmith
+                (rdf:about "http://somewhere/JohnSmith")
+              (vCard::FN "John Smith")
+              (vCard::N (rdfs:Resource (vCard::Given "John")
+                                       (vCard::Family "Smith"))))
+Warning: Entail by rdf1: vCard::FN rdf:type rdf:Property.
+Warning: Entail by rdf1: vCard::N rdf:type rdf:Property.
+Warning: Entail by rdf1: vCard::Given rdf:type rdf:Property.
+Warning: Entail by rdf1: vCard::Family rdf:type rdf:Property.
+#&lt;|rdfs:Resource| somewhere:JohnSmith&gt;
+gx-user(6): (defIndividual somewhere::BeckySmith
+                (rdf:about "http://somewhere/BeckySmith")
+              (vCard:FN "Becky Smith")
+              (vCard:N (rdfs:Resource (vCard:Given "Becky")
+                                      (vCard:Family "Smith"))))
+#&lt;|rdfs:Resource| somewhere:BeckySmith&gt;
+gx-user(7): (defIndividual _:bag01 (rdf:type rdf:Bag)
+              (rdf::_1 somewhere:BeckySmith)
+              (rdf::_2 somewhere:JohnSmith))
+Warning: Entail by rdf1: rdf:_1 rdf:type rdf:Property.
+Warning: Entail by rdf1: rdf:_2 rdf:type rdf:Property.
+#&lt;rdf:Bag common-lisp:nil&gt;
+gx-user(8): (get-form _:bag01)
+(rdf:Bag (rdf:type rdf:Bag)
+  (rdf:_1 somewhere:BeckySmith) (rdf:_2 somewhere:JohnSmith))
+</code></pre>
+</b><br>
+
+<p>In SWCLOS, ordinal properties are initially not defined. However, if you put 
+them in proper position, it is automatically defined as an instance of rdfs:ContainerMembershipProperty.</p>
+
+<p>In Figure 7.1, the top node is a blank node, then we put it a blank node 
+identifier _:bag01. Note that a blank node object is bound to a designated blank node ID. 
+In SWCLOS, a node name is not mandatory even if in the top level node,   
+but it is preferable to put a node identifier for convenience.</p>
+
+<h3>7.2 &nbsp;List</h3>
+
+<p>In RDF semantics, we can make an instance of rdf:List with rdf:first, rdf:rest 
+and rdf:nil. <b>Figure 7.2</b> shows an example of list structure in RDF, which is from 
+<a href="http://www.w3.org/TR/rdf-primer#figure16">RDF Primer</a>.</p>
+
+<p align="center">
+<img border="0" src="FIGURES/ListStructure.png" 
+ alt="An RDF Collection (list structure)">
+</p>
+<P class=caption align=center><B>Figure 7.2 An RDF Collection (list structure) 
+(from <a href="http://www.w3.org/TR/rdf-primer#figure16">RDF Primer</a>)</B></P>
+
+<p>This RDF graph is encoded as follows straightforwardly.</p>
+
+<b>
+<pre><code>gx-user(2): (defpackage eg (:documentation "http://example.org/"))
+#&lt;The eg package&gt;
+gx-user(3): (defpackage vocab
+              (:documentation "http://example.org/students/vocab/"))
+#&lt;The vocab package&gt;
+gx-user(4): (defIndividual eg::courses/6.001
+                (rdf:about "http://example.org/courses/6.001")
+              (vocab::students
+               (rdf:List 
+                (rdf:first
+                 (rdfs:Resource (rdf:about "http://example.org/students/Amy")))
+                (rdf:rest
+                 (rdf:List 
+                  (rdf:first
+                   (rdfs:Resource (rdf:about "http://example.org/students/Mohamed")))
+                  (rdf:rest
+                   (rdf:List 
+                    (rdf:first
+                     (rdfs:Resource (rdf:about "http://example.org/students/Johann")))
+                    (rdf:rest rdf:nil))))))))
+Warning: Entail by rdf1: vocab::students rdf:type rdf:Property.
+#&lt;|rdfs:Resource| eg:courses/6.001&gt;
+gx-user(5): (pprint (get-form eg:courses/6.001))
+
+(|rdfs:Resource| eg:courses/6.001 (rdf:about #&lt;uri http://example.org/courses/6.001&gt;)
+ (vocab:students
+  (rdf:List
+   (rdf:first
+    (rdfs:Resource (rdf:about #&lt;uri http://example.org/students/Amy&gt;)))
+   (rdf:rest
+    (rdf:List
+     (rdf:first
+      (rdfs:Resource (rdf:about #&lt;uri http://example.org/students/Mohamed&gt;)))
+     (rdf:rest
+      (rdf:List
+       (rdf:first
+        (rdfs:Resource (rdf:about #&lt;uri http://example.org/students/Johann&gt;)))
+       (rdf:rest rdf:nil))))))))
+</code></pre>
+</b><br>
+
+<p>You can get any data in list using path traverse function '->' as follows.</p>
+
+<b>
+<pre><code>gx-user(6): (get-form (-> eg:courses/6.001 vocab:students rdf:rest 
+                          rdf:rest rdf:first))
+(rdfs:Resource (rdf:about #&lt;uri http://example.org/students/Johann&gt;))
+gx-user(7): (-> eg:courses/6.001 vocab:students rdf:rest rdf:rest rdf:rest)
+#&lt;rdf:List rdf:nil&gt;
+</code></pre>
+</b><br>
+
+<p>However, using rdf:List is very tedious in SWCLOS. We can use the lisp list to 
+represent a collection of resources in SWCLOS. You may represent the collection of students as 
+follows, whereas the RDF graph is not equal to Figure 7.2. </p>
+
+<b>
+<pre><code>
+gx-user(7): (defIndividual eg::courses/6.002
+                (rdf:about "http://example.org/courses/6.002")
+              (vocab::students
+               (rdfs:Resource (rdf:about "http://example.org/students/Amy"))
+               (rdfs:Resource (rdf:about "http://example.org/students/Mohamed"))
+               (rdfs:Resource (rdf:about "http://example.org/students/Johann"))))
+#&lt;|rdfs:Resource| eg:courses/6.002&gt;
+gx-user(8): (get-form eg:courses/6.002)
+(|rdfs:Resource| eg:courses/6.002 (rdf:about "http://example.org/courses/6.002")
+ (vocab:students (rdfs:Resource (rdf:about "http://example.org/students/Amy"))
+  (rdfs:Resource (rdf:about "http://example.org/students/Mohamed"))
+  (rdfs:Resource (rdf:about "http://example.org/students/Johann"))))
+gx-user(9): (-> eg:courses/6.002 vocab:students)
+(#&lt;rdfs:Resource common-lisp:nil&gt; #&lt;rdfs:Resource common-lisp:nil&gt; #&lt;rdfs:Resource common-lisp:nil&gt;)
+gx-user(10): (mapcar #'get-form *)
+((rdfs:Resource (rdf:about "http://example.org/students/Amy"))
+ (rdfs:Resource (rdf:about "http://example.org/students/Mohamed"))
+ (rdfs:Resource (rdf:about "http://example.org/students/Johann")))
+</code></pre>
+</b><br>
+
+<p>Even though this input form does not contain rdf:first and rdf:rest, it is very 
+easy for lisp programmers to imagine the above forms from the list structure in 
+Figure 7.2. </p>
+
+
+<hr>
+<i><small>  Author: <a href="mailto:koide@nii.ac.jp">Seiji Koide</a>. 
+ Copyright (c) 2005, 2006 GALAXY EXPRESS CORPORATION. Feb. 2006
+<br> Copyright (c) 2007-2009 Seiji Koide. Oct. 2009
+<br> </small></i></body></html>

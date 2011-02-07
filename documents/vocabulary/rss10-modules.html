@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+ <head>
+  <title>RDF Site Summary 1.0 Modules</title>
+  <link rel="stylesheet" type="text/css" href="../style.css"/>
+ </head>
+
+ <body>
+
+  <h1>RDF Site Summary 1.0 Modules</h1>
+
+<!-- Authors -->
+
+   <h2><a name="authors">Authors</a></h2>
+
+     <p>The members of the RSS-DEV Working Group:-</p>
+
+<dl>
+     <dt><a href="mailto:begeddov@jfinity.com">Gabe Beged-Dov</a>, 
+      <a href="http://www.jfinity.com">JFinity Systems LLC</a></dt>
+     <dt><a href="mailto:daniel.brickley@bristol.ac.uk">Dan Brickley</a>, 
+      <a href="http://www.ilrt.bris.ac.uk/discovery/">ILRT</a></dt>
+     <dt><a href="mailto:rael@oreilly.com">Rael Dornfest</a>, 
+      <a href="http://www.oreilly.com">O'Reilly &amp; Associates</a></dt>
+     <dt><a href="mailto:ian@calaba.com">Ian Davis</a>, 
+      <a href="http://www.calaba.com">Calaba, Ltd.</a></dt>
+     <dt><a href="mailto:ldodds@ingenta.com">Leigh Dodds</a>, 
+      <a href="http://www.xmlhack.com">xmlhack</a></dt>
+     <dt><a href="mailto:eisen@pobox.com">Jonathan Eisenzopf</a>,
+      <a href="http://www.wwind.com">Whirlwind Interactive</a></dt>
+     <dt><a href="mailto:david@moreover.com">David Galbraith</a>,
+      <a href="http://www.moreover.com">Moreover.com</a></dt>
+     <dt><a href="mailto:guha@guha.com">R.V. Guha</a>,
+      <a href="http://www.guha.com">guha.com</a></dt>
+     <dt><a href="mailto:ken@bitsko.slc.ut.us">Ken MacLeod</a>,
+      <a href="http://bitsko.slc.ut.us/">(Independent)</a></dt>
+     <dt><a href="mailto:emiller@oclc.org">Eric Miller</a>,
+      <a href="http://www.oclc.org">Online Computer Library Center, Inc.</a></dt>
+     <dt><a href="mailto:aaron@theinfo.org">Aaron Swartz</a>, 
+      <a href="http://www.theinfo.org">The Info Network</a></dt>
+     <dt><a href="mailto:vdv@dyomedea.com">Eric van der Vlist</a>, 
+      <a href="http://www.dyomedea.com">Dyomedea</a></dt>
+</dl>
+
+<!-- Version -->
+
+   <h2><a name="version">Version</a></h2>
+
+	<div class="version"><a href="http://purl.org/rss/1.0/modules/">1.3.2 2001-03-20</a> Added content module (<a href="mailto:aaron@theinfo.org">as</a>)</div>
+    <div class="version">1.3.1 2000-12-20 (editor: <a href="mailto:Sean@mysterylights.com">SBP</a> - cleaned up markup)</div>
+    <div class="version">1.3 2000-12-09</div>
+
+<!-- Status -->
+
+   <h2><a name="status">Status</a></h2>
+
+    <p>
+     <a href="http://www.egroups.com/surveys/rss-dev?id=444214">Release</a>
+    </p>
+
+
+<!-- Rights -->
+
+   <h2><a name="rights">Rights</a></h2>
+
+    <p>
+     Copyright &copy; 2000 by the Authors.
+    </p>
+    <p>
+     Permission to use, copy, modify and distribute the RDF Site Summary
+     1.0 Specification and its accompanying documentation for any purpose
+     and without fee is hereby granted in perpetuity, provided that the
+     above copyright notice and this paragraph appear in all copies.
+     The copyright holders make no representation about the suitability
+     of the specification for any purpose.  It is provided "as is"
+     without expressed or implied warranty.
+    </p>
+    <p>
+     This copyright applies to the RDF Site Summary 1.0 Specification
+     and accompanying documentation and does not extend to the RSS
+     format itself.
+    </p>
+
+<!-- Abstract -->
+
+   <h2><a name="abstract">Abstract</a></h2>
+
+    <p>
+     RSS modules are XML-namespace based compartmentalized extensions
+     to <a href="http://purl.org/rss/1.0/">RDF Site Summary (RSS) 1.0</a>.
+    </p>
+
+<!-- TOC -->
+
+   <h2><a name="toc">Table of Contents</a></h2>
+
+<dl>
+<dt>1. <a href="#s1">Introduction</a></dt>
+<dt>2. <a href="#s2">Modules</a></dt>
+<dt>3. <a href="#s3">Module Guidelines</a></dt>
+<dd>3.1 <a href="#s3.1">XML Namespaces</a></dd>
+<dd>3.2 <a href="#s3.2">Simple vs. Rich Content Models</a></dd>
+<dd>3.3 <a href="#s3.3">RDF</a></dd>
+<dd>3.4 <a href="#s3.4">Compatibility</a></dd>
+<dd>3.5 <a href="#s3.5">Formats</a></dd>
+<dt>4. <a href="#s4">Resources</a></dt>
+</dl>
+
+
+<!-- Introduction -->
+
+   <h2><a name="s1">1. Introduction</a></h2>
+    
+    <p>
+     Namespace-based modularization affords for compartmentalized extensibility, allowing 
+     RDF Site Summary (RSS) 1.0 to be extended:     </p>
+     <ol>
+      <li> without need of iterative rewrites of the core specification</li>
+      <li> without need of consensus on each and every element</li>
+      <li> without bloating RSS with elements the majority of which won't be used in any 
+           particular arena or application</li>
+      <li> without namespace collisions</li>
+     </ol>
+
+    <p>
+     The only modules that ship "in the box" with RSS 1.0 are
+     <a href="http://purl.org/rss/1.0/modules/dc/">Dublin Core</a> and 
+     <a href="http://purl.org/rss/1.0/modules/syndication/">Syndication</a>.
+    </p>
+    <p>
+     This document serves as a registry
+     for modules discussed on and adopted by the members of the 
+     <a href="http://www.egroups.com/group/rss-dev/">RSS-DEV Mailing List</a>.
+     Some examples of module usage may be found in the
+     <a href="http://purl.org/rss/1.0/spec#s7">Examples</a> of the 
+     <a href="http://purl.org/rss/1.0/spec">RSS 1.0 Specification</a>.
+    </p>
+
+<!-- Modules -->
+
+   <h2><a name="s2">2. Modules</a></h2>
+
+    <p>
+     RSS 1.0 modules are maintained in separate documents, available online
+     at <a href="http://purl.org/rss/1.0/modules/">http://purl.org/rss/1.0/modules/</a>.
+     Modules are classified as <a href="http://purl.org/rss/1.0/modules/proposed/">Proposed</a>
+     until accepted as <a href="http://purl.org/rss/1.0/modules/standard/">Standard</a>
+     by members of the RSS-DEV working group or a sub-membership thereof focused
+     on the area addressed by the module.
+    </p>
+    <p>
+     The current set of standard RSS 1.0 modules is:</p>
+     <ul>
+      <li><a href="http://purl.org/rss/1.0/modules/dc/">Dublin Core</a></li>
+      <li><a href="http://purl.org/rss/1.0/modules/syndication/">Syndication</a></li>
+      <li><a href="http://purl.org/rss/1.0/modules/content/">Content</a></li>
+     </ul>
+
+<!-- Module Guidelines -->
+
+   <h2><a name="s3">3. Module Guidelines</a></h2>
+    
+    <h3><a name="s3.1">3.1 XML Namespaces</a></h3>
+
+    <p>
+     Every RSS 1.0 module should reside in its own 
+     <a href="http://www.w3.org/TR/REC-xml-names/">XML Namespaces</a>
+     and compartmentalize some grouping of functionality with a 
+     specific purpose in mind.  A module should be as narrowly
+     defined so as to avoid the "kitchen sink" feel while taking care
+     to be inclusive of all the functionality required to serve the
+     purpose at hand.
+    </p>
+
+
+    <h3><a name="s3.2">3.2 Simple vs. Rich Content Models</a></h3>
+
+    <p>
+     Module authors are left to choose whether the task at hand
+     demands a simple or rich content model.  Adopting a simple
+     model, however, does not preclude later semantic augmentation
+     -- either to the existing module itself or via a secondary module.
+    </p>
+    <p>
+     An Example: The Dublin Core module defines a simple flat structure
+     of elements containing string literals:
+    </p>
+
+<pre>...
+&lt;dc:subject&gt;Woodworking&lt;/dc:subject&gt;
+&lt;dc:creator&gt;Arthur Author&lt;/dc:creator&gt;
+...</pre>
+
+    <p>
+     The subject and creator are simply the string literals "Woodworking" and
+     "Arthur Author," respectively.  At some point, however, additional semantics 
+     for dc:subject may be overlaid by way of a taxonomy module:
+    </p>
+
+<pre>...
+&lt;dc:subject&gt;
+  &lt;taxo:topic rdf:about="http://dmoz.org/Arts/Crafts/Wood_Craft/Woodworking/"&gt;
+    &lt;rdf:value="Woodworking" /&gt;
+  &lt;/taxo:topic&gt;
+&lt;/dc:subject&gt;
+...</pre>
+
+    <p>
+     Now subject is defined by a resource, here a branch of the 
+     <a href="http://www.dmoz.org">Open Directory Project</a> (DMOZ) tree,
+     rdf:value providing a default string literal value of "Woodworking"
+     for non-RDF parsers or applications needing only a simple bit of
+     text as a subject description--this is termed the "dumb down" principle
+     in some circles.
+    </p>
+    <p>
+     Application developers are advised to expect such semantic augmentation.
+     Module developers are advised to make it clear how plain content is to
+     be extracted from richer models.
+    </p>
+
+    <h3><a name="s3.3">3.3 RDF </a></h3>
+
+    <p>
+     While modules are not required to take full advantage of RSS 1.0's
+     RDF framework, effort should at least be made to construct modules
+     that are at least RDF-compliant and do their best to provide
+     coherent data models for both RDF and plain XML.
+    </p>
+    <p>
+     With this in mind, any element containing XML markup (i.e. other
+     elements) that is not written as RDF should signal RDF parsers
+     that this markup should not be interpreted, instead maintained as
+     a value using the
+     <b><code><a href="http://www.w3.org/TR/REC-rdf-syntax#ex-Literal">parseType="Literal"</a></code></b> 
+     attribute.
+    </p>
+    <p>
+     A simple example employing parseType="Literal":
+    </p>
+
+<pre>&lt;dc:creator rdf:parseType="Literal"&gt;
+  &lt;name&gt;
+    &lt;firstname&gt;John&lt;/firstname&gt;
+    &lt;middle_initial&gt;Q.&lt;/middle_initial&gt;
+    &lt;lastname&gt;Public&lt;/lastname&gt;
+  &lt;/name&gt;
+&lt;/dc:creator&gt;</pre>
+
+    <h3><a name="s3.4">3.4 Compatibility</a></h3>
+
+    <p>
+     RSS modules must not introduce conflicts by ad hoc modification of the 
+     content models of any other module or the core.  Modular extensions may
+     not be considered stand-ins for required core elements (eg. dc:description
+     at the channel level does not obviate the need for including the required
+     rss:description element).
+    </p>
+
+    <h3><a name="s3.5">3.5 Formats</a></h3>
+
+    <p>
+     <em>Date</em><br />
+     RSS modules are to adopt the the W3C's preferred date and time formats
+     [<a href="http://www.w3.org/TR/NOTE-datetime">W3CDTF</a>].
+    </p>
+
+
+<!-- Resources -->
+
+   <h2><a name="s4">4. Resources</a></h2>
+
+    <p>
+     Please see the <a href="http://purl.org/rss/1.0/spec#s8">Resources</a> section
+     of the <a href="http://purl.org/rss/1.0/spec">RSS 1.0 Specification Proposal</a>.
+    </p>
+
+ </body>
+
+</html>
+

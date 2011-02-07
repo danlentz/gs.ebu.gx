@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+<TITLE>Downloading and Installing Lisp Code for Automated Planning</TITLE>
+<!-- Changed by: Seiji Koide   22-May-2008 -->
+<!-- Changed by: Peter Norvig, 24-Jul-1996 -->
+<META http-equiv="Content-Type" content="text/html">
+<META http-equiv="Content-Style-Type" content="text/css">
+<link href="overview.css" rel="stylesheet" type="text/css">
+</HEAD>
+<BODY bgcolor=#ffffff>
+<H1>Downloading and Installing Lisp Code for Automated Planning</H1>
+<P>
+This page gives instructions for retrieving the code for the book, and
+installing it on your local system.  This installation procedure need
+only be followed once.  
+
+<H2>Downloading the Code</H1>
+<P>
+To download the code, follow these steps:
+
+<OL>
+<LI> Create a directory where you want the code to reside, and change to that directory.
+On Unix, this might be "<tt>mkdir &lt;<I>planning</I>&gt;; cd &lt;<I>planning</I>&gt</tt>".
+
+<LI> </b>Download the source code</b>. The easiest way is to click on
+this link to get <a href="../code.tar">code.tar</a> (???KB).    
+
+<LI> Execute the command, on Unix, <tt>tar xf code.tar</tt>, or on Windows, 
+drag the code.tar file to a program such as WinZip.
+to unpack the archive of files.  
+</OL>
+
+<H2>Installing a Lisp Interpreter/Compiler</H2>
+<P>
+There are many available Lisp compilers that you can use.  However, we 
+have tested the code only the following:
+<ul>
+<li> <a href="http://www.franz.com/downloads/">Franz
+Allegro Common Lisp</a> for Windows.
+</ul>
+<P>We hope that someone ports the program to any other Lisp system. 
+<P>
+If you have no Allegro CL system, you can install the evaluation version from 
+<a href="http://www.franz.com/downloads/">Franz Inc</a>. 
+It is free but some months later you will be required to respond the query when starting lisp system 
+whether you upgrade or not. However, you can continue to use it 
+with replying "CONTINUE". 
+<H3>How to change character mode:</H3>
+We always use ACL in modern mode (character case sensitive), in which
+lisp system distinguishes upper-case letters and lower-case letters. 
+We recommend to follow the instruction below in order to set up modern mode for 
+the evaluation version.  If you purchase ACL, the setting is just menu selection 
+in Windows version. 
+
+<OL>
+<LI>Run original aclxx-express.
+<LI>Execute the following form in Lisp window. You will obtain 'allegro.exe' file under 
+'C:\Program Files\acl80-express' folder.
+<pre class="box"><code>     (progn
+       (build-lisp-image "sys:allegro.dxl" :case-mode :case-sensitive-lower)
+       (when (probe-file "sys:allegro.exe") (delete-file "sys:allegro.exe"))
+       (sys:copy-file "sys:allegro-ansi.exe" "sys:allegro.exe"))
+</code></pre><BR>
+<LI>To start Lisp, invoke 'allegro.exe' instead of 'allegro-ansi.exe'. 
+In Windows, it is good idea to set up the start menu for 'allegro.exe'. You may copy the start menu folder for 
+'allegro-ansi.exe' and revise the link of short-cut file.
+</OL>
+
+<H2>Installing the Code</H1>
+
+<OL>
+<LI> Make sure you have both read-permission and write-permission for
+the directory where the code is kept.
+
+<P><LI> Edit the file "planning.cl" and change the value of the
+parameter *planning-root* to reflect the location of the files.
+Make sure to use the proper syntax for a directory, not a regular
+file.  For example, on a Unix file system, you want something like
+"/usr/local/planning/", or "/home/yourname/planning/", where the final "/"
+indicates that /usr/local/planning is a directory.  For a Windows file
+system, you'd have something like "C:\\allegro-projects\\planning\\".  Note that you have to
+use double backslashes, because backslashes are treated specially in
+Common Lisp strings.
+
+<P><LI> For some unusual Lisp compilers instead of ACL, you may need to edit the parameter
+*planning-binary-type* to indicate the type of files created by your Lisp
+compiler.  If the compiler creates files of the form "name.bin", then set
+this parameter to "bin".  Do include the double-quote marks.
+</OL>
+
+<h2>Running the Code</h2>
+
+The steps above need be done only once;
+you  are now ready for the easier process of
+<A HREF="user.html">using the code</A>.
+
+<P>
+<hr>
+<i><small> Author: <a href="mailto:SeijiKoide@aol.com?subject=Planning">Seiji Koide</a>. Modified Norvig's file. Copyright (c) 2008 Seiji Koide. May. 2008 </small></i></body></html>
+</TABLE></BODY></HTML>

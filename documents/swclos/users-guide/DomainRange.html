@@ -1,0 +1,335 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<META http-equiv="Content-Style-Type" content="text/css">
+  <title>Domain and Range</title>
+  <link href="manual.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<h2>8. &nbsp;Domain and Range</h2>
+
+<h3>8.1 &nbsp;Adding Domain and Range Constraints</h3>
+
+<p>Each property in RDF may have its own attributes about the domain and the range. The domain value
+restricts the class of subject in triple of the extension of the property and the range value restricts the range
+of the property value. See <a href="RDFSchema.html#Figure 5.2">Figure 5.2</a>. </p>
+
+<p>To define a domain and a range of a property, use <a href="RDFSchema.html#SWCLOSdefProperty"><b>defProperty</b></a> as follows.
+</p>
+
+<blockquote><b>
+<pre><code>gx-user(3): (defpackage vin)
+#&lt;The vin package&gt;
+gx-user(4): (defProperty vin::hasMaker
+                (rdfs:domain vin::Wine)
+              (rdfs:range vin::Winery))
+Warning: Range entailX3 by rdfs:domain: vin::Wine rdf:type rdfs:Class.
+Warning: Range entailX3 by rdfs:range: vin::Winery rdf:type rdfs:Class.
+#&lt;rdf:Property vin:hasMaker&gt;
+</code></pre></b>
+</blockquote>
+
+<p>The defined domain and range value of property is retrieved by the accessor 
+<b>rdfs:domain</b> and <b>rdfs:range</b>. </p>
+
+<blockquote><b>
+<pre><code>gx-user(6): (rdfs:domain vin:hasMaker)
+#&lt;rdfs:Class vin:Wine&gt;
+gx-user(7): (rdfs:range vin:hasMaker)
+#&lt;rdfs:Class vin:Winery&gt;
+gx-user(8): (rdfs:domain rdfs:comment)
+#&lt;rdfs:Class rdfs:Resource&gt;
+gx-user(9): (rdfs:range rdfs:comment)
+#&lt;rdfs:Class rdfs:Literal&gt;
+</code></pre></b>
+</blockquote>
+
+<p>These accessor signals an error, if a property has no definition.</p>
+
+<blockquote><b>
+<pre><code>gx-user(10): (defProperty vin::hasColor
+                 (rdfs:range vin::WineColor))
+Warning: Range entailX3 by rdfs:range: vin::WineColor rdf:type rdfs:Class.
+#&lt;rdf:Property vin:hasColor&gt;
+gx-user(11): (rdfs:range vin:hasColor)
+#&lt;rdfs:Class vin:WineColor&gt;
+gx-user(12): (rdfs:domain vin:hasColor)
+Error: The slot rdfs:domain is unbound in the object
+       #&lt;rdf:Property vin:hasColor&gt; of class #&lt;rdfs:Class rdf:Property&gt;.
+[condition type: unbound-slot]
+</code></pre></b>
+</blockquote>
+
+<p>You may use function <b>range-value</b> and <b>domain-value</b> without signaling an error, 
+even if a property has no definition on domain or range value.</p>
+
+<blockquote><b>
+<pre><code>gx-user(13): (range-value vin:hasColor)
+#&lt;rdfs:Class vin:WineColor&gt;
+gx-user(14): (domain-value vin:hasColor)
+common-lisp:nil
+</code></pre></b>
+</blockquote>
+
+<a id="SWCLOSrdfs:domain" name="SWCLOSrdfs:domain" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>rdfs:domain <I>property</I></U></TH>
+      <TD width="70">[Accessor]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>provides an access method for the domain value of <i>property</i>.
+This method signals an error, if the value is unbound.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<a id="SWCLOSrdfs:range" name="SWCLOSrdfs:range" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>rdfs:range <I>property</I></U></TH>
+      <TD width="70">[Accessor]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>provides an access method for the range value of <i>property</i>.
+This method signals an error, if the value is unbound.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<a id="SWCLOSdomain-value" name="SWCLOSdomain-value" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>domain-value <I>property</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>returns the domain value of <i>property</i>.
+This function returns cl:nil, if the value is unbound.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<a id="SWCLOSrange-value" name="SWCLOSrange-value" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>range-value <I>property</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>returns the range value of <i>property</i>.
+This function returns cl:nil, if the value is unbound.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<p>The domain and range value is inherited from the super-properties defined 
+through rdfs:subPropertyOf. In the following example, function <b>get-domain</b> 
+accesses and retrieves the domain value of superproperties of vin:hasColor. </p>
+
+<blockquote><b>
+<pre><code>gx-user(19): (defProperty vin::hasColor
+                 (rdfs:subPropertyOf vin::hasWineDescriptor))
+Warning: Range entailX3 by rdfs:subPropertyOf: vin::hasWineDescriptor rdf:type rdf:Property.
+#&lt;rdf:Property vin:hasColor&gt;
+gx-user(20): (get-domain vin:hasColor)
+common-lisp:nil
+gx-user(21): (defProperty vin:hasWineDescriptor
+                 (rdfs:domain vin:Wine))
+#&lt;rdf:Property vin:hasWineDescriptor&gt;
+gx-user(22): (get-domain vin:hasColor)
+#&lt;rdfs:Class vin:Wine&gt;<BR>
+</code></pre></b>
+</blockquote>
+
+<a id="SWCLOSget-domain" name="SWCLOSget-domain" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>get-domain <I>property</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>This function searches domains that are directly defined and inherited from its super
+properties and returns the most specific domain values. So, the return value may be a single
+value or a list of values. This function returns cl:nil if any defined domain is not found after
+the exhaustive search. However, note that cl:nil for domain value means rdfs:Resource in
+fact by RDFS semantics. If a disjoint pair of values found, <b>domain-condition-unsatiafiable</b>
+error is signaled.
+</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<a id="SWCLOScollect-domains" name="SWCLOScollect-domains" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>collect-domains <I>properties</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>collects domains from each of <i>properties</i> using <b>get-domain</b>. 
+      A property must be a symbol.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<a id="SWCLOSdomainp" name="SWCLOSdomainp" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>domainp <I>property</I> <I>domain</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>returns true if <I>property</I>'s domain is a subclass of <I>domain</I>,
+      or if some of <I>property</I>'s super-properties has a subclass of 
+      <I>domain</I>.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<a id="SWCLOSget-range" name="SWCLOSget-range" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>get-range <I>property</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>returns the range value from <i>property</i> and its super-properties. 
+      The inheritance rule is same as <a href="#SWCLOSget-domain">get-domain</a>.
+      This function may signal <b>range-condition-unsatiafiable</b> error.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<a id="SWCLOScollect-ranges" name="SWCLOScollect-ranges" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>collect-ranges <I>properties</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>collects ranges from each of <i>properties</i> using <b>get-range</b>. 
+      A property must be a symbol.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<a id="SWCLOSrangep" name="SWCLOSrangep" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>rangep <I>property</I> <I>range</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>returns true if <I>property</I>'s range is a subclass of <I>range</I>, 
+      or if some of <I>property</I>'s super-properties has a subclass of 
+      <I>range</I>. </TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<h3>8.2 &nbsp;Domain and Range Constraints Satisfaction</h3>
+
+<p>As mentioned in the description of <b>get-domain</b> and <b>get-range</b> above, any disjoint pair of domains and
+ranges with respect to a specific property causes the <i>unsatisfiable condition</i> error. The satisfiability
+checking is very important especially in OWL, because OWL provides users the definition of
+owl:disjointWith relation on concepts (classes), while RDF provides only the intrinsic disjoitness with
+respect to XML Schema data.
+</p>
+
+<p>In the following demonstration, <b>range-condition-unsatiafiable</b> error happens, since <b>xsd:float</b> and
+<b>xsd:integer</b> are disjoint and both are defined as domains with respect to hasInteger property.
+</p>
+
+<blockquote><b>
+<pre><code>gx-user(2): (defProperty hasFloat (rdfs:range xsd:float))
+#&lt;rdf:Property hasFloat&gt;
+gx-user(3): (defProperty hasInteger (rdfs:range xsd:integer)
+              (rdfs:subPropertyOf hasFloat))
+#&lt;rdf:Property hasInteger&gt;
+gx-user(4): (defResource foo (hasInteger 1))
+Error: range condition unsatisfiable: disjoint clash: 
+       #&lt;rdfs:Datatype xsd:integer&gt; #&lt;rdfs:Datatype xsd:float&gt;
+[condition type: range-condition-unsatisfiable]
+</code></pre></b>
+</blockquote>
+
+<p>If domains and ranges involve some inclusiveness (<b>gx:subtypep</b> relation in RDF and <b>subsumed-p</b> relation
+in OWL) among them, the <i>most specific concepts</i> (<i>classes</i>) or MSCs are returned. Namely, the return value
+of <b>get-domain</b> and <b>get-range</b> is the most specific concept (if all concepts are related in the super-sub
+relation) or a list of the most specific concepts (if some concepts are independent in the super-sub relation).
+</p>
+
+<p>After rebooting SWCLOS,</p>
+
+<blockquote><b>
+<pre><code>gx-user(2): (defProperty hasInteger (rdfs:range xsd:integer))
+#&lt;rdf:Property hasInteger&gt;
+gx-user(3): (defProperty hasPositiveInteger
+              (rdfs:range xsd:positiveInteger)
+              (rdfs:subPropertyOf hasInteger))
+#&lt;rdf:Property hasPositiveInteger&gt;
+gx-user(4): (get-range hasPositiveInteger)
+#&lt;rdfs:Datatype xsd:positiveInteger&gt;
+gx-user(5): (subtypep xsd:positiveInteger xsd:integer)
+t
+t
+</code></pre></b>
+</blockquote>
+
+<p>In this case, xsd:positiveInteger is chosen as range constraint of property subproperty
+hasPositiveInteger in two constraints, xsd:integer and xsd:positiveInteger, because
+xsd:positiveInteger is more specific than xsd:integer.
+</p>
+
+
+<p></p>
+
+<hr>
+<i><small> Author: <a href="mailto:koide@nii.ac.jp">Seiji Koide</a>. 
+ Copyright (c) 2005, 2006 GALAXY EXPRESS CORPORATION. Feb. 2006
+<br> Copyright (c) 2007-2009 Seiji Koide. Oct. 2009
+<br> </small></i></body></html>

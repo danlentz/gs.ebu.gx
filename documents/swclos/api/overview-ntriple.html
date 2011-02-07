@@ -1,0 +1,1004 @@
+<HTML>
+<HEAD>
+<TITLE>RDFS System</TITLE> 
+<META http-equiv="Content-Type" content="text/html">
+<META http-equiv="Content-Style-Type" content="text/css">
+<link href="overview.css" rel="stylesheet" type="text/css">
+</HEAD> 
+<BODY bgcolor="#ffffff"> 
+
+<H1>SWCLOS: A Semantic Web Reasoner on CLOS</H1>
+<H2>NTriple Subsystem</H2>
+<P>
+
+<P><HR size=3>
+<UL>
+<LI><A HREF="#NTriple/Ntriple.cl"><B>Ntriple.cl</B></A>  N-triple module
+<LI><A HREF="#NTriple/NTparser.cl"><B>NTparser.cl</B></A> 
+<LI><A HREF="#NTriple/ntwriter.cl"><B>ntwriter.cl</B></A>  NTWriter module
+</UL>
+
+<A NAME="NTriple/Ntriple.cl"><HR>
+<H2>File <A HREF="../NTriple\Ntriple.cl">NTriple\Ntriple.cl</A></H2></A>
+<P>
+<H2> N-triple module</H2>
+<P>
+ IT Program Project in Japan: 
+          Building Operation-Support System for Large-scale System using IT
+<P>
+ Copyright © 2003 by Galaxy Express Corporation
+<P>
+<P><HR WIDTH=80% ALIGN=left><P>
+<P>
+<H2> defTriple</H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="deftriple"><A HREF="../NTriple\Ntriple.cl"><B>defTriple</B></A></A> <I>subject</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="60" align="right">[macro]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>defines a triple with forward-reference functionality.</TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="/."><A HREF="../NTriple\Ntriple.cl"><B>/.</B></A></A> <I>subject</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="60" align="right">[macro]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>defines a triple with forward-reference functionality.</TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="./"><A HREF="../NTriple\Ntriple.cl"><B>./</B></A></A> <I>subject</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="60" align="right">[macro]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>defines a triple with forward-reference functionality.</TD>
+</TR></TBODY></TABLE></DIV> 
+<P>
+<H2> Add Triple</H2>
+<P>
+ addTriple shows very convenient usage of method. 
+ A triple of subject/predicate/object in various types, which may be undefined in forward reference, 
+ are accepted and they are set up step by step using appropriate entailment rules piecewisely.
+<BR>
+<PRE><CODE>
+        +-- t/URI/t
+        +-- t/sym/t
+        +-- URI/t/t
+        |                                   +-- sym/rdf:type/sym
+        |                                   +-- sym/rdf:type/cls
+        +-- sym/rsc/t                       +-- sym/rdfs:subPropertyOf/sym
+ t/t/t -+-- sym/prop/t --+-- sym/prop/sym --+-- sym/rdfs:subPropertyOf/prop
+        |                +-- sym/prop/data  +-- sym/rdfs:subClassOf/sym
+        |                                   +-- sym/rdfs:subClassOf/cls
+        |
+        +-- rsc/prop/t --+-- rsc/prop/sym
+        |                +-- cls/prop/t ---+-- cls/prop/sym 
+        |                                  +--------------------- cls/rdfs:subClassOf/cls
+        +-- rsc/rsc/t
+
+</CODE></PRE><P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>subject</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>adds a subject-predicate-object triple.</TD>
+</TR></TBODY></TABLE></DIV> 
+<P>
+<H2> symbol rdf:type Class</H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:symbol"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                   symbol)</I> <I>(predicate
+                                                                                                                   (eql
+                                                                                                                    type))</I> <I>(object
+                                                                                                                                   Class)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>This form is turned out to an <B>addClass</B> form, due to predicate rdf:type.</TD>
+</TR></TBODY></TABLE></DIV> 
+<P>
+<H2> symbol rdf:type <I>symbol</I> -->  symbol rdf:type <I>resource</I></H2>
+<P>
+ Range constraint is used for proactive entailment for undefined <I>symbol</I>.
+ See entaiment rule rdfs3.
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:symbol"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                   symbol)</I> <I>(predicate
+                                                                                                                   (eql
+                                                                                                                    type))</I> <I>(object
+                                                                                                                                   symbol)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:t"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>subject</I> <I>(predicate
+                                                                                                             (eql
+                                                                                                              type))</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> Class rdfs:subClassOf Class</H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="superclasses-of:class"><A HREF="../NTriple\Ntriple.cl"><B>superclasses-of</B></A></A> <I>(object
+                                                                                                              Class)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="subclasses-of:class"><A HREF="../NTriple\Ntriple.cl"><B>subclasses-of</B></A></A> <I>(object
+                                                                                                          Class)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:class"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                  Class)</I> <I>(predicate
+                                                                                                                 (eql
+                                                                                                                  subClassOf))</I> <I>(object
+                                                                                                                                       Class)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> <I>symbol</I> rdfs:subClassOf Class  -->  <I>resource</I> rdfs:subClassOf Class</H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:symbol"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                   symbol)</I> <I>(predicate
+                                                                                                                   (eql
+                                                                                                                    subClassOf))</I> <I>(object
+                                                                                                                                         Class)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> symbol rdfs:subClassOf <I>symbol</I> -->  symbol rdfs:subClassOf <I>resource</I></H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:symbol"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                   symbol)</I> <I>(predicate
+                                                                                                                   (eql
+                                                                                                                    subClassOf))</I> <I>(object
+                                                                                                                                         symbol)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> Property rdfs:subPropertyOf Property</H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="strict-abst-property-p"><A HREF="../NTriple\Ntriple.cl"><B>strict-abst-property-p</B></A></A> <I>abst</I> <I>spec</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="most-specific-property"><A HREF="../NTriple\Ntriple.cl"><B>most-specific-property</B></A></A> <I>absts</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:property"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                     Property)</I> <I>(predicate
+                                                                                                                       (eql
+                                                                                                                        subPropertyOf))</I> <I>(object
+                                                                                                                                                Property)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> <I>symbol</I> rdfs:subPropertyOf Property  -->  <I>resource</I> rdfs:subPropertyOf Property</H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:symbol"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                   symbol)</I> <I>(predicate
+                                                                                                                   (eql
+                                                                                                                    subPropertyOf))</I> <I>(object
+                                                                                                                                            Property)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> symbol rdfs:subPropertyOf <I>symbol</I> -->  symbol rdfs:subPropertyOf <I>resource</I></H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:symbol"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                   symbol)</I> <I>(predicate
+                                                                                                                   (eql
+                                                                                                                    subPropertyOf))</I> <I>(object
+                                                                                                                                            symbol)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:t"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>subject</I> <I>(predicate
+                                                                                                             (eql
+                                                                                                              subPropertyOf))</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> Class Property <I>symbol</I> --> Class Property <I>resource</I></H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:class"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                  Class)</I> <I>(predicate
+                                                                                                                 Property)</I> <I>(object
+                                                                                                                                   symbol)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> Resource Property <I>symbol</I> --> Resource Property <I>resource</I></H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:resource"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                     Resource)</I> <I>(predicate
+                                                                                                                       Property)</I> <I>(object
+                                                                                                                                         symbol)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> Class Property t</H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:class"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                  Class)</I> <I>(predicate
+                                                                                                                 Property)</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> Resource Property t</H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:resource"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                     Resource)</I> <I>(predicate
+                                                                                                                       Property)</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:resource"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                     Resource)</I> <I>(predicate
+                                                                                                                       Resource)</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="collect-domaind"><A HREF="../NTriple\Ntriple.cl"><B>collect-domaind</B></A></A> <I>slots</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>collects domain information from properties in <I>slots</I>.</TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:symbol"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                   symbol)</I> <I>(predicate
+                                                                                                                   Property)</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:symbol"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                   symbol)</I> <I>(predicate
+                                                                                                                   Resource)</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:property"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                     Property)</I> <I>(predicate
+                                                                                                                       (eql
+                                                                                                                        range))</I> <I>(object
+                                                                                                                                        symbol)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> <I>symbol</I> Property data  -->  <I>resource</I> Property data</H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:symbol"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                   symbol)</I> <I>(predicate
+                                                                                                                   Property)</I> <I>(object
+                                                                                                                                     number)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:symbol"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                   symbol)</I> <I>(predicate
+                                                                                                                   Property)</I> <I>(object
+                                                                                                                                     string)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> <I>symbol</I> Property <I>symbol</I>  -->  <I>resource</I> Property <I>resource</I></H2>
+<P>
+ Range constraint is used for satisfiability checking and proactive entailment.
+ See entaiment rule rdfs3.
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:symbol"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                   symbol)</I> <I>(predicate
+                                                                                                                   Property)</I> <I>(object
+                                                                                                                                     symbol)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> <I>URI</I> Property t  -->  <I>symbol</I> Property t</H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:uri"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                uri)</I> <I>(predicate
+                                                                                                             Property)</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> <I>URI</I> symbol t  -->  <I>URI</I> Property t</H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:uri"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                uri)</I> <I>(predicate
+                                                                                                             symbol)</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> (quote <I>resource</I>) Property t --> <I>resource</I> Property t</H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:cons"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                 cons)</I> <I>(predicate
+                                                                                                               Property)</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> t <I>symbol</I> t  -->  t <I>Property</I> t</H2>
+<P>
+ If <I>symbol</I> is undefined, entailment rule rdf1 is applied.
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:t"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>subject</I> <I>(predicate
+                                                                                                             symbol)</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P>
+<H2> t <I>URI</I> t  -->  t <I>symbol</I> t</H2>
+<P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:t"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>subject</I> <I>(predicate
+                                                                                                             uri)</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:symbol"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                   symbol)</I> <I>(predicate
+                                                                                                                   (eql
+                                                                                                                    type))</I> <I>(object
+                                                                                                                                   Resource)</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:(eql 'string)"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                          (eql
+                                                                                                           'string))</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:(eql 'decimal)"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                           (eql
+                                                                                                            'decimal))</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:(eql 'float)"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                         (eql
+                                                                                                          'float))</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:(eql 'double)"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                          (eql
+                                                                                                           'double))</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:(eql 'int)"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                       (eql
+                                                                                                        'int))</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:(eql 'integer)"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                           (eql
+                                                                                                            'integer))</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:(eql 'long)"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                        (eql
+                                                                                                         'long))</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:(eql 'short)"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                         (eql
+                                                                                                          'short))</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:(eql 'positiveinteger)"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                                   (eql
+                                                                                                                    'positiveInteger))</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:(eql 'nonpositiveinteger)"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                                      (eql
+                                                                                                                       'nonPositiveInteger))</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:(eql 'negativeinteger)"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                                   (eql
+                                                                                                                    'negativeInteger))</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple:(eql 'nonnegativeinteger)"><A HREF="../NTriple\Ntriple.cl"><B>addTriple</B></A></A> <I>(subject
+                                                                                                                      (eql
+                                                                                                                       'nonNegativeInteger))</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="65" align="right">[method]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="intern-from-nodeid"><A HREF="../NTriple\Ntriple.cl"><B>intern-from-nodeID</B></A></A> <I>ID</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="intern-langstring"><A HREF="../NTriple\Ntriple.cl"><B>intern-langString</B></A></A> <I>literal</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>langString ::= '"' string '"' ( '@' language )?</TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="intern-datatypestring"><A HREF="../NTriple\Ntriple.cl"><B>intern-datatypeString</B></A></A> <I>literal</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>datatypeString ::= langString '^^' uriref </TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="intern-literal"><A HREF="../NTriple\Ntriple.cl"><B>intern-literal</B></A></A> <I>literal</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="intern-from-qname"><A HREF="../NTriple\Ntriple.cl"><B>intern-from-QName</B></A></A> <I>QName</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="addtriple-from-file"><A HREF="../NTriple\Ntriple.cl"><B>addTriple-from-file</B></A></A> <I>subject</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="intern-subject"><A HREF="../NTriple\Ntriple.cl"><B>intern-subject</B></A></A> <I>str</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="intern-predicate"><A HREF="../NTriple\Ntriple.cl"><B>intern-predicate</B></A></A> <I>str</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="intern-object"><A HREF="../NTriple\Ntriple.cl"><B>intern-object</B></A></A> <I>str</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="get-triple"><A HREF="../NTriple\Ntriple.cl"><B>get-triple</B></A></A> <I>resource</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<A NAME="NTriple/NTparser.cl"><HR>
+<H2>File <A HREF="../NTriple\NTparser.cl">NTriple\NTparser.cl</A></H2></A>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="find-package-from-documentation"><A HREF="../NTriple\NTparser.cl"><B>find-package-from-documentation</B></A></A> <I>resource</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="find-package-from-uri"><A HREF="../NTriple\NTparser.cl"><B>find-package-from-uri</B></A></A> <I>resource</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="label-localpart"><A HREF="../NTriple\NTparser.cl"><B>label-localpart</B></A></A> <I>symbol</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="label-prefix"><A HREF="../NTriple\NTparser.cl"><B>label-prefix</B></A></A> <I>symbol</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="label-uri"><A HREF="../NTriple\NTparser.cl"><B>label-uri</B></A></A> <I>symbol</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="escaped-p"><A HREF="../NTriple\NTparser.cl"><B>escaped-p</B></A></A> <I>str</I> <I>pos</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="position-with-escape"><A HREF="../NTriple\NTparser.cl"><B>position-with-escape</B></A></A> <I>char</I> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="find-with-escape"><A HREF="../NTriple\NTparser.cl"><B>find-with-escape</B></A></A> <I>char</I> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="ws-p"><A HREF="../NTriple\NTparser.cl"><B>ws-p</B></A></A> <I>char</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>ws ::= space | tab</TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="eoln-p"><A HREF="../NTriple\NTparser.cl"><B>eoln-p</B></A></A> <I>char</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>eoln ::= cr | lf | cr lf</TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="character-p"><A HREF="../NTriple\NTparser.cl"><B>character-p</B></A></A> <I>char</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>character ::= [#x20-#x7E] /* US-ASCII space to decimal 126 */ </TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="name-char-p"><A HREF="../NTriple\NTparser.cl"><B>name-char-p</B></A></A> <I>char</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="lower-name-char-p"><A HREF="../NTriple\NTparser.cl"><B>lower-name-char-p</B></A></A> <I>char</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="skip-ws"><A HREF="../NTriple\NTparser.cl"><B>skip-ws</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="name-p"><A HREF="../NTriple\NTparser.cl"><B>name-p</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="parse-name"><A HREF="../NTriple\NTparser.cl"><B>parse-name</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>name ::= [A-Za-z][A-Za-z0-9]* </TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="qname-p"><A HREF="../NTriple\NTparser.cl"><B>QName-p</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="parse-qname"><A HREF="../NTriple\NTparser.cl"><B>parse-QName</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="name&space"><A HREF="../NTriple\NTparser.cl"><B>name&space</B></A></A> <I>QName</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="id-p"><A HREF="../NTriple\NTparser.cl"><B>ID-p</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="parse-nodeid"><A HREF="../NTriple\NTparser.cl"><B>parse-nodeID</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>nodeID ::= '_:' name</TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="language-p"><A HREF="../NTriple\NTparser.cl"><B>language-p</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>language ::= [a-z]+ ('-' [a-z0-9]+ )* </TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="%language-p"><A HREF="../NTriple\NTparser.cl"><B>%language-p</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="parse-language"><A HREF="../NTriple\NTparser.cl"><B>parse-language</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="uriref-p"><A HREF="../NTriple\NTparser.cl"><B>uriref-p</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>uriref ::= '<I>' absoluteURI '</I>'</TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="parse-uriref"><A HREF="../NTriple\NTparser.cl"><B>parse-uriref</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>uriref ::= '<I>' absoluteURI '</I>'</TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="langstring-p"><A HREF="../NTriple\NTparser.cl"><B>langString-p</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>langString ::= '"' string '"' ( '@' language )?</TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="parse-langstring"><A HREF="../NTriple\NTparser.cl"><B>parse-langString</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>langString ::= '"' string '"' ( '@' language )?</TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="datatypestring-p"><A HREF="../NTriple\NTparser.cl"><B>datatypeString-p</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>datatypeString ::= '</TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="parse-datatypestring"><A HREF="../NTriple\NTparser.cl"><B>parse-datatypeString</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>datatypeString ::= '</TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="literal-p"><A HREF="../NTriple\NTparser.cl"><B>literal-p</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="parse-literal"><A HREF="../NTriple\NTparser.cl"><B>parse-literal</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>literal ::= langString | datatypeString</TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="object-p"><A HREF="../NTriple\NTparser.cl"><B>object-p</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>object ::= uriref | nodeID | literal  </TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="parse-object"><A HREF="../NTriple\NTparser.cl"><B>parse-object</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="predicate-p"><A HREF="../NTriple\NTparser.cl"><B>predicate-p</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>predicate ::= uriref  </TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="parse-predicate"><A HREF="../NTriple\NTparser.cl"><B>parse-predicate</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>predicate ::= uriref  </TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="subject-p"><A HREF="../NTriple\NTparser.cl"><B>subject-p</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>subject ::= uriref | nodeID  </TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="parse-subject"><A HREF="../NTriple\NTparser.cl"><B>parse-subject</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>subject ::= uriref | nodeID  </TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="parse-triple"><A HREF="../NTriple\NTparser.cl"><B>parse-triple</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>triple ::= subject ws+ predicate ws+ object ws* '.' ws*  </TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="nt-comment-p"><A HREF="../NTriple\NTparser.cl"><B>nt-comment-p</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="parse-nt-comment"><A HREF="../NTriple\NTparser.cl"><B>parse-nt-comment</B></A></A> <I>str</I> <I>i</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>comment ::= '#' ( character - ( cr | lf ) )*  </TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="parse-triple-line"><A HREF="../NTriple\NTparser.cl"><B>parse-triple-line</B></A></A> <I>line</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>line ::= ws* ( comment | triple )? eoln  </TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="read-ntripledoc"><A HREF="../NTriple\NTparser.cl"><B>read-ntripleDoc</B></A></A> <I>stream</I> <I>process-fn</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD>ntripleDoc ::= line*  </TD>
+</TR></TBODY></TABLE></DIV> 
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="ask-user-nt-file"><A HREF="../NTriple\NTparser.cl"><B>ask-user-nt-file</B></A></A> </U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="read-ntriple-file"><A HREF="../NTriple\NTparser.cl"><B>read-NTriple-file</B></A></A> <I>process-fn</I> <I>&optional</I> <I>file</I> <I>code</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="rdf-parser-test"><A HREF="../NTriple\NTparser.cl"><B>rdf-parser-test</B></A></A> <I>subject</I> <I>predicate</I> <I>object</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<A NAME="NTriple/ntwriter.cl"><HR>
+<H2>File <A HREF="../NTriple\ntwriter.cl">NTriple\ntwriter.cl</A></H2></A>
+<P>
+<H2> NTWriter module</H2>
+<P>
+ IT Program Project in Japan: 
+          Building Operation-Support System for Large-scale System using IT.
+<P>
+ This code is written by Seiji Koide at Galaxy Express Corporation, Japan,
+ for the realization of the MEXT IT Program in Japan,
+<P>
+ Copyright © 2004 by Galaxy Express Corporation
+<BR>
+ Copyright (c) 2008 Seiji Koide
+<P><HR WIDTH=80% ALIGN=left><P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="get-triple-uri"><A HREF="../NTriple\ntwriter.cl"><B>get-triple-uri</B></A></A> <I>resource</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="print-uri-form"><A HREF="../NTriple\ntwriter.cl"><B>print-uri-form</B></A></A> <I>uri</I> <I>stream</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="write-triple"><A HREF="../NTriple\ntwriter.cl"><B>write-triple</B></A></A> <I>triple</I> <I>&optional</I> <I>stream</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<P><TABLE width="100%" cellpadding="0"><TBODY>
+<TR><TD><U><A NAME="write-nt"><A HREF="../NTriple\ntwriter.cl"><B>write-nt</B></A></A> <I>resource</I> <I>&optional</I> <I>stream</I></U></TD>
+<TD width="70" align="right">[function]</TD></TR>
+</TBODY></TABLE>
+<DIV align="right"><TABLE width="90%" cellpadding="0"><TBODY><TR>
+<TD></TD>
+</TR></TBODY></TABLE></DIV> <P>
+<HR>
+<TABLE BORDER=4 CELLPADDING=4 CELLSPACING=0><tr>
+<td> <A HREF="http://www-kasm.nii.ac.jp/~koide/SWCLOS2-en.htm">SWCLOS Home</A>
+<td> <A HREF="../../contact.html">Authors</A>
+<td> <A HREF="overview.html">Lisp Code Overview</A>
+</TABLE>
+</BODY> 
+</HTML>

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<META http-equiv="Content-Style-Type" content="text/css">
+  <title>13. Property Restriction in OWL </title>
+  <link>
+  <link href="manual.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<h2>13. &nbsp;Property Restriction in OWL </h2>
+
+<h3>13.1 &nbsp;Restriction on Properties</h3>
+
+<p></p>
+
+<blockquote>
+<pre><code>
+</code></pre>
+</blockquote>
+
+<a id="SWCLOSread-rdf-file" name="SWCLOSread-rdf-file" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>read-rdf-file <I>accepter-fun</I> [ <i>file</i> [ <i>code</i> ]]</U></TH>
+      <TD width="70">[Function]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>This function read and parse a <i>file</i> that contains RDF/XML format 
+      data, then passes attributes in RDFdecl, parsed XMLDecl, parsed doctypedecl, 
+      parsed Comments, and parsed Descriptions to <i>accepter-fun</i>. 
+      <i>code</i> is a character code of <i>file</i>. If <i>file</i> has its 
+      encoding description in XMLDecl, the direction in file superseeds. </TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<h3>13.2 &nbsp;owl:allValuesFrom</h3>
+
+<p>You can get any data in list using path travel function -> as follows.</p>
+
+<blockquote>
+<pre><code>gx-user(6): (get-form (-> eg:courses/6.001 vocab:students rdf:rest rdf:rest rdf:first))
+(rdfs:Resource (rdf:about "http://example.org/students/Johann"))
+gx-user(7): (-> eg:courses/6.001 vocab:students rdf:rest rdf:rest rdf:rest)
+#&lt;rdf:List rdf:nil&gt;
+</code></pre>
+</blockquote>
+
+<p>However, using rdf:List is very tedious in SWCLOS. We can use the lisp list to 
+represent a collection in SWCLOS. You may represent the collection of students as 
+follows, whereas the RDF graph is not equal to Figure 10.2. </p>
+
+<p>Even though this input form does not contain rdf:first and rdf:rest, it is very 
+easy for lisp programmers to imagine the above forms from the list structure in 
+Figure 10.2. </p>
+
+<hr>
+<i><small>  Author: <a href="mailto:SeijiKoide@aol.com">Seiji Koide</a>. 
+ Copyright (c) 2005, 2006 GALAXY EXPRESS CORPORATION. Feb. 2006
+<br> </small></i></body></html>

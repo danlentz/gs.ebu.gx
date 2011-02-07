@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<META http-equiv="Content-Style-Type" content="text/css">
+  <title>SWCLOS Basics</title>
+  <link>
+  <link href="manual.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<h2>2. &nbsp;SWCLOS Basics</h2>
+
+<h3>2.1 &nbsp;How to Get SWCLOS</h3>
+
+<p>SWCLOS is an Open Source Program that was originally developed at GALAXY EXPRESS
+CORPORATION in Japan, and Seiji Koide, who is the developer of SWCLOS, has been continued
+updating it. The latest version is available from Koide's home page at National Institute of Informatics (NII) 
+<a href="http://www-kasm.nii.ac.jp/~koide/SWCLOS2-en.htm">
+http://www-kasm.nii.ac.jp/~koide/SWCLOS2-en.htm</a>.
+</p>
+
+<p>The SWCLOS current version is developed on Allegro Common Lisp 8.1 Windows version that is
+delivered by Franz Inc. We hope someone ports it to other lisp systems, although it is probably hard,
+because partly the implementation is concerned with ACL features.
+</p>
+
+<h3>2.2 &nbsp;Proprietary Rights</h3>
+
+<p>GALAXY EXPRESS CORPORATION holds all copyrights and allows anyone to use anyhow AS IS,
+except modifying the package name of <b>gx</b> and <b>gx-user</b>, and the object name <b>galaxy</b>. 
+'GX' is the rocket name from GALAXY EXPRESS CORPORATION. See README file in delivery.
+</p>
+
+<h3>2.3 &nbsp;How to Start SWCLOS</h3>
+
+<p>After compiling and loading SWCLOS into the ACL modern lisp version, it is much better to enter <b>gx-user</b>
+package in the lisp listener window to use SWCLOS. Please note that SWCLOS requires
+case-sensitive-lower on case mode of lisp reader to distinguish upper and lower case of letters. This
+features is not ANSI-standard today, but we hope it will be so, soon.
+</p>
+
+<blockquote>
+<pre><code><b>cg-user(1): (in-package gx-user)
+#&lt;The gx-user package&gt;
+gx-user(2): 
+</b></code></pre></blockquote>
+
+<p>Franz has prepared with a good tutorial for the case of letters. 
+See <a href="http://www.franz.com/support/tutorials/casemode-tutorial.htm">
+http://www.franz.com/support/tutorials/casemode-tutorial.htm</a>.</p>
+
+<h3>2.4 &nbsp;Monotonicity of Knowledge</h3>
+
+<p>In Semantic Webs you assume that the knowledge always increases and the interpretation become
+monotonously more precise and richer. SWCLOS leverages the monotonicity principle in Semantic Webs
+to accept the forward reference. In the current version, there are no delete functions for entities in
+ontologies, and there is no undo functionality. Such functions will be provided at the next version.</p>
+
+<p>Please note that (setf (slot-value ...) ...) do not overwrite the previous slot value. The
+slotvalue setting function just adds a new value into the slot. This is a reflection of the monotonicity
+principle. Do not fear it. You can make slot unbound, so you can reset any values after unbinding, if you
+would like so.</p>
+
+<h3>2.5 &nbsp;Open World Assumption and Three-Value Logic</h3>
+
+<p>Semantic Webs assume that the World Wide Webs are dynamic, changeable, and open in the sense that no
+one knows all of WWWs. From the viewpoint of Logic, Close World Assumption is a base of inference.
+Therefore, people who are accustomed to logic thinking should mind this point.
+</p>
+
+<p>The primary function of Description Logics (DLs) is i) to classify objects to classes, ii) to determine
+whether or not a class is subsumed by another class. In SWCLOS, this work is performed by i) <b>gx:typep</b>
+and ii) <b>gx:subtypep</b> in the RDF universe and <b>subsumed-p</b> in the OWL universe. These functions return
+two values; the first value is yes/no for query and the second represents the certainty. Therefore, the pair of
+return values &lt;t,t&gt; expresses boolean true, &lt;nil,t&gt; expresses boolean false, and &lt;nil,nil&gt; means unknown.
+Note that this ternary-value logic is an extension of ANSI Common Lisp native specification on cl:subtypep,
+which returns two values described above. See the document of ANSI Common Lisp <a href="http://www.franz.com/support/documentation/8.1/ansicl/dictentr/subtypep.htm">
+http://www.franz.com/support/documentation/8.1/ansicl/dictentr/subtypep.htm</a>. However, you do
+not need to mind how to use ternary value logic. If you use only the first return value, your program does
+not care of unknown and it is regarded as boolean false. If you are interested how to compute ternary-value
+logic in SWCLOS, see the source code you obtained.
+</p>
+
+<p></p>
+
+<hr>
+<i><small> Author: <a href="mailto:koide@nii.ac.jp?subject=SWCLOS">Seiji Koide</a>. 
+ Copyright (c) 2005, 2006 GALAXY EXPRESS CORPORATION. Feb. 2006
+<br> Copyright (c) 2007-2009 Seiji Koide. Oct. 2009
+<br> </small></i></body></html>

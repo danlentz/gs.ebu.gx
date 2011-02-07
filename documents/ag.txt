@@ -1,0 +1,167 @@
+
+(#S(property :name :exclude-standard-ontology-uris
+             :default nil
+             :documentation "If true, then AllegroGraph will *not* automatically intern a set of 
+_standard_ ontology URI strings into each triple-store it creates. These 
+URIs consist of the RDFS and OWL strings used by the reasoner and other
+URIs used by the temporal and geospatial frameworks."
+             :evaluate-p nil
+             :value nil
+             :validation-function nil
+             :validation-error nil)
+ #S(property :name :error-on-redefine-namespace
+             :default t
+             :documentation "The default value for the `errorp` keyword argument to
+[register-namespace][]. If true and `errorp` is not
+supplied, then calling [register-namespace][] with a
+`namespace-prefix` that already has a namespace mapping
+will signal an error. Otherwise the namespace mapping will be
+changed silently."
+             :evaluate-p nil
+             :value nil
+             :validation-function nil
+             :validation-error nil)
+ #S(property :name :default-metaindex-skip-size
+             :default 256
+             :documentation "Used to control how often AllegroGraph records extra index information
+to speed up triple access in queries."
+             :evaluate-p nil
+             :value nil
+             :validation-function nil
+             :validation-error nil)
+ #S(property :name :include-standard-parts
+             :default nil
+             :documentation "If true, then AllegroGraph will automatically intern a set of _standard_ part strings into each triple-store it creates. These parts consist of the RDFS and OWL strings used by the reasoner."
+             :evaluate-p nil
+             :value nil
+             :validation-function nil
+             :validation-error nil)
+ #S(property :name :suppress-cleanup-messages
+             :default nil
+             :documentation "If nil, then AllegroGraph will print information regarding
+its internal maintenance to *standard-output*. If true, these
+messages will not be printed."
+             :evaluate-p nil
+             :value nil
+             :validation-function nil
+             :validation-error nil)
+ #S(property :name :blank-node-string-prefix
+             :default "_:anon"
+             :documentation "Used as the prefix when printing blank nodes."
+             :evaluate-p nil
+             :value nil
+             :validation-function nil
+             :validation-error nil)
+ #S(property :name :standard-indices
+             :default (mapcar #'canonical-index-flavor
+                              '(spogi posgi ospgi gspoi gposi gospi))
+             :documentation "A list of indices that will be added to each newly created triple-store
+(unless it is overridden in the call to [create-triple-store][]). It is
+also used by the function [add-standard-indices][]."
+             :evaluate-p t
+             :value nil
+             :validation-function nil
+             :validation-error nil)
+ #S(property :name :default-triple-store-class
+             :default triple-db
+             :documentation nil
+             :evaluate-p nil
+             :value nil
+             :validation-function #<Function (:internal
+                                              (:top-level-form
+                                               "application-properties.lisp"
+                                               5378)
+                                              0)
+                                    @
+                                    #x1001f50d72>
+             :validation-error nil)
+ #S(property :name :verbose
+             :default t
+             :documentation "This is used as the default value of `verbose` in AllegroGraph
+functions that have a verbose keyword argument. Examples include load-ntriples,
+load-xml/rdf and index-all-triples."
+             :evaluate-p nil
+             :value (t)
+             :validation-function nil
+             :validation-error nil)
+ #S(property :name :verbose-prepare-reasoning
+             :default nil
+             :documentation "If true, then `prepare-reasoning` will output information messages as it runs inferences."
+             :evaluate-p nil
+             :value nil
+             :validation-function nil
+             :validation-error nil)
+ #S(property :name :display-cleanup-messages
+             :default nil
+             :documentation "If set to true, then AllegroGraph will display additional
+messages to \\*error-output\\* during certain maintenance
+operations such as closing triple-stores or exiting. This
+property defaults to nil."
+             :evaluate-p nil
+             :value nil
+             :validation-function nil
+             :validation-error nil)
+ #S(property :name :temporary-directory
+             :default (system:temporary-directory)
+             :documentation "Specifies the location of a directory that AllegroGraph
+will use for some of its temporary files. Defaults to the
+return value of `sys:temporary-directory`."
+             :evaluate-p t
+             :value nil
+             :validation-function nil
+             :validation-error nil)
+ #S(property :name :agraph-cluster-code-pathname
+             :default nil
+             :documentation "When set, this is used to help locate the cluster/grid support code for AllegroGraph."
+             :evaluate-p nil
+             :value nil
+             :validation-function nil
+             :validation-error nil)
+ #S(property :name :default-print-triple-format
+             :default :ntriples
+             :documentation "The default value for the `format` keyword argument to
+[print-triple][], [print-triples][], and [part->string][].
+May be one of these values:
+
+ * :ntriples - Print appropriate for an N-Triples syntax file, including angle brackets and other
+punctuation, and escaping all characters outside the permitted set with \\uxxxx escapes.  The permitted
+characters are approximately the printable 7-bit ASCII.  Triples 
+written in this format are intended to be
+readable without loss of information, provided encoded UPIs have 
+appropriate type or predicate mappings in effect.
+
+ * :long - Exactly like :ntriples, except that no character \\uxxxx escaping is performed.  This is
+appropriate for printing to a stream that can support and display Unicode characters.
+
+ * :concise - This format is intended for human-readable presentation.  Characters are not escaped,
+language and type tags are suppressed from literals, and numeric encoded UPIs are printed numerically.  If an
+appropriate namespace prefix is registered, it is used, otherwise URIs are printed fully.
+
+ * :terse - Similar to :concise, except that only the fragment portion of a URI is printed, and long
+literal strings are truncated with \"...\" ellipses.
+
+The default is `:ntriples`."
+             :evaluate-p nil
+             :value nil
+             :validation-function nil
+             :validation-error nil)
+ #S(property :name :server-port
+             :default 8712
+             :documentation "The default port for the AllegroGraph server."
+             :evaluate-p nil
+             :value nil
+             :validation-function nil
+             :validation-error nil)
+ #S(property :name :agraph-manager-period
+             :default 2
+             :documentation nil
+             :evaluate-p nil
+             :value nil
+             :validation-function #<Function (:internal
+                                              (:top-level-form
+                                               "application-properties.lisp"
+                                               5236)
+                                              0)
+                                    @
+                                    #x1001f4fcf2>
+             :validation-error nil)) 

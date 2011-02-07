@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<META http-equiv="Content-Style-Type" content="text/css">
+  <title>SWCLOS User's Manual</title>
+  <link>
+  <link href="manual.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<hr>
+<h1>SWCLOS User's Manual</h1>
+<hr>
+
+<h2>Table of Contents</h2>
+<ol>
+  <li><a href="Introduction.html">Introduction</a></li>
+        <DL><DD>&nbsp;</DD></DL>
+  <li><a href="BASICS.html">SWCLOS Basics</a></li>
+        <DL><DD>&nbsp;</DD></DL>
+        <DL><DD>2.1 &nbsp;How to Get SWCLOS</DD></DL>
+        <DL><DD>2.2 &nbsp;Proprietary Rights</DD></DL>
+        <DL><DD>2.3 &nbsp;How to Start SWCLOS</DD></DL>
+        <DL><DD>2.4 &nbsp;Monotonicity of Knowledge</DD></DL>
+        <DL><DD>2.5 &nbsp;Open World Assumption and Three-Value Logic</DD></DL>
+        <DL><DD>&nbsp;</DL>
+  <li><a href="resource.html">URI, QName, and Resource</a></li>
+        <DL><DD>&nbsp;</DD></DL>
+        <DL><DD>3.1 &nbsp;URI</DD></DL>
+        <DL><DD>3.2 &nbsp;QName</DD></DL>
+        <DL><DD>3.3 &nbsp;URI Namedspace</DD></DL>
+        <DL><DD>3.4 &nbsp;Resource</DD></DL>
+        <DL><DD>3.5 &nbsp;NodeID</DD></DL>
+        <DL><DD>&nbsp;</DL>
+  <li><a href="RDFobject.html">RDF Resource Objects</a></li>
+        <DL><DD>&nbsp;</DD></DL>
+        <DL><DD>4.1 &nbsp;Resource Objects and the Syntax in S-expression</DD></DL>
+        <DL><DD>4.2 &nbsp;Adding and Getting a Resource Form</DD></DL>
+        <DL><DD>&nbsp;</DD></DL>
+  <li><a href="RDFSchema.html">RDFS Vocabularies and Semantics</a></li>
+        <DL><DD>&nbsp;</DD></DL>
+        <DL><DD>5.1 &nbsp;Resource Classes, Metaclasses, and Instances</DD></DL>
+        <DL><DD>5.2 &nbsp;rdf:type and rdfs:subClassOf</DD></DL>
+        <DL><DD>5.3 &nbsp;rdfs:subPropertyOf</DD></DL>
+        <DL><DD>5.4 &nbsp;Properties and Slots</DD></DL>
+        <DL><DD>5.5 &nbsp;Adding Resource Objects</DD></DL>
+        <DL><DD>5.6 &nbsp;Adding Slots</DD></DL>
+        <DL><DD>5.7 &nbsp;Adding Slot Values</DD></DL>
+        <DL><DD>5.8 &nbsp;Adding Multiple Types</DD></DL>
+        <DL><DD>5.9 &nbsp;Extension of Property and Slot Definition</DD></DL>
+        <DL><DD>&nbsp;</DD></DL>
+  <li><a href="datatype.html">String, Number, Datatype, and Lang</a></li>
+        <DL><DD>&nbsp;</DD></DL>
+        <DL><DD>6.1 &nbsp;Literal</DD></DL>
+        <DL><DD>6.2 &nbsp;XSD Datatypes in SWCLOS</DD></DL>
+        <DL><DD>6.3 &nbsp;xml:lang in SWCLOS</DD></DL>
+        <DL><DD>&nbsp;</DL>
+  <li><a href="RDFCollection.html">RDF Collection</a></li>
+        <DL><DD>&nbsp;</DD></DL>
+        <DL><DD>7.1 &nbsp;RDF Container</DD></DL>
+        <DL><DD>7.2 &nbsp;List</DD></DL>
+        <DL><DD>&nbsp;</DD></DL>
+  <li><a href="DomainRange.html">Domain and Range</a></li>
+        <DL><DD>&nbsp</DD></DL>
+        <DL><DD>8.1 &nbsp;Adding Domain and Range Constraints</DD></DL>
+        <DL><DD>8.2 &nbsp;Domain and Range Constraint Satisfaction</DD></DL>
+        <DL><DD>&nbsp;</DD></DL>
+  <li><a href="RDFSAxiomsEntailments.html">RDFS Axioms and Entailments</a></li>
+        <DL><DD>&nbsp;</DD></DL>
+        <DL><DD>9.1 &nbsp;RDF and RDFS Axioms</DD></DL>
+        <DL><DD>9.2 &nbsp;RDFS Entailment</DD></DL>
+        <DL><DD>9.3 &nbsp;RDF Entailment Rules</DD></DL>
+        <DL><DD>9.4 &nbsp;RDFS Entailment Rules</DD></DL>
+        <DL><DD>&nbsp;</DD></DL>
+  <li><a href="RDFParserWriter.html">RDF/XML Parser and Writer</a></li>
+        <DL><DD>&nbsp;</DD></DL>
+        <DL><DD>10.1 &nbsp;RDF/XML Parser</DD></DL>
+        <DL><DD>10.2 &nbsp;RDF/XML Writer</DD></DL>
+        <DL><DD>&nbsp;</DD></DL>
+  <li><a href="NTriples.html">N-Triples</a></li>
+        <DL><DD>&nbsp;</DD></DL>
+        <DL><DD>11.1 &nbsp;N-Triple Parser</DD></DL>
+        <DL><DD>11.2 &nbsp;Adding N-Triples</DD></DL>
+        <DL><DD>11.3 &nbsp;N-Triple Writer</DD></DL>
+        <DL><DD>&nbsp;</DD></DL>
+  <li><a href="SWCLOSOWL.html">OWL in SWCLOS</a></li>
+        <DL><DD>&nbsp;</DD></DL>
+        <DL><DD>12.1 &nbsp;OWL Extension of RDF and RDFS</DD></DL>
+        <DL><DD>12.2 &nbsp;Description Logic and OWL in SWCLOS</DD></DL>
+        <DL><DD>12.3 &nbsp;OWL Property Restrictions</DD></DL>
+        <DL><DD>12.4 &nbsp;Substantial and Non-Substantial Relationship</DD></DL>
+        <DL><DD>12.5 &nbsp;Axiomatic Complete Relations</DD></DL>
+        <DL><DD>&nbsp;</DD></DL>
+  <li><a href="OWLEntailments.html">OWL Axioms and Entailment Rules </a></li>
+        <DL><DD>&nbsp;</DD></DL>
+        <DL><DD>13.1 &nbsp;OWL Axioms </DD></DL>
+        <DL><DD>13.2 &nbsp;OWL Semantics and Entailment Rules  </DD></DL>
+        <DL><DD>&nbsp;</DD></DL>
+  <li><a href="OWLAPIs.html">OWL APIs </a></li>
+        <DL><DD>&nbsp;</DD></DL>
+        <DL><DD>14.1 &nbsp;Subsumption in OWL </DD></DL>
+        <DL><DD>&nbsp;</DD></DL>
+
+</ol>
+<hr>
+
+<h2>Acknowledgements</h2>
+<p>SWCLOS was developed at one of the Japanese IT programs titled "Building 
+Operation Support System for Large-Scale Systems using IT", that was conducted 
+by the Ministry of Education, Culture, Sports, Science, and Technology from 
+2002 to 2005 fiscal year. It is updated and maintained by Seiji Koide at IHI 
+Corporation and National Insitute of Informatics.</p>
+
+<hr>
+<i><small> Author: <a href="mailto:koide@nii.ac.jp?subject=SWCLOS">Seiji Koide</a>. 
+ Copyright (c) 2005, 2006 GALAXY EXPRESS CORPORATION. Feb. 2006
+<br> Copyright (c) 2007-2009 Seiji Koide. Oct. 2009
+<br> </small></i></body></html>

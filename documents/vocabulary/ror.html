@@ -1,0 +1,2966 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<title>ROR - Resources of a Resource</title>
+
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+h1
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:16.0pt;
+	font-family:Arial;}
+h2
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-style:italic;}
+h3
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:13.0pt;
+	font-family:Arial;}
+h4
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Times New Roman";}
+h5
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	font-size:13.0pt;
+	font-family:"Times New Roman";
+	font-style:italic;}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc2, li.MsoToc2, div.MsoToc2
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:12.0pt;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc3, li.MsoToc3, div.MsoToc3
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:24.0pt;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link=blue vlink=purple>
+
+<div class=Section1>
+
+<h1><a name="_Toc90272374"></a><a name="_Toc89573348"></a><a name="_Toc89504347"></a><a
+name="_Toc88992210"></a><a name="_Toc88977847"></a><a name="_Toc88977122"></a><a
+name="_Toc88892268"></a><a name="_Toc88553508"></a><a name="_Toc88552163"></a><a
+name="_Toc88552092"></a><a name="_Toc88541615"></a><a name="_Toc88541559"></a><a
+name="_Toc88376922"></a><a name="_Toc88369458"></a><a name="_Toc88124894"></a><a
+name="_Toc88019264"></a><a name="_Toc87953665"></a><a name="_Toc87893477"></a><a
+name="_Toc87893394"></a><a name="_Toc87889734"></a><a name="_Toc87679486"></a><a
+name="_Toc85170868"></a><a name="_Toc85168282"></a><a name="_Toc84924898"></a><a
+name="_Toc84737532"></a><a name="_Toc84736313"></a><a name="_Toc84318825"></a><a
+name="_Toc84316425"></a><a name="_Toc84163528"></a><a name="_Toc84157492"></a><a
+name="_Toc84157045"></a><a name="_Toc83554104"></a><a name="_Toc83542641"></a><a
+name="_Toc83542120"></a><a name="_Toc83534415"></a><a name="_Toc83480726"></a><a
+name="_Toc83477111"></a><a name="_Toc83228157"></a><a name="_Toc83128995"><span
+style='font-size:20.0pt'>ROR </span></a><span style='font-size:20.0pt'>(</span><i>Resources
+of a Resource)</i></h1>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><b>Created</b>           2004/10/1</p>
+
+<p class=MsoNormal><b>Last Update    </b>2005/3/1</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>Copyright © 2004 - 2005  Rorweb.com
+</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'><br>
+Permission is granted to everyone to use ROR, a patent-pending technology, for
+describing their own website(s) or resource(s) for free. ROR is provided “as
+is” without warranty, expressed or implied. Licensing of ROR will soon be made
+available; we are currently testing it with several partners.</span><span
+style='font-size:10.0pt'><br>
+<br>
+</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><b>Keywords</b></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>Semantic Web, RDF, XML, Vocabulary,
+Resource Description, Website Description</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h2><a name="_Toc90272375"></a><a name="_Toc89573349"></a><a name="_Toc89504348"></a><a
+name="_Toc88992211"></a><a name="_Toc88977848"></a><a name="_Toc88977123"></a><a
+name="_Toc88892269"></a><a name="_Toc88553509"></a><a name="_Toc88552164"></a><a
+name="_Toc88552093"></a><a name="_Toc88541616"></a><a name="_Toc88541560"></a><a
+name="_Toc88376923"></a><a name="_Toc88369459"></a><a name="_Toc88124895"></a><a
+name="_Toc88019265"></a><a name="_Toc87953666"></a><a name="_Toc87893478"></a><a
+name="_Toc87893395"></a><a name="_Toc87889735"></a><a name="_Toc87679487"></a><a
+name="_Toc85170869"></a><a name="_Toc85168283"></a><a name="_Toc84924899"></a><a
+name="_Toc84737533"></a><a name="_Toc84736314"></a><a name="_Toc84318826"></a><a
+name="_Toc84316426"></a><a name="_Toc84163529"></a><a name="_Toc84157493"></a><a
+name="_Toc84157046"></a><a name="_Toc83554105"></a><a name="_Toc83542642"></a><a
+name="_Toc83542121"></a><a name="_Toc83534416"></a><a name="_Toc83480727"></a><a
+name="_Toc83477112"></a><a name="_Toc83228158"></a><a name="_Toc83128996">Overview</a></h2>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>The idea behind ROR is to provide
+a simple and structured way for resources to generically describe their
+content, resources, and relationships with other resources, and make this
+information available in one location on the resource, accessible to all
+interested.</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>                                                                                                                                                  </span></p>
+
+<h2><a name="_Toc90272376"></a><a name="_Toc89573350"></a><a name="_Toc89504349"></a><a
+name="_Toc88992212"></a><a name="_Toc88977849"></a><a name="_Toc88977124"></a><a
+name="_Toc88892270"></a><a name="_Toc88553510"></a><a name="_Toc88552165"></a><a
+name="_Toc88552094"></a><a name="_Toc88541617"></a><a name="_Toc88541561"></a><a
+name="_Toc88376924"></a><a name="_Toc88369460"></a><a name="_Toc88124896"></a><a
+name="_Toc88019266"></a><a name="_Toc87953667"></a><a name="_Toc87893479"></a><a
+name="_Toc87893396"></a><a name="_Toc87889736"></a><a name="_Toc87679488"></a><a
+name="_Toc85170870"></a><a name="_Toc85168284"></a><a name="_Toc84924900"></a><a
+name="_Toc84737534"></a><a name="_Toc84736315"></a><a name="_Toc84318827"></a><a
+name="_Toc84316427"></a><a name="_Toc84163530"></a><a name="_Toc84157494"></a><a
+name="_Toc84157047"></a><a name="_Toc83554106"></a><a name="_Toc83542643"></a><a
+name="_Toc83542122"></a><a name="_Toc83534417"></a><a name="_Toc83480728"></a><a
+name="_Toc83477113"></a><a name="_Toc83228159"></a><a name="_Toc83128997">Status
+of this document</a></h2>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>This document is a work in
+progress and will be refined. The author makes no commitments at this point regarding
+future updates. Feel free to send your questions, comments or suggestions at 
+<script language="JavaScript">document.write('<a href="mai'+'lto:info&#064;'+'rorweb.com">info&#064;'+'rorweb.com</a>')</script>
+</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h2><a name="_Toc90272377"></a><a name="_Toc89573351"></a><a name="_Toc89504350"></a><a
+name="_Toc88992213"></a><a name="_Toc88977850"></a><a name="_Toc88977125"></a><a
+name="_Toc88892271"></a><a name="_Toc88553511"></a><a name="_Toc88552166"></a><a
+name="_Toc88552095"></a><a name="_Toc88541618"></a><a name="_Toc88541562"></a><a
+name="_Toc88376925"></a><a name="_Toc88369461"></a><a name="_Toc88124897"></a><a
+name="_Toc88019267"></a><a name="_Toc87953668"></a><a name="_Toc87893480"></a><a
+name="_Toc87893397"></a><a name="_Toc87889737"></a><a name="_Toc87679489"></a><a
+name="_Toc85170871"></a><a name="_Toc85168285"></a><a name="_Toc84924901"></a><a
+name="_Toc84737535"></a><a name="_Toc84736316"></a><a name="_Toc84318828"></a><a
+name="_Toc84316428"></a><a name="_Toc84163531"></a><a name="_Toc84157495"></a><a
+name="_Toc84157048"></a><a name="_Toc83554107"></a><a name="_Toc83542644"></a><a
+name="_Toc83542123"></a><a name="_Toc83534418"></a><a name="_Toc83480729"></a><a
+name="_Toc83477114"></a><a name="_Toc83228160"></a><a name="_Toc83128998">Table
+of Content</a></h2>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc90272378">Namespace<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>2</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc90272379">Introduction<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>2</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc90272380">ROR General Vocabulary<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>2</span></a></span></p>
+
+<p class=MsoToc3><span class=MsoHyperlink><a href="#_Toc90272381">Description<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>2</span></a></span></p>
+
+<p class=MsoToc3><span class=MsoHyperlink><a href="#_Toc90272382">Classes and
+Properties<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>4</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc90272383">ROR Web
+Vocabulary<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>5</span></a></span></p>
+
+<p class=MsoToc3><span class=MsoHyperlink><a href="#_Toc90272384">Description<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>5</span></a></span></p>
+
+<p class=MsoToc3><span class=MsoHyperlink><a href="#_Toc90272385">Classes
+Overview<span style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>6</span></a></span></p>
+
+<p class=MsoToc3><span class=MsoHyperlink><a href="#_Toc90272386">Classes and
+Properties<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>6</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc90272387">ROR Document<span
+style='color:windowtext;display:none;text-decoration:none'> </span><span
+style='color:windowtext;display:none;text-decoration:none'>7</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc90272388">About the <span
+style='font-family:"Courier New"'>type</span> Property<span style='color:windowtext;
+display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>8</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc90272389">About the RDF
+<span style='font-family:"Courier New"'>seeAlso</span> Property<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>8</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc90272390">Example<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>9</span></a></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<h2><a name="_Toc90272378"></a><a name="_Toc84163532"></a><a name="_Toc84157496"></a><a
+name="_Toc84157049"></a><a name="_Toc83554108">Namespace</a></h2>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>xmlns:ror           =  “http://rorweb.com/0.1/”
+</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<h2><a name="_Toc90272379">Introduction</a></h2>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>The goal of ROR is to
+facilitate the exchange of information and meaning between resources and/or
+applications, by providing a simple set of terms and mechanisms for describing
+their content, resources, and relationships with other resources, exploring the
+possibilities of the Semantic Web. </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>ROR currently provides a set
+of two vocabularies: </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.25in'><span
+style='font-size:11.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b><span style='font-size:11.0pt'>General Vocabulary</span></b><span
+style='font-size:11.0pt'>: describes the general aspects of a resource and the
+general relationships between the resources it uses or is composed of (collection,
+tree, or network structures).</span></p>
+
+<p class=MsoNormal style='margin-left:.25in'><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.25in'><span
+style='font-size:11.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b><span style='font-size:11.0pt'>Web Vocabulary</span></b><span
+style='font-size:11.0pt'>: is an extension to the General Vocabulary and specializes
+in describing Internet resources like web sites, web stores, products, web
+feeds, sitemaps, web services, etc </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>ROR is built on top of W3’s <a
+href="http://www.w3.org/RDF/">RDF</a> (Resource Description Framework) but adds
+some constraints so that both RDF/XML and XML parsers can easily read it.</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>A ROR document can be created
+and added to a resource, to describe it. See <a href="#_ROR_Document">ROR Document</a>
+for details.</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h2><a name="_Toc90272380">ROR General Vocabulary</a></h2>
+
+<h3><a name="_Toc90272381">Description</a></h3>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>The General Vocabulary describes
+the general aspects of a resource and the general relationships between the
+resources it uses or it is composed of.  The vocabulary is designed to be used
+as a skeleton for connecting and organizing the resources of a resource, on
+which additional meaning can be added using other vocabularies (e.g. Dublin
+Core, Syndication, ROR Web Vocabulary,  etc). </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>A resource can be anything (a
+website, an object, a person, a place, a file, a database record, etc). In a
+ROR document describing a website, the top resource would typically represent
+the website itself, the lowest level resources would represent things as granular
+as a link, a blog or feed entry, a webpage paragraph, a product, a forum
+message, etc. The idea of ROR is to<i>“divide and describe”</i>: describe resources
+by decomposing them into ever smaller resources that can be described more
+fully and precisely. </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>Below is an example of a resource
+described with the ROR General Vocabulary:</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><img width=336 height=228 src="image001.gif"></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=590 valign=top style='width:6.15in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;?xml
+  version=&quot;1.0&quot;?&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;rdf:RDF
+  </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>  
+  xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>  
+  xmlns=&quot;http://www.rorweb.com/0.1/&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>        </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'><br>
+  <i>   <b>&lt;!-- Main Resource --&gt;<br>
+  <br>
+  </b></i></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>  
+  &lt;<b>Resource</b> rdf:about=&quot;<b>mything</b>&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>       &lt;type&gt;</span><span
+   style='font-size:8.0pt;font-family:"Courier New"'>Main</span><span
+  style='font-size:8.0pt;font-family:"Courier New"'>&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>       &lt;title&gt;My
+  Thing&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>       &lt;url&gt;http://www.my-thing-site.com/&lt;/url&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>       &lt;image&gt;logo.jpg&lt;/image&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>      
+  ... </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>  
+  &lt;/<b>Resource</b>&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>  
+  <b>&lt;!-- Other Resources --&gt;</b></span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>  
+  &lt;<b>Resource</b> rdf:about=&quot;<b>thing-1</b>&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>       &lt;title&gt;Thing
+  1&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>       &lt;<b>resourceOf</b> 
+  rdf:resource=&quot;<b>mything</b>&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>      
+  ...</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>  
+  &lt;/<b>Resource</b>&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>  
+  &lt;<b>Resource</b> rdf:about=&quot;<b>thing-2</b>&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>       &lt;title&gt;Thing
+  2&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>       &lt;<b>resourceOf</b> 
+  rdf:resource=&quot;<b>mything</b>&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>      
+  ...</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>  
+  &lt;/<b>Resource</b>&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'><br>
+     &lt;<b>Resource</b> rdf:about=&quot;<b>thing-3</b>&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>       &lt;title&gt;Thing
+  3&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>       &lt;<b>resourceOf</b> 
+  rdf:resource=&quot;<b>thing-2</b>&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>      
+  ...<br>
+     &lt;/<b>Resource</b>&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>  
+  &lt;<b>Resource</b> rdf:about=&quot;<b>thing-4</b>&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>       &lt;title&gt;Thing
+  4&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>       &lt;<b>resourceOf</b> 
+  rdf:resource=&quot;<b>thing-2</b>&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>      
+  ...</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>  
+  &lt;/<b>Resource</b>&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>  
+  &lt;<b>Resource</b> rdf:about=&quot;<b>thing-n</b>&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>       &lt;title&gt;Thing
+  n&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>       &lt;<b>resourceOf</b> 
+  rdf:resource=&quot;<b>mything</b>&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>      
+  ...</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>  
+  &lt;/<b>Resource</b>&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/rdf:RDF&gt;</span></p>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>In a ROR document all elements
+are described using the </span><i><span style='font-size:11.0pt;font-family:
+"Courier New"'>Resource</span></i><span style='font-size:11.0pt'> class. The elements
+can optionally be identified using the </span><i><span style='font-size:11.0pt;
+font-family:"Courier New"'>rdf:about</span></i><span style='font-size:11.0pt'>
+attribute. Class types are identified by the </span><i><span style='font-size:
+11.0pt;font-family:"Courier New"'>type</span></i><span style='font-size:11.0pt'>
+property (also optional). For example, the main resource of a ROR document has its
+</span><i><span style='font-size:11.0pt;font-family:"Courier New"'>type</span></i><span
+style='font-size:11.0pt'> property set to “</span><span style='font-size:11.0pt'>Main</span><span
+style='font-size:11.0pt'>”: </span><span style='font-size:11.0pt;font-family:
+"Courier New"'>&lt;type&gt;</span><span style='font-size:11.0pt;font-family:
+ "Courier New"'>Main</span><span style='font-size:11.0pt;font-family:"Courier New"'>&lt;/type&gt;</span><span
+style='font-size:11.0pt'>. The </span><i><span style='font-size:11.0pt;
+font-family:"Courier New"'>type</span></i><span style='font-size:11.0pt'>
+property is also used by the Web Vocabulary to identify other types of
+resources. A property can hold a value, or a reference to another resource. An
+example of a value is </span><span style='font-size:11.0pt;font-family:"Courier New"'>&lt;title&gt;My
+Thing&lt;/title&gt;</span><span style='font-size:11.0pt'>, an example of a
+reference is </span><span style='font-size:11.0pt;font-family:"Courier New"'>&lt;resourceOf
+rdf:resource=&quot;mything&quot;/&gt;. </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>.</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<h3><a name="_Toc90272382">Classes and Properties</a></h3>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h4><span style='font-weight:normal'>1. Classes</span></h4>
+
+<p class=MsoNormal><b>&nbsp;</b></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Resource</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:5.2in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Defines a new resource or
+  object (subclass of rdfs:Resource)</span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Main</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:5.2in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Defines the main resource (subclass
+  of Resource)</span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h4><span style='font-weight:normal'>2. Properties</span></h4>
+
+<p class=MsoNormal><b>&nbsp;</b></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>id</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Identifier or short name of
+  the resource</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>title</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Title of the resource</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>desc</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Short description of the
+  resource</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>descLong</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Long description of resource</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>type</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Type of the resource
+  (Resource, </span><span style='font-size:10.0pt'>Main</span><span
+  style='font-size:10.0pt'>, or other class types, maps to rdf:type)</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>category</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Category describing the
+  content of the resource (comma-delimited text from general to specific, or
+  third-party resource reference). </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>keywords</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Keywords describing the
+  content of the resource (comma-delimited text)</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>url</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>URL of the resource if
+  applicable</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>doc</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>URL of documentation about
+  the resource</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>content</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Content of the resource</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>format</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Mime format of the resource
+  (e.g. text/html, video/mpeg, etc)</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>size</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Size of the resource if
+  applicable (in KiloBytes)</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>creator</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Creator of the resource</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>created</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Creation date of the
+  resource  (e.g. 2005-01-31)</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>publisher</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Publisher of the resource</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>published</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Published date of the
+  resource  (e.g. 2005-01-31)</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>updated</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Last update date of the
+  resource </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>updatePeriod</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Update period of the
+  resource (example: second, minute, hour, day, week, month, year)</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>updateRate</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Rate of the update period
+  of the resource is updated (example: <u>1</u>, 2, 3, etc) </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>image</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Image about the resource</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>imageSmall</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Small image about the
+  resource</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>imageLarge</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Large image about the
+  resource</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>sortBy</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Sort order of resources of
+  this resource by [property] (default is sortOrder)</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>sortDir</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Sort direction up or down
+  (default is up)</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>sortOrder</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Order position of resource (e.g.
+  1, 2, 3, etc)</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>language</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Language of the resource </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>available</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>Determines if the resource
+  is currently available (default is yes) </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>resource</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>A resource or object associated
+  with this resource</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>resourceOf</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>A resource or object this
+  resource is associated with (inverse property of <i>resource</i>)</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.6pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>seeAlso</span></b></p>
+  </td>
+  <td width=499 valign=top style='width:374.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt'>A resource or object with
+  more information about this resource (maps to rdfs:seeAlso)</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><b>&nbsp;</b></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>Note: Some of the properties
+listed above will be mapped to properties of the Dublin Core vocabulary (<a
+href="http://dublincore.org/">http://dublincore.org</a>).</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<h2><a name="_Toc90272383"></a><a name="_4._Qualifying_Properties"></a>ROR Web
+Vocabulary</h2>
+
+<h3><a name="_Toc90272384">Description</a></h3>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>The ROR Web Vocabulary is an
+extension of the General Vocabulary and specializes in describing web resources
+like websites, web pages, web stores, web feeds, products, web services, etc,
+resources that are common on the Web. All classes are subclasses of the ROR </span><i><span
+style='font-size:11.0pt;font-family:"Courier New"'>Resource</span></i><span
+style='font-size:11.0pt'> class. </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>Below is an example of a
+resource describing a product offered on a website. Here too, the resource is
+described using the </span><i><span style='font-size:11.0pt;font-family:"Courier New"'>Resource</span></i><span
+style='font-size:11.0pt'> class, and the </span><i><span style='font-size:11.0pt;
+font-family:"Courier New"'>type</span></i><span style='font-size:11.0pt'>
+property is set to the name of the class of interest, here </span><i><span
+style='font-size:11.0pt;font-family:"Courier New"'>Product</span></i><span
+style='font-size:11.0pt'>. Setting the </span><i><span style='font-size:11.0pt;
+font-family:"Courier New"'>type</span></i><span style='font-size:11.0pt'>
+property to </span><i><span style='font-size:11.0pt;font-family:"Courier New"'>Product</span></i><span
+style='font-size:11.0pt'> tells a ROR document reader that this resource is of
+class </span><i><span style='font-size:11.0pt;font-family:"Courier New"'>Product</span></i><span
+style='font-size:11.0pt'>, and that properties attached to that class (e.g.
+price, currency, etc) may also be found. All properties are optional.</span></p>
+
+<p class=MsoNormal><i><span style='font-size:10.0pt'>&nbsp;</span></i></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=590 valign=top style='width:6.15in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>&lt;<b>Resource</b>
+  rdf:about=&quot;web-hosting&quot;<b>&gt;</b></span></p>
+  <p class=MsoNormal><b><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Product&lt;/type&gt;</span></b></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Web Hosting&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/webhosting.htm&lt;/url&gt;    </span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;image&gt;http://www.acme.com/domains.gif&lt;/image&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  <b>&lt;price&gt;12.95&lt;/price&gt;</b></span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  <b>&lt;priceRecur&gt;9.95&lt;/priceRecur&gt;</b></span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  <b>&lt;priceRecurPeriod&gt;month&lt;/priceRecurPeriod&gt;</b></span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  <b>&lt;priceRecurRate&gt;1&lt;/priceRecurRate&gt;</b></span></p>
+  <p class=MsoNormal><b><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;currency&gt;USD&lt;/currency&gt;</span></b></p>
+  <p class=MsoNormal><b><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;available&gt;yes&lt;/available&gt;</span></b></p>
+  <p class=MsoNormal><b><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;kind&gt;service&lt;/kind&gt;</span></b></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;products&quot;/&gt;</span></p>
+  <p class=MsoNormal><b><span style='font-size:9.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></b></p>
+  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h3><a name="_Toc90272385">Classes Overview</a></h3>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>Here is the current list of
+classes included in the vocabulary; they can be used in the </span><i><span
+style='font-size:11.0pt;font-family:"Courier New"'>type</span></i><span
+style='font-size:11.0pt'> property. Of course this list is not final, many new classes
+and properties will be added regularly. Classes with properties are further documented
+below.</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=590 valign=top style='width:6.15in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;font-family:"Courier New"'>Ad,
+  Address, AffiliateProgram, Affiliation, Alert, App, Article, Audio, Archive, Banner,
+  Blog, Book, Business, Contact, Course, Data, Discount, Document, Download, EBook,
+  Entity, Event, Favorite, Feed, File, Forum, Friend, Graph, HttpService,
+  Image, Information, Legal, Link, Magazine, Menu, Message, Music, Newsletter,
+  Organization, Partner, Person, Poll, Product, QA, Report, Review, Schedule, SiteMap,
+  Song, Text, Tip, Tool, Tutorial, Video, Webpage, WebService, Website, Wiki</span></b></p>
+  <p class=MsoNormal><i><span style='font-size:10.0pt;font-family:"Courier New"'>&nbsp;</span></i></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<h3><a name="_Toc90272386">Classes and Properties</a><br>
+                                                                              </h3>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Address</span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines an address</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>name</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Name of person, business
+    or organization</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>address1</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Address 1</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>address2</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Address 2</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>stateRegion</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>State or Region</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>postalCode</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Zip code, postal code,</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>city</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>City</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>country</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Country code</span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>AffiliateProgram</span></b></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>&nbsp;</span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines an affiliate (or
+  associate) program</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=133 valign=top style='width:99.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>commission</span></b></p>
+    </td>
+    <td width=328 valign=top style='width:245.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Commission offered by
+    program (e.g. 20)</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=133 valign=top style='width:99.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>commType</span></b></p>
+    </td>
+    <td width=328 valign=top style='width:245.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Type of commission: <u>percent</u>,
+    amount</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=133 valign=top style='width:99.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>commissionRecur</span></b></p>
+    </td>
+    <td width=328 valign=top style='width:245.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Recurring commission (e.g.
+    2.00)</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=133 valign=top style='width:99.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>commissionRecurType</span></b></p>
+    </td>
+    <td width=328 valign=top style='width:245.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Type of recurring
+    commission: <u>percent</u>, amount</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=133 valign=top style='width:99.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>commissionRecurPeriod</span></b></p>
+    </td>
+    <td width=328 valign=top style='width:245.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Period of recurring
+    commission (e.g. month)</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=133 valign=top style='width:99.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>commissionRecurRate</span></b></p>
+    </td>
+    <td width=328 valign=top style='width:245.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Rate of period of
+    recurring commission (e.g. 2, 3, 4, …). </span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=133 valign=top style='width:99.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>trackingDays</span></b></p>
+    </td>
+    <td width=328 valign=top style='width:245.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Tracking duration of program
+    (in days, 0 means no tracking, -1 means forever)</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=133 valign=top style='width:99.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>signupFee</span></b></p>
+    </td>
+    <td width=328 valign=top style='width:245.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Signup fee</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=133 valign=top style='width:99.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>currency</span></b></p>
+    </td>
+    <td width=328 valign=top style='width:245.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Currency of commission<br>
+    <br>
+    </span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>                </span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>App </span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines a software
+  application or tool</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>platform</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Platform supported by the
+    application</span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Business</span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines an business</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=87 valign=top style='width:65.6pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>name</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.0pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Name of the business</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.6pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>founded</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.0pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Date, year founded (e.g.
+    2000, 200-06, 2000-06-01)</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.6pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>industry</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.0pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Industry of the business</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.6pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>employees</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.0pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Number of employees</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.6pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>tradeSymbol</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.0pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Trade symbol</span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Contact</span></b></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines a contact (person,
+  business, or organization)</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=97 valign=top style='width:72.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>name</span></b></p>
+    </td>
+    <td width=364 valign=top style='width:272.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Name of person, business
+    or organization</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=97 valign=top style='width:72.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>address</span></b></p>
+    </td>
+    <td width=364 valign=top style='width:272.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Address</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=97 valign=top style='width:72.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>phone</span></b></p>
+    </td>
+    <td width=364 valign=top style='width:272.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Phone number</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=97 valign=top style='width:72.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>mobile</span></b></p>
+    </td>
+    <td width=364 valign=top style='width:272.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Mobile phone number</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=97 valign=top style='width:72.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>work</span></b></p>
+    </td>
+    <td width=364 valign=top style='width:272.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Work number</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=97 valign=top style='width:72.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>pager</span></b></p>
+    </td>
+    <td width=364 valign=top style='width:272.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Pager number</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=97 valign=top style='width:72.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>fax</span></b></p>
+    </td>
+    <td width=364 valign=top style='width:272.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Fax number</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=97 valign=top style='width:72.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>email</span></b></p>
+    </td>
+    <td width=364 valign=top style='width:272.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Email address</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=97 valign=top style='width:72.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>foaf</span></b></p>
+    </td>
+    <td width=364 valign=top style='width:272.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Friend of a friend resource
+    (<a href="http://www.foaf-project.org/">http://www.foaf-project.org</a>)</span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=461 colspan=2 valign=top style='width:4.8in;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Note: if needed, several
+    contacts can be created and grouped under one main contact resource (e.g.
+    support, sales, marketing, business development, etc).<br>
+    <br>
+    </span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>                    </span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Discount</span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines a product discount</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=93 valign=top style='width:69.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>discountType</span></b></p>
+    </td>
+    <td width=368 valign=top style='width:275.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Type of discount: <u>percent</u>,
+    amount</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=93 valign=top style='width:69.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>amount</span></b></p>
+    </td>
+    <td width=368 valign=top style='width:275.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Amount of the discount
+    (e.g. 15)</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=93 valign=top style='width:69.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>for</span></b></p>
+    </td>
+    <td width=368 valign=top style='width:275.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Resource this discount
+    applies to</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=93 valign=top style='width:69.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>startDate</span></b></p>
+    </td>
+    <td width=368 valign=top style='width:275.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Start date (e.g.
+    2005-01-01)</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=93 valign=top style='width:69.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>endDate</span></b></p>
+    </td>
+    <td width=368 valign=top style='width:275.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>End date (e.g. 2005-12-31)</span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Event</span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines an event</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=93 valign=top style='width:69.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>starts</span></b></p>
+    </td>
+    <td width=368 valign=top style='width:275.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Start date and/or time</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=93 valign=top style='width:69.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>ends</span></b></p>
+    </td>
+    <td width=368 valign=top style='width:275.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>End date and/or time</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=93 valign=top style='width:69.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>location</span></b></p>
+    </td>
+    <td width=368 valign=top style='width:275.8pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Place or location<br>
+    <br>
+    </span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Feed</span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines a web feed (rss, atom,
+  ror)</span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>&nbsp;</span></b></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=98 valign=top style='width:73.5pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>feedType</span></b></p>
+    </td>
+    <td width=363 valign=top style='width:272.1pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>rss, atom, ror</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=98 valign=top style='width:73.5pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>feedVersion</span></b></p>
+    </td>
+    <td width=363 valign=top style='width:272.1pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Version of the feed (e.g.
+    0.91, 1.0, 2.0)</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>&nbsp;</span></b></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Note: when feedType is <b>ror,
+  </b>entries are identified through the <i>resource</i> or <i>resourceOf</i>
+  properties</span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>&nbsp;</span></b></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>HttpService </span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines an http service</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=87 valign=top style='width:65.55pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>name</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.05pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Name of the service</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.55pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>url</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.05pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>URL of the service</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.55pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>methodType</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.05pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Type of http method: get,
+    post</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.55pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>input</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.05pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Input parameter</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.55pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>output</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.05pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Output parameter</span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Image</span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines an image</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>width</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Width</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>height</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Height</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>animated</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Is the image animated?
+    yes, <u>no</u></span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Legal</span></b></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>&nbsp;</span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines legal information
+  for a resource </span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=87 valign=top style='width:65.05pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>privacy</span></b></p>
+    </td>
+    <td width=374 valign=top style='width:280.55pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Privacy page or text</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.05pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>disclaimer</span></b></p>
+    </td>
+    <td width=374 valign=top style='width:280.55pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Disclaimer page or text</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.05pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>copyright</span></b></p>
+    </td>
+    <td width=374 valign=top style='width:280.55pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Copyright page or text</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.05pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>tradmark</span></b></p>
+    </td>
+    <td width=374 valign=top style='width:280.55pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Tradmark page or text</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.05pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>patent</span></b></p>
+    </td>
+    <td width=374 valign=top style='width:280.55pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Patent page or text</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.05pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>agreement</span></b></p>
+    </td>
+    <td width=374 valign=top style='width:280.55pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Agreement page or text</span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Message </span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines a message (email,
+  forum, etc)</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=86 valign=top style='width:64.7pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>sender</span></b></p>
+    </td>
+    <td width=375 valign=top style='width:280.9pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Sender</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=86 valign=top style='width:64.7pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>recipient</span></b></p>
+    </td>
+    <td width=375 valign=top style='width:280.9pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Recipient</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=86 valign=top style='width:64.7pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>cc</span></b></p>
+    </td>
+    <td width=375 valign=top style='width:280.9pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Copy to</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=86 valign=top style='width:64.7pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>bcc</span></b></p>
+    </td>
+    <td width=375 valign=top style='width:280.9pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Blind copy to</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=86 valign=top style='width:64.7pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>title</span></b></p>
+    </td>
+    <td width=375 valign=top style='width:280.9pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Title or subject</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=86 valign=top style='width:64.7pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>body</span></b></p>
+    </td>
+    <td width=375 valign=top style='width:280.9pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Body</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=86 valign=top style='width:64.7pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>thread</span></b></p>
+    </td>
+    <td width=375 valign=top style='width:280.9pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Thread</span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Newsletter</span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines a newsletter or ezine</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=101 valign=top style='width:1.05in;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>circulation</span></b></p>
+    </td>
+    <td width=383 valign=top style='width:287.5pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Circulation of the
+    newsletter</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=101 valign=top style='width:1.05in;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>publishPeriod</span></b></p>
+    </td>
+    <td width=383 valign=top style='width:287.5pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Period of publishing (example:
+    day, week, month, year)</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=101 valign=top style='width:1.05in;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>publishRate</span></b></p>
+    </td>
+    <td width=383 valign=top style='width:287.5pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Rate of publishing period
+    (example: <u>1</u>, 2, 3, etc)</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=101 valign=top style='width:1.05in;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>archive</span></b></p>
+    </td>
+    <td width=383 valign=top style='width:287.5pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>URL of archive</span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Person</span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines a business</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=87 valign=top style='width:65.6pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>name</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.0pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Name of the person</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.6pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>firstName</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.0pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>First name</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.6pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>lastName</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.0pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Last Name</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.6pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>middleName</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.0pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Middle name</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.6pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>birthDate</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.0pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Birth date</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=87 valign=top style='width:65.6pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>gender</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:280.0pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Gender</span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Product</span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines a product or service</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=89 valign=top style='width:66.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>price</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Price of the product or
+    service (one-time, initial, setup)</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=89 valign=top style='width:66.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>priceRecur</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Recurring price, if any </span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=89 valign=top style='width:66.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>priceRecurPeriod</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Recurring period (example:
+    minute, hour, day, week, month, year)</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=89 valign=top style='width:66.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>priceRecurRate</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Frequency of price recurring
+    period (example: <u>1</u>, 2, 3, etc)</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=89 valign=top style='width:66.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>currency</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Currency of the price</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=89 valign=top style='width:66.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>kind</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Kind of product or
+    service: goods, service</span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>QA</span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines a Q&amp;A element</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>question</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>A question</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>answer</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>The answer</span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>Review </span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines a review (for a product,
+  a resource, etc)</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>for</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Object of the review  (a
+    product name, a url, etc)</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>pros</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Pros about the object of
+    the review</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>cons</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Cons about the object of
+    the review</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=88 valign=top style='width:66.35pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>rating</span></b></p>
+    </td>
+    <td width=396 valign=top style='width:296.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Rating (from 0, bad - to 10,
+    excellent)</span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:10.0pt'>WebService </span></b></p>
+  </td>
+  <td width=475 valign=top style='width:4.95in;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>Defines a web service </span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
+   style='background:#F3F3F3;border-collapse:collapse'>
+   <tr>
+    <td width=88 valign=top style='width:65.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>name</span></b></p>
+    </td>
+    <td width=373 valign=top style='width:279.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Name of the service</span></p>
+    </td>
+   </tr>
+   <tr>
+    <td width=88 valign=top style='width:65.75pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><b><span style='font-size:9.0pt'>wsdl                   </span></b></p>
+    </td>
+    <td width=373 valign=top style='width:279.85pt;padding:0in 5.75pt 0in 0in'>
+    <p class=MsoNormal><span style='font-size:9.0pt'>Location of the WSDL
+    document</span></p>
+    <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>[to be completed]</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<h2><a name="_Toc90272387"></a><a name="_ROR_Document"></a>ROR Document</h2>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>A ROR document(s) can be
+added to a resource to describe its content and resources (products, services,
+methods, sitemap, content, etc). The default ROR document name is </span><b><span
+style='font-size:11.0pt;font-family:"Courier New"'>ror.xml</span></b><span
+style='font-size:11.0pt'>. This means that web agents and applications (e.g. search
+engine spiders, etc) can search for this document on a website and find valuable
+information about it and its resources. </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>If the resource is a webpage,
+it can reference this file or another ROR document in the HTML code (in the &lt;head&gt;
+section): </span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=590 valign=top style='width:6.15in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>&lt;link
+   id=&quot;rorlink&quot; rel=&quot;meta&quot; type=&quot;application/rdf+xml&quot;
+  </span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'> title=&quot;ROR&quot;
+  href=&quot;another-file.xml&quot; /&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>A ROR document can be a
+simple static file or a document generated periodically or on-the-fly by the
+server using information pulled from a database.</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>To add meaning, elements of a
+webpage (words, paragraphs, images, etc) can reference resources in the ROR document.
+For example, the name of a product can include a reference to the product
+resource itself:<br>
+<br>
+Webpage elements (english):</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=590 valign=top style='width:6.15in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>&lt;span
+  resource=&quot;main&quot;&gt;Our company&lt;/span&gt; offers the following
+  services: &lt;br /&gt;<br>
+  - &lt;span resource=&quot;domain-registration&quot;&gt;Domain
+  Registration&lt;/span&gt;&lt;br /&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>- &lt;span
+  resource=&quot;web-hosting&quot;&gt;Web Hosting&lt;/span&gt;<br>
+  <br>
+  &lt;span resource=&quot;discount&quot;&gt;20% Discount&lt;/span&gt;<br>
+  <br>
+  </span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:11.0pt'><br>
+Webpage elements (french):</span></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=590 valign=top style='width:6.15in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>&lt;span
+  resource=&quot;main&quot;&gt;Notre Societe&lt;/span&gt; offre les services suivant:
+  &lt;br /&gt;<br>
+  - &lt;span resource=&quot;domain-registration&quot;&gt;Registration de Domaines&lt;/span&gt;&lt;br
+  /&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>- &lt;span
+  resource=&quot;web-hosting&quot;&gt;Hebergement&lt;/span&gt;<br>
+  <br>
+  &lt;span resource=&quot;discount&quot;&gt;Rabais de 20%&lt;/span&gt;<br>
+  <br>
+  </span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Corresponding resources:</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=590 valign=top style='width:6.15in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'><br>
+  &lt;Resource rdf:about=&quot;main&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;</span><span style='font-size:8.0pt;font-family:"Courier New"'>Main</span><span
+  style='font-size:8.0pt;font-family:"Courier New"'>&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Acme Web Hosting&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  ...</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;domain-registration&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Product&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Domain Registration&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  ...</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:11.0pt'><br>
+  </span><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource rdf:about=&quot;web-hosting&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Product&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Web Hosting&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  ...</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;<br>
+  <br>
+  &lt;Resource rdf:about=&quot;discount &quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Discount&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Discount&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  ...</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<h2><a name="_Toc90272388">About the </a><span style='font-family:"Courier New"'>type</span>
+Property</h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>The ROR </span><i><span
+style='font-size:11.0pt;font-family:"Courier New"'>type</span></i><span
+style='font-size:11.0pt'> property is similar to the RDF </span><i><span
+style='font-size:11.0pt;font-family:"Courier New"'>type</span></i><span
+style='font-size:11.0pt'> property, which is also supported by ROR. It is meant
+to be an easy way to say this: </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><i><span style='font-size:11.0pt;font-family:"Courier New"'>&lt;rdf:type
+rdf:resource=”http://rorweb.com/0.1/[ClassName]” /&gt;</span></i></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>The </span><i><span
+style='font-size:11.0pt;font-family:"Courier New"'>rdf:type</span></i><span
+style='font-size:11.0pt'>  property also provides a way to extend the ROR
+Vocabulary </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>As with RDF, ROR allows
+resources to have several types at the same time (be an instance of multiple
+classes). The example below shows how a website can describe a downloadable application:</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=590 valign=top style='width:6.15in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>&lt;<b>Resource</b>
+  rdf:about=&quot;domain-name-finder&quot;<b>&gt;</b></span></p>
+  <p class=MsoNormal><b><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;App&lt;/type&gt;</span></b></p>
+  <p class=MsoNormal><b><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Download&lt;/type&gt;</span></b></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Domain Name Finder&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/domainfinder.htm&lt;/url&gt;  </span></p>
+  <p class=MsoNormal><b><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;platform&gt;Windows 2000&lt;/platform&gt;  </span></b></p>
+  <p class=MsoNormal><b><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;platform&gt;Windows XP&lt;/platform&gt;  </span></b></p>
+  <p class=MsoNormal><b><span style='font-size:9.0pt;font-family:"Courier New"'> 
+    &lt;size&gt;1000&lt;/size&gt;</span></b></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;downloads&quot;/&gt;</span></p>
+  <p class=MsoNormal><b><span style='font-size:9.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></b></p>
+  <p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h2><a name="_Toc90272389"></a><a name="_ROAR_document"></a>About the RDF <span
+style='font-family:"Courier New"'>seeAlso</span> Property</h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>The RDF </span><i><span
+style='font-size:11.0pt;font-family:"Courier New"'>seeAlso</span></i><span
+style='font-size:11.0pt'> property is used in ROR to state that further
+information can be found elsewhere (inside or outside a ROR document). </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>For example, elements of a </span><i><span
+style='font-size:11.0pt;font-family:"Courier New"'>SiteMap</span></i><span
+style='font-size:11.0pt'>, which are generally just representations of other
+elements of the resource, can use the </span><i><span style='font-size:11.0pt;
+font-family:"Courier New"'>seeAlso</span></i><span style='font-size:11.0pt'>
+property to identify the elements they represent. </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>The property can also be used
+to document the location of other ROR documents. Large websites might not want
+to store all information in one ROR document, but across several documents. For
+example, the main ROR document could contain a resource named “Articles” which points
+to another ROR document(s) containing the </span><i><span style='font-size:
+11.0pt;font-family:"Courier New"'>Article</span></i><span style='font-size:
+11.0pt'> resources. </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><i><span style='font-size:11.0pt;font-family:"Courier New"'>&lt;rdfs:seeAlso
+rdf:resource=”http://acme.com/articles.xml” /&gt;</span></i></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>Another use of the property
+is for documenting other websites or resources (e.g. related websites, partners,
+etc)</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h2><a name="_Toc90272390">Example</a></h2>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>Below is an example of a ROR
+document describing the resources of a website called Acme Web Hosting. Additional
+examples will be added soon.</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><img width=508 height=699 src="image002.gif"></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Main Document (ror.xml)</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=590 valign=top style='width:6.15in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;?xml
+  version=&quot;1.0&quot;?&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;rdf:RDF
+  xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>        
+  xmlns:rdfs=&quot;http://www.w3.org/2000/01/rdf-schema#&quot; </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>        
+  xmlns=&quot;http://rorweb.com/0.1/&quot;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>        
+  xml:base=&quot;http://www.acme.com/ror/&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>        </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'><br>
+  <i>&lt;!-- Main Resource --&gt;</i></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;main&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;</span><span style='font-size:8.0pt;font-family:"Courier New"'>Main</span><span
+  style='font-size:8.0pt;font-family:"Courier New"'>&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Acme Web Hosting&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com&lt;/url&gt;        </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;image&gt;http://www.acme.com/logo.gif&lt;/image&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;!--
+  Contact Resource --&gt;</span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;contact&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Contact&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Contact Information&lt;/title&gt;    </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/contact.htm&lt;/url&gt;        </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;name&gt;Acme Hosting, Inc&lt;/name&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;address&gt;123 Main Street\nBoston, MA 02211&lt;/address&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;phone&gt;800 555 1234&lt;/phone&gt;   </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;email&gt;sales@acme.com&lt;/email&gt; </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;main&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;!--
+  Feed Resource --&gt;</span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;newsfeed&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Feed&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;News Feed&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/rssnews.xml&lt;/url&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;main&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  </span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;!--
+  Product Resources --&gt;</span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;products&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Product&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Products&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/products.htm&lt;/url&gt;    </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;main&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;domain-registration&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Product&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Domain Registration&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/domains.htm&lt;/url&gt;    </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;image&gt;http://www.acme.com/domains.gif&lt;/image&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;imageSmall&gt;http://www.acme.com/smalldomains.gif&lt;/imageSmall&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;priceRecur&gt;9.95&lt;/priceRecur&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;priceRecurPeriod&gt;year&lt;/priceRecurPeriod&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;available&gt;yes&lt;/available&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;currency&gt;USD&lt;/currency&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;kind&gt;service&lt;/kind&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;products&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;web-hosting&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Product&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Web Hosting&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/hosting.htm&lt;/url&gt;    </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;image&gt;http://www.acme.com/hosting.gif&lt;/image&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;imageSmall&gt;http://www.acme.com/smallhosting.gif&lt;/imageSmall&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;priceRecur&gt;12.95&lt;/priceRecur&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;priceRecurPeriod&gt;month&lt;/priceRecurPeriod&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;available&gt;yes&lt;/available&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;currency&gt;USD&lt;/currency&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;kind&gt;service&lt;/kind&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;products&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;!--
+  Method Resources --&gt;</span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;methods&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Services&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;main&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;webservice&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;WebService&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Web Services&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;doc&gt;http://www.acme.com/webservices.htm&lt;/doc&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;wsdl&gt;http://www.acme.com/webservices.wsdl&lt;/wsdl&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;methods&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;search&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;HttpService&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Search&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/cgi-bin/search&lt;/url&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;doc&gt;http://www.acme.com/http-services.htm#search&lt;/doc&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;methodType&gt;get&lt;/methodType&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;input&gt;word&lt;/input&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;input&gt;sort-type&lt;/input&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;input&gt;sort-order&lt;/input&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;methods&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;!--Article
+  Resources --&gt;</span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;articles&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Article&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Articles&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;rdfs:seeAlso rdf:resource=&quot;http://www.acme.com/articles.xml&quot;/&gt;   
+  </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf  rdf:resource=&quot;main&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;!--Blog
+  Resources --&gt;</span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;blog&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Blog&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Blog&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;sortBy&gt;created&lt;/sortBy&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;sortDir&gt;down&lt;/sortDir&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf  rdf:resource=&quot;main&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;blog-entry3&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Entry 3&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;desc&gt;...&lt;/desc&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;created&gt;2004-10-03&lt;/created&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf  rdf:resource=&quot;blog&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;blog-entry2&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Entry 2&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;desc&gt;...&lt;/desc&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;created&gt;2004-10-02&lt;/created&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf  rdf:resource=&quot;blog&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;blog-entry1&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Entry 1&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;desc&gt;...&lt;/desc&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;created&gt;2004-10-01&lt;/created&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf  rdf:resource=&quot;blog&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;!--More
+  Things --&gt;</span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;more-things&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;More Things&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;keywords&gt;some keywords here&lt;/keywords&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;main&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;thing-1&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Thing 1&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/thing1&lt;/url&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;more-things&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;thing-2&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Thing 2&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/thing2&lt;/url&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;more-things&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;thing-11&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Thing 1.1&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>  
+   &lt;url&gt;http://www.acme.com/thing11&lt;/url&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;thing-1&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;thing-12&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Thing 1.2&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/thing12&lt;/url&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;thing-1&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;!--
+  Legal Resources --&gt;</span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;legal&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'> 
+  &lt;type&gt;Legal&lt;/type&gt;   </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'> 
+  &lt;title&gt;Legal&lt;/title&gt;  </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'> 
+  &lt;privacy&gt;http://www.acme.com/privacy.htm&lt;/privacy&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'> 
+  &lt;copyright&gt;Copyright 1996-2004 Acme Hosting, Inc&lt;/copyright&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'> 
+  &lt;resourceOf  rdf:resource=&quot;main&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;!--
+  Site Map Resources --&gt;</span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;sitemap&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Sitemap&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Site Map&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;main&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;map-about&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;About&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/about.htm&lt;/url&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;sitemap&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;map-products&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Products&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;rdfs:seeAlso rdf:resource=&quot;products&quot;/&gt;    </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;sitemap&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;map-feed&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Feed&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;rdfs:seeAlso rdf:resource=&quot;newsfeed&quot;/&gt;    </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf  rdf:resource=&quot;sitemap&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;map-contact&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Contact&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;rdfs:seeAlso rdf:resource=&quot;contact&quot;/&gt;    </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf  rdf:resource=&quot;sitemap&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;map-blog&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Daily Blog&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;rdfs:seeAlso rdf:resource=&quot;blog&quot;/&gt;    </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf  rdf:resource=&quot;sitemap&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;map-articles&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Articles&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;rdfs:seeAlso rdf:resource=&quot;articles&quot;/&gt;    </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf  rdf:resource=&quot;sitemap&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/rdf:RDF&gt;</span></p>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Articles (articles.xml)</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='background:#F3F3F3;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=590 valign=top style='width:6.15in;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;?xml
+  version=&quot;1.0&quot;?&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;rdf:RDF
+  xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>        
+  xmlns=&quot;http://rorweb.com/0.1/&quot; </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>        
+  xml:base=&quot;http://www.acme.com/ror/&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>        </span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'><br>
+  <i>&lt;!-- Article Resources --&gt;</i></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;article-1&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Article&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Article 1&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;descLong&gt;article description&lt;/descLong&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/article1.htm&lt;/url&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;author&gt;John Smith&lt;/author&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;articles&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;article-2&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Article&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Article 2&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;descLong&gt;article description&lt;/descLong&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/article2.htm&lt;/url&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;author&gt;Jane Smith&lt;/author&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;articles&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;Resource
+  rdf:about=&quot;article-n&quot;&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;type&gt;Article&lt;/type&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;title&gt;Article N&lt;/title&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;descLong&gt;article description&lt;/descLong&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;url&gt;http://www.acme.com/articlen.htm&lt;/url&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;author&gt;John Smith&lt;/author&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>   
+  &lt;resourceOf rdf:resource=&quot;articles&quot;/&gt;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/Resource&gt;</span></p>
+  <p class=MsoNormal><i><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></i></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;font-family:"Courier New"'>&lt;/rdf:RDF&gt;</span></p>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>&nbsp;</p>
+
+</div>
+
+</body>
+
+</html>

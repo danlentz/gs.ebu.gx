@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<META http-equiv="Content-Style-Type" content="text/css">
+  <title>RDF/XML Parser and Writer </title>
+  <link>
+  <link href="manual.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<h2>10. &nbsp;RDF/XML Parser and Writer </h2>
+
+<p>So far, only S-expression is used to represent RDF ontology. It is convenient for lisp programmers to
+handle pieces of knowledge in RDF. However, SWCLOS, of course, allows users to read RDF/XML format
+files and print out SWCLOS contents in RDF/XML format.
+</p>
+
+<h3>10.1 &nbsp;RDF/XML Parser</h3>
+
+<p><b>parse-rdf</b> is a parser for RDF/XML format files. It is useful to check RDF/XML syntax, but it does not
+interpret anything in semantics. In the following example, you might misunderstand that <b>parse-rdf</b> just
+prints out an RDF/XML format file, but it is not a reality. <b>parse-rdf</b> produces a list of XML element of lisp
+structure from RDF/XML file, namely <a href="http://www.w3.org/TR/2004/REC-xml11-20040204/#NT-XMLDecl">XMLDecl</a>, 
+<a href="http://www.w3.org/TR/2004/REC-xml11-20040204/#dt-doctype">doctypedecl</a>, 
+<a href="http://www.w3.org/TR/2004/REC-xml11-20040204/#sec-comments">Comment</a>, and 
+<a href="http://www.w3.org/TR/rdf-syntax-grammar/#RDF">RDFdecl</a> element
+as lisp structure. In Common Lisp, the print form of lisp structure is programmable. So, the structure print
+function of XMLDecl is programmed so as to print out a XMLDecl form in XML, the print function of
+doctypedecl structure is to ":doctypedecl ...", a Comment structure to a Comment form, and an RDFdecl
+structure to an RDFdecl form. In short, <b>parse-rdf</b> reads RDF/XML format file, parses RDF/XML format,
+makes structures, and returns them in a list. Then, you see RDF/XML-like forms of such structures in the
+list.
+</p>
+
+<p>If you want to handle just RDF data without the interpretation of RDFS and OWL from RDF/XML format
+files, <b>parse-rdf</b> is available to do so. However, in order to interpret contents in RDF/XML files, you may
+use <b>read-rdf-file</b> with an accepter function, which is usually <b>addRdfXml</b>. See the followings.
+</p>
+
+<b>
+<pre><code>gx-user(2): (with-open-file (p "SWCLOS/RDFS/JenaEx.rdf") (parse-rdf p))
+(&lt;?xml version="1.0" ?&gt; #&lt;doctypedecl ... &gt; 
+&lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#"
+         xmlns:somewhere="http://somewhere/"&gt;
+  &lt;rdf:Description rdf:about="http://somewhere/JohnSmith"&gt;
+    &lt;vCard:FN&gt;John Smith&lt;/vCard:FN&gt;
+    &lt;vCard:N&gt;
+      &lt;rdf:Description&gt;
+        &lt;vCard:Family&gt;Smith&lt;/vCard:Family&gt;
+        &lt;vCard:Given&gt;John&lt;/vCard:Given&gt;
+      &lt;/rdf:Description&gt;
+    &lt;/vCard:N&gt;
+  &lt;/rdf:Description&gt;
+&lt;/rdf:RDF&gt;)
+gx-user(3): (read-rdf-file #'addRdfXml "SWCLOS/RDFS/JenaEx.rdf")
+Warning: Entail by rdf1: vCard:FN rdf:type rdf:Property.
+Warning: Entail by rdf1: vCard:N rdf:type rdf:Property.
+Warning: Entail by rdf1: vCard:Family rdf:type rdf:Property.
+Warning: Entail by rdf1: vCard:Given rdf:type rdf:Property.
+:done
+gx-user(4): somewhere:JohnSmith
+#&lt;|rdfs:Resource| somewhere:JohnSmith&gt;
+</code></pre></b>
+<br /><br />
+
+<a id="SWCLOSparse-rdf" name="SWCLOSparse-rdf" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>parse-rdf <I>stream</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>parses RDF/XML from <i>stream</i> and makes the internal representation of RDF. This function
+returns a list of several XML structures. Note that <b>*base-uri*</b> and <b>*default-namespace*</b> in
+the environment are updated through content from <i>stream</i>.
+</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<a id="SWCLOSread-rdf-file" name="SWCLOSread-rdf-file" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>read-rdf-file <I>accepter-fun</I> [ <i>file</i> [ <i>code</i> ]]</U></TH>
+      <TD width="70">[Function]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>This function reads and parses a <i>file</i> that contains RDF/XML format data, then passes
+attributes in RDFdecl, parsed XMLDecl, parsed doctypedecl, parsed Comments, and parsed
+Descriptions to <i>accepter-fun</i>. The <i>code</i> is a character code of <i>file</i>, of which the default is
+utf-8. If file has its encoding description in XMLDecl, the direction in file supersedes the
+<i>code</i>.
+</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<a id="SWCLOSaddRdfXml" name="SWCLOSaddRdfXml" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>addRdfXml <I>description</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>This function accepts an instance of lisp structure Description, which may be generated
+from the RDF parser, and transform it to S-expression form, then interprets the form by
+<b>addForm</b>. This function returns the result of <b>addForm</b>.
+</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<h3>10.2 &nbsp;RDF/XML Writer</h3>
+
+<p>To print out RDF data in RDF/XML format, the function <b>write-xml</b> is available.
+See the following example.</p>
+
+<b>
+<pre><code>gx-user(3): (write-xml somewhere:JohnSmith)
+&lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:somewhere="http://somewhere/"
+         xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" &gt;
+  &lt;rdf:Description rdf:about="http://somewhere/JohnSmith" &gt;
+    &lt;vCard:FN&gt;John Smith&lt;/vCard:FN&gt;
+    &lt;vCard:N&gt;
+      &lt;rdf:Description&gt;
+        &lt;vCard:Family&gt;Smith&lt;/vCard:Family&gt;
+        &lt;vCard:Given&gt;John&lt;/vCard:Given&gt;
+      &lt;/rdf:Description&gt;
+    &lt;/vCard:N&gt;
+  &lt;/rdf:Description&gt;
+&lt;/rdf:RDF&gt;
+</code></pre>
+</b><br><br>
+
+<a id="SWCLOSwrite-xml" name="SWCLOSwrite-xml" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>write-xml <I>x</I> [ <i>stream</i> ]</U></TH>
+      <TD width="70">[Function]</TD>
+  </TR></TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>This function accepts a resource object or a list of resource objects, and print out them in
+RDF/XML format. Note that this function returns no value. If <i>stream</i> is not supplied,
+*standard-output* is used as default.
+</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<hr>
+<i><small>  Author: <a href="mailto:SeijiKoide@aol.com">Seiji Koide</a>. 
+ Copyright (c) 2005, 2006 GALAXY EXPRESS CORPORATION. Feb. 2006
+<br> Copyright (c) 2007, 2009 Seiji Koide. Oct. 2009
+<br> </small></i></body></html>

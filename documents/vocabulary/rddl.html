@@ -1,0 +1,1235 @@
+<!-- <!DOCTYPE html PUBLIC "-//XML-DEV//DTD XHTML RDDL 1.0//EN" "http://www.rddl.org/rddl-xhtml.dtd">-->
+<html   xmlns="http://www.w3.org/1999/xhtml" 
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns:rddl="http://www.rddl.org/"
+		xml:lang="en"
+		xml:base="http://www.rddl.org/">
+<head>
+        <title>XML Resource Directory Description Language (RDDL)</title>
+        <link href="xrd.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Resource Directory Description Language (RDDL)</h1>
+<div class="head">
+<p>This Version: <a href="http://www.rddl.org"> February 18, 2002</a></p>
+<p>Latest Version: <a href="http://www.rddl.org/">http://www.rddl.org/2</a></p>
+<p>Previous Version: <a href="http://www.openhealth.org/RDDL/20010305/rddl-20010305.html">March 5, 2001</a></p>
+<p>Editors:</p>
+<ul> 
+<li><a href="mailto:jonathan@openhealth.org">Jonathan Borden</a>, <a 
+href="http://www.jonathanborden-md.com/jonathan-borden-cv.htm">The Open 
+Healthcare Group</a></li>
+<li><a href="mailto:tbray@textuality.com">Tim Bray</a>, <a href="http://antarcti.ca">Antarcti.ca Systems</a> </li>
+</ul>
+</div>
+<div id="toc">
+<h2>Table of contents</h2>
+	<ol>
+		<li><a href="#intro">Introduction</a></li>
+		<li><a href="#background">Background</a></li>
+		<li><a href="#np">Nature and Purpose</a>
+        	<ol>
+                <li><a href="#nature">Nature</a></li>
+                <li><a href="#purpose">Purpose</a></li>
+       		</ol>
+		</li>
+
+		<li><a href="#resource">resource element</a>
+			<ol>                
+				<li><a href="#id">id attribute</a></li>
+			</ol>
+		</li>
+		<li><a href="#document.attributes">xml:base and xml:lang Attributes</a>
+			<ol>
+				<li><a href="#baseURI">Base URI</a></li>
+				<li><a href="#lang">Language</a></li>
+			</ol>
+		</li>
+		<li><a href="#attributes">xlink Attributes</a>
+			<ol>
+                <li><a href="#role">xlink:role</a></li>
+                <li><a href="#arcrole">xlink:arcrole</a></li>
+                <li><a href="#href">xlink:href</a></li>
+                <li><a href="#title">xlink:title</a></li>
+                <li><a href="#type">xlink:type</a></li>
+     		</ol>
+		</li>
+		<li><a href="#related.resources">Resources</a></li>
+		<li><a href="#references">Normative References</a></li>
+		<li><a href="#informative.references">Informative References</a></li>
+	</ol>
+</div>
+<div id="intro">
+<h2>1. Introduction</h2>
+<p>
+This document describes the Resource Directory Description Language (RDDL). 
+A RDDL document, called a Resource Directory, provides a package of information about some 
+target, including:
+<ul>
+	<li>Human-readable descriptive material about the target.</li>
+	<li>A directory of individual resources related to the target, each directory entry containing descriptive material and linked to the resource in question. 
+</li>
+</ul>
+The targets which RDDL was designed to describe are XML Namespaces. 
+Examples of &quot;individual related resources&quot; include schemas, stylesheets, and executable 
+code designed to process markup from some namespace. A Resource Directory is 
+designed to be suitable for service as the body of an entity returned by dereferencing 
+a URI serving as an XML Namespace name.
+</p>
+<p>The Resource Directory Description Language is an extension of <a href="http://www.w3.org/TR/xhtml-basic">XHTML Basic
+1.0</a> with an added element named <code><a href="#resource">resource</a></code>. 
+This element serves as an XLink to the referenced resource, and contains
+a human-readable description of the resource and machine readable links which describe
+the purpose of the link and the nature of the resource being linked to. 
+The nature of the resource being linked to is indicated by the <code>xlink:role</code> attribute and the purpose of the link is indicated by the <code>xlink:arcrole</code> attribute.
+</p>
+
+<p>A DTD for RDDL has been defined using
+<a href="http://www.w3.org/TR/xhtml-modularization/">Modularization for XHTML</a>.</p>
+<p>This document describes the syntax and semantics of the Resource Directory Description Language 1.0, 
+and also serves as a Resource Directory Description for the namespace <code>http://www.rddl.org/</code>. 
+This specification is subject to change without notice.
+However, each version is associated with a version specific URI. 
+Version specific RDDL namespace URIs are named as: &quot;http://www.rddl.org/&quot; + YYYYMMDD. 
+Backwards incompatible changes will be publicly announced and associated with a new namespace URI.</p>
+</div>
+<div id="background">
+<h2>2. Background</h2>
+<p>The Resource Directory Description Language was initially proposed and
+specified after discussion on the <a href="http://www.xml.org/xml-dev/">xml-dev</a> mailing list.
+Descriptions of the origins and historical context of RDDL may be found at
+<a href="http://xml.coverpages.org/rddl.html#rddlBackground">the XML Cover Pages</a>,
+<a href="http://www.xmlhack.com/read.php?item=974">&lt;?xmlhack?></a>, and 
+<a href="http://www.xml.com/pub/a/2001/01/10/rddl.html">xml.com</a>.
+Extending HTML with a <code>resource</code> element was proposed <a href="http://www.w3.org/MarkUp/Resource/Specification">in 1996</a> by Tim Berners-Lee and Dave Raggett.
+RDDL reflects contributions from <a href="http://www.rddl.org/contrib.htm">many participants</a> in the xml-dev mailing
+list
+</p>
+<p>This document has no official standing and has not been considered nor
+approved by any organization.</p>
+</div>
+<div id="np">
+<h2>3. Nature and Purpose</h2>
+<div id="nature">
+<h3>3.1 The Nature of a Related Resource</h3>
+<p>Related resources have a <strong>nature</strong>, a machine-readable label provided by
+the value of the <code><a href="#role">xlink:role</a></code> attribute.
+For example, the nature of an XML Schema designed for use with a namespace
+would be given as <code>xlink:role=&quot;http://www.w3.org/2001/XMLSchema&quot;</code>.</p>
+<p>In cases where there is only one resource with a particular nature,
+the purpose of the linked resource may be inferred from this nature.
+For example, if there is only one related resource for a particular
+namespace whose nature indicates that it is a schema, 
+processing software might infer that its purpose is to validate
+elements in that namespace.</p>
+</div>
+<div id="purpose">
+<h3>3.2 The Purpose of a Related Resource</h3>
+<p>Related resources may have a <strong>purpose</strong>, a machine-readable label
+provided by
+the value of the <code><a href="#arcrole">xlink:arcrole</a></code> attribute.
+The purpose is designed to convey the intended usage of the related resource.
+For example, two related resources might have natures that indicate they
+are both schemas, but the purposes might indicate that one is designed to
+validate the &quot;strict&quot; version of the language, the other the &quot;forgiving&quot; form.</p>
+<!-- doesn't add anything I think
+<p>Multiple resources of the same nature and purpose may be included in a RDDL document. An example of
+when this is desirable is when several included modules of a particular schema format or software
+language are referenced. In this case, software will need to distinguish among these resources by other factors such as
+the <a href="#href">href</a> of the link or the <a href="#lang">language</a>
+of the linked resource</p>
+-->
+</div>
+</div>
+<div id="resource">
+   <h2>4. The <code>rddl:resource</code> Element</h2>
+   <p>The <code>resource</code> element is in a namespace whose name
+    is <code>http://www.rddl.org/</code>.
+    In this discussion, we assume the use of the namespace prefix
+    <code>rddl</code>, and refer to this element as <code>rddl:resource</code>.
+    The <code>rddl:resource</code> element represents a simple xlink, using the
+    attributes defined in the XLink namespace.
+   </p>
+   <p>The <code>rddl:resource</code> must occur in the content of the HTML <code>body</code> element.
+	In the RDDL DTD, the XHTML <span class="pentity">%Flow.mix</span> entity has been
+	redefined to contain <code>rddl:resource</code> so it roughly may be placed anywhere a <code>p</code> element may be placed.
+	The <code>rddl:resource</code> element itself uses the <span
+	class="pentity">%Flow.mix</span> content model, and should have human-readable content 
+	which describes the associated resource.
+   </p>
+   <p>Here is a DTD fragment declaring the <code>rddl:resource</code> element,
+	edited for clarity.
+   </p>
+<table class="eg" summary="Example"><tr><td>
+<div class="dtd">
+<pre>
+&lt;!ELEMENT rddl:resource (#PCDATA | %Flow.mix;)*&gt;
+&lt;!ATTLIST rddl:resource
+  id            ID       #IMPLIED
+  xml:lang      NMTOKEN  #IMPLIED
+  xml:base      CDATA    #IMPLIED
+  xmlns:rddl    CDATA    #FIXED   &quot;http://www.rddl.org/&quot;
+  xlink:type    (simple) #FIXED   &quot;simple&quot;
+  xlink:arcrole CDATA    #IMPLIED
+  xlink:role    CDATA             &quot;http://www.rddl.org/#resource&quot;
+  xlink:href    CDATA    #IMPLIED
+  xlink:title   CDATA    #IMPLIED
+  xlink:embed   CDATA    #FIXED   &quot;none&quot;
+  xlink:actuate CDATA    #FIXED   &quot;none&quot;
+  &gt;
+</pre></div></td></tr></table>
+<div id="id">
+<h3>4.1 <code>id</code></h3>
+<p>The <code>id</code> attribute value may be used to give the resource
+description a unique identifier.</p>
+</div>
+</div>
+<div id="document.attributes">
+	<h2>5. The <code>xml:base</code> and <code>xml:lang</code> 
+Attributes</h2>
+<div id="baseURI">
+  <h3>5.1 Base URI</h3>
+  	<p>The base URI of a RDDL document may be specified according to the <a href="http://www.w3.org/TR/xmlbase/">W3C XML Base</a> recommendation. 
+     The <code>xml:base</code> attribute may be specified on the root <code>html</code> element or on a <code>rddl:resource</code> element. 
+	</p> 
+	 <p>Future versions of XHTML may allow the use of <code>xml:base</code> on some or all XHTML elements, 
+	 and its semantics should apply even when on another XHTML element, for example
+	 the <code>body</code>, or <code>div</code> element,
+	 that contains a <code>rddl:resource</code> element.
+  </p>
+</div>
+<div id="lang">
+	<h3>5.2 Language</h3>
+	<p>The language of the text contained by an element is specified by the <a href="http://www.w3.org/TR/REC-xml#sec-lang-tag">xml:lang</a> attribute. 
+	This attribute can be specified on
+	XHTML elements and on the <code>rddl:resource</code> element.
+	An <code>html</code> element in an XHTML document may specify both <code>lang</code> and <code>xml:lang</code> attributes, 
+	but the <code>lang</code> attribute is not used by RDDL processors.</p>
+</div>
+</div>
+
+
+<div id="attributes">
+<h2>6. Attributes of <code>rddl:resource</code></h2>
+<p>In the following discussion, several attributes appear which
+are defined by <a href="http://www.w3.org/TR/xlink/">XLink</a>.
+For purposes of this discussion, we assume that the XLink
+namespace, <code>http://www.w3.org/1999/xlink</code> is bound to 
+the prefix <code>xlink</code>.</p>
+
+<div id="role">
+<h3>6.1 <code>xlink:role</code></h3>
+<p>The value of this attribute must be a URI reference. A URI reference may contain a URI part and a fragment identifier. 
+Per <a href="http://www.w3.org/TR/xlink/#link-semantics">XLink</a>, when present the URI part must be an absolute URI.
+It provides a machine-readable identifier for the <a href="#nature">nature</a> of the related resource.
+Software may dispatch on this value.</p>
+<p>When the related resource is an XML language for which a namespace name has
+been defined, and for which the namespace name adequately distinguishes the nature of the resource, 
+the namespace name should be used as its nature.</p>
+<p>When the related resource is not an XML document but is adequately distinguished by a MIME type, the value of the
+<code>xlink:role</code> attribute may reflect this MIME type with values formed by the concatenation of the prefix 
+<code>http://www.isi.edu/in-notes/iana/assignments/media-types/</code> with a MIME type e.g. 
+<code>http://www.isi.edu/in-notes/iana/assignments/media-types/text/css</code>.</p>
+<rddl:resource xlink:type="simple"
+        xlink:title="RDDL Natures"
+        xlink:role="http://www.rddl.org/"
+        xlink:arcrole="http://www.rddl.org/purposes#directory"
+        xlink:href="http://www.rddl.org/natures"
+>
+<div class="resource">
+        <p>It is anticipated that many related-resource natures will be well known.
+        A list of well-known natures may be found in the RDDL directory 
+        <a href="http://www.rddl.org/natures">http://www.rddl.org/natures</a>.</p>
+</div>
+</rddl:resource>
+<p>If no nature is provided for a related resource, the default value is 
+<code>http://www.rddl.org/#resource</code>. </p>
+</div>
+<div id="arcrole">
+<h3>6.2 <code>xlink:arcrole</code></h3>
+<p>The value of this attribute must be a URI reference. A URI reference may contain a URI part and a fragment identifier. 
+Per <a href="http://www.w3.org/TR/xlink/#link-semantics">XLink</a>, when present the URI part must be an absolute URI. It provides a machine-readable identifier for the <a href="#purpose">purpose</a> of the link to the related resource.
+Software may dispatch on this value.</p>
+<!--
+<p>In some cases the purpose of the document can only be partially determined by the type of the root element. 
+For example a RDDL document has a root element <code>html</code> qualified by the XHTML namespace. The nature of a RDDL
+document is that it is an XHTML document though its purpose is to serve as a directory of resources. In this situation
+the root element type does not completely specify the nature nor adequately specify the purpose of the document. 
+The presence of both <code>xlink:role</code> and <code>xlink:arcole</code>
+attributes for a single resource link provides flexibility in such situations.
+</p>
+-->
+<rddl:resource xlink:type="simple"
+        xlink:title="RDDL Purposes"
+        xlink:role="http://www.rddl.org/"
+        xlink:arcrole="http://www.rddl.org/purposes#directory"
+        xlink:href="http://www.rddl.org/purposes"
+>
+        <div class="resource">
+        <p>It is anticipated that the purposes of many related resources will be well known.
+        A list of well-known purposes may be found in the RDDL directory 
+        <a href="http://www.rddl.org/purposes">http://www.rddl.org/purposes</a>.</p>
+        </div>
+</rddl:resource>
+</div>
+<!--
+<p>In general it will not be otherwise specified but may be used to distinguish among related 
+schemata such as for HTML strict, transitional and frameset. The <code>xlink:role</code> of a link should be thought of as the
+type of the resource referenced by the link.</p>
+<div class="issue"><p class=".ednote">Ed. need to further discuss uses of and
+compare xmlink:arcrole and xlink:role</p>
+-->
+<div id="href">
+<h3>6.3 <code>xlink:href</code></h3>
+<p>This XLink <a href="http://www.w3.org/TR/2000/PR-xlink-20001220/#link-locators">locator</a>
+attribute's
+value is a  URI reference to the target related resource.</p>
+</div>
+<div id="title">
+<h3>6.4 <code>xlink:title</code></h3>
+<p>A human readable short descriptive title. 
+This should be specified but not be seen as a replacement for descriptive content.</p>
+</div>
+<div id="type">
+<h3>6.5 <code>xlink:type</code></h3>
+<p>The <code>xlink:type</code> is always &quot;simple&quot; in this version of the specification.</p>
+</div>
+<div id="show">
+<h3>6.6 <code>xlink:show</code> and <code>xlink:actuate</code></h3>
+<p>Not used. The only legal value is "none".</p>
+</div>
+
+</div>
+<div id="related.resources">
+<h2>7. Related Resources for RDDL</h2>
+<!-- start resource definitions -->
+<div class="resource">
+<h3>7.1 Well-Known Related-Resource Natures</h3>
+<p>A <a href="http://www.rddl.org/natures">list</a> of well-known related-resource natures, with descriptions.</p>
+</div><div class="resource">
+<h3>7.2 Well-Known Related-Resource Purposes</h3>
+<p>A <a href="http://www.rddl.org/purposes">list</a> of well-known related-resource purposes, with descriptions.</p>
+</div>
+<rddl:resource xlink:type="simple"
+           id="CSS"
+           xlink:title="CSS Stylesheet"
+           xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/text/css"
+           xlink:href="xrd.css" 
+           >
+<div class="resource">
+<h3>7.3 CSS Stylesheet</h3>
+<p>A <a href="http://www.rddl.org/xrd.css">CSS stylesheet</a> used to provide the &quot;look-and-feel&quot;
+of this document, suitable in general for RDDL documents.</p> 
+</div>
+</rddl:resource>
+<div class="resource" id="DTD">
+<rddl:resource xlink:type="simple"
+           xlink:title="DTD for validation"
+           xlink:arcrole="http://www.rddl.org/purposes#validation"
+           xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+           xlink:href="rddl-xhtml.dtd"
+           >
+<h3>7.4 Document Type Definition</h3>
+<p>A DTD <a href="http://www.rddl.org/rddl-xhtml.dtd">rddl-xhtml.dtd</a> for RDDL, defined as an extension of XHTML Basic 1.0 
+using Modularization for XHTML</p>
+</rddl:resource>
+        <p>The DTD includes a number of modules:</p>
+        <ul>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="rddl-qname-1.mod"
+                                >
+                        <a href="rddl-qname-1.mod">rddl-qname-1.mod</a>
+                </rddl:resource></li>
+                 <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="rddl-resource-1.mod"
+                                >
+                       <a href="rddl-resource-1.mod">rddl-resource-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-arch-1.mod"
+                                >
+                        <a href="xhtml-arch-1.mod">xhtml-arch-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/text/xml-dtd"
+                                xlink:href="xhtml-attribs-1.mod"
+                                >
+                        <a href="xhtml-attribs-1.mod">xhtml-attribs-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-base-1.mod"
+                                >
+                        <a href="xhtml-base-1.mod">xhtml-base-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-basic-form-1.mod"
+                                >
+                        <a href="xhtml-basic-form-1.mod">xhtml-basic-form-1.mod</a>
+                </rddl:resource></li>
+                 <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-basic-table-1.mod"
+                                >
+                       <a href="xhtml-basic-table-1.mod">xhtml-basic-table-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-blkphras-1.mod"
+                                >
+                        <a href="xhtml-blkphras-1.mod">xhtml-blkphras-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-blkstruct-1.mod"
+                                >
+                        <a href="xhtml-blkstruct-1.mod">xhtml-blkstruct-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-charent-1.mod"
+                                >
+                        <a href="xhtml-charent-1.mod">xhtml-charent-1.mod</a>
+                </rddl:resource></li>
+                <li> <rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-datatypes-1.mod"
+                                >
+                       <a href="xhtml-datatypes-1.mod">xhtml-datatypes-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-framework-1.mod"
+                                >
+                        <a href="xhtml-framework-1.mod">xhtml-framework-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-hypertext-1.mod"
+                                >
+                        <a href="xhtml-hypertext-1.mod">xhtml-hypertext-1.mod</a>
+                </rddl:resource></li>
+                 <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-image-1.mod"
+                                >
+                       <a href="xhtml-image-1.mod">xhtml-image-1.mod</a>
+                </rddl:resource></li>
+                <li> <rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-inlphras-1.mod"
+                                >
+                       <a href="xhtml-inlphras-1.mod">xhtml-inlphras-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-inlstruct-1.mod"
+                                >
+                        <a href="xhtml-inlstruct-1.mod">xhtml-inlstruct-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#entities"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-external-parsed-entity"
+                                xlink:href="xhtml-lat1.ent"
+                                >
+                        <a href="xhtml-lat1.ent">xhtml-lat1.ent</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-link-1.mod"
+                                >
+                        <a href="xhtml-link-1.mod">xhtml-link-1.mod</a>
+                </rddl:resource></li>
+                 <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-meta-1.mod"
+                                >
+                       <a href="xhtml-meta-1.mod">xhtml-meta-1.mod</a>
+                </rddl:resource></li>
+                 <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#notations"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-notations-1.mod"
+                                >
+                       <a href="xhtml-notations-1.mod">xhtml-notations-1.mod</a>
+                </rddl:resource></li>
+               <li> <rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-object-1.mod"
+                                >
+                        <a href="xhtml-object-1.mod">xhtml-object-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-param-1.mod"
+                                >
+                        <a href="xhtml-param-1.mod">xhtml-param-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-qname-1.mod"
+                                >
+                        <a href="xhtml-qname-1.mod">xhtml-qname-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-rddl-model-1.mod"
+                                >
+                        <a href="xhtml-rddl-model-1.mod">xhtml-rddl-model-1.mod</a>
+                </rddl:resource></li>
+                 <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#entities"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-external-parsed-entity"
+                                xlink:href="xhtml-special.ent"
+                                >
+                       <a href="xhtml-special.ent">xhtml-special.ent</a>
+                </rddl:resource></li>
+                 <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-struct-1.mod"
+                                >
+                       <a href="xhtml-struct-1.mod">xhtml-struct-1.mod</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#entities"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-external-parsed-entity"
+                                xlink:href="xhtml-symbol.ent"
+                                >
+                        <a href="xhtml-symbol.ent">xhtml-symbol.ent</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xhtml-text-1.mod"
+                                >
+                        <a href="xhtml-text-1.mod">xhtml-text-1.mod</a>
+                </rddl:resource></li>
+                 <li><rddl:resource xlink:type="simple"
+                                xlink:arcrole="http://www.rddl.org/purposes#module"
+                                xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/xml-dtd"
+                                xlink:href="xlink-module-1.mod"
+                                >
+                       <a href="xlink-module-1.mod">xlink-module-1.mod</a>
+                </rddl:resource></li>
+        </ul>
+</div>
+<rddl:resource xlink:type="simple" 
+	id="RDFS"
+    xlink:title="RDF Schema"
+    xlink:role="http://www.w3.org/2000/01/rdf-schema#"
+    xlink:href="rddl.rdfs"
+          >
+	<div class="resource">
+		<h3>7.5 RDF Schema</h3>
+		<p>An <a href="rddl.rdfs">RDF Schema</a> for RDDL. This code is shown as an example and is not normative.</p>
+	</div>
+</rddl:resource>
+<rddl:resource xlink:type="simple" id="RELAX"
+           xlink:title="RELAX Grammar"
+           xlink:role="http://www.xml.gr.jp/xmlns/relaxNamespace"
+		   xlink:arcrole="http://www.rddl.org/purposes#schema-validation"
+           xlink:href="rddl-integration.rxg"
+           >
+	<div class="resource">
+		<h3>7.6 RELAX</h3>
+		<p>A <a href="rddl-integration.rxg">RELAX Namespace Grammar</a> for RDDL. 
+		This grammar, contributed by Murata Makoto, defines RDDL as a hedge grammar.</p>
+		<p>Included modules:</p>
+<ul>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/rddl-1.rxm"
+	>
+	<a href="modules/rddl-1.rxm">rddl-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-attribs-1.rxm"
+	>
+	<a href="modules/xhtml-attribs-1.rxm">xhtml-attribs-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-base-1.rxm"
+	>
+	<a href="modules/xhtml-base-1.rxm">xhtml-base-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-basic-form-1.rxm"
+	>
+	<a href="modules/xhtml-basic-form-1.rxm">xhtml-basic-form-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-basic-table-1.rxm"
+	>
+	<a href="modules/xhtml-basic-table-1.rxm">xhtml-basic-table-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-basic10-model-1.rxm"
+	>
+	<a href="modules/xhtml-basic10-model-1.rxm">xhtml-basic10-model-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-basic10.rxm"
+	>
+	<a href="modules/xhtml-basic10.rxm">xhtml-basic10.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-blkphras-1.rxm"
+	>
+	<a href="modules/xhtml-blkphras-1.rxm">xhtml-blkphras-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-blkstruct-1.rxm"
+	>
+	<a href="modules/xhtml-blkstruct-1.rxm">xhtml-blkstruct-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-for-rddl.rxm"
+	>
+	<a href="modules/xhtml-for-rddl.rxm">xhtml-for-rddl.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-framework-1.rxm"
+	>
+	<a href="modules/xhtml-framework-1.rxm">xhtml-framework-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-hypertext-1.rxm"
+	>
+	<a href="modules/xhtml-hypertext-1.rxm">xhtml-hypertext-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-image-1.rxm"
+	>
+	<a href="modules/xhtml-image-1.rxm">xhtml-image-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-inlphras-1.rxm"
+	>
+	<a href="modules/xhtml-inlphras-1.rxm">xhtml-inlphras-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-inlstruct-1.rxm"
+	>
+	<a href="modules/xhtml-inlstruct-1.rxm">xhtml-inlstruct-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-link-1.rxm"
+	>
+	<a href="modules/xhtml-link-1.rxm">xhtml-link-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-list-1.rxm"
+	>
+	<a href="modules/xhtml-list-1.rxm">xhtml-list-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-meta-1.rxm"
+	>
+	<a href="modules/xhtml-meta-1.rxm">xhtml-meta-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-object-1.rxm"
+	>
+	<a href="modules/xhtml-object-1.rxm">xhtml-object-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-param-1.rxm"
+	>
+	<a href="modules/xhtml-param-1.rxm">xhtml-param-1.rxm</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+	xlink:role="http://www.xml.gr.jp/xmlns/relaxCore"
+	xlink:arcrole="http://www.rddl.org/purposes#schema-module"
+	xlink:href="modules/xhtml-text-1.rxm"
+	>
+	<a href="modules/xhtml-text-1.rxm">xhtml-text-1.rxm</a>
+</rddl:resource></li>
+</ul>
+</div>
+</rddl:resource>
+<div id="RELAXNG" class="resource">
+<!-- 
+        each member of this collection 'inherits' the name/ID of 'RELAXNG' 
+-->
+<rddl:resource xlink:type="simple"
+           xlink:title="RELAXNG Schema"
+           xlink:arcrole="http://www.rddl.org/purposes#schema-validation"
+           xlink:role="http://relaxng.org/ns/structure/1.0"
+           xlink:href="xhtml-rddl.rng"
+           >
+
+<h3>7.51 RELAXNG</h3>
+<p>A RELAXNG Schema <a href="xhtml-rddl.rng">xhtml-rddl.rng</a> for RDDL</p>
+
+</rddl:resource>
+<!-- 
+        this resource defines a rddl:collection 
+        the role property is 
+-->
+                <p>The RELAXNG Schema includes a number of modules:</p>
+                <ul>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/attribs.rng">
+                        <a href="modules/attribs.rng">attribs.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/base.rng">
+                        <a href="modules/base.rng">base.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/basic-form.rng">
+                        <a href="modules/basic-form.rng">basic-form.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/basic-table.rng">
+                        <a href="modules/basic-table.rng">applet.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/datatypes.rng">
+                        <a href="modules/datatypes.rng">datatypes.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/struct.rng">
+                        <a href="modules/struct.rng">struct.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/text.rng">
+                        <a href="modules/text.rng">text.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/hypertext.rng">
+                        <a href="modules/hypertext.rng">hypertext.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/list.rng">
+                        <a href="modules/list.rng">list.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/image.rng">
+                        <a href="modules/image.rng">image.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/param.rng">
+                        <a href="modules/param.rng">param.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/object.rng">
+                        <a href="modules/object.rng">object.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/meta.rng">
+                        <a href="modules/meta.rng">meta.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/link.rng">
+                        <a href="modules/link.rng">link.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/xlink.rng">
+                        <a href="modules/xlink.rng">xlink.rng</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://relaxng.org/ns/structure/1.0"
+                        xlink:href="modules/resource.rng">
+                        <a href="modules/resource.rng">resource.rng</a>
+                </rddl:resource></li>
+                </ul>
+</div>
+<!-- Schematron -->
+<rddl:resource xlink:type="simple" id="schematron"
+           xlink:title="Schematron Schema"
+           xlink:role="http://www.ascc.net/xml/schematron"
+		   xlink:arcrole="http://www.rddl.org/purposes#schema-validation"
+           xlink:href="rddl.sch"
+           >
+	<div class="resource">
+		<h3>7.7 Schematron</h3>
+		<p>A <a href="rddl.sch">Schematron Schema</a> for RDDL. </p>
+	</div>
+	<rddl:resource xlink:type="simple"
+		xlink:title="Schematron XSLT"
+		xlink:role="http://www.w3.org/1999/XSL/Transform"
+	    xlink:arcrole="http://www.ascc.net/xml/schematron"
+		xlink:href="rddl-schematron.xsl"
+		>
+	<div class="resource">
+		<h3>7.8 Schematron XSLT implementation</h3>
+		<p>A Schematron Schema  for RDDL 'compiled' into XSLT is <a href="rddl-schematron.xsl">here</a>. </p>
+	</div>
+
+	</rddl:resource>
+</rddl:resource>
+<!-- end schematron-->
+<rddl:resource xlink:type="simple" id="SOCAT"
+           xlink:title="OASIS Catalog"
+           xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/sgml-open-catalog"
+           xlink:href="rddl.soc"
+           >
+<div class="resource">
+<h3>7.9 OASIS Open Catalog</h3>
+<p>The OASIS Open Catalog Format catalog for RDDL. 
+This <a href="rddl.soc">catalog</a> defines PUBLIC and SYSTEM identifiers related to the RDDL DTD. </p>
+</div>
+</rddl:resource>
+<!-- 
+here the div element 'contains' both the resource link to the main TREX schema
+as well as links to the collection of modules
+
+the XPath "div//rddl:resource" defines a container
+-->
+<div id="TREX" class="resource">
+<!-- 
+        each member of this collection 'inherits' the name/ID of 'TREX' 
+-->
+<rddl:resource xlink:type="simple"
+           xlink:title="TREX Schema"
+           xlink:arcrole="http://www.rddl.org/purposes#schema-validation"
+           xlink:role="http://www.thaiopensource.com/trex"
+           xlink:href="xhtml-rddl.trex"
+           >
+
+<h3>7.10 TREX</h3>
+<p>A TREX Schema <a href="xhtml-rddl.trex">xhtml-rddl.trex</a> for RDDL</p>
+
+</rddl:resource>
+<!-- 
+        this resource defines a rddl:collection 
+        the role property is 
+-->
+                <p>The TREX Schema includes a number of modules:</p>
+                <ul>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/attribs.trex">
+                        <a href="modules/attribs.trex">attribs.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/base.trex">
+                        <a href="modules/base.trex">base.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/basic-form.trex">
+                        <a href="modules/basic-form.trex">basic-form.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/basic-table.trex">
+                        <a href="modules/basic-table.trex">applet.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/datatypes.trex">
+                        <a href="modules/datatypes.trex">datatypes.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/struct.trex">
+                        <a href="modules/struct.trex">struct.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/text.trex">
+                        <a href="modules/text.trex">text.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/hypertext.trex">
+                        <a href="modules/hypertext.trex">hypertext.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/list.trex">
+                        <a href="modules/list.trex">list.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/image.trex">
+                        <a href="modules/image.trex">image.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/param.trex">
+                        <a href="modules/param.trex">param.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/object.trex">
+                        <a href="modules/object.trex">object.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/meta.trex">
+                        <a href="modules/meta.trex">meta.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/link.trex">
+                        <a href="modules/link.trex">link.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/xlink.trex">
+                        <a href="modules/xlink.trex">xlink.trex</a>
+                </rddl:resource></li>
+                <li><rddl:resource xlink:type="simple"
+                        xlink:arcrole="http://www.rddl.org/purposes#module"
+                        xlink:role="http://www.thaiopensource.com/trex"
+                        xlink:href="modules/resource.trex">
+                        <a href="modules/resource.trex">resource.trex</a>
+                </rddl:resource></li>
+                </ul>
+</div>
+
+<rddl:resource xlink:type="simple" id="ZIP"
+           xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/zip"
+           xlink:arcrole="http://www.rddl.org/purposes#software-package"
+           xlink:href="rddl-20010122.zip"
+           >
+<div class="resource">
+<h3>7.11 ZIP</h3>
+<p>The RDDL spec, DTDs and other contents of the directory, 
+zipped for <a href="rddl-20010122.zip">download</a>.</p>
+</div>
+</rddl:resource>
+<rddl:resource xlink:type="simple"
+           xlink:title="Java project"
+		   xlink:role="http://www.rddl.org/"
+           xlink:arcrole="http://www.rddl.org/purposes#implementation"
+           xlink:href="RDDL-JOM.html"
+           >
+<div class="resource">
+<h3>7.12 Java API</h3>
+<p>An example of a Java API for RDDL. A RDDL description of the object model is <a href="RDDL-JOM.html">here</a></p><p>Code
+to implement it based on SAX is here <a href="org/rddl/">here</a>. This code is shown as an example 
+and is not normative.</p>
+</div>
+</rddl:resource>
+<rddl:resource xlink:type="simple"
+           id="JAR"
+           xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/zip"
+           xlink:arcrole="http://www.rddl.org/purposes#JAR"
+           xlink:href="rddl.jar"
+           >
+<div class="resource">
+<h3>7.13 JAR</h3>
+<p>The above code packaged as a <a href="rddl.jar">java archive</a>. </p>
+<p>An example of how it might be used in the case where an XML Schema for the namespace is desired:</p>
+<pre class="dtd">
+&#160;&#160;RDDLURL rurl = new RDDLURL(
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"http://www.rddl.org/", 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"http://www.w3.org/2001/XMLSchema",
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"http://www.rddl.org/purposes#schema-validation", 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;); // a namespace URI, the root namespace
+        InputStream is = rurl.getInputStream(); // and you get the XSD
+        ...
+</pre>
+</div>
+</rddl:resource>
+<rddl:resource xlink:type="simple"
+           xlink:title="XSLT API"
+           xlink:arcrole="http://www.rddl.org/purposes#implementation"
+           xlink:role="http://www.w3.org/1999/XSL/Transform"
+           xlink:href="rddlapi.xsl"
+           >
+<div class="resource">
+<h3>7.14 XSLT Stylesheet</h3>
+<p>An example of an <a href="rddlapi.xsl">XSLT</a> stylesheet for RDDL, which accepts the params <code>role</code> and <code>arcrole</code>. The transform inserts the document
+referenced by xlink:href in the output. This code is shown as an example 
+and is not normative.</p>
+</div>
+</rddl:resource>
+<rddl:resource xlink:type="simple"
+           xlink:title="XSLT Table View"
+           xlink:arcrole="http://www.w3.org/1999/xhtml"
+           xlink:role="http://www.w3.org/1999/XSL/Transform"
+           xlink:href="rddlview.xsl"
+           >
+<div class="resource">
+<h3>7.15 RDDL Table View</h3>
+<p>An example of an <a href="rddlview.xsl">XSLT</a> stylesheet which extracts RDDL resource elements into an HTML table. This code is shown as an example 
+and is not normative.</p>
+</div>
+</rddl:resource>
+<rddl:resource xlink:type="simple"
+           xlink:title="RDDL2RDF"
+           xlink:arcrole="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+           xlink:role="http://www.w3.org/1999/XSL/Transform"
+           xlink:href="rddl2rdf.xsl"
+           >
+<div class="resource">
+<h3>7.17 RDDL to RDF converter</h3>
+<p>This is an XSLT <a href="rddl2rdf.xsl">transform</a> which converts a RDDL document into RDF.
+This code is shown as an example and is not normative.</p>
+</div>
+</rddl:resource>
+<rddl:resource xlink:type="simple"
+           xlink:title="RDDL2RSS"
+           xlink:arcrole="http://purl.org/rss/1.0/"
+           xlink:role="http://www.w3.org/1999/XSL/Transform"
+           xlink:href="rddl2rss.xsl"
+           >
+<div class="resource">
+<h3>7.18 RDDL to RSS 1.0 converter</h3>
+<p>This is an XSLT <a href="rddl2rss.xsl">transform</a> which converts a RDDL document into RSS.
+This code is shown as an example and is not normative.</p>
+</div>
+</rddl:resource>
+<rddl:resource xlink:type="simple"
+		id="CSHARP"
+		xlink:title="C# implementation"
+		xlink:arcrole="http://www.rddl.org/purposes#implementation"
+		xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/zip"
+		xlink:href="http://www.injektilo.org/rddl/RDDL.NET.zip"
+           >
+<div class="resource">
+<h3>7.19 C# API</h3>
+<p>Jason Diamond's <a href="http://www.injektilo.org/rddl/">C# API</a> for the RDDL on the Microsoft .NET platform. 
+A <a href="http://www.injektilo.org/rddl/RDDL.NET.zip">ZIP</a> file. This is referenced as an example and is not normative.</p>
+</div>
+</rddl:resource>
+<rddl:resource xlink:type="simple" 
+	id="IE5Behavior"
+	xlink:title="IE5 Behavior"
+	xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/text/html"
+	xlink:arcrole="http://www.rddl.org/purposes#implementation"
+	xlink:href="rddl.htc"
+	>
+	<div class="resource">
+		<h3>7.20 IE5 Behavior</h3>
+		<p>An IE5 Behavior that uses the xlink:href as a link. If you are using IE5 then you are viewing this behavior.</p>
+	</div>
+</rddl:resource>
+<rddl:resource xlink:type="simple" 
+	id="home"
+	xlink:title="RDDL Home Directory"
+	xlink:role="http://www.rddl.org/"
+	xlink:arcrole="http://www.rddl.org/purposes#directory"
+	xlink:href="http://www.rddl.org/home"
+	>
+	<div class="resource">
+		<h3>7.21 Home RDDL Directory</h3>
+		<p>This resource references a <a href="http://www.rddl.org/home">RDDL document</a> containing a collection of resources referencing other RDDL documents.</p>
+	</div>
+</rddl:resource>
+<!-- end resource definitions -->
+</div>
+
+
+<div id="references" class="resource">
+<h2>8. Normative References</h2>
+<ol>
+<li><rddl:resource xlink:type="simple"
+        id="xml-names"
+        xlink:title="W3C XML Names"
+        xlink:role="http://www.w3.org/TR/html4/"
+        xlink:arcrole="http://www.rddl.org/purposes#normative-reference"
+        xlink:href="http://www.w3.org/TR/REC-xml-names"
+        >
+        <a href="http://www.w3.org/TR/REC-xml-names">W3C XML Names</a>
+</rddl:resource></li>
+ <li><rddl:resource xlink:type="simple"
+        id="rfc2396"
+        xlink:title="IETF RFC 2396"
+        xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/text/plain"
+        xlink:arcrole="http://www.rddl.org/purposes#normative-reference"
+        xlink:href="http://www.ietf.org/rfc/rfc2396.txt"
+        >
+       <a href="http://www.ietf.org/rfc/rfc2396.txt">IETF RFC 2396</a>
+</rddl:resource></li>
+
+ <li><rddl:resource xlink:type="simple"
+        id="rec-xlink"
+        xlink:title="W3C REC XLink"
+        xlink:role="http://www.w3.org/TR/html4/"
+        xlink:arcrole="http://www.rddl.org/purposes#normative-reference"
+        xlink:href="http://www.w3.org/tr/xlink"
+        >
+       <a href="http://www.w3.org/tr/xlink">W3C XLink</a>
+</rddl:resource></li>
+ <li><rddl:resource xlink:type="simple"
+        id="rec-xhtml-basic"
+        xlink:title="W3C REC XHTML Basic"
+        xlink:role="http://www.w3.org/1999/xhtml"
+        xlink:arcrole="http://www.rddl.org/purposes#normative-reference"
+        xlink:href="http://www.w3.org/TR/xhtml-basic"
+        >
+       <a href="http://www.w3.org/TR/xhtml-basic">W3C XHTML Basic 1.0</a>
+</rddl:resource></li>
+
+<li><rddl:resource xlink:type="simple"
+        id="rec-xmlbase"
+        xlink:title="W3C REC XML Base"
+        xlink:role="http://www.w3.org/TR/html4/"
+        xlink:arcrole="http://www.rddl.org/purposes#normative-reference"
+        xlink:href="http://www.w3.org/TR/xmlbase/"
+        >
+        <a href="http://www.w3.org/TR/xmlbase/">W3C XML Base</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+        id="rec-xptr"
+        xlink:title="W3C REC XPointer"
+        xlink:role="http://www.w3.org/TR/html4/"
+        xlink:arcrole="http://www.rddl.org/purposes#normative-reference"
+        xlink:href="http://www.w3.org/tr/xptr"
+        >
+        <a href="http://www.w3.org/tr/xptr">W3C XPointer</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+        id="rec-xmlinfoset"
+        xlink:title="W3C REC XML Infoset"
+        xlink:role="http://www.w3.org/1999/xhtml"
+        xlink:arcrole="http://www.rddl.org/purposes#normative-reference"
+        xlink:href="http://www.w3.org/TR/xml-infoset/"
+        >
+        <a href="http://www.w3.org/TR/xml-infoset/">W3C XML Infoset</a>
+</rddl:resource></li>
+</ol>
+</div>
+<div id="informative.references" class="resource">
+<h2>9. Informative References</h2>
+<ol>
+  <li><rddl:resource xlink:type="simple"
+        id="rec-xhtml"
+        xlink:title="W3C REC XHTML"
+        xlink:role="http://www.w3.org/1999/xhtml"
+        xlink:arcrole="http://www.rddl.org/purposes#reference"
+        xlink:href="http://www.w3.org/tr/xhtml1"
+        >
+      <a href="http://www.w3.org/tr/xhtml1">W3C XHTML 1.0</a>
+</rddl:resource></li>
+<li><rddl:resource xlink:type="simple"
+        id="note-xlink2rdf"
+        xlink:title="W3C NOTE XLink2RDF"
+        xlink:role="http://www.w3.org/TR/html4/"
+        xlink:arcrole="http://www.rddl.org/purposes#reference"
+        xlink:href="http://www.w3.org/TR/xlink2rdf/"
+        >
+        <a href="http://www.w3.org/TR/xlink2rdf/">W3C Note Harvesting RDF Statements from XLinks</a>
+</rddl:resource></li>
+ <li><rddl:resource xlink:type="simple"
+        id="rec-modxhtml"
+        xlink:title="W3C REC Modulatization for XHTML"
+        xlink:role="http://www.w3.org/1999/xhtml"
+        xlink:arcrole="http://www.rddl.org/purposes#reference"
+        xlink:href="http://www.w3.org/TR/xhtml-modularization/"
+        >
+       <a href="http://www.w3.org/TR/xhtml-modularization/">W3C Modularization of XHTML</a>
+</rddl:resource></li>
+</ol>
+</div>
+</body>
+</html>

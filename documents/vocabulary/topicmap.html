@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<title>An RDF schema for topic maps</title>
+<link href="/default.css" type="text/css" rel=stylesheet>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+<h1>An RDF schema for topic maps</h1>
+
+<table>
+<tr><th>By:</th>      <td>Lars Marius Garshol</td></tr>
+<tr><th>Version:</th> <td>0.1</td></tr>
+<tr><th>Date:</th>    <td>2002-10-07</td></tr>
+<tr><th>Status:</th>  <td>Not deployed, possibly changing</td></tr>
+<tr><th>Formats:</th> <td>HTML (this page),
+                          <a href="schema.rdf">RDF schema</a></td></tr>
+</table>
+
+<p>
+This document describes an RDF schema that is essentially a
+translation of <a href="http://www.isotopicmaps.org/sam/">the Standard
+Application Model for Topic Maps</a> into RDF. As such it allows topic
+maps to be expressed in RDF, but is perhaps less flexible than one
+might wish. There is only one restriction compared to the SAM: all
+locators must be URIs.
+</p>
+
+<p>
+A rough version of this proposal was worked out at a nocturne at
+<a href="http://www.knowledgetechnologies.net/2002/">KT2002</a>, as
+described in <a href="http://www.xmlhack.com/read.php?item=1579">this
+xmlhack.com article</a>. The proposal is indebted to the participants
+of that workshop, in particular Uche Ogbuji, Eric Prud'hommeaux,
+Nikita Ogievetsky, and Steve Pepper. Some modifications and choices
+have been made in the completion of this document, so any errors in
+this document are entirely the fault of the author.
+</p>
+
+<h2><a name="TopicItem">TopicMapItem</a></h2>
+
+<p>URI: <b>http://psi.ontopia.net/rdf/#TopicMapItem</b></p>
+
+<p>
+A common superclass for all the classes defined in this schema. This
+class has no direct counterpart in the topic map model, and is only
+used in order to better express the RDF schema.
+</p>
+
+<h2><a name="Topic">Topic</a></h2>
+
+<p>URI: <b>http://psi.ontopia.net/rdf/#Topic</b></p>
+
+<p>
+An RDF class corresponding to the topic map notion of a <a
+href="http://www.isotopicmaps.org/sam/sam-model/#topic">topic</a>.
+Topics can have the following properties:
+</p>
+
+<dl>
+<dt><a name="subject-identifier">http://psi.ontopia.net/rdf/#subject-identifier</a></dt>
+<dd>An RDF property corresponding to the topic map notion of a
+<a
+href="http://www.isotopicmaps.org/sam/sam-model/#subject-identifier">subject
+identifier</a>. This is a daml:unambiguousProperty.</dd>
+
+<dt><a name="subject-address">http://psi.ontopia.net/rdf/#subject-address</a></dt>
+<dd>An RDF property corresponding to the topic map notion of a
+<a
+href="http://www.isotopicmaps.org/sam/sam-model/#subject-address">subject
+address</a>. This is a daml:unambiguousProperty.</dd>
+
+<dt><a name="base-name">http://psi.ontopia.net/rdf/#base-name</a></dt>
+<dd>An RDF property associating the topic with its base names.</dd>
+
+<dt><a name="occurrence">http://psi.ontopia.net/rdf/#occurrence</a></dt>
+<dd>An RDF property associating the topic with its occurrences.</dd>
+
+<dt><a
+name="source-locator">http://psi.ontopia.net/rdf/#source-locator</a></dt>
+<dd>An RDF property associating topic map items of all types with
+their <a
+href="http://www.isotopicmaps.org/sam/sam-model/#source-locator">source
+locators</a>.</dd>
+
+</dl>
+
+<h2><a name="BaseName">BaseName</a></h2>
+
+<p>URI: <b>http://psi.ontopia.net/rdf/#BaseName</b></p>
+
+<p>
+An RDF class corresponding to the topic map notion of a <a
+href="http://www.isotopicmaps.org/sam/sam-model/#base-name">base
+name</a>. Base names can have the following properties:
+</p>
+
+<dl>
+<dt><a name="#scope">http://psi.ontopia.net/rdf/#scope</a></dt>
+<dd>An RDF property corresponding to the topic map notion of <a
+href="http://www.isotopicmaps.org/sam/sam-model/#scope">scope</a>. This
+is an rdf:Bag.</dd>
+
+<dt><a name="#value">http://psi.ontopia.net/rdf/#value</a></dt>
+<dd>An RDF property that holds the string literal which is the base
+name.</dd>
+
+<dt><a name="#variants">http://psi.ontopia.net/rdf/#variants</a></dt>
+<dd>An RDF property associating the topic with its variants. This is
+an rdf:Alt.</dd>
+
+<dt>http://psi.ontopia.net/rdf/#source-locator</a></dt>
+<dd>An RDF property associating topic map items of all types with
+their <a
+href="http://www.isotopicmaps.org/sam/sam-model/#source-locator">source
+locators</a>.</dd>
+
+</dl>
+
+
+<h2><a name="Variant">Variant</a></h2>
+
+<p>URI: <b>http://psi.ontopia.net/rdf/#Variant</b></p>
+
+<p>
+An RDF class corresponding to the topic map notion of a <a
+href="http://www.isotopicmaps.org/sam/sam-model/#variant-name">variant
+name</a>. Variant names can have the following properties:
+</p>
+
+<dl>
+<dt>http://psi.ontopia.net/rdf/#scope</dt>
+<dd>An RDF property corresponding to the topic map notion of <a
+href="http://www.isotopicmaps.org/sam/sam-model/#scope">scope</a>. This
+is an rdf:Bag, and on this class it must be non-empty.</dd>
+
+<dt>http://psi.ontopia.net/rdf/#value</dt>
+<dd>An RDF property that holds the string literal which is the
+variant name.</dd>
+
+<dt>http://psi.ontopia.net/rdf/#resource</dt>
+<dd>An RDF property that refers to the resource which is the variant.</dd>
+
+<dt>http://psi.ontopia.net/rdf/#source-locator</a></dt>
+<dd>An RDF property associating topic map items of all types with
+their <a
+href="http://www.isotopicmaps.org/sam/sam-model/#source-locator">source
+locators</a>.</dd>
+
+</dl>
+
+
+<h2><a name="Occurrence">Occurrence</a></h2>
+
+<p>URI: <b>http://psi.ontopia.net/rdf/#Occurrence</b></p>
+
+<p>
+An RDF class corresponding to the topic map notion of an <a
+href="http://www.isotopicmaps.org/sam/sam-model/#occurrence">occurrence</a>.
+Occurrences can have the following properties:
+</p>
+
+<dl>
+<dt><a name="#occurrence-type">http://psi.ontopia.net/rdf/#occurrence-type</a></dt>
+<dd>An RDF property that refers to the topic that defines the
+type of this occurrence. A sub-property of rdf:type.</dd>
+
+<dt>http://psi.ontopia.net/rdf/#scope</dt>
+<dd>An RDF property corresponding to the topic map notion of <a
+href="http://www.isotopicmaps.org/sam/sam-model/#scope">scope</a>. This
+is an rdf:Bag.</dd>
+
+<dt>http://psi.ontopia.net/rdf/#value</dt>
+<dd>An RDF property that holds the string literal which is the
+occurrence of information about the topic.</dd>
+
+<dt><a name="#resource">http://psi.ontopia.net/rdf/#resource</a></dt>
+<dd>An RDF property that refers to the resource this occurrence
+connects with the topic.</dd>
+
+<dt>http://psi.ontopia.net/rdf/#source-locator</a></dt>
+<dd>An RDF property associating topic map items of all types with
+their <a
+href="http://www.isotopicmaps.org/sam/sam-model/#source-locator">source
+locators</a>.</dd>
+
+</dl>
+
+
+<h2><a name="Association">Association</a></h2>
+
+<p>URI: <b>http://psi.ontopia.net/rdf/#Association</b></p>
+
+<p>
+An RDF class corresponding to the topic map notion of an <a
+href="http://www.isotopicmaps.org/sam/sam-model/#association">association</a>.
+Associations can have the following properties:
+</p>
+
+<dl>
+<dt><a name="#association-type">http://psi.ontopia.net/rdf/#association-type</a></dt>
+<dd>An RDF property that refers to the topic that defines the
+type of this association. A sub-property of rdf:type.</dd>
+
+<dt>http://psi.ontopia.net/rdf/#scope</dt>
+<dd>An RDF property corresponding to the topic map notion of <a
+href="http://www.isotopicmaps.org/sam/sam-model/#scope">scope</a>. This
+is an rdf:Bag.</dd>
+
+<dt><a name="#resource">http://psi.ontopia.net/rdf/#roles</a></dt>
+<dd>An RDF property that connects the roles making up this association
+with the association. This is an rdf:Bag.</dd>
+
+<dt>http://psi.ontopia.net/rdf/#source-locator</a></dt>
+<dd>An RDF property associating topic map items of all types with
+their <a
+href="http://www.isotopicmaps.org/sam/sam-model/#source-locator">source
+locators</a>.</dd>
+
+</dl>
+
+
+<h2><a name="AssociationRole">AssociationRole</a></h2>
+
+<p>URI: <b>http://psi.ontopia.net/rdf/#AssociationRole</b></p>
+
+<p>
+An RDF class corresponding to the topic map notion of an <a
+href="http://www.isotopicmaps.org/sam/sam-model/#association-role">association
+role</a>.
+Association roles can have the following properties:
+</p>
+
+<dl>
+<dt><a name="#role-type">http://psi.ontopia.net/rdf/#role-type</a></dt>
+<dd>An RDF property that refers to the topic that defines the
+type of this association role. A sub-property of rdf:type.</dd>
+
+<dt><a name="#resource">http://psi.ontopia.net/rdf/#role-player</a></dt>
+<dd>An RDF property that refers to the topic playing this role in the
+association.</dd>
+
+<dt>http://psi.ontopia.net/rdf/#source-locator</a></dt>
+<dd>An RDF property associating topic map items of all types with
+their <a
+href="http://www.isotopicmaps.org/sam/sam-model/#source-locator">source
+locators</a>.</dd>
+
+</dl>
+
+</body>
+</html>

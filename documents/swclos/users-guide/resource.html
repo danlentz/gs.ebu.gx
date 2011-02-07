@@ -1,0 +1,962 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>URI, QName, and Resource</title>
+<META http-equiv="Content-Type" content="text/html">
+<META http-equiv="Content-Style-Type" content="text/css">
+<link href="manual.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h2>3. &nbsp;URI, QName, and Resource</h2>
+
+<p><A href="http://www.w3.org/TR/rdf-primer/">The Resource Description Framework (RDF)</A>
+is a language for representing information about resources
+in the World Wide Webs, and it has a <A href="http://www.w3.org/TR/rdf-syntax-grammar/">special syntax 
+in XML</A> called RDF/XML in short. In RDF, every
+resource, except literals and blank nodes, is identified with URIs. This idea originates from the meta-data
+markup for web resources. However, you do not need to mind in Semantic Webs or ontology descriptions
+whether resources in RDF really exist on the Webs or not.
+</p>
+
+<p>A URI in RDF denotes an entity in the <i>universe of discourse</i>, namely a virtual world in computer that
+reflects an idea on the real world. A URI in SWCLOS is bound with a CLOS object that represents a part of
+ontology on the denotation of a URI. You can input a URI object in SWCLOS using angle bracket reader
+macro '&lt;', where URI reading is terminated by '&gt;'. Note that the expression starting a sharp character and
+enveloped with '&lt;' and '&gt;' is an object expression in Lisp.
+</p>
+
+<blockquote>
+<pre><code><b>gx-user(3): &lt;http://www.w3.org/2000/01/rdf-schema#Resource&gt;
+#&lt;uri http://www.w3.org/2000/01/rdf-schema#Resource&gt;
+gx-user(4): (uri-value &lt;http://www.w3.org/2000/01/rdf-schema#Resource&gt;)
+#&lt;rdfs:Class rdfs:Resource&gt;
+</b></code></pre></blockquote>
+
+<p>The QName is an abbreviation of URI with the <A href="http://www.w3.org/TR/1999/REC-xml-names-19990114/">
+namespace function</A> for XML. For example, "http://www.w3.org/2000/01/rdf-schema#Resource" is abbreviated to "rdfs:Resource". 
+Here, the
+fragment-less URI or "http://www.w3.org/2000/01/rdf-schema" is mapped to "rdfs", a prefix of QName,
+while a fragment "Resource" is called local part of QName. Franz Inc. provides URI APIs, in which a URI
+is implemented of CLOS objects typed to <a href="http://www.franz.com/support/documentation/8.1/doc/classes/uri/uri.htm">net.uri:uri</a>. 
+In SWCLOS, a part of URI that is corresponding to
+a prefix part of QName is connected to a lisp package, whereby a URI corresponds to a QName as lisp
+symbol in a package. Thus, a URI may have one by one mapping to a lisp symbol (QName), and vice versa.
+See the followings.
+</p>
+
+<blockquote>
+<pre><code><b>gx-user(5): (uri2symbol &lt;http://www.w3.org/2000/01/rdf-schema#Resource&gt;)
+rdfs:Resource
+gx-user(6): (symbol2uri 'rdfs:Resource)
+#&lt;uri http://www.w3.org/2000/01/rdf-schema#Resource&gt;
+</b></code></pre></blockquote>
+
+<p>At the line 5 in the demonstration above, the uri is converted to the corresponding QName, and at line 6,
+the reverse operation is directed. Note that such correspondence has been established when SWCLOS loads
+an ontology including URIs, or you input URIs as RDF entity in the lisp top level window.
+</p>
+
+<p>The substance of RDF can be modeled as labeled uni-directional graph of edge and node called RDF graph.
+A start node of edge is called <i>subject</i>, an end node is called <i>object</i>, and an edge is called <i>predicate</i> in <i>triple</i>.
+So, a triple <i>subject/predicate/object</i> in text stands for the minimal structure in graph. A set of triples in text
+stands for a whole RDF graph.
+</p>
+
+<p>A predicate in triple is a URI or QName, and it turns out a resource in RDF that is called property in RDF
+vocabulary. Note that any edge must be named by a URI in RDF. Furthermore, it must have a QName in
+SWCLOS, because it turns a slot name in CLOS. A subject in triple designates a non-literal resource, that is,
+a node represented by a URI or a blank node. The blank node has no URI but may be assigned with a blank
+node ID. An object in triple is either a resource (with or without URI) or a literal. The following shows an
+example of statement in N-Triple.
+</p>
+
+<blockquote>
+&lt;John_Doe&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;Man&gt; .
+</blockquote>
+
+<p>In SWCLOS, a resource or an entity in RDF is realized by a CLOS object. A denotation of triple
+<i>subject/predicate/object</i> is represented by a subjective CLOS object and its slot of which the slot name is
+corresponding to a predicate. The slot value is an objective CLOS object (called <i>resource</i>) or lisp data
+(<i>literal</i>). The subjective CLOS object may be bound to the URI, if it is not a blank node. Its URI can be
+converted to a QName, and a named resource object is also bound to the QName symbol. See the following
+demonstration.
+</p>
+
+<blockquote>
+<pre><code><b>gx-user(7): rdfs:Resource
+#&lt;rdfs:Class rdfs:Resource&gt;
+gx-user(8): (uri-value &lt;http://www.w3.org/2000/01/rdf-schema#Resource&gt;)
+#&lt;rdfs:Class rdfs:Resource>
+gx-user(9): &lt;&lt;http://www.w3.org/2000/01/rdf-schema#Resource&gt;>
+#&lt;rdfs:Class rdfs:Resource&gt;
+</b></code></pre></blockquote>
+
+<p>Note that at line 9, the special reader macro for double angle brackets '&lt;&lt;' reads the character sequence of
+URI up to characters '&gt;&gt;' and then a bound value to the converted URI is returned. A CLOS object that
+represents a resource in RDF is called resource object in SWCLOS.
+</p>
+
+<h3>3.1 &nbsp;URI</h3>
+
+<p>SWCLOS utilizes the URI APIs of Allegro Common Lisp (ACL). Please see the details <a href="http://www.franz.com/support/documentation/8.1/doc/uri.htm">
+http://www.franz.com/support/documentation/8.1/doc/uri.htm</a>. To
+implement value-bindable URI, a subclass of <a href="http://www.franz.com/support/documentation/8.1/doc/classes/uri/uri.htm">
+net.uri:uri</a> is defined with an extra value slot. Every URI in
+SWCLOS is interned to ensure the uniqueness of URI in system.
+</p>
+
+<a id="SWCLOSuri" name="SWCLOSuri">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#uri">
+<U>uri</U></a></TH>
+<TD width="45">[Class]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>A subclass of <a href="http://www.franz.com/support/documentation/8.1/doc/classes/uri/uri.htm">
+net.uri:uri</a>. It has the definition of extra slot for value, to which the corresponsing resource object is stored.</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#uri:uri">
+<U>uri <I>thing</I></U></a></TH>
+<TD width="60">[Method]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>Four methods are defined for this generic function: when <i>thing</i> is an instance of <b>gx:uri</b>, it is returned. 
+If it is an instance of 
+<a href="http://www.franz.com/support/documentation/8.1/doc/classes/uri/uri.htm">net.uri:uri</a>, 
+its class is changed to <b>gx:uri</b> and interned. When <i>thing</i> is a string, it is interned as uri 
+and its class is changed to <b>gx:uri</b>. Otherwise, it signals an error. </TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSuri-value" name="SWCLOSuri-value">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#uri"><U>uri-value <I>uri</I></U></a></TH>
+<TD width="70">[Function]</TD>
+</TR>
+</TBODY></TR>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>This function returns a value in its value slot. This function is settable. </TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<br>
+
+<p>There are several utilities for handling all uri entries. See 
+<a href="..\doc\overview-rdfs.html#print-all-entity-uris">print-all-entity-uris</a>, 
+<a href="..\doc\overview-rdfs.html#do-all-entity-uris">do-all-entity-uris</a>, 
+and <a href="..\doc\overview-rdfs.html#list-all-entity-uris">list-all-entity-uris</a> in doc folder.</p>
+
+
+<h3>3.2 &nbsp;QName</h3>
+
+<p>A URI in SWCLOS may be converted to the corresponding <a href="http://www.w3.org/TR/xml-names11/#ns-qualnames">
+QName</a>. The prefix of QName in XML is
+mapped to a lisp package in SWCLOS and the local part is mapped to a symbol name in the package. A
+QName symbol is exported, because an exported lisp symbol has the same appearance as the QName in
+XML. A QName symbol is used to designate a resource name in S-expression. In fact, the description at the
+top level in SWCLOS requires a QName symbol instead of a URI with define macros such as <a href="RDFSchema.html#SWCLOSdefConcept"><b>defConcept</b></a>
+and <a href="RDFSchema.html#SWCLOSdefIndividual"><b>defIndividual</b></a> in S-expression. Some URIs that have no prefix definition cannot be converted to
+QNames and remain as URI.
+</p>
+
+<p>The mapping rule from URI to QName in SWCLOS is as follows.</p>
+
+<ul>
+<li>
+If a URI has a fragment, SWCLOS attempts to create a QName symbol of which name is the fragment
+and of which package is associated to the fragment-less URI. If SWCLOS knows the mapping from the
+fragment-less URI to the package name, the system automatically creates the QName symbol with its
+URI, otherwise, in order to create the mapping from the fragment-less URI to the package name, the
+system invokes the function that is bound to symbol <a href="#SWCLOSuri2symbol-package-mapping-fun">
+<b>*uri2symbol-package-mapping-fun*</b></a> with the
+fragment-less URI.
+<li>
+If a URI has no fragment, then the irregular conversion procedure is carried out as follows. SWCLOS
+firstly invokes the function bound to <a href="#SWCLOSuri2symbol-name-mapping-fun">
+<b>*uri2symbol-name-mapping-fun*</b></a>. If the returned value is a
+symbol, it is used. If the returned value is a string, a symbol is created with the name and the associated
+package to the URI. If SWCLOS does not know the associated package, then the system invokes the
+function that is bound to symbol <b>*uri2symbol-package-mapping-fun*</b>, and create a symbol.
+<li>
+To the symbol <b>*uri2symbol-package-mapping-fun*</b>, currently as default, the function that makes a
+query to users for package name is bound.
+<li>
+When the function bound to <b>*uri2symbol-name-mapping-fun*</b> is invoked, currently as default, if a
+URI has a fragment-less path, the procedure for a fragment-less path parses the path into a directory and
+a name. The name of path is a tail part in the path description and the other part is a directory. The name
+is used for QName local part. The directory is used for package association. Otherwise, in case of both
+no fragment in the URI and no name in the path, a query to users is invoked for QName symbol name.
+</ul>
+
+<p>See the following demonstration.</p>
+
+<pre><code><b>gx-user(17): (uri2symbol &lt;http://somewhere/maindir/subdir/JohnSmith&gt;)
+swsd:JohnSmith
+gx-user(18): (uri2symbol &lt;http://somewhere/JohnSmith&gt;)
+sw:JohnSmith
+gx-user(19): (uri2symbol &lt;http://JohnSmith/&gt;)
+no:J.S.</b></code></pre>
+
+<p>At line 17, prefix query to users is carried out for "http://somewhere/somedirectory/subdir/", and "swsd" is
+replied by a user. At line 18 for "http://somewhere/", "sw" is replied. At line 19, the local name is required
+at first, then "J.S." is supplied, then, "no" is replied for the prefix query.
+</p>
+
+<h3>3.3 &nbsp;URI Named Space</h3>
+
+<p>A uri reference is unique in WWWs, and then <a href="http://www.w3.org/TR/1999/REC-xml-names-19990114/">XML namespace</a> 
+supports the uniqueness of QName with
+a local part, which is unique in a name space. In SWCLOS, a local part of QName corresponds to symbol
+name in a package, and a namespace for a prefix part corresponds to a lisp package. To realize such
+mapping, we need the connection between a prefix part in URI and a lisp package, and when
+URI-to-symbol mapping is irregular, we further need the mapping from a URI to a symbol name in the lisp
+package. An instance of <b>uri-namedspace</b>, that is a subclass of <a href="http://www.franz.com/support/documentation/8.1/doc/classes/uri/uri.htm">net.uri:uri</a>, has two extra slots, package and
+environment, and it enables such named space environments for the URI name space. See the following
+demonstration.
+</p>
+
+<pre><code><b>gx-user(2): (defpackage :ex (:documentation "http://somewhere/main/sub/file"))
+#&lt;The ex package&gt;
+gx-user(3): (set-uri-namedspace-from-pkg (find-package :ex))
+#&lt;The ex package&gt;
+gx-user(4): (get-uri-namedspace &lt;http://somewhere/main/sub/file&gt;)
+#&lt;uri-namedspace http://somewhere/main/sub/file&gt;
+gx-user(5): (uri2package "http://somewhere/main/sub/file")
+#&lt;The ex package&gt;
+gx-user(6): (uri2symbol "http://somewhere/main/sub/file#JohnSmith")
+ex:JohnSmith</b></code></pre>
+
+<p>In the above demonstration, a URI string is set to a new package named "ex" as its documentation option at
+first, and then the regular mapping is set as prefix named space in system at line 3. So, URI to package
+mapping is established as shown at line 5. In regular mapping for a URI with fragment, regular URI to
+QName conversion is carried out in default rules without the URIÅfs symbol mapping environment.
+</p>
+
+<p>A user may set any user-defined functions to global variable 
+<a href="../doc/overview-rdfs.html#*uri2symbol-name-mapping-fun*"><b>*uri2symbol-name-mapping-fun*</b></a> and
+<a href="../doc/overview-rdfs.html#*uri2symbol-package-mapping-fun*"><b>*uri2symbol-package-mapping-fun*</b></a> 
+in order to implement application-oriented rules for the irregular
+mapping in default. See the detail in the description of the documentation file of program in the doc folder
+and the source program.
+</p>
+
+<p>When SWCLOS reads RDF/XML files, the namespace directions with <a href="http://www.w3.org/TR/REC-xml-names#NT-PrefixedAttName">PrefixedAttName</a> 'xmlns:' and
+<a href="http://www.w3.org/TR/REC-xml-names#NT-DefaultAttName">DefaultAttName</a> 'xmlns' make the mapping from a URI to the package name. On the other hand, from the
+standpoint of lisp expression, SWCLOS users can direct the mapping from a package to a URI in the
+package documentation as demonstrated above, in which a user put a corresponding URI as documentation
+of package.
+</p>
+
+<p>Sometime you may be embarrassed at an error message of no package for a base-URI or a default
+namespace, when SWCLOS reads an RDF/XML file. It happens if an RDF/XML file does not include any
+Prefix name in the file for the file itself. For such a case, you must supply two sentences, something like
+"xmlns:base = '<i>somewhere</i>'" and "xmlns:<i>PREFIX</i> = '<i>somewhere</i>'" into RDF attributes in the file.
+</p>
+
+<p>Each <b>uri-namedspace</b> is stored in a hasharray which is bound to a global variable <a href="#SWCLOSuri-namedspaces"><b>*NameSpaces*</b></a>. The
+converting functions, <a href="#SWCLOSuri2symbol"><b>uri2symbol</b></a> and <a href="#SWCLOSsymbol2uri"><b>symbol2uri</b></a> use these mappings bound to <b>*NameSpaces*</b>.
+</p>
+
+<p></p>
+
+<a id="SWCLOSuri-namedspaces" name="SWCLOSuri-namedspaces">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#*NameSpaces*">
+<U>*NameSpaces*</U></a></TH>
+<TD width="82">[Global Var]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>A variable where a hashtable is set. The hashtable is for interning prefix URIs that are
+instances of <b>uri-namedspace</b>. See the document of <a href="http://www.franz.com/support/documentation/8.1/doc/uri.htm#interning-uris-1">
+interning URIs</a>. The interning into this
+hashtable is carried out at the occurrence of the first mapping from a fragment-less URI, a
+name-less URI, or a specially directed URI to a package. See <a href="#SWCLOSuri2symbol">uri2symbol</a>.
+</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSuri-namedspace" name="SWCLOSuri-namedspace">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#uri-namedspace">
+<U>uri-namedspace</U></a></TH>
+<TD width="50">[Class]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>Subclass of <a href="http://www.franz.com/support/documentation/8.1/doc/classes/uri/uri.htm">
+net.uri:uri</a> class. This subclass has two extra slot definitions; package slot
+definition and env slot definition. The associated lisp package is stored into the package slot
+and the irregular associations in the namespace between URIs and QName symbol names
+are stored into the env slot of this instance object.
+</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSlist-all-uri-namedspaces" name="SWCLOSlist-all-uri-namedspaces">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#list-all-uri-namedspaces">
+<U>list-all-uri-namedspaces </U></a></TH>
+<TD width="70">[Function]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>This function returns a list of all uri-namedspaces in the system.</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSset-uri-namedspace" name="SWCLOSset-uri-namedspace">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#set-uri-namedspace">
+<U>set-uri-namedspace <i>prefix-uri</i></U></a></TH>
+<TD width="70">[Function]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>This function changes <i>prefix-uri</i> to a namedspace and registers it to system. 
+You need to set a lisp package into the uri-namedspace package slot before the usage.</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSget-uri-namedspace" name="SWCLOSget-uri-namedspace">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#get-uri-namedspace">
+<U>get-uri-namedspace <i>prefix-uri</i></U></a></TH>
+<TD width="70">[Function]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>This function retrieves the uri-namedspace from <i>prefix-uri</i> and returns it. 
+If <i>prefix-uri</i> is not an uri, cl:nil is returned.</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSset-uri-namedspace-from-pkg" name="SWCLOSset-uri-namedspace-from-pkg">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#set-uri-namedspace-from-pkg">
+<U>set-uri-namedspace-from-pkg <i>pkg</i></U></a></TH>
+<TD width="70">[Function]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>This function registers the namespace associated to <i>pkg</i>. The <i>pkg</i> must have a uri string in <i>pkg</i>'s 
+document slot.</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSdefault-namespace" name="SWCLOSdefault-namespace">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#*default-namespace*">
+<U>*default-namespace*</U></a></TH>
+<TD width="82">[Global Var]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>When a default namespace is indicated by DefaultAttName 'xmlns' in RDF/XML 
+files and the system reads it, the namespace URI is set to this variable.
+This is often used in scoping of let form.</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSbase-uri" name="SWCLOSbase-uri">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#*base-uri*">
+<U>*base-uri*</U></a></TH>
+<TD width="82">[Global Var]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>When a base URI is indicated by 'xml:base' in RDF/XML files and the system 
+reads it, the URI is set to this variable.
+This is often used in scoping of let form.</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSuri2symbol-package-mapping-fun" name="SWCLOSuri2symbol-package-mapping-fun">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#*uri2symbol-package-mapping-fun*">
+<U>*uri2symbol-package-mapping-fun*</U></a></TH>
+<TD width="82">[Global Var]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>When there is no associated package for a URI, the function bound to this variable is
+invoked, and the return value is used as package for the corresponding QName symbol. This
+mechanism is useful to implement user-specific or application specific conversion as
+irregular mapping rule. The function bound to this symbol has to have one parameter, i.e., a
+URI.
+</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSuri2symbol-name-mapping-fun" name="SWCLOSuri2symbol-name-mapping-fun">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#*uri2symbol-name-mapping-fun*">
+<U>*uri2symbol-name-mapping-fun*</U></a></TH>
+<TD width="82">[Global Var]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>When there is no associated name for a URI, the function bound to this variable is invoked,
+and the return value is used as name for QName symbol. This mechanism is useful to
+implement user-specific or application-specific conversion as irregular rule. The function
+bound to this symbol has to have one parameter, i.e., a URI.
+</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSuri2symbol" name="SWCLOSuri2symbol">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#parse-uri">
+<U>uri2symbol <i>uri</i></U></a></TH>
+<TD width="70">[Function]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>converts <i>uri</i> to the corresponding QName symbol and returns it. If <i>uri</i> is null (cl:nil) or null
+string, it returns cl:nil. If <i>uri</i> is a string, its parsed uri is used. <a href="#SWCLOSuri-namedspaces"><b>*NameSpaces*</b></a> 
+is consulted
+for the association between a fragment-less or name-less URI and package. In the case of
+irregular mapping, the functions bound to <a href="#SWCLOSuri2symbol-package-mapping-fun">
+<b>*uri2symbol-package-mapping-fun*</b></a> and
+<a href="#SWCLOSuri2symbol-name-mapping-fun">
+<b>*uri2symbol-name-mapping-fun*</b></a> are called and the return value is used. See the mapping
+rule described above.
+</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSsymbol2uri" name="SWCLOSsymbol2uri">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#symbol2uri">
+<U>symbol2uri <i>symbol</i></U></TH>
+<TD width="70">[Function]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>returns a URI from rdf:about slot of this resource object if this <i>symbol</i> is defined as QName
+and the <a href="RDFobject.html">resource object</a> is bound to this <i>symbol</i>. Otherwise this function retrieves the URI
+string from the symbol package of <i>symbol</i>, then returns a URI associated to <i>symbol</i> in the
+env slot if the association exists, or returns a URI that is made from package-corresponding
+(fragment-less) URI and symbol-name (as URI fragment).
+</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<p>Note that all resource names or QName symbols are exported. Therefore, in a dedicated package for a
+resource namespace, the following code is an example that lists up all defined URI in the namespace.
+</p>
+
+<b>
+<pre><code>
+gx-user(7): (loop for x being each external-symbol
+                      in (find-package :rdfs)
+               collect (symbol2uri x))
+(#&lt;uri http://www.w3.org/2000/01/rdf-schema#subPropertyOf&gt;
+ #&lt;uri http://www.w3.org/2000/01/rdf-schema#Datatype&gt;
+ #&lt;uri http://www.w3.org/2000/01/rdf-schema#domain&gt;
+ #&lt;uri http://www.w3.org/2000/01/rdf-schema#label&gt;
+ #&lt;uri http://www.w3.org/2000/01/rdf-schema#seeAlso&gt;
+ #&lt;uri http://www.w3.org/2000/01/rdf-schema#Container&gt;
+ #&lt;uri http://www.w3.org/2000/01/rdf-schema#subClassOf&gt;
+ #&lt;uri http://www.w3.org/2000/01/rdf-schema#isDefinedBy&gt;
+ #&lt;uri http://www.w3.org/2000/01/rdf-schema#Resource&gt;
+ #&lt;uri http://www.w3.org/2000/01/rdf-schema#range&gt; ...)
+</code></pre>
+</b>
+<br>
+
+<p><b>list-all-entities-in</b> performs almost same work.</p>
+<b>
+<pre><code>
+gx-user(4): (list-all-entities-in :rdfs)
+(rdfs:subPropertyOf rdfs:Datatype rdfs:domain rdfs:label rdfs:seeAlso
+                    rdfs:Container rdfs:subClassOf rdfs:isDefinedBy
+                    rdfs:Resource rdfs:range ...)
+</code></pre>
+</b>
+<br />
+
+<a id="SWCLOSlist-all-entities-in" name="SWCLOSlist-all-entities-in">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#list-all-entities-in:uri">
+<U>llist-all-entities-in <i>space</i></U></a></TH>
+<TD width="65">[Method]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD><i>space</i> must be a package, a package name, a package name string, or a uri. This method
+returns a list of all of external symbols in <i>space</i>. Note that even if a user defined external
+symbols in <i>space</i> without RDF resource definition, they are listed. See also
+<a href="#SWCLOSlist-all-resources">list-all-resources</a>.
+</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<p>Precisely speaking, we have some semantic gap between a URI namespace and a lisp package. The lisp
+package is always global in the current session. Namely, a lisp package for the namespace should be unique
+anywhere and anytime. The URI is also globally unique, but its namespace is a temporal setting for the URI
+abbreviation in the scope of a RDF/XML file or a Web page. In a RDF/XML file, a settled namespace for a
+URI is scoped within the file, and it is legal that someone set a different name of namespace for the
+identical URI in another RDF/XML file. Thus, in ideal the two files should be correctly merged regardless
+of namespaces but regarding URIs. For example, if you have two ontology files, one has a namespace
+'wine' for some URI and another has a namespace 'vin' for the same URI, the system must read both in the
+same namespace. However, Lisp cannot read symbols in different packages into some one package. To
+solve this problem, the lisp package nicknames are utilized here. When SWCLOS detects the mapping
+different package names onto a same URI, the newly indicated prefix turns out a nickname for the
+previously mapped package. Even so, note that the first encountered package name is a nominal name and
+nickname's prefixes do not appear in S-expression.</p>
+
+<h3>3.4 &nbsp;Resource</h3>
+
+<p>In addition to the URI-value mapping mentioned at Section 3.1, a CLOS object as resource can be set as
+symbol-value to the QName symbol if it has a QName, or to an assigned nodeID symbol if it is anonymous.
+To test whether a CLOS object is a resource object or not, you may use lisp native type predicate 
+<a href="http://www.franz.com/support/documentation/8.1/ansicl/dictentr/typep.htm">
+cl:typep</a> as follows. Note to use <a href="RDFobject.html#SWCLOStypep"><b>gx:typep</b></a> predicate, if you need a type-testing predicate that exactly obeys RDFS
+semantics.
+</p>
+
+<blockquote>
+<pre><code><b>gx-user(2): (cl:typep rdfs:Resource rdfs:Resource)
+t
+gx-user(3): (cl:typep rdfs:Class rdfs:Resource)
+t
+gx-user(4): (cl:typep rdf:Property rdfs:Resource)
+t
+</b></code></pre>
+</blockquote>
+
+<p>In the example above, three resource objects, named rdfs:Resource, rdfs:Class, and rdf:Property, are tested
+whether they are instances of class rdfs:Resource.
+</p>
+
+<a id="SWCLOSobject?" name="SWCLOSobject?">
+<p>Predicate <b>rsc-object-p</b> is prepared for testing whether an CLOS object is a resource object or
+not. It is same as (cl:typep x rdfs:Resource) in the semantics but it is faster a bit and simplifies your code.
+Note that <b>object?</b> is used for testing a QName symbol or a nodeID symbol to which a resource object is
+bound.
+</p>
+
+<blockquote>
+<pre><code><b>gx-user(5): (object? 'rdfs:Resource)
+t
+gx-user(6): (object? 'rdfs:Class)
+t
+gx-user(7): (object? 'rdf:Property)
+t
+</b></code></pre>
+</blockquote>
+
+
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#object?">
+<U>object? <i>symbol</i></U></a></TH>
+<TD width="70">[Function]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>returns true if <i>symbol</i> has a resource object, otherwise returns false.</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSlist-all-resources" name="SWCLOSlist-all-resources">
+<p>To list up all resources defined in the system, you can use <b>list-all-resources</b> as follows.</p>
+
+<pre><code><b>gx(8): (list-all-resources t)
+(#&lt;rdfs:Class rdfs:Resource&gt; #&lt;rdfs:Class rdfs:Container&gt; 
+ #&lt;rdfs:Class rdf:Alt&gt; #&lt;rdfs:Class rdf:Seq&gt; #&lt;rdfs:Class rdf:Bag&gt;
+ #&lt;rdfs:Class gx::ill-structured-XMLLiteral&gt; #&lt;rdfs:Class rdf:Statement&gt; 
+ #&lt;rdfs:Class rdf:List&gt; #&lt;rdf:List rdf:nil&gt; #&lt;rdfs:Class rdfs:Literal&gt;
+ ...)
+</b></code></pre>
+<br>
+
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#list-all-resources">
+<U>list-all-resources [<i>with-system-rdf-object-p</i>]</U></a></TH>
+<TD width="70">[Function]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>This function lists up all of resources that are defined as instance of rdfs:Resource. An
+instance of rdf:XMLLiteral is not included in the list. <i>with-system-rdf-object-p</i> is optional
+and RDF(S) and OWL resources are included if true is supplied, otherwise only user-defined
+resources are included.
+</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<p>In most cases, a resource object is named with a QName. The method <a href="#SWCLOSname"><b>name</b></a> gets the name from a resource
+object and returns its QName symbol. The resource object is set to the QName symbol. On the other hand,
+resource objects that have no name are called <i>anonymous</i> resource, or <i>blank node</i>, or <i>bnode</i> in short, and
+you can access them through <b>uri-value</b> function rather than symbol value.
+</p>
+
+<blockquote>
+<pre><code><b>gx-user(2): (name rdfs:Resource)
+rdfs:Resource
+gx-user(3): (addObject rdfs:Resource '((rdf:about "NothingElseURI")))
+#&lt;rdfs:Resource common-lisp:nil&gt;
+gx-user(4): &lt;&lt;NothingElseURI&gt;&gt;
+#&lt;rdfs:Resource common-lisp:nil&gt;
+gx-user(5): (slot-value &lt;&lt;NothingElseURI&gt;&gt; 'rdf:about)
+"NothingElseURI"
+gx-user(6): (anonymous-p &lt;&lt;NothingElseURI&gt;&gt;)
+t
+</b></code></pre>
+</blockquote>
+
+<p>Note that in the above demonstration, an anonymous object is created at line 3, whose URI string is "NothingElseURI".
+So, &lt;NothingElseURI&gt; at line 4 is parsed to a URI, and the resource object is retrieved through <b>uri-value</b> and 
+returned it.</p>
+
+<a id="SWCLOSnamed-p" name="SWCLOSnamed-p">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#named-p">
+<U>named-p <i>resource</i></U></a></TH>
+<TD width="70">[Function]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>returns true if a resource object <i>resource</i> has a name, otherwise false. If <i>resource</i> 
+is not a resource object, it returns false.</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSanonymous-p" name="SWCLOSanonymous-p">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#anonymous-p">
+<U>anonymous-p <i>resource</i></U></a></TH>
+<TD width="70">[Function]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>returns true if <i>resource</i> has no name, otherwise false. If <i>resource</i>
+is not a resource object, it returns false.</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSname" name="SWCLOSname">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR>
+<TH><a href="..\doc\overview-rdfs.html#name:resource">
+<U>name <i>resource</i></U></a></TH>
+<TD width="60">[Method]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>returns the name of <i>resource</i>, if named. Otherwise cl:nil. Note that this 
+function is different from <a href="http://www.franz.com/support/documentation/8.1/doc/operators/cg/n/name.htm">
+cg:name</a> in ACL.</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<h3>3.5 &nbsp;NodeID</h3>
+
+<p>A nodeID is used for referring anonymous node, especially in N-Triple notation. It looks like QName that
+has '_' as prefix and meaningless local name such as 'a01'. However, a nodeID is not associated to any URI
+and has no global identification. There is a package dedicated for nodeID in SWCLOS, its package name is
+'_', and a nodeID is also a lisp symbol in SWCLOS. You can bind any blank node to a nodeID symbol in
+the current session, but there is no way to store and reload the information on nodeID bindings by
+SWCLOS. The following functions are for the nodeID. However, there are useful functions no more on
+NodeIDs in SWCLOS. Be careful to use NodeIDs with respect to the identity of blank nodes according to
+RDF Semantics. See <a href="http://www.w3.org/TR/rdf-mt/">RDF Semantics</a>.</p>
+
+<a id="SWCLOSnodeID?" name="SWCLOSnodeID?">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#nodeID?">
+<U>nodeID? <i>name</i></U></a></TH>
+<TD width="70">[Function]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<i>name</i> should be a symbol. This function returns <a href="http://www.franz.com/support/documentation/8.1/ansicl/glossary/t.htm#true">true</a> 
+if <i>name</i> can be regarded as a nodeID, namely its package name is '_', otherwise returns <a href="http://www.franz.com/support/documentation/8.1/ansicl/glossary/f.htm#false">
+false</a>. This function does not care of a
+bound value of <i>name</i>.
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<a id="SWCLOSnodeID2symbol" name="SWCLOSnodeID2symbol">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#nodeID2symbol">
+<U>nodeID2symbol <i>str</i></U></a></TH>
+<TD width="70">[Function]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>interns a nodeID symbol whose name is str in the nodeID package, exports and returns it.
+Users must ensure the uniqueness of the nodeID in this function usage.
+</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+<a id="SWCLOSmake-unique-nodeID" name="SWCLOSmake-unique-nodeID">
+<TABLE width="100%" cellpadding="0">
+<TBODY>
+<TR align="left">
+<TH><a href="..\doc\overview-rdfs.html#make-unique-nodeID">
+<U>make-unique-nodeID <i>str</i></U></a></TH>
+<TD width="70">[Function]</TD>
+</TR>
+</TBODY>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+<TBODY>
+<TR>
+<TD>interns a nodeID symbol whose name begins with str and has succeeding digits, exports and
+returns it. The system assures the uniqueness of the nodeID in the current system.
+</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV>
+<br>
+
+<p>As well as character '&lt;' being a reader macro on for URI, character '_' is also a reader macro so that the
+character sequence of the succeeding colon and other characters makes an exported lisp symbol, and the
+symbol is handed to eval function if it is bound. Otherwise new anonymous resource object is created and
+bound to the symbol, then the symbol is handed to eval function. See the following demonstration.
+</p>
+
+<blockquote>
+<pre><code><b>gx-user(2): _:a01
+#&lt;|rdfs:Resource| :anonymous&gt;
+gx-user(3): (quote _:a01)
+_:a01
+gx-user(4): (list _:a01 _:a02)
+(#&lt;|rdfs:Resource| :anonymous&gt; #&lt;|rdfs:Resource| :anonymous&gt;)
+gx-user(5): (eq _:a01 _:a01)
+t
+gx-user(6): (eq _:a01 _:a02)
+common-lisp:nil</b></code></pre>
+</blockquote>
+
+<p>Where |rdfs:Resource| denotes the alternative to rdfs:Resource in SWCLOS, which is designated
+instead of rdfs:Resource when rdfs:Resource is specified as class of instances. It is expected that
+rdfs:Resource should be an abstract class in CLOS and finally all slots are defined at subclasses of
+rdfs:Resource, even if some slot definitions might be tentatively designated to rdfs:Resource.
+|rdfs:Resource| is useful to suppress making wasteful slot definitions at rdfs:Resource.
+</p>
+
+<hr>
+<i><small>Author: <a href="mailto:koide@nii.ac.jp">Seiji Koide</a>. 
+ Copyright (c) 2005, 2006 GALAXY EXPRESS CORPORATION. Feb. 2006
+<br> Copyright (c) 2007-2009 Seiji Koide. Oct. 2009
+<br> </small></i>
+
+</body>
+</html>

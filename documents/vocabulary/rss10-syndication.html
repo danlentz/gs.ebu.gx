@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+ <head>
+  <title>RDF Site Summary 1.0 Modules: Syndication</title>
+  <link rel="stylesheet" type="text/css" href="../../style.css" />
+ </head>
+
+ <body>
+  <h1>RDF Site Summary 1.0 Modules: Syndication</h1>
+<!-- Authors -->
+   <h2><a name="authors">Authors</a></h2>
+     <p>The members of the RSS-DEV Working Group:-</p>
+<dl>
+     <dt><a href="mailto:begeddov@jfinity.com">Gabe Beged-Dov</a>, 
+      <a href="http://www.jfinity.com">JFinity Systems LLC</a></dt>
+     <dt><a href="mailto:daniel.brickley@bristol.ac.uk">Dan Brickley</a>, 
+      <a href="http://www.ilrt.bris.ac.uk/discovery/">ILRT</a></dt>
+     <dt><a href="mailto:rael@oreilly.com">Rael Dornfest</a>, 
+      <a href="http://www.oreilly.com">O'Reilly &amp; Associates</a></dt>
+     <dt><a href="mailto:ian@calaba.com">Ian Davis</a>, 
+      <a href="http://www.calaba.com">Calaba, Ltd.</a></dt>
+     <dt><a href="mailto:ldodds@ingenta.com">Leigh Dodds</a>, 
+      <a href="http://www.xmlhack.com">xmlhack</a></dt>
+     <dt><a href="mailto:eisen@pobox.com">Jonathan Eisenzopf</a>,
+      <a href="http://www.wwind.com">Whirlwind Interactive</a></dt>
+     <dt><a href="mailto:david@moreover.com">David Galbraith</a>,
+      <a href="http://www.moreover.com">Moreover.com</a></dt>
+     <dt><a href="mailto:guha@guha.com">R.V. Guha</a>,
+      <a href="http://www.guha.com">guha.com</a></dt>
+     <dt><a href="mailto:ken@bitsko.slc.ut.us">Ken MacLeod</a>,
+      <a href="http://bitsko.slc.ut.us/">(Independent)</a></dt>
+     <dt><a href="mailto:emiller@oclc.org">Eric Miller</a>,
+      <a href="http://www.oclc.org">Online Computer Library Center, Inc.</a></dt>
+     <dt><a href="mailto:aaron@theinfo.org">Aaron Swartz</a>, 
+      <a href="http://www.theinfo.org">The Info Network</a></dt>
+     <dt><a href="mailto:vdv@dyomedea.com">Eric van der Vlist</a>, 
+      <a href="http://www.dyomedea.com">Dyomedea</a></dt>
+</dl>
+
+<!-- Version -->
+
+   <h2><a name="version">Version</a></h2>
+	<p><strong>Latest Version:</strong> <a href="http://purl.org/rss/1.0/modules/syndication/">http://purl.org/rss/1.0/modules/syndication/</a></p>
+    <div class="version">1.4.1 2000-12-20 (editor: <a href="mailto:sean@mysterylights.com">SBP</a> - cleaned up markup)</div>
+    <div class="version">1.4   2000-12-09</div>
+
+<!-- Status -->
+
+   <h2><a name="status">Status</a></h2>
+
+    <p>
+     <a href="http://www.egroups.com/surveys/rss-dev?id=444214">Release</a>
+    </p>
+
+
+<!-- Rights -->
+
+   <h2><a name="rights">Rights</a></h2>
+
+    <p>
+     Copyright &copy; 2000 by the Authors.
+    </p>
+    <p>
+     Permission to use, copy, modify and distribute the RDF Site Summary
+     1.0 Specification and its accompanying documentation for any purpose
+     and without fee is hereby granted in perpetuity, provided that the
+     above copyright notice and this paragraph appear in all copies.
+     The copyright holders make no representation about the suitability
+     of the specification for any purpose.  It is provided "as is"
+     without expressed or implied warranty.
+    </p>
+    <p>
+     This copyright applies to the RDF Site Summary 1.0 Specification
+     and accompanying documentation and does not extend to the RSS
+     format itself.
+    </p>
+
+   <h2><a name="description">Description</a></h2>
+
+    <p>
+		  Provides syndication hints to aggregators and others picking up this 
+      RDF Site Summary (RSS) feed regarding how often it is updated.  
+			For example, if you updated your file twice an hour, updatePeriod 
+			would be "hourly" and updateFrequency would be "2".  The
+			syndication module borrows from Ian Davis's 
+			<a href="http://InternetAlchemy.org/ocs/">Open Content Syndication (OCS)</a>
+			directory format.  It supercedes the RSS 0.91 skipDay and skipHour elements.  
+    </p>
+    <p>
+		<em>updatePeriod</em><br />
+		Describes the period over which the channel format is updated. 
+		Acceptable values are: hourly, daily, weekly, monthly, yearly. 
+		If omitted, daily is assumed.
+    </p>
+    <p>
+		<em>updateFrequency</em><br />
+    Used to describe the frequency of updates in
+    relation to the update period. A positive integer indicates how many 
+		times in that period the channel is updated. For example, an 
+		updatePeriod of daily, and an updateFrequency of 2 indicates the 
+		channel format is updated twice daily. If omitted a value of 1 is 
+		assumed.
+    </p>
+    <p>
+		<em>updateBase</em><br />
+		Defines a base date to be used in concert with updatePeriod and 
+		updateFrequency to calculate the publishing schedule. The date
+		format takes the form: yyyy-mm-ddThh:mm
+    </p>
+
+   <h2><a name="namespaces">Namespace Declarations</a></h2>
+
+			 <ul>
+			  <li><b>xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"</b></li>
+			 </ul>
+
+   <h2><a name="model">Model</a></h2>
+
+    <p>
+      <em>&lt;channel&gt; Elements:</em></p>
+			 <ul>
+			  <li><b>&lt;sy:updatePeriod&gt;</b> ( 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' )</li>
+			  <li><b>&lt;sy:updateFrequency&gt;</b> ( a positive integer )</li>
+			  <li><b>&lt;sy:updateBase&gt;</b> ( #PCDATA ) [<a href="http://www.w3.org/TR/NOTE-datetime">W3CDTF</a>]</li>
+			 </ul>
+
+   <h2><a name="example">Example</a></h2>
+
+
+<pre>&lt;?xml version="1.0" encoding="utf-8"?&gt; 
+
+&lt;rdf:RDF 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  <span class="example-syn">xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"</span>
+  xmlns="http://purl.org/rss/1.0/"
+&gt; 
+
+  &lt;channel rdf:about="http://meerkat.oreillynet.com/?_fl=rss1.0"&gt;
+    &lt;title&gt;Meerkat&lt;/title&gt;
+    &lt;link&gt;http://meerkat.oreillynet.com&lt;/link&gt;
+    &lt;description&gt;Meerkat: An Open Wire Service&lt;/description&gt;
+    <span class="example-syn">&lt;sy:updatePeriod&gt;hourly&lt;/sy:updatePeriod&gt;
+    &lt;sy:updateFrequency&gt;2&lt;/sy:updateFrequency&gt;
+    &lt;sy:updateBase&gt;2000-01-01T12:00+00:00&lt;/sy:updateBase&gt;</span>
+
+    &lt;image rdf:resource="http://meerkat.oreillynet.com/icons/meerkat-powered.jpg" /&gt;
+
+    &lt;items&gt;
+      &lt;rdf:Seq&gt;
+        &lt;rdf:li resource="http://c.moreover.com/click/here.pl?r123" /&gt;
+      &lt;/rdf:Seq&gt;
+    &lt;/items&gt;
+
+    &lt;textinput rdf:resource="http://meerkat.oreillynet.com" /&gt;
+
+  &lt;/channel&gt;
+
+  &lt;image rdf:about="http://meerkat.oreillynet.com/icons/meerkat-powered.jpg"&gt;
+    &lt;title&gt;Meerkat Powered!&lt;/title&gt;
+    &lt;url&gt;http://meerkat.oreillynet.com/icons/meerkat-powered.jpg&lt;/url&gt;
+    &lt;link&gt;http://meerkat.oreillynet.com&lt;/link&gt;
+  &lt;/image&gt;
+
+  &lt;item rdf:about="http://c.moreover.com/click/here.pl?r123"&gt;
+    &lt;title&gt;XML: A Disruptive Technology&lt;/title&gt; 
+    &lt;link&gt;http://c.moreover.com/click/here.pl?r123&lt;/link&gt;
+    &lt;description&gt;
+      XML is placing increasingly heavy loads on the existing technical
+      infrastructure of the Internet.
+    &lt;/description&gt;
+  &lt;/item&gt; 
+
+  &lt;textinput rdf:about="http://meerkat.oreillynet.com"&gt;
+    &lt;title&gt;Search Meerkat&lt;/title&gt;
+    &lt;description&gt;Search Meerkat's RSS Database...&lt;/description&gt;
+    &lt;name&gt;s&lt;/name&gt;
+    &lt;link&gt;http://meerkat.oreillynet.com/&lt;/link&gt;
+  &lt;/textinput&gt;
+
+&lt;/rdf:RDF&gt;</pre>
+
+ </body>
+
+</html>
+

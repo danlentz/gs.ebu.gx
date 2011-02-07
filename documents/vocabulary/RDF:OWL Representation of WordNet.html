@@ -1,0 +1,2391 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type"
+     content="text/html; charset=iso-8859-1">
+  <title>RDF/OWL Representation of WordNet</title>
+  <style type="text/css">
+p.ref {
+  font-size: 90%}
+p.quote {
+  font-style: italic}
+p.note {
+  font-size: 90% ; 
+  margin-left: +5% ; 
+  margin-right: +5%}
+p.warning {
+  margin-left: +5% ; 
+  margin-right: +5%; 
+  font-weight: bold}
+p.caption { 
+  text-align: center; 
+  font-weight: bold;}
+p.todo {
+  margin-left: +5% ; 
+  margin-right: +5%; 
+  font-weight: bold}
+dt {
+  font-weight: bold}
+code {
+  color: rgb(153, 0, 0); 
+  font-weight: bold}
+th {
+  font-weight: bold;
+}
+  
+pre {
+  color: rgb(153, 0, 0); 
+  font-size: 90%; 
+  font-weight: bold; 
+  margin-left: +2%}
+  </style>
+  <link rel="stylesheet" type="text/css"
+     href="http://www.w3.org/StyleSheets/TR/W3C-WD">
+ </head>
+
+ 
+<body>
+<div class="head">
+<a href="http://www.w3.org/"><img
+ src="http://www.w3.org/Icons/w3c_home" alt="W3C" height="48"
+ width="72"></a>
+
+<h1>RDF/OWL Representation of WordNet</h1>
+
+<h2>W3C Working Draft 19 June 2006</h2>
+
+
+<dl>
+  <dt>This version:</dt>
+  <dd>
+    <a href="http://www.w3.org/TR/2006/WD-wordnet-rdf-20060619/"
+       >http://www.w3.org/TR/2006/WD-wordnet-rdf-20060619/</a></dd>
+  <dt>Latest version:</dt>
+    <dd><a href="http://www.w3.org/TR/wordnet-rdf/"
+       >http://www.w3.org/TR/wordnet-rdf/</a></dd>
+  <dt>Previous version:</dt>
+    <dd>This is the first published version</dd>
+  <dt>Editors:</dt>
+
+  <dd><a href="http://www.cs.vu.nl/~mark/">Mark van
+  Assem</a>, Vrije Universiteit Amsterdam</dd> 
+  <dd><a
+  href="http://www.istc.cnr.it/createhtml.php?nbr=71">Aldo
+  Gangemi</a>, ISTC-CNR, Rome</dd> 
+  <dd><a href="http://www.cs.vu.nl/~guus/">Guus
+  Schreiber</a>, Vrije Universiteit Amsterdam</dd> 
+</dl>
+
+<p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &#169; 2006 <a href="http://www.w3.org/"><acronym title="World Wide Web Consortium">W3C</acronym></a><sup>&#174;</sup> (<a href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute of Technology">MIT</acronym></a>, <a href="http://www.ercim.org/"><acronym title="European Research Consortium for Informatics and Mathematics">ERCIM</acronym></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p>
+
+<!-- end copyright -->
+
+<hr></div>
+
+<!-- end of head -->
+
+<div id="body">
+<h2 class="notoc"><a id="abstract">Abstract</a></h2>
+
+<p>This document presents a standard conversion of Princeton WordNet 
+to RDF/OWL. It describes how it was converted and gives examples
+of how it may be queried for use in Semantic Web applications.</p>
+
+
+<h2 id="Status">Status of this Document</h2>
+
+<p><em>This section describes the status of this document at
+the time of its publication.  Other documents may supersede
+this document. A list of current W3C publications and the
+latest revision of this technical report can be found in the
+<a href="http://www.w3.org/TR/">W3C technical reports
+index</a> at http://www.w3.org/TR/.</em></p>
+    
+<p>
+This document is a First Public Working Draft produced by the
+<a href="http://www.w3.org/2001/sw/BestPractices/">Semantic Web
+Best Practices and Deployment Working Group</a>, part of the
+<a href="http://www.w3.org/2001/sw/">W3C Semantic Web Activity</a>.
+</p>
+
+<p>
+Comments on this document are encouraged and may be sent to
+<a href="mailto:public-swbp-wg@w3.org">public-swbp-wg@w3.org</a>;
+please include the text "comment" in the
+subject line.  All messages received at this address are viewable
+in a <a href="http://lists.w3.org/Archives/Public/public-swbp-wg/"
+>public archive</a>.
+</p>
+
+<p>
+At the time of publication the charter of the Semantic Web Best
+Practices and Deployment Working Group is expiring and no chartered
+group has been proposed to continue further work on this document.
+The Working Group does recognize that feedback on this document
+may lead to suggestions for further work.  The current Working
+Group is not placing this work on the
+<a href="http://www.w3.org/2003/06/Process-20030618/tr"
+>W3C Recommendation Track</a>.
+</p>
+
+<p>
+The URIs specified in this document for WordNet terms are served by
+W3C in accordance with its <a
+href="http://www.w3.org/Consortium/Persistence">resource persistence
+policy</a>.  Refer
+to Appendix I Open Issues for expectations regarding Princeton URIs
+for these resources.
+</p>
+
+<p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>. W3C maintains a <a rel="disclosure" href="http://www.w3.org/2004/01/pp-impl/35495/status">public list of any patent disclosures</a> made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
+
+<p>Publication as a Working Draft does not imply endorsement
+by the W3C Membership. This is a draft document and may be
+updated, replaced or obsoleted by other documents at any
+time. It is inappropriate to cite this document as other
+than work in progress.</p>
+
+
+
+<!-- ACKNOWLEDGEMENTS SECTION -->
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>
+
+The following people have reviewed this document
+and provided valuable advice: 
+Jeremy Carroll,
+Brian McBride,
+John McClure, 
+Benjamin Nguyen and
+Jacco van Ossenbruggen.
+
+The following people have provided valuable advice through
+the best practices mailing list and personal correspondence
+with the editors:
+David Booth,
+Dan Connolly
+Jeremy Carroll
+Kjetil Kjernsmo,
+Michel Klein,
+Peter Mika, 
+Alistair Miles,
+Steve Pepper, 
+Jacco van Ossenbruggen and
+Ralph Swick. 
+
+Dan Brickley and Brian McBride have contributed to the
+WordNet conversion described in this note through their work
+in the WordNet Task Force and additional comments and
+suggestions. 
+
+Special thanks to Ralph Swick for help in
+generating CBDs and setting up this conversion in W3C
+webspace. 
+
+We also thank the MultimediaN e-Culture team,
+in particular Jan Wielemaker, for important usage comments.
+</p>
+
+
+<h2 id="contents">Table of Contents</h2>
+
+<ul>
+  <li><a href="#introduction">1. Introduction and guide to the reader</a></li>
+  <li><a href="#intrown">2. Introduction to WordNet in RDF/OWL</a></li> 
+  <li><a href="#selectandquery">3. Selecting and Querying the appropriate WN version</a></li>
+  <li><a href="#advanced">4. Advanced options</a></li>
+
+  <li><a href="#requirements">Appendix A: Requirements</a></li>
+  <li><a href="#versioningstrategy">Appendix B: Versioning and redirection strategy</a></li>
+  <li><a href="#distribution">Appendix C: Overview of the WordNet Prolog distribution</a></li>
+  <li><a href="#details">Appendix D: Conversion details</a></li>
+  <li><a href="#skos">Appendix E: Possible mappings to SKOS</a></li>
+  <li><a href="#previousversions">Appendix F: Relation to previous versions</a></li>
+  <li><a href="#uris">Appendix G: Introducing URIs for Synsets, WordSenses, Words</a></li>
+  <li><a href="#internationalization">Appendix H: Internationalization</a></li>
+  <li><a href="#issues">Appendix I: Open Issues</a></li>
+  <li><a href="#changelog">Appendix J: Change Log since 17 October</a></li>
+  <li><a href="#references">Appendix K: References</a></li>
+</ul>
+
+<hr/>
+
+
+<!-- INTRODUCTION SECTION -->
+
+<h2 id="introduction">1. Introduction and guide to the reader</h2>
+
+<p>WordNet [<a href="#fellbaum98">Fellbaum, 1998</a>]
+is a heavily-used lexical resource in
+natural-language processing and information
+retrieval. 
+
+More recently, it has also been adopted in
+Semantic Web research community. It is used
+mainly for annotation and retrieval in different domains
+such as cultural heritage [<a href="#hollink03">Hollink et al., 2003</a>], 
+product catalogs [<a href="#guarino99">Guarino et al., 1999</a>] 
+and photo metadata [<a href="#brickley02">Brickley, 2002</a>].
+
+It is also
+used to ground other vocabularies such as the FOAF schema 
+[<a href="#brickley05">Brickley and Miller, 2005</a>], as background
+knowledge in ontology alignment tools and other applications 
+(see <a href="http://esw.w3.org/mt/esw/archives/cat_applications_and_demos.html">
+http://esw.w3.org/mt/esw/archives/cat_applications_and_demos.html</a> for a list).
+
+Currently there exist several
+conversions of WordNet to RDF(S) or OWL. </p>
+
+<p>The 
+<a href="http://www.w3.org/2001/sw/BestPractices/WNET/tf.html">
+WordNet Task Force</a> of the SWBPD WG aims at providing a
+standard conversion of WordNet for direct use by
+Semantic Web application developers. Some of the earlier
+conversions are incomplete and are incompatible with
+each other, for example because they provide different URIs
+for the same entity in the original source. By providing
+a standard conversion that is as complete as possible the TF
+aims to improve interoperability of SW applications that
+use WordNet and simplify the choice between the existing
+RDF/OWL versions. We have based this conversion on examining the
+commonalities of previous conversions, extending them where
+necessary and making choices to suit different needs of
+application developers.
+
+This
+conversion may be used directly in Semantic Web
+applications, or as a source for modified WordNet versions
+(e.g. turning WordNet into an ontology). We have focused
+on staying as close to the original source as possible, i.e.
+reflect the original data model without interpretation.
+For example, whether or not (parts of) WordNet actually
+constitute a proper subclass hierarchy is outside the scope.
+
+The W3C hosts the conversion of version 2.0 
+of Princeton WordNet  at the following URI:
+</p>
+
+	<pre>
+	http://www.w3.org/2006/03/wn/wn20/	
+	</pre>
+
+See <a href="#issues">Open Issues</a> for more information on future hosting.
+ 	
+
+
+<h3 id="guide">Guide to the reader</h3>
+
+<p>
+This document is composed of three parts. The first part (Section two) 
+has three subsections.
+The first subsection provides a Primer to the usage of the WordNet RDF/OWL 
+representation and is intended as a convenient starting point for users and
+developers that have already worked with Princeton WordNet and have basic
+knowledge of RDF(S) and OWL, or those who have already worked with another
+RDF/OWL representation of WordNet. The second subsection provides an
+<a href="#rdfowlschema">Introduction to the WordNet RDF/OWL schema</a>.
+Those who are not familiar with WordNet should read the third subsection:
+<a href="#wnmetamodel">Introduction to the WordNet datamodel</a>, 
+before reading the Primer.
+
+The second part of this document consists of Sections three and four which give more background 
+information for those who are not familiar with WordNet and describe
+advanced options. It also provides
+more background to the decisions taken during conversion.
+The third part (the Appendices) contains 
+detailed information on the RDF/OWL representation, versioning strategy and
+open issues. 
+</p>
+
+<p>
+This document is intended to reflect the consensus of
+the community using WordNet on the Semantic Web and the opinion
+of the TF on how best to represent the Princeton WordNet datamodel in RDF/OWL.
+</p>
+
+<p>This document uses the following namespace abbreviations in URIs:</p>
+
+<ul>
+	<li>rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns</li>
+	<li>rdfs: http://www.w3.org/2000/01/rdf-schema</li>
+	<li>owl: http://www.w3.org/2002/07/owl</li>
+	<li>xsd: http://www.w3.org/2001/XMLSchema</li>
+	<li>wn20instances: http://www.w3.org/2006/03/wn/wn20/instances/</li>
+	<li>wn20schema: http://www.w3.org/2006/03/wn/wn20/schema/</li>
+	
+</ul>
+
+
+
+
+<!--  -->
+<hr />
+
+
+<h2 id="intrown">2. Introduction to WordNet in RDF/OWL</h2>
+
+<h3 id="primer">Primer to using RDF/OWL WordNet</h3>
+
+WordNet can either be downloaded and queried from any triple store the user
+wishes to use, or it can be queried online.
+All files of version 2.0 can be downloaded as one archive file from the 
+following location: <a href="http://www.w3.org/2006/03/wn/wn20/download/">http://www.w3.org/2006/03/wn/wn20/download/</a>. 
+For 
+information on advanced possibilities (e.g. for reducing the size of WordNet)
+see <a href="#basicfull">WordNet Basic and WordNet Full</a> and 
+<a href="#advanced">Advanced options</a>. WordNet can also be queried online
+by performing HTTP GETs on the URIs described below.
+
+
+<h4 id="overview">Overview of classes, properties and URIs</h4>
+
+<p>
+The WordNet schema has three main classes: Synset, WordSense and Word. The
+first two classes have subclasses for the lexical groups present in 
+WordNet, e.g. NounSynset and VerbWordSense (see <a href="#figure1">Figure one</a>). 
+Each instance of Synset, WordSense and Word
+has its own URI. 
+
+There is a pattern for the URIs so that 
+(a) it is easy to determine from the URI the class to which the instance belongs; 
+and (b) the
+URI provides some information on the meaning of the entity it represents.
+For example, the following URI</p>
+
+
+<pre>
+ http://www.w3.org/2006/03/wn/wn20/instances/synset-bank-noun-2
+</pre>
+
+<p>
+is a NounSynset. This NounSynset contains a WordSense which
+is the first sense of the word "bank".
+The pattern for instances of Synset is: wn20instances: + synset- + %lexform%- + %type%- + %sensenr%.
+The %lexform% is the lexical form of the first WordSense of the Synset (the first
+WordSense in the Princeton source as signified by its "wordnumber", 
+see <a href="#distribution">Overview of the WordNet Prolog distribution</a>). 
+The %type% is one of noun, verb, adjective, adjective satellite and adverb.
+The %sensenr% is the number of the WordSense that is contained in the synset.
+This pattern produces a unique URI because the WordSense uniquely identifies 
+the synset (a WordSense belongs to exactly one Synset).
+
+
+The pattern for
+URIs of WordSenses is the same, except that "synset" is replaced for
+"wordsense". Example:</p>
+
+
+<pre>
+http://www.w3.org/2006/03/wn/wn20/instances/wordsense-bank-noun-1
+</pre>
+
+
+<p>The pattern for Words is: wn20instances: + word- + %lexform%. The %lexform%
+is the actual lexical form of the Word.
+For example:</p>
+
+<pre>
+http://www.w3.org/2006/03/wn/wn20/instances/word-bank
+</pre>
+
+
+
+Lastly, the classes and properties of the schema also have a pattern, 
+namely wn20schema: + %ID%, where the %ID% is the name
+of the property or class. For example, the URI for the participleOf property is:
+
+<pre>
+http://www.w3.org/2006/03/wn/wn20/schema/participleOf 
+</pre>
+
+
+<hr />
+
+<div id="figure1" class="figure">
+
+<pre>
+	Synset
+		AdjectiveSynset
+			AdjectiveSatelliteSynset
+		AdverbSynset
+		NounSynset
+		VerbSynset
+	
+	WordSense
+		AdjectiveWordSense
+			AdjectiveSatelliteWordSense
+		AdverbWordSense
+		NounWordSense
+		VerbWordSense
+	Word
+		Collocation
+</pre>
+<p class="caption">Figure 1. The class hierarchy of the WordNet schema</p>
+</div>
+
+<hr />
+
+<div id="figure2" class="figure">
+
+	<table>
+	<tr><th>Property</th><th>Domain</th><th>Range</th> <th>Prolog clause</th></tr>
+	
+	<tr><td colspan="4"><hr /></td></tr>
+	
+	<tr> <td>containsWordSense</td> <td>Synset</td> <td>WordSense</td> <td>s</td></tr>
+	<tr> <td>word</td> <td>WordSense</td> <td>Word</td> <td>s</td></tr>
+
+	<tr><td colspan="4"><hr /></td></tr>
+	
+	<tr> <td>lexicalForm</td> <td>Word</td> <td>xsd:string</td> <td>s</td></tr>
+	<tr> <td>synsetId</td> <td>Synset</td> <td>xsd:string</td> <td>s</td></tr>
+	<tr> <td>tagCount</td> <td>Synset</td> <td>xsd:integer</td> <td>s</td></tr>
+	<tr> <td>gloss</td> <td>Synset</td> <td>xsd:string</td> <td>g</td></tr>
+	<tr> <td>frame</td> <td>VerbWordSense</td> <td>xsd:string</td><td>fr</td></tr>
+
+	<tr><td colspan="4"><hr /></td></tr>
+	
+	<tr> <td>hyponymOf</td> <td>Synset</td> <td>Synset</td> <td>hyp</td></tr>
+	<tr> <td>entails</td> <td>Synset</td> <td>Synset</td> <td>ent</td></tr>
+	<tr> <td>similarTo</td> <td>Synset</td> <td>Synset</td> <td>sim</td></tr>
+	<tr> <td>memberMeronymOf</td> <td>Synset</td> <td>Synset</td> <td>mm</td></tr>
+	<tr> <td>substanceMeronymOf</td> <td>Synset</td> <td>Synset</td> <td>ms</td></tr>
+	<tr> <td>partMeronymOf</td> <td>Synset</td> <td>Synset</td> <td>mp</td></tr>
+	
+	<tr> <td>classifiedByTopic</td> <td>Synset</td> <td>Synset</td> <td>cls</td></tr>
+	<tr> <td>classifiedByUsage</td> <td>Synset</td> <td>Synset</td> <td>cls</td></tr>
+	<tr> <td>classifiedByRegion</td> <td>Synset</td> <td>Synset</td> <td>cls</td></tr>
+	
+	<tr> <td>causes</td> <td>Synset</td> <td>Synset</td> <td>cs</td></tr>
+	<tr> <td>sameVerbGroupAs</td> <td>Synset</td> <td>Synset</td> <td>vgp</td></tr>
+	<tr> <td>attribute</td> <td>Synset</td> <td>Synset</td> <td>at</td></tr>
+	<tr> <td>adjectivePertainsTo</td> <td>Synset</td> <td>Synset</td> <td>per</td></tr>
+	<tr> <td>adverbPertainsTo</td> <td>Synset</td> <td>Synset</td> <td>per</td></tr>
+
+	<tr><td colspan="4"><hr /></td></tr>
+	
+	<tr> <td>derivationallyRelated</td> <td>WordSense</td> <td>WordSense</td> <td>der</td></tr>
+	<tr> <td>antonymOf</td> <td>WordSense</td> <td>WordSense</td> <td>ant</td></tr>
+	<tr> <td>seeAlso</td> <td>WordSense</td> <td>WordSense</td> <td>sa</td></tr>
+	<tr> <td>participleOf</td> <td>WordSense</td> <td>WordSense</td> <td>ppl</td></tr>
+	
+	<tr><td colspan="4"><hr /></td></tr>
+
+	<tr> <td>classifiedBy</td> <td>Synset</td> <td>Synset</td> <td>cls</td> </tr>
+	<tr> <td>meronymOf</td> <td>Synset</td> <td>Synset</td> <td>mm,ms,mp</td> </tr>
+	<tr> <td></td> <td></td> <td></td> <td></td> </tr>
+
+	</table>
+
+<p class="caption">Figure 2. Overview of properties in the WordNet schema. 
+The "Prolog clause" column indicates the Prolog clause(s) used to generate
+instances of the properties.</p>
+</div>
+
+<hr />
+
+See <a href="#figure2">Figure two</a> for an overview of the properties. 
+The figure is divided into four categories: properties that connect the main
+classes, properties that provide data in the form of XML Schema Datatypes,
+properties that represent WordNet relations between synsets, properties
+that represent relations between word senses, and finally two superproperties
+that were introduced for relationship properties.
+See <a href="#details">Appendix D</a> for a list of all relations.
+
+
+
+<h4 id="queries">Example queries</h4>
+
+<p>Here follow some typical queries that can be posed on the WordNet RDF/OWL
+once it is loaded into a triple store such as SWI Prolog's
+Semantic Web library [<a href="#swiprolog">SWI Prolog, 2006</a>]
+or Sesame [<a href="#broekstra02">Broekstra et al., 2002</a>]. 
+The examples are given in SPARQL query
+language [<a href="#sparql05">SPARQL, 2005</a>]. Which query
+language is available to a user depends on the chosen triple store.</p>
+
+
+<p>
+The following queries for all Synsets that contain a Word with the lexical
+form "bank":
+</p>
+
+<pre>
+
+	PREFIX  wn20schema: &lt;http://www.w3.org/2006/03/wn/wn20/schema/&gt;
+
+	SELECT  ?aSynset
+	WHERE   { ?aSynset wn20schema:containsWordSense ?aWordSense .
+		  ?aWordSense wn20schema:word ?aWord .
+		  ?aWord wn20schema:lexicalForm  "bank"@en-US }	
+</pre>
+
+<p>
+Notice the addition of the language tag using "@en-US". This is necessary
+in all queries for strings. Queries without the correct language tag do
+not return results.
+</p>
+
+<p>The following queries for all antonyms of a specific WordSense ("bank"):
+</p>
+
+<pre>
+
+	PREFIX  wn20instances: &lt;http://www.w3.org/2006/03/wn/wn20/instances/&gt;
+	PREFIX  wn20schema: &lt;http://www.w3.org/2006/03/wn/wn20/schema/&gt;
+
+	SELECT  ?aWordSense
+	WHERE   { wn20instances:wordsense-bank-noun-1 wn20schema:antonymOf ?aWordSense }	
+</pre>
+
+<p>The following queries for all Synsets that have a hypernym that 
+is similar to some other Synset:
+</p>
+
+<pre>
+
+	PREFIX  wn20schema: &lt;http://www.w3.org/2006/03/wn/wn20/schema/&gt;
+
+	SELECT  ?aSynset
+	WHERE   { ?aSynset wn20schema:hyponymOf ?bSynset .
+	          ?bSynset wn20schema:similarTo ?cSynset}	
+</pre>
+
+
+<h4 id="advancedfeatures">Advanced features</h4>
+
+<p>Although WordNet is not a strict class hierarchy, it is possible to interpret
+it as such for certain types of applications. This is also possible with this
+version, see <a href="#advanced">Advanced options</a>.</p>
+
+<p>The above section describes the Full version of RDF/OWL WordNet. There is
+also a Basic version for users who only require the Synsets for their application
+and wish to reduce the size of their triple store. See 
+<a href="#basicfull">WordNet Basic and WordNet Full</a> for 
+more information.</p>
+
+
+<hr />
+
+<h3 id="rdfowlschema">Introduction to the WordNet RDF/OWL schema</h3>
+
+
+<p>The schema of the conversion has three main classes: Synset,
+Word and WordSense.  Synset and WordSense have subclasses
+based on the distinction of lexical groups. For Synset this
+means subclasses NounSynset, VerbSynset, AdjectiveSynset (in
+turn subclass AdjectiveSatelliteSynset) and
+AdverbSynset. For WordSense this means subclasses
+NounWordSense, VerbWordSense, etcetera. Word has a subclass Collocation used
+to represent words that have hyphens or underscores in them. Word does not
+have subclasses such as VerbWord, because a word like "bank" is separate
+from its function as e.g. a verb or a noun.  
+There is no representation for "all noun word senses with the lexical form
+'bank'" and "all verb word senses with the lexical form 'bank'" in the 
+original source, so there is no such class in the class hierarchy.
+</p>
+ 
+<p>
+There are three kinds of properties in the schema. A first set of properties
+connects instances of the main classes together. The class <code>Synset</code>
+is linked to its <code>WordSense</code>s with the property <code>containsWordSense</code>,
+and <code>WordSense</code> to its <code>Word</code> with the property <code>word</code>.
+
+A second set of properties represents the WordNet relations such as hyponymy
+and meronymy. There are three kinds of relations: those that relate two
+<code>Synset</code>s to each other (e.g. <code>hyponymOf</code>), 
+those that relate two <code>WordSense</code>s to each other
+(e.g. <code>antonymOf</code>) and a miscellaneous set 
+(<code>gloss</code> and <code>frame</code>).
+
+See <a href="#details">Conversion details</a> for an overview of all relations.
+
+A third set of properties gives information on entities (they have XML Schema datatypes
+as their range such as <code>xsd:string</code>). Examples are <code>synsetId</code>
+that records the original ID given in Princeton WordNet to a synset, and the
+<code>tagCount</code> of a wordsense. The actual lexical form of a <code>Word</code>
+is recorded with the property <code>lexicalForm</code>.
+Each synset has an <code>rdfs:label</code>
+that is filled with the lexical form of the first word sense in the synset.
+</p>
+
+<h4 id="differences">Major differences with previous versions</h4>
+
+<p>This conversion builds on three previous WordNet
+conversions, namely by:</p>
+
+<ol>
+  <li><a href="#wn:brickley">Dan Brickley</a></li>
+  <li><a href="#wn:deckermelnik">Stefan Decker &amp; Sergey 
+  Melnik</a></li>
+
+  <li><a href="#wn:neuchatel">University of Neuchatel</a></li>
+
+</ol>
+
+The work done at the <a href="#graves05">University of Chile</a> 
+which also resulted in a conversion was done in parallel to the work of this TF.
+The major differences between this version and the ones listed above are 
+that this version:
+
+<ol>
+	<li>does not model the hyponym hierarchy as a subclass hierarchy;</li>
+	<li>it represents words and word senses as separate entities with
+	    their own URI which makes it possible to refer to them directly;
+	<li>contains all relations that are in Princeton WordNet;</li>
+	<li>provides OWL semantics in the form of inverse properties, definition
+	    of property characteristics (e.g. Symmetry) and 
+	    property restrictions on classes.</li>
+	<li>can be used by both RDFS and OWL infrastructure</li>
+</ol>
+
+More details can be found in <a href="#previousversions">Relation to previous versions</a>. See <a href="#advanced">Advanced options</a> for a 
+solution to use this version's hyponym hierarchy as a subclass hierarchy.
+
+
+
+<!--  -->
+<hr />
+
+<h3 id="wnmetamodel">Introduction to the WordNet datamodel</h3>
+
+<p>The core concept in WordNet is the <i>synset</i>. A
+synset groups words with a synonymous meaning, such as {car,
+auto, automobile, machine, motorcar}. Another sense of the word
+"car" is recorded in the synset {car, railcar, railway car,
+railroad car}. Although both synsets contain the <i>word</i>
+"car", they are different entities in WordNet because they have a
+different meaning. More precisely: a synset contains
+one or more <i>word senses</i> and each word sense belongs to exactly 
+one synset. In turn, each word sense has exactly one word that
+represents it lexically, and 
+one word can be related to one or more word senses. 
+</p>
+<p>There are four disjoint kinds of synset, containing
+either nouns, verbs, adjectives or adverbs. There is one
+more specific kind of adjective called an adjective satellite.
+Furthermore,
+WordNet defines seventeen relations, of which ten between
+synsets (hyponymy, entailment, similarity, member meronymy,
+substance meronymy, part meronymy, classification, cause,
+verb grouping, attribute) and five between word senses
+(derivational relatedness, antonymy, see also, participle,
+pertains to).  The remaining relations are "gloss" (between
+a synset and a sentence), and "frame" (between a synset and
+a verb construction pattern).
+
+There is also a more specific kind of word. Collocations
+are indicated by hyphens or underscores (an underscore stands
+for a space character), e.g. <code>mix-up</code> and
+<code>eye_contact</code>.
+
+</p>
+
+
+<!--  -->
+<hr />
+
+
+<h2 id="selectandquery">3. Selecting and Querying the appropriate WN version</h2>
+
+<h3 id="querying">Querying WordNet: offline and online</h3>
+
+<p>There are two ways to query RDF/OWL WordNet. The first option is 
+to download the appropriate WordNet version (see <a href="#basicfull">
+WordNet Basic and WordNet Full</a>) and load it into local
+processing software such as Sesame [<a href="#broekstra02">Broekstra et al., 2002</a>] or SWI-Prolog's Semantic
+Web library [<a href="#swiprolog">SWI Prolog, 2006</a>]. Query languages such as SPARQL [<a href="#sparql05">SPARQL, 2005</a>] and
+Prolog programs may then be written to query the data.
+</p>
+
+<p>Example SPARQL query on version 2.0 of RDF/OWL WordNet
+for all WordSenses which have a Word with the
+lexical form "bank":
+</p>
+
+	<pre>
+
+	PREFIX  wn20schema: &lt;http://www.w3.org/2006/03/wn/wn20/schema/&gt;
+
+	SELECT  theWordSense
+	WHERE   { theWordSense wn20schema:word theWord .
+		  theWord wn20schema:lexicalForm  "bank"@en-US }	
+	</pre>
+
+<p>The second option is to query the on-line version of WordNet by
+doing an HTTP GET on an already known WordNet URI such as
+http://www.w3.org/2006/03/wn/wn20/instances/wordsense-bank-noun-1. 
+
+This HTTP GET request returns the <i>Concise Bounded Description</i>
+of the requested URI, which is an RDF graph that includes all statements in
+the whole WordNet RDF/OWL
+which have that URI as its subject (see [<a href="#cbd05">CBD, 2004</a>]
+for details).
+This is a far less flexible approach because it is not possible
+to pose queries (e.g. a query for all synsets which contain the word "bank"). 
+However, it does give a sensible set of triples to answer the question
+"tell me about this resource" if the user has no prior knowledge of this
+resource.
+</p>
+
+<p>In version 2.0 of WordNet RDF/OWL, the HTTP GET on 
+http://www.w3.org/2006/03/wn/wn20/instances/wordsense-bank-noun-1
+returns the following triples (the Concise Bound Description):
+</p>
+
+	<pre>
+	wn20instances:wordsense-bank-noun-1	rdf:type			wn20schema:NounWordSense
+	wn20instances:wordsense-bank-noun-1	wn20schema:inSynset		wn20instances:synset-bank-noun-2
+	wn20instances:wordsense-bank-noun-1	wn20schema:word			wn20instances:word-bank
+	wn20instances:wordsense-bank-noun-1	wn20schema:derivationallyRelated wn20instances:wordsense-bank-verb-3
+	wn20instances:wordsense-bank-noun-1	wn20schema:derivationallyRelated wn20instances:wordsense-bank-verb-5
+	wn20instances:wordsense-bank-noun-1	wn20schema:derivationallyRelated wn20instances:wordsense-bank-verb-6
+	wn20instances:wordsense-bank-noun-1	rdfs:label			"bank"@en-US
+	wn20instances:wordsense-bank-noun-1	wn20schema:tagCount		"883"@en-US	
+	</pre>
+
+<p>
+Because this WordNet version does not have blank nodes and reified triples, 
+the Consice Bounded Description of a the URI 
+http://www.w3.org/2006/03/wn/wn20/instances/wordsense-bank-noun-1
+is the same as the result of the following SPARQL query:
+</p>
+
+	<pre>
+	SELECT http://www.w3.org/2006/03/wn/wn20/instances/wordsense-bank-noun-1 ?p ?x
+	WHERE {&lt;http://www.w3.org/2006/03/wn/wn20/instances/wordsense-bank-noun-1&gt; ?p ?x}
+	</pre>
+
+
+<h3 id="basicfull">WordNet Basic and WordNet Full</h3>
+
+<p>The complete WordNet in RDF/OWL version described here consists of different
+files and is over 150 MB uncompressed RDF/XML in size. The required memory
+footprint when loading all files into software such as SWI-Prolog's Semantic
+Web library may be double that amount (figures vary for different software).
+To mitigate memory shortage problems and/or improve query response times
+we have made a separate file for
+each WordNet relation. The required footprint can be dimished by 
+loading only those files/relations that are required by the application
+at hand.</p>
+
+<p>WordNet is often used for a task known as <i>sense disambiguation</i>:
+the annotation of lexical forms in texts with a synset's ID (or, on the
+Semantic Web, its URI) to record the meaning of the lexical form
+(cf. [<a href="#ide98">Ide and V&#233;ronis, 1998</a>]). 
+The disambiguation process consists of selecting the appropriate synset.
+
+In the sense disambiguation task (and others in which only the Synsets are of
+interest) the WordSenses and Words add memory footprint
+which may not be used. To keep the footprint small for such applications we
+provide a <i>WordNet Basic</i> version. This version consists of the synset file
+of the <i>WordNet Full</i>, an additional data file and a separate schema file.
+This last file contains one additional property called <code>senseLabel</code> (domain
+<code>Synset</code> and range <code>xsd:string</code>). It also omits classes
+and properties that are not used in the Basic version (e.g. WordSense and containsWordSense).
+The data file contains
+instances of
+the new property for each Synset in the synset file. The property value is 
+filled with the lexical forms
+that are attached to <code>Word</code>s in the Full version. When selecting
+candidate Synsets for a lexical form in a text one queries for
+<code>senseLabel</code>s matching the lexical forms.
+
+
+</p>
+
+<p>
+Like for WordNet Full, the Basic users can also limit the relations to those
+that are required for their task, with the caveat that the following relations
+are defined between WordSenses and are therefore useless to Basic users:
+derivational relatedness, antonymy, see also, participle,
+pertains to. 
+</p>
+
+<p>
+Each version has a separate RDF/OWL schema file. Although the same schema
+could be used for both versions because the Basic schema is a subset of the
+Full schema (apart from the additional property <code>senseLabel</code>), 
+it may be confusing to have classes in the Basic schema which
+do not have instances. For clarity two separate schema files were made.
+</p>
+
+<p>See also <a href="#versions">WordNet versions</a> for
+a list of downloadable files.
+</p>
+
+
+
+
+
+<h4 id="downloads">Downloadable files</h4>
+
+
+<p>Below the files to download are listed for version 2.0 of WordNet RDF/OWL.
+Alternatively, an archive file for both Full and Basic versions are available
+from the following location: 
+<a href="http://www.w3.org/2006/03/wn/wn20/download/">http://www.w3.org/2006/03/wn/wn20/download/</a>. 
+
+</p>
+
+<p>WordNet 2.0 Full consists of the following three files plus any of the files 
+that contain relations that are listed below.
+</p>
+
+	<ul>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/schemas/wnfull.rdfs">WordNet Full Schema</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/wordnet-synset.rdf">Synsets</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/full/wordnet-wordsensesandwords.rdf">WordSenses, Words, instances of properties that connect Synsets, Words, WordSenses</a></li>
+	</ul>
+
+<p>WordNet 2.0 Basic consists of the following files plus any of the files
+that contain relations between Synsets
+</p>
+
+	<ul>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/schemas/wnbasic.rdfs">WordNet Basic Schema</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/wordnet-synset.rdf">Synsets</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/basic/wordnet-senselabels.rdf">senseLabels</a></li>
+	</ul>
+
+
+<p>Files that contain relations between Synsets:
+</p>
+
+	<ul>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/wordnet-hyponym.rdf">hyponymy</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/wordnet-entailment.rdf">entailment</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/wordnet-similarity.rdf">similarity</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/wordnet-membermeronym.rdf">member meronymy</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/wordnet-substancemeronym.rdf">substance meronymy</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/wordnet-partmeronym.rdf">part meronymy</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/wordnet-classifiedby.rdf">classification</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/wordnet-causes.rdf">cause</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/wordnet-sameverbgroupas.rdf">verb grouping</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/wordnet-attribute.rdf">attribute</a></li>
+	</ul>
+
+<p>Files that contain relations between WordSenses:
+</p>
+
+	<ul>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/full/wordnet-derivationallyrelated.rdf">derivational relatedness</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/full/wordnet-antonym.rdf">antonymy</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/full/wordnet-seealso.rdf">see also</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/full/wordnet-participleof.rdf">participle</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/full/wordnet-pertainsto.rdf">pertains to</a></li>
+	</ul>
+
+<p>Files that provide information on Synsets:
+</p>
+
+	<ul>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/wordnet-glossary.rdf">glosses</a></li>
+	<li><a href="http://www.w3.org/2006/03/wn/wn20/rdf/wordnet-frame.rdf">frames</a></li>
+	</ul>
+
+<!--  -->
+<hr />
+
+<h2 id="advanced">4. Advanced options</h2>
+
+<h3 id="owlfeatures">OWL features</h3>
+
+The basic modeling of this WordNet version has been done in RDFS (classes,
+subclassing and property definitions). Additional statements have been added
+to the schema using OWL [<a href="#owl04">OWL Overview, 2004</a>] to 
+provide more semantics to OWL users. The
+OWL primitives that have been used are:
+
+	<ul>
+	<li>owl:disjointWith statements between classes (e.g. Word and WordSense);</li>
+	<li>owl:allValuesFrom restrictions (e.g. to define that AdjectiveSynsets only containWordSenses from the class AdjectiveWordSense)</li>
+	<li>owl:someValuesFrom restrictions (e.g. to define that each Word has at least one value for the property <code>sense</code> from the class <code>WordSense</code>);</li>
+	<li>owl:TransitiveProperty statements (e.g. to define that <code>entails</code> is a transitive relation; </li>
+	<li>owl:inverseOf statements (e.g. to define that <code>hypernymOf</code> is an inverse of <code>hyponymOf</code>.</li>
+	
+	</ul>
+
+The first three constructs enable e.g. checking correctness of the data
+(which is not necessary for users and these statements are ignored by
+software that does not support OWL DL reasoning.
+The last two statements can be ignored by RDFS users 
+while keeping the following in mind:
+
+	<ol>
+	<li>for transitive properties RDFS users have to construct the transitive
+	closure of the graph themselves or write software that deals with transitivity
+	while querying the data;</li>
+	<li>the WordNet data does not explicitly contain the inverse of e.g. hyponymOf.
+	The inverse statement is only implied with the OWL statement <code>hyponymOf owl:inverseOf hypernymOf</code>.
+	In other words, querying the hypernymOf relation will return no results
+	when using software that is not OWL-aware.
+	Therefore, RDFS users should not use the inverse properties because they
+	do not yield query results. Because querying for <code>X hypernymOf Y</code>
+	is just a syntactic variant of querying for <code>Y hyponymOf X</code>
+	RDFS users do not have less information than OWL users.
+	See <a href="#details">Conversion details</a> for a list of the inverse properties.</li>
+	</ol>
+
+<h3 id="classhierarchy">Using WordNet as a class hierarchy</h3>
+
+<p>For some purposes it may be useful to treat WordNet as a class hierarchy, where
+each (Noun)Synset is an <code>rdfs:Class</code> and the hyponym relationship 
+is interpreted as the <code>rdfs:subClassOf</code> relationship. Do note that
+this is not a correct interpretation, e.g.
+the synset denoting the city "Paris" is a hyponym of the synset denoting "capital",
+but "Paris" should be an instance of "capital" instead of a subclass.
+Therefore this interpretation was
+not added in this version. Users that wish to interpret WordNet as a class
+hierarchy may add the following triples to their local triple store:
+
+<pre>
+
+
+
+	&lt;rdf:Description rdf:about="&amp;wn20schema;Synset"&gt;
+		&lt;rdfs:subClassOf rdf:resource="&amp;rdfs;Class" /&gt;
+	&lt;/rdf:Description&gt;
+
+	&lt;rdf:Description rdf:about="&amp;wn20schema;hyponymOf"&gt;
+		&lt;rdfs:subPropertyOf rdf:resource="&amp;rdfs;subClassOf" /&gt;
+	&lt;/rdf:Description&gt;
+
+
+</pre>
+
+The first statement makes each instance of Synset an instance of class
+(effectively, they are both an instance and a class), while the second makes
+the hyponym property a subproperty of the subclass relationship.
+
+This approach has been successfully used in [<a href="#wielemaker03">Wielemaker et al., 2003</a>] 
+for creating a subclass hierarchy so that it can be displayed in standard subclass browsing
+software.
+
+
+
+<hr />
+
+<!--  Appendices  -->
+
+
+<h2 id="requirements">Appendix A: Requirements</h2>
+
+
+<p>Requirements that were observed while designing the
+RDF/OWL conversion are:</p>
+
+<ol>
+<li>it should be a full conversion (i.e. be as complete as
+possible);</li>
+<li>it should be convenient to work with;</li>
+<li>it should provide OWL semantics while still being
+intepretable by pure RDFS tools (i.e. OWL semantics are
+provided but can be ignored).</li>
+</ol>
+
+
+<p>The requirement of completeness has been fullfilled by carefully analyzing
+the conceptual model of WordNet as well as its data. Existing versions and
+their documentation were used to compare with our analyses. Some 
+results of the analyses are 
+documented here in 
+<a href="#wnmetamodel">Introduction to the WordNet datamodel</a>,
+<a href="#previousversions">Relation to previous versions</a> and 
+<a href="#details">Conversion details</a>.
+</p>
+
+<p>
+To satisfy the requirement of convenience we have provided:
+
+<ul>
+<li>URIs for all entities (in particular WordSenses and Words)
+so that they are directly accessible;</li>
+<li>human-readable URIs;</li>
+<li>a Basic and Full version;</li>
+<li>separate files so only the necessary data for the application
+    at hand needs be loaded;</li>
+<li>an on-line service that returns the Concise Bounded Description
+    of any WordNet URI.</li>
+</ul>
+
+<p>To satisfy the requirement of providing OWL semantics while still
+being interpretable by pure RDFS tools we have:
+
+<ul>
+<li>provided the appropriate <code>owl:disjointFrom</code> statements; </li>
+<li>provided relevant OWL restrictions for each class;</li>
+<li>defined each class as being both of <code>rdf:type</code> <code>owl:Class</code>
+    as well as <code>rdfs:Class</code>;</li>
+<li>defined each property as an <code>rdf:Property</code> as well as
+     either <code>owl:DatatypeProperty</code> or <code>owl:ObjectProperty</code>;</li>
+<li>defined an <code>owl:inverse</code> for each property;</li>
+<li>defined the relevant property characteristics 
+    (e.g. <code>owl:TransitiveProperty</code>) for each property.</li>
+</ul>
+
+
+
+<hr />
+
+<!--  -->
+
+<h2 id="versioningstrategy">Appendix B: Versioning and redirection strategy</h2>
+
+
+The material for this Appendix should address how new versions should be treated,
+how they can be accessed and what their relationship towards other versions i.
+How this can be done is still under discussion. See <a href="#issues">Issues</a>,
+whereto the material that was present here in the previous version of this document
+has been moved.
+
+
+@@TODO
+
+<hr />
+
+
+<!-- PROLOG FORMAT -->
+
+<h2 id="distribution">Appendix C: Overview of the WordNet Prolog distribution</h2>
+
+<p>The <a href="http://wordnet.princeton.edu/obtain#pro">
+Prolog distribution</a> consists of eighteen files: one
+file that represents synsets and then one for each of the
+seventeen relationships. The file with synsets contains
+Prolog facts such as:</p>
+
+<pre>
+  s(100003009,1,"living_thing",n,1,1).
+  s(100003009,2,"animate_thing",n,1,0).
+</pre>
+
+<p>Each fact denotes exactly one word sense. The word senses
+with the same synset ID together form a synset. The two
+facts above together form the synset with the ID
+100003009. The arguments of the clause are the following:
+
+	<ol>
+	<li>Synset ID: unique number for a synset. 
+	If ID starts with 1: synset contains only nouns 
+	2: verbs 
+	3: adjectives 
+	4: adverbs</li>
+	<li>Word number: provides a number for the word sense within the synset 
+	(not ordered)</li>
+	<li>Lexical form: a string, possibly containing a hyphen (connecting
+	collocated words);</li>
+	<li>Sense type: value is one of the set {n, v, a, s, r} which stands for
+	noun, verb, adjective, adjective satellite and
+	adverb, respectively; </li>
+	<li>Sense number: gives a number to the sense in which the 
+	lexical form is used that is unique for the sense type (e.g. there
+	are ten different nouns with the lexical form "bank" numbered 1 to 10; there
+	are eight different verbs with the lexical form "bank" numbered 1 to 8;</li>
+	<li>Tag count: frequency of this word sense measured against a text corpus. </li>
+	</ol>
+
+
+<p>Relations are identified by lists of facts like the
+following:</p>
+
+<pre>
+  hyp(100002056,100001740).
+  mp(100004824,100003226).
+  ant(100017087,1,100019244,1).
+</pre>
+
+<p>The first identifies a hyponymy relation between two
+synsets, the second part meronymy between synsets, the third
+antonymy between two word senses (second and fourth argument
+are word numbers). The documentation defines characteristics
+for each relationship, such as (anti-)symmetry, inverseness
+and value restrictions on the lexical groups (e.g. nouns,
+verbs) that may appear in relations.  Most of these
+informally stated requirements can be formalized in OWL and
+are present in the conversion. </p>
+
+<p>Investigation of the source
+files and documentation revealed several conflicts between
+source and documentation.
+For example, the order of synset arguments of
+the member meronym relation seems to be different than the
+documentation asserts.  For each conflict we have proposed a
+solution. Details of the conversion can be found in <a
+href="#details">Conversion details</a>.</p> 
+
+<!--  -->
+<hr />
+
+
+<!-- -->
+
+<h2 id="details">Appendix D: Conversion details</h2>
+
+
+<p>The following lists the definition of each Prolog clause
+as stated in the Prolog distribution's documentation,
+followed by notes on the meaning of the clause, an example,
+the mapping to RDF/OWL, OWL characteristics defined for the
+property, its inverse property and possible conflicts between
+documentation and source files.</p>
+
+<p>The quotes from the Prolog documentation of Princeton WordNet
+contain Prolog variables
+written in lower-case (should start with upper-case letter) 
+and sometimes two variables in one clause that
+are spelled exactly the same (should have different spelling
+because two different variables are intended). 
+This has been corrected in the quotes shown below from that documentation
+for improved clarity.</p>
+
+
+<h4 id="s_op">s(Synset_ID,W_num,Word,Ss_type,Sense_number,Tag_count).</h4>
+
+<p class="quote">
+A s operator is present for every word sense in
+WordNet. In wn_s.pl, W_num specifies the word number for
+word in the synset.
+</p>
+	
+<p class="note">The arguments of the clause are the following:
+
+	<ol>
+	<li>Synset ID: unique number for a synset. 
+	If ID starts with 1: synset contains only nouns 
+	2: verbs 
+	3: adjectives 
+	4: adverbs</li>
+	<li>Word number: provides a number for the word sense within the synset 
+	(not ordered)</li>
+	<li>Lexical form: a string, possibly containing a hyphen (connecting
+	collocated words), an underscore (stands for a space between two
+	collocated words), and escape sequences to encode diacritics;</li>
+	<li>Sense type: value is one of the set {n, v, a, s, r} which stands for
+	noun, verb, adjective, adjective satellite and
+	adverb, respectively; </li>
+	<li>Sense number: gives a number to the sense in which the 
+	lexical form is used that is unique for the sense type (e.g. there
+	are ten different nouns with the lexical form "bank" numbered 1 to 10; there
+	are eight different verbs with the lexical form "bank" numbered 1 to 8;</li>
+	<li>Tag count: frequency of this word sense measured against a text corpus. </li>
+	</ol>
+
+<p>Each s(...) represents one word sense. All s(...) with the same ID together form the whole synset.</p>
+
+<p>Maps to: 
+<ul>
+	<li>Synset's subclasses: NounSynset, VerbSynset, AdverbSynset, AdjectiveSynset, AdjectiveSatelliteSynset</li>
+	<li>Word</li>
+	<li>WordSense</li>
+	<li>containsWordSense(Synset,WordSense) - inverse: inSynset</li>
+	<li>synsetId(Synset, xsd:nonNegativeInteger)</li>
+	<li>tagCount(WordSense, xsd:nonNegativeInteger)</li>
+	<li>word(WordSense, Word) - inverse: sense</li>
+	<li>lexicalForm(Word, xsd:string) - superproperty: rdfs:label</li>
+</ul>	
+
+<h4 id="g_op">g(Synset_ID,Gloss).</h4>
+
+<p class="quote">
+The g operator specifies the gloss for a synset.</p>
+<p class="note">Gloss is a string.</p>
+<p>Maps to: wn:gloss(Synset_ID, Gloss)</p>
+
+
+<h4 id="hyp_op">hyp(Synset_ID_A,Synset_ID_B).</h4>
+
+<p class="quote">
+The hyp operator specifies that the second
+synset is a hypernym of the first synset. This relation
+holds for nouns and verbs. The reflexive operator, hyponym,
+implies that the first synset is a hyponym of the second
+synset.</p>
+<p class="note">Examples: hyp(100003226,100003009), [organism, living_thing].
+hyp(100018827,100017572), [food, substance].
+
+With "reflexive" inverseness is meant.</p> 
+<p>Maps to: wn:hyponymOf(Synset_ID_A, Synset_ID_B)</p>	
+<p class="characteristics">Property characteristics: Transitive</p>
+<p class="inverse">Inverse property: wn:hypernymOf</p>
+<p class="superprop">Superproperty: rdfs:comment</p>
+
+
+
+<h4 id="ent_op">ent(Synset_ID_A,Synset_ID_B).</h4>
+
+<p class="quote">
+The ent operator specifies that the second
+synset is an entailment of first synset. This relation only
+holds for verbs.
+</p>
+<p class="note">Example: ent(200001740,200004923) [breathe,
+inhale], ent(200004701,200004127) [sneeze, exhale]</p>
+<p>Maps to: wn:entails(Synset_ID_A, Synset_ID_B)
+</p>
+<p class="characteristics">Property characteristics: Transitive</p>
+<p class="inverse">Inverse property: wn:entailedBy</p>
+
+
+<h4 id="sim_op">sim(Synset_ID_A,Synset_ID_B).</h4>
+
+<p class="quote">
+The sim operator specifies that the second
+synset is similar in meaning to the first synset. This means
+that the second synset is a satellite the first synset,
+which is the cluster head. This relation only holds for
+adjective synsets contained in adjective clusters.</p>	
+<p>Maps to: wn:similarTo(Synset_ID_A, Synset_ID_B) 
+</p>
+
+
+
+<h4 id="mm_op">mm(Synset_ID_A, Synset_ID_B).</h4>
+
+<p class="quote">
+The mm operator specifies that the second synset
+is a member meronym of the first synset.  This relation only
+holds for nouns. The reflexive operator, member holonym, can
+be implied.
+</p>		
+<p class="note">Example: mm(100006026,107463651).  [Person,
+People]. With "reflexive" inverseness is meant.</p>
+<p class="warning">Documentation seems to be wrong here. 
+Arguments are the other way around in Prolog source.</p>
+<p>Maps to: wn:memberMeronymOf(Synset_ID_A, Synset_ID_B)
+</p>
+<p class="inverse">Inverse property: wn:memberHolonymOf</p>
+<p class="superprop">Superproperty: wn:meronymOf</p>
+	
+<h4 id="ms_op">ms(Synset_ID_A, Synset_ID_B).</h4>
+
+<p class="quote">
+The ms operator specifies that the second synset
+is a substance meronym of the first synset.  This relation
+only holds for nouns. The reflexive operator, substance
+holonym, can be implied.</p>
+<p class="warning">Documentation seems to be wrong
+here. Arguments are the other way around in Prolog source.</p> 
+<p class="note">Example: ms(102073849,107118730). [oxtail,
+oxtail soup]. With "reflexive" inverseness is meant.</p> 
+<p>Maps to: wn:substanceMeronymOf(Synset_ID_A, Synset_ID_B)
+</p>
+<p class="inverse">Inverse property: wn:substanceHolonymOf</p>
+<p class="superprop">Superproperty: wn:meronymOf</p>
+
+
+<h4 id="mp_op">mp(Synset_ID_A, Synset_ID_B).</h4>
+
+<p class="quote">
+The mp operator specifies that the second synset
+is a part meronym of the first synset. This relation only
+holds for nouns. The reflexive operator, part holonym, can
+be implied.
+</p>
+<p class="warning">Documentation seems to be wrong
+here. Arguments are the other way around in Prolog source.</p>
+<p class="note">Example:  mp(100004824,100003226). [cell,
+organism]</p>
+<p>Maps to: wn:partMeronymOf(Synset_ID_A, Synset_ID_B)
+</p>
+<p class="inverse">Inverse property: wn:partHolonymOf</p>
+<p class="superprop">Superproperty: wn:meronymOf</p>
+	
+
+<h4 id="der_op">der(Synset_ID_A, Synset_ID_B).</h4>
+
+<p class="quote">
+The der operator specifies that there exists a
+reflexive lexical morphosemantic relation between the first
+and second synset terms representing derivational
+morphology.
+</p>
+<p class="warning">Documentation seems to be wrong here.
+The pattern is der(Synset_ID_A,Nr1,Synset_ID_B,Nr2).
+It seems that the numbers
+refer to WordSenses within the synsets. "Reflexive" probably
+means symmetric. Not sure if there are "doubles" in the
+prolog source like for other predicates (can be excluded
+when creating triples, but it produces the same triple so
+does not matter - one could argue whether to create the
+triple or not when its symmetric counterpart is missing in
+the source).</p>
+<p class="note">Example:
+der(100002645,3,201420446,4). [unit, unify]</p>
+<p>Maps to: wn:derivationallyRelated(WordSense_ID_A,
+WordSense_ID_B) 
+</p>
+<p class="characteristics">Property characteristics: Symmetric</p>
+
+
+<h4 id="cls_op">cls(Synset_ID_A, Synset_ID_B,Class_type).</h4>
+
+<p class="quote">
+The cls operator specifies that the first synset
+has been classified as a member of the class represented by
+the second synset.
+</p>
+<p class="note">Class_type:  t:topical, u:usage, r:regional</p>
+<p class="note">Examples:  
+cls(100004824,105681603,t), [cell, biology]. 
+cls(100033885,106668368,u), [blind_alley, figure_of_speech].
+cls(302439442,108349657,r), [outcaste, India]. 
+
+
+</p>  
+<p>Maps to:
+</p>
+<ul>
+  <li>t: wn:classifiedByTopic(Synset_ID_A,Synset_ID_B)</li>
+  <li>u: wn:classifiedByUsage(Synset_ID_A,Synset_ID_B)</li>
+  <li>r: wn:classifiedByRegion(Synset_ID_A,Synset_ID_B)</li>
+</ul>
+
+<p class="inverse">Inverse properties: memberInTopic, memberInUsage, memberInRegion</p>
+<p class="superprop">Superproperty: classifiedBy - inverse: memberIn</p>
+
+<h4 id="cs_op">cs(Synset_ID_A, Synset_ID_B).</h4>
+
+<p class="quote">
+The cs operator specifies that the second synset
+is a cause of the first synset. This relation only holds for
+verbs.
+</p>
+<p class="note">Examples:  
+  <br/>cs(200018968,200014429). [cause_to_sleep, sleep/catch_some_Z's]
+  <br/>cs(200020073,200019883). [keep_up, sit_up/stay_up]
+  <br/>cs(200020689,200014429). [anaestesize/put_to_sleep/... ,
+       slumber/sleep/catch_some_Z's]</p>
+<p class="warning">Documentation seems to be wrong
+here. Arguments are the other way around in Prolog source (e.g. anaethesize causes to
+sleep).</p>
+<p>Maps to: wn:causes(A,B)</p>
+<p class="inverse">Inverse property: wn:causedBy</p>
+
+
+<h4 id="vgp_op">vgp(Synset_ID_A, Synset_ID_B).</h4>
+
+<p class="quote">
+The vgp operator specifies verb synsets that are
+similar in meaning and should be grouped together when
+displayed in response to a grouped synset search.
+</p>
+<p class="warning">Documentation is unclear. The actual
+format in the file is vgp(sidA, W_num1, sidB, W_num2).  But
+in wn_vgp.pl the W_num's are always '0'. This seems to mean
+that the relation holds for all the words in the synset,
+i.e. the relation holds between synsets.</p>
+<p class="note">It seems that the file contains all the
+symmetric definitions, i.e.  vgp(A,0,B,0) means that the
+file also contains vgp(B,0,A,0).  One of the two can be
+ignored. No problem if the conversion code does not do this,
+because the asserted double triple is exactly the same. 
+See comment under "der".</p>
+<p>Maps to: wn:sameVerbGroupAs(A,B)</p>
+<p class="characteristics">Property characteristics: Symmetric</p>
+
+
+<h4 id="at_op">at(Synset_ID_A, Synset_ID_B).</h4>
+
+<p class="quote">
+The at operator defines the attribute relation
+between noun and adjective synset pairs in which the
+adjective is a value of the noun. For each pair, both
+relations are listed (ie. each synset_id is both a source
+and target).
+</p>
+<p class="note">Example:
+at(101028287,300455926). [mercantilism, commercial]</p>  
+<p class="note">The inverse version is also listed, so both
+at(A,B) and at(B,A) are in the source file.</p>
+<p>Maps to:</p>
+<ul>
+  <li>if synset A is a noun (so B is adjective):
+  wn:attribute(Synset_ID_A,Synset_ID_B)</li> 
+  <li>if synset A is adjective: wn:attribute(Synset_ID_B,Synset_ID_A)</li>
+</ul>
+<p class="inverse">Inverse property: wn:attributeOf</p>
+
+
+
+<h4 id="ant_op">ant(Synset_ID_A,W_num_1,Synset_ID_B,W_num_2).</h4>
+
+<p class="quote">
+The ant operator specifies antonymous
+words. This is a lexical relation that holds for all
+syntactic categories. For each antonymous pair, both
+relations are listed (ie. each Synset_ID,W_num pair is both
+a source and target word.)</p>	
+<p class="notes">The synset_id + W_num identifies a word
+sense.</p>  
+<p>Maps to: wn:antonymOf(WordSense1, WordSense2)</p>
+<p class="characteristics">Property characteristics: Symmetric</p>
+
+
+
+<h4 id="sa_op">sa(Synset_ID,W_num,Synset_ID,W_num).</h4>
+
+<p class="quote">
+The sa operator specifies that additional
+information about the first word can be obtained by seeing
+the second word. This operator is only defined for verbs and
+adjectives. There is no reflexive relation (ie. it cannot be
+inferred that the additional information about the second
+word can be obtained from the first word).</p>
+<p class="notes">The synset_id + W_num identifies a word
+sense. The statement "no reflexive relation" probably means
+that the relation is not symmetrical.</p>  
+<p>Maps to: wn:seeAlso(WordSense1, WordSense2)
+</p>
+
+
+<h4 id="ppl_op">ppl(Synset_ID,W_num,Synset_ID,W_num).</h4>
+
+<p class="quote">
+The ppl operator specifies that the adjective
+first word is a participle of the verb second word.</p>
+<p class="notes">The Synset_ID + W_num identifies a word
+   sense.</p>  
+<p>Maps to: wn:participleOf(WordSense1, WordSense2)</p>
+<p class="inverse">Inverse property: wn:participle</p>
+
+
+<h4 id="per_op">per(Synset_ID_A,W_num,Synset_ID_B,W_num).</h4>
+
+<p class="quote">
+The per operator specifies two different
+relations based on the parts of speech involved. If the
+first word is in an adjective synset, that word pertains to
+either the noun or adjective second word. If the first word
+is in an adverb synset, that word is derived from the
+adjective second word.</p>
+
+<p class="warning">Documentation seems to be wrong here. The relation
+holds between wordsenses, not words. We also split the
+relation into two properties, as the documentation already
+indicates.</p>
+
+<p>Maps to:
+<ul>
+  <li>A is adjective(satellite), B is noun or
+  adjective(satellite): wn:adjectivePertainsTo(Synset_ID_A,Synset_ID_B)</li> 
+  <li>A is adverb, B is adjective(satellite):
+  wn:adverbPertainsTo(Synset_ID_A,Synset_ID_B)</li> 
+</ul>
+<p class="inverse">Inverse property: @@TODO</p>
+
+
+
+<h4 id="fr_op">fr(Synset_ID,F_num,W_num).</h4>
+
+<p class="quote">
+The fr operator specifies a generic sentence frame for one
+or all words in a synset. The operator is defined only for
+verbs.
+</p>
+
+<p class="note">Example:
+fr(200610468,8,1).</p>  
+
+<p>Maps to: wn:frame(VerbWordSense, xsd:string)
+</p>
+
+<p class="note">The Synset_ID and W_num together identify a
+VerbWordSense that is associated with a particular sentence in
+which the verb can be filled in. If the W_num is zero, the sentence
+applies to all senses in the Synset. In that case we generate a
+<code>wn:frame</code> for each sense in the Synset.</p>  
+
+<p class="note">A problem in conversion of this Prolog file is
+that the actual sentences are only identified by a number (F_num), and
+not present in the actual source. The actual sentences and their number
+(F_num) <i>are</i> present in the Unix version of Princeton WordNet, in
+a file called <i>frames.vrb</i>. Two example lines (there are 35 lines) 
+from that file: "26 Somebody ----s that CLAUSE",
+"27 Somebody ----s to somebody". We have converted these lines into
+a Prolog clause <code>sen(F_Num, String)</code> and stored them in a
+file <i>sen.pl</i>, to be able to do the conversion.
+</p>  
+
+
+
+<h3 id="additionalprops">Additional properties</h3>
+
+The following additional superproperties have been added to the schema
+for querying convenience:
+
+<h4 id="meronymOf">meronymOf</h4>
+
+<p>Subproperties: partMeronymOf, memberMeronymOf, substanceMeronymOf</p>
+<p>Inverse: wn:holonymOf</p>
+
+<h4 id="classifiedBy">classifiedBy</h4>
+
+<p>Subproperties: classifiedByTopic, classifiedByUsage, classifiedByRegion</p>
+<p>Inverse: classifies</p>
+
+
+<h3 id="language">Language tag</h3>
+
+<p>It is good practice to use the <code>xml:lang</code> attribute
+to specify the language in which literals are written. 
+Currently all the RDF files are given a language tag on the
+document level (in RDF tag) for this purpose.</p> 
+
+
+<h3 id="rdfs_label">Use of <code>rdfs:label</code></h3>
+
+<p>It is good practice to give labels to instances, in this
+case of Word, WordSense and Synset. For Word this is solved
+by adding wn:lexicalForm rdfs:subpropertyOf rdfs:label.
+For WordSense the contents for the rdfs:label is chosen by
+copying the contents of the wn:lexicalForm of the Word. For
+Synset the first word (according to W_num) is chosen as the
+label. As there is no preferred status of one WordSense 
+within a Synset (the W_num does not seem to have a specific 
+meaning) this is an arbitrary choice.
+</p>
+
+
+
+<h3 id="conversion">Conversion program</h3>
+
+<p>The conversion file can be found at:
+  <a href="http://www.w3.org/2006/03/wn/wn20/convertwn20.pl">
+  http://www.w3.org/2006/03/wn/wn20/convertwn20.pl</a>.
+ The source code contains instructions for use.
+ </p>
+
+<p>The conversion program makes use of the open-source <a
+href="http://www.swi-prolog.org">SWI-Prolog</a> programming language 
+and its Semantic Web library.</p>
+
+<p>The program can be used for conversion of new Princeton WordNet
+versions to RDF/OWL as long as the format and semantics of the Prolog
+source files are not changed.
+</p>
+
+
+<hr />
+
+<!-- -->
+
+<h2 id="skos">Appendix E: Possible mappings to SKOS</h2>
+
+<p>"SKOS Core provides a model for expressing the basic structure and 
+content of concept schemes such as thesauri, classification schemes, 
+subject heading lists, taxonomies, 'folksonomies', other types of 
+controlled vocabulary, and also concept schemes embedded in glossaries 
+and terminologies." [<a href="#skos05">SKOS Core Guide, 2005</a>].
+
+Because WordNet may be considered a complex kind of thesaurus, it
+is natural to try to represent it using SKOS. This version has not
+concentrated on such a representation, but we list some options for
+a future version in the SKOS schema.</p>
+
+<p>The central class of SKOS is <code>skos:Concept</code>. Its instances are
+connected using the <code>skos:broader/skos:narrower</code> properties. To
+each concept one can attach exactly one <code>skos:prefLabel</code> and
+zero or more <code>skos:altLabel</code>s.</p>
+
+<p>The term "mapping" can have two meanings in this context. In the first meaning,
+the schema of WordNet (i.e. its classes and properties) is mapped to the SKOS classes
+and properties using <code>rdfs:subClassOf</code>, <code>rdfs:subPropertyOf</code>,
+<code>owl:equivalentClass</code> and <code>owl:equivalentProperty</code>.
+
+This is only possible without loss of information if the WordNet schema is equal
+to or is a strict specialization of SKOS. 
+
+In the
+second meaning, a set of rules is specified that converts WordNet into instances
+of the SKOS schema. This is a more flexible approach and allows for more complex
+mappings (mappings other than property/class equalities and strict specialization).
+</p>
+
+<p>A first choice concerns what WordNet class(es) to map to <code>skos:Concept</code>.
+
+</p>
+
+<p>
+[@@TODO. See Appendix "Issues"] 
+</p>
+
+<hr />
+
+<!-- -->
+
+
+<h2 id="previousversions">Appendix F: Relation to previous versions</h2>
+
+
+<p>This conversion builds on three previous WordNet
+conversions, namely by:</p>
+
+<ol>
+  <li><a href="#wn:brickley">Dan Brickley;</a></li>
+  <li><a href="#wn:deckermelnik">Stefan Decker &amp; Sergey 
+  Melnik;</a></li>
+  <li><a href="#wn:neuchatel">University of Neuchatel;</a></li>
+</ol>
+
+<p>A fourth conversion by <a href="#graves05">University of Chile</a> was done
+in parallel with the activities of this TF.
+</p>
+
+<p>In this document we have not tried to come up with a
+completely new conversion. Rather, we have studied these
+existing conversions, filled in some gaps and made a few different
+decisions. Below we discuss the differences per conversion.</p> 
+
+<p>The conversion by Brickley is a partial conversion, as
+only the noun-part of WordNet is converted. Of the relations only
+the hypernym relation is converted. 
+Brickley converts the noun hierarchy into <code>rdfs:Class</code>es and 
+the hyponym relationship into
+<code>rdfs:subClassOf</code>. This is an attractive
+interpretation, but we argue that not all hyponyms can be
+interpreted in that way. For example, 
+the synset denoting the city "Paris" is a hyponym of the synset 
+denoting "capital", but "Paris" should be an instance of "capital" 
+instead of a subclass. An attempt to provide a consistent
+semantic translation of hyponymy has been done [<a
+href="#gangemi03">Gangemi, 2003</a>], but in this work we 
+explicitly avoid semantic translation of the intended meaning
+of WordNet relations.</p>
+
+<p>The conversion by Decker &amp; Melnik is also a partial one. It does
+convert all synset types, but only three of the WordNet relations. Another
+difference is that it attaches word forms as labels to the Synset instances. 
+Hence WordSenses and Words do not have a URI.
+
+<p>The two previous conversions are based on an older version of Princeton
+WordNet and are not updated as far as the TF can tell. Both provide RDFS semantics,
+but not OWL semantics.</p>
+
+
+<p>The conversion of Neuchatel is close to the one in this
+document. It has roughly the same class hierarchy, with two
+exceptions. Firstly, it contains a class to represent word senses,
+but does not have a separate class for words. Secondly,
+it defines classes like "Nouns_and_Adjectives" (with subclasses Noun
+and Adjective). The "Nouns_and_Adjectives" classes are used
+in restriction definitions, where we have chosen to use <code>owl:unionOf</code>,
+because it better reflects the actual semantics.
+Aonther difference with this conversion is that Neuchatel is in
+pure OWL (e.g. all properties are either owl:ObjectProperty or
+owl:DatatypeProperty), while the conversion of the TF is
+both in RDFS and OWL (e.g. each OWL property is also defined
+to be an rdfs:Property).
+The conversion by the TF splits some relations into sub-relations,
+because their semantics warranted such a separation. For
+example, the Prolog relationship <code>per</code> denotes
+(a) a relation between an adjective and a noun or adjective
+or (b) a relation between an adverb and an adjective. We
+convert <code>per</code> into
+<code>adjectivePertainsTo</code> and
+<code>adverbPertainsTo</code>. The Neuchatel conversion does not 
+provide sub-relations, and omits relations "derivation" and "classification".
+and also does not provide inverses for all relationships. The conversion uses
+hash URIs, while the TF's uses slash URIs 
+(the benefits of the slash approach are described in <a href="#hashvsslash">Hash versus
+slash URIs</a>).
+The main advantages of the conversion by the TF in comparison to the Neuchatel
+conversion is that it is more complete,
+uses slash URIs, is interpretable by both RDFS and OWL infrastructure,
+and represents Words as first-class citizens.
+</p>
+
+<p>Representing words as first-class citizens 
+allows fine-grained mappings to WordNets in other languages. 
+Future integration of WordNet with WordNets in other
+languages can be done on three levels: relating Synsets,
+relating WordSenses and relating Words from the different WordNets
+to each other. However, as the other
+conversions do not provide URIs for words, these only allow integration
+on the first two levels.
+For future integration of WordNet with
+other multilingual resources it is essential that one can
+refer to two different words with the same lexical form,
+or two words with a different lexical form but similar
+meanings.
+</p>
+
+<p>The conversion by University of Chile was made
+in parallel to the efforts of this TF (see e.g. 
+<a href="http://lists.w3.org/Archives/Public/public-swbp-wg/2006Jan/0048">this
+mail on the public-swbp-wg@w3c.org mail archive</a>). 
+It has almost the
+same class hierarchy as this conversion; only the class
+Collocation is not present. The schema is modelled in
+RDFS, so it does not define restrictions, disjointness
+axioms, property characteristics and inverse properties.
+It does not have the superproperties for WN relations that we have
+introduced, and it uses hash URIs. 
+The main technical advantages of the version by this TF is
+that it includes OWL semantics and that it uses slash URIs.
+</p>
+
+<p>The previously mentioned conversions do not convert the frame sentences,
+while the TF's conversion and the conversion of University of Chile include them.
+</p>
+
+<p>A practical advantage of the TF's conversion over the other conversion is
+the availability of a Basic and Full version and separate files for the WN
+relations.</p>
+
+
+<p>In summary, the advantages of the TF's conversion over other versions are that
+it is complete, uses slash URIs, provides OWL semantics while still being
+interpretable by RDFS infrastructure, provides a Basic and Full version,
+and provides URIs for words.</p>
+
+<!--  -->
+<hr />
+
+
+<h2 id="uris">Appendix G: Introducing URIs for Synsets, WordSenses, Words</h2>
+
+<p>
+We have chosen to introduce identifiers for the instances
+of classes Synset, WordSense and Word. We use the base uri + a locally
+unique ID. Three kinds of entities need a URI:
+instances of the classes Synset, WordSense and Word.
+Instead of generating any unique ID we have tried to
+use IDs derived from information in the source and also tried
+to make them human-readable. Because the IDs have
+distinct syntactic patterns, it is
+easy to identify the type of the resource (Synset,
+WordSense or Word) by examining the URI. The patterns
+are described in <a href="#primer">Primer to using RDF/OWL WordNet</a>.</p>
+
+<p>We use two different namespaces: one for the schema and one for the instances.
+This makes it possible to manage the schema separately from the instances.
+</p>
+
+<p>
+Some words contain characters that are not allowed in NCNames. In order to
+generate a correct URI we changed the following characters into underscores:
+'/', '\','(', ')' and ' ' (space).  
+For example, the URI for the word "read/write_memory" becomes:
+</p>
+
+<pre>
+http://www.w3.org/2006/03/wn/wn20/instances/word-read_write_memory
+</pre>
+
+
+
+<p>
+The motivation for representing words as instances
+of a class with their own URIs instead of as labels or blank nodes 
+is discussed in <a href="#previousversions">Relation to previous versions</a>.
+</p>
+
+
+
+
+<!-- -->
+
+<h3 id="hashvsslash">Hash versus slash URIs</h3>
+
+There are two options in formatting the relationship between the
+namespace and the local part, usually termed "hash" URIs and "slash" URIs
+after the symbol used to connect the two parts. The following gives an
+example of each type for the noun-synset "bank":
+
+
+	<pre>
+	http://wordnet.princeton.edu/wn/wordsense-bank-noun-1
+	
+	http://wordnet.princeton.edu/wn#wordsense-bank-noun-1
+	
+	</pre>
+
+The disadvantage of hash URIs is that when a HTTP GET is done (e.g. for 
+the second example
+above) the browser will return the <em>whole</em> document located at
+<i>http://wordnet.princeton.edu/wn</i>. The reason for this is that servers do not
+receive the fragment identifier. Because WordNet is very large this is not a
+desirable option. (There is a work-around defined in 
+[<a href="#uriqa04">URI QA, 2004</a>] that utilizes a special HTTP message 
+header, but this would require a commitment from both client and server to 
+use this special format.)
+
+The alternative is to use slash URIs. This choice implies
+that a decision needs to be made on which statements the server should 
+return when an HTTP GET
+is done for resources with a URI such as 
+<i>http://www.w3.org/2006/03/wn/wn20/instances/synset-bank-noun-2</i>.
+
+[@@REFS for def of hash/slash URIs and the frag id problem]
+
+Possible choices are:
+
+	<ul>
+	<li>a graph that contains a pre-defined set of properties if the resource
+	has values for them (e.g. <code>rdf:type</code>, <code>rdfs:subClassOf</code>);</li>
+	<li>all statements connected to the resource with some offset, e.g. everything
+	connected in at most two steps;</li>
+	<li>the Concise Bounded Description of the URI [<a href="#cbd05">CBD, 2005</a>];</li>
+	<li>the Symmetric Concise Bounded Description of the URI [<a href="#cbd05">CBD, 2005</a>].</li>
+	</ul>
+
+<p>
+The difference between the two last ones is that the Symmetric CBD not only includes
+statements for which the URI is the subject, but also those for which the URI is
+the object.
+We have chosen for the CBD of the URI because it 
+"constitutes a reasonable default response to the request 'tell me about this resource'"
+[<a href="#cbd05">CBD, 2005</a>].</p>
+
+<p>Note that a variant of Recipe 5 in [<a href="#recipes06">Recipes, 2006</a>]  may be used to implement
+   the HTTP GET on these WN URIs.</p>
+
+
+
+
+<!-- Internationalization -->
+<hr />
+
+<h2 id="internationalization">Appendix H: Internationalization</h2>
+
+<p>
+This section contains two language related topics. First of all, Princeton
+WordNet is
+a source that documents American English. To reflect this in the conversion, all
+RDF documents of this conversion are declared to be written in 
+American English by adding the 
+<code>xml:lang='en-US'</code> to the RDF tag of all WordNet files.
+</p>
+<p>
+Secondly, it is desirable to be able to integrate other existing WordNets 
+in other languages in the future
+(for a list of available WordNets see <a href="http://www.globalwordnet.org/gwa/wordnet_table.htm">http://www.globalwordnet.org/gwa/wordnet_table.htm</a>). 
+Although this
+TF does not have the goal of performing such integration, it has the intention
+of making such integration possible with this RDF/OWL version of Princeton WordNet.
+Integration of WordNets implies creating mappings between entities in the WordNets
+to indicate lexico-semantic relationships between them, e.g. a property that
+signifies that the
+meanings of two Synsets overlap. The entities that represent language concepts
+that should be able to map are instances of the classes: Synset, WordSense and Word. 
+To this end this conversion supplies URIs for instances of all three classes.
+We have not given the URIs in this conversion a part that encodes the language, 
+such as http://www.w3.org/2006/03/wn/wn20/en/synset-bank-noun-2. 
+The reason is that two WordNets in different
+languages require different base URIs. This alone guarantees uniqueness of e.g. the
+Word "chat" in an English WordNet and the word "chat" (cat) in a French WordNet.
+Identification of the language a particular word belongs to can also be done by using
+the <code>xml:lang</code> tag.
+</p>
+
+
+<!-- OPEN ISSUES SECTION -->
+<hr />
+
+<h2 id="issues">Appendix I: Open Issues</h2>
+
+<h3 id="princeton_uris">Princeton based URIs</h3>
+
+The TF is in contact with Princeton. Princeton is willing to provide a namespace
+for RDF/OWL WordNet. At the present moment we do not use Princeton based URIs
+but will do so in the future when (a) we have consensus within our community
+that this is an appropriate representation of WordNet (b) we have checked with
+Princeton the remaining modeling issues and check if we have made modeling
+decisions (c) there is consensus on how to serve WordNet online (see issues
+stated elsewhere).
+
+
+<p>This document was originally written as if there will be an RDF/OWL version of
+each Princeton WordNet edition. Is this feasible? There should be an
+institute who takes responsibility for not only creating new versions but also
+making them available for online use. Concerning creating new versions: 
+when new versions by Princeton
+only differ from previous in its content, then this is just a matter
+of running the Prolog conversion program and putting the new version
+online. This document describes the convertion of Princeton version 2.0. 
+In version 2.1 there is at least one structural difference, namely the 
+introduction of a "instanceOf" relationship.</p>
+
+
+
+<h3 id="maintenance">Maintanance / publishing newer versions</h3>
+
+<p>
+This version is based on the Princeton WordNet 2.0. Is it feasible and desirable
+to find an institute willing to commit to maintaining WordNet for a longer 
+period, say two years? This also entails bringing out a new RDF/OWL version
+for each new Princeton version. Without such a commitment the RDF/OWL version
+presented in this document will be outdated within one or two years because of
+updates to the original source.
+</p>
+
+
+<h3 id="old_and_new">Serving old and new versions</h3>
+
+<p>
+An idea suggested in an earlier version of this Draft was to introduce a new
+base URI for each new version, and to use redirection from a stable URI which
+redirects to the newest available version of RDF/OWL WordNet. For example,
+the URI 
+<pre>
+http://wordnet.princeton.edu/wn/
+</pre>
+
+can redirect to the latest version, e.g. 2.0 as in
+
+<pre>
+http://wordnet.princeton.edu/wn20/
+</pre>
+
+Some text suggested in an earlier version of this draft follows below:
+
+<hr />
+
+<div style="font-style: italic">
+<p>When users download WordNet, they download a specific version of WordNet
+in RDF/OWL that has a version number that corresponds to the
+Princeton WordNet version on which it is based. To distinguish the
+different available versions, each version has a version-specific base URI,
+such as:
+</p>
+
+<pre>
+http://wordnet.princeton.edu/wn20/
+</pre>
+
+<p>
+After downloading and loading WordNet in RDF/OWL into a triple store this
+version-specific base URI should be used when querying. The query examples
+below use version 2.0 as an example. See <a href="#versions">WordNet versions</a>
+for more information.
+</p>
+
+<p>
+Notice that if the base URI http://wordnet.princeton.edu/wn/ is used for the
+HTTP GET, then the base URI of the returned triples is different. This
+is because the request is forwarded by Princeton to the base URI of the
+newest WordNet version (see 
+<a href="#versions">WordNet versions</a>).
+</p>
+
+
+<h3 id="versions"><i>WordNet versions</i></h3>
+
+<p>
+There are two choices concerning versioning which any new user of RDF/OWL 
+WordNet has to make. First of all, one has to choose whether to use the
+Basic or Full version. Secondly, there are different versions published
+of Princeton WordNet and converted into RDF/OWL (version 2.0, version 2.1 
+etcetera). 
+
+It should be prevented that an "old" and a "new"
+synset are collapsed into one synset by an RDF triple store 
+because they have the same URI when using two versions
+in one store (e.g. because of legacy data mixed with data indexed with
+the newest WordNet version). 
+If this does happen, the properties of
+the old and new synset are mixed, which is not appropriate
+(it becomes impossible to distinguish which property/value
+pair belongs to which version of the synset) 
+To prevent this, each conversion published by the TF has a
+separate namespace.
+(Currently only version 2.0 is converted into RDF/OWL,
+but there will be more conversions available in the future.)
+
+
+A service
+at Princeton automatically redirects from the namespace
+</p>
+
+<pre>
+http://wordnet.princeton.edu/wn/
+</pre>
+
+to the namespace of the newest version, e.g.
+
+<pre>
+http://wordnet.princeton.edu/wn20/
+</pre>
+
+<p>
+This allows users to keep working with the WordNet version for which
+they programmed their software (e.g. http://wordnet.princeton.edu/wn20/) 
+regardless of changes in new versions. Therefore we recommend
+that programmers base their code on the version-specific base URI instead
+of the general namespace that redirects to the newest version-specific base URI.
+</p>
+
+<p>When two different 
+versions are to be used in concord, it may be necessary to establish
+a mapping between the synset for "financial institution" in the older
+and newer version. This can be a complex task because although the synset itself
+and its word senses may remain the same, the surrounding synsets may have changed,
+making it difficult to decide whether the two synsets are "the same" or not. 
+Providing such mappings between synsets in different versions 
+is out of the scope of this TF. It may also be unappropriate to provide such
+mappings because what constitutes a "correct" mapping may differ between applications.</p>
+
+See also <a href="#versioningstrategy">Versioning and redirection strategy</a> 
+for more information on the redirection strategy.
+
+</div>
+<hr />
+
+<h3 id="redirects">303 redirects</h3>
+
+Should or should we not use a 303 redirect when serving WordNet online? The
+meaning and consequences of 
+<a href="http://www.w3.org/2001/tag/issues.html#httpRange-14">the TAG's decision on httpRange-14</a>
+are unclear. See many discussions in various mailing list, the most recent one starting at
+<a href="http://lists.w3.org/Archives/Public/public-swbp-wg/2006Apr/0048">http://lists.w3.org/Archives/Public/public-swbp-wg/2006Apr/0048</a>.
+
+<h3 id="primitive_queries">URIs as primitive queries</h3>
+
+<p>
+URIs can be used as a means of primitive queries. 
+The following URI in WordNet refers to the first NounWordSense of the word "bank", 
+which is an RDF node in WN: 
+	<pre>
+	http://www.w3.org/2006/03/wn/wn20/instances/wordsense-bank-noun-1.
+	</pre>
+
+The current proposal is to return the CBD [<a href="#cbd05">CBD, 2005</a>] of the requested RDF node.
+
+Many agents would probably like somewhat bigger chunks of data at once, e.g. 
+all WordSenses of "bank". This could be done by returning the set of 
+WordSenses with the Word "bank" on HTTP GETs on e.g. the URI:
+
+	<pre>
+	http://www.w3.org/2006/03/wn/wn20/instances/wordsenseset-bank.
+	</pre>
+
+<p>
+A full SPARQL service for WN can also address this need, but this is a nice
+alternative that does not require all agents to understand SPARQL. Another
+reason is that running a SPARQL service requires more resources from the
+hosting institute.
+
+However, this second (type of) URI does not refer to any RDF node or RDF arc. 
+Is this use of URIs "accepted practice" (or could become 
+such a thing) or "should be avoided at all costs" because the approach mixes 
+the naming of nodes with naming sets of nodes?
+See also <a href="http://lists.w3.org/Archives/Public/public-swbp-wg/2006Mar/0076.html">http://lists.w3.org/Archives/Public/public-swbp-wg/2006Mar/0076.html</a>. 
+If it is a good idea, how should the URIs be constructed?
+</p>
+
+
+
+
+
+
+<h3 id="sense_number">W_num and sense_number</h3>
+
+<p>Each WordSense in a Synset has a "W_num" (starting from
+1). It seems that this is not essential ordering information
+(i.e. only used to distinguish between word senses in the
+prolog source), so it has not been included in the
+conversion. Similar point for the sense_number in the prolog
+source.</p>
+
+<p>Have to check with Princeton if indeed this information
+is not vital and also check with user community if they are
+not using these numbers.</p>
+ 
+
+<h3 id="symmetric_props">Generating instances of symmetric properties</h3>
+
+<p>The Prolog source sometimes contains symmetrical pairs,
+e.g. the source file for antonyms should contain ant(A,B)
+but also ant(B,A) according to the documentation. However,
+the conversion program finds clauses where this is not the
+case. Currently the program does NOT add an antonym in the
+RDF for such cases.</p>
+
+<p>Need to check with Princeton if these are either
+omissions or errors. </p>
+
+
+<h3 id="frames">Frames</h3>
+
+<p>There seems to be additional semantics in the frame sentences, and
+hence could be alternative ways to convert the sentences. For example,
+the structure of the sentences seems to fall into two parts, plus
+an optional part. For example, the frame sentence 
+"Somebody ----s that CLAUSE" has a prefix, a postfix and a lexical
+category. These could be extracted and added as properties to an instance
+of a class Frame. It should be checked with users if this information
+is useful and with Princeton about the meaning of the lexical categories.</p>
+
+
+<h3 id="other_issues">Other</h3>
+
+
+<ul>
+  <li>Should wn:seeAlso be a subproperty of rdfs:seeAlso? If so, other properties
+  could also be appropriate subproperties of rdfs:seeAlso, as the semantics of
+  the triple S rdfs:seeAlso O is "... that the resource O may provide additional information about S." 
+  [<a href="#rdfprimer04">RDF Primer, 2004</a>]</li>
+
+  <li>We assume wn:sameVerbGroupAs is between synsets, but
+  have to check with Princeton if it should be between
+  WordSenses.</li> 
+
+  <li>A strategy is required (test set?)
+  to check whether the conversion program's output is correct. </li> 
+
+  <li>Should this document contain information on the relation to SKOS? There 
+  are problems in seeing WN as a strict specialization of SKOS:
+  Should all WN classes be regarded as subclasses of skos:Concepts or should only
+  Synsets or WordSenses be regarded as skos:Concepts? 
+  Also difficult choice regarding what to map to skos:prefLabel/skos:altLabel. WordSenses
+  have equal status in WN, no one preferred over the other. If you choose not to
+  make all classes of WN subclass of skos:Concept then you lose information. So it 
+  seems impossible to define WN as strict specialization of SKOS. The remaining
+  solution is a rule-based mapping. But again the decision remains what is an
+  appropriate mapping of the main classes to skos:Concept. It seems a choice between
+  Synsets and WordSenses is necessary. In the former case, it seems logical to 
+  map the hyponym relation to skos:broader. It the latter case, a possibility
+  is to put the WordSenses in a skos:Collection and hierarchically relate these
+  collections based on the hyponymy relation. However, this would result
+  </li>
+  
+  <li>Document now contains a set of downloadable files for version WordNet RDF/OWL
+version 2.0. Should this be moved to a separate WN download document?</li>
+
+<li>This version is not OWL DL, because rdfs:label is used on instances. 
+Should the description of the benefits of the OWL definitions in the schema 
+be changed?</li>
+
+
+</ul>
+
+
+<hr />
+
+
+
+<h2 id="changelog">Appendix J: Change Log </h2>
+
+Since 3 April
+
+
+<ul>
+<li>Added reference to 'Best Practices Recipes for Publishing RDF Vocabularies' </li>
+<li>Moved all references to Princeton based URIs in favour of W3C based URIs because
+    they will not return 404 (Princeton will be brought into the loop as late as possible)</li>
+<li>Moved all material on redirection to the Issues list, as there is no consensus on
+    if and how redirection may be used</li>
+<li>Moved all material on management issues (who will maintain WN) to the Issues list</li>
+<li>Moved all material on versioning (new versions and how they are published and made
+    available) to the Issues list</li>
+<li>Fixed error in description of the "per" operator; it is between wordsenses, not between synsets</li>
+</ul>
+
+Since 2 February:
+<ul>
+<li>Added class AdjectiveSatelliteWordSense </li>
+<li>removed inverses from RDFS part</li>
+<li>Changed URI formatting to a more readable and versatile form</li>
+<li>Moved several "issues" as documented in the text itself to Appendix H (now called Appendix I)</li>
+<li>New Appendix on internationalization (new Appendix H)</li>
+<li>Added missing superproperties to Appendix D</li>
+<li>Added explanation on how frame sentences were converted to Appendix D</li>
+<li>Merged Sects. 2-4 into one</li>
+<li>Merged Sects. 5-7 into one</li>
+<li>Moved discussion on URIs in Sect. 5 to Appendix G; merged the material with the appendix</li>
+<li>Extended explanations in Appendix F (other conversions); indicated advantages of this conversion</li>
+<li></li>
+</ul>
+
+
+Since 17 October:
+<ul>
+<li>introduction rewritten; improved scope and added guide to the reader</li>
+<li>created new "Primer" section</li>
+<li>moved material in introduction on Prolog format to appendix</li>
+<li>moved material in introduction on requirements to appendix and edited material</li>
+<li>added new section on "querying wordnet online and offline"</li>
+<li>added new section on "wordnet basic and wordnet full"</li>
+<li>added new section on "wordnet versions"</li>
+<li>added new section on "advanced options"</li>
+<li>added new appendix on "versioning and redirection strategy"</li>
+<li>added new appendix on "possible mappings to SKOS"</li>
+<li>added new appendix on "relation to previous versions" which contains
+    new comparison with a fourth wordnet version from university of chile</li>
+<li>resolved many open issues including "hash vs. slash issue"</li>
+</ul>
+
+<h2 id="references">Appendix K: References</h2>
+
+
+<p class="ref">
+[<a name="wn:brickley">Brickley, 1999</a>]
+D. Brickley. Message to RDF Interest Group: "WordNet in
+RDF/XML: 50,000+ RDF class vocabulary".  
+<a href="http://lists.w3.org/Archives/Public/www-rdf-interest/1999Dec/0002.html">http://lists.w3.org/Archives/Public/www-rdf-interest/1999Dec/0002.html</a>
+See also <a href="http://xmlns.com/2001/08/wordnet/">http://xmlns.com/2001/08/wordnet/</a>.
+</p>
+
+<p class="ref">
+[<a name="brickley02">Brickley, 2002</a>]
+Dan Brickley, RDFWeb: co-depiction photo metadata
+<a href="http://rdfweb.org/2002/01/photo/">http://rdfweb.org/2002/01/photo/</a>.
+</p>
+
+<p class="ref">
+[<a name="brickley05">Brickley and Miller, 2005</a>]
+Dan Brickley and Libby Miller, FOAF Vocabulary Specification
+Namespace Document 27 July 2005
+<a href="http://xmlns.com/foaf/0.1/">http://xmlns.com/foaf/0.1/</a>
+</p>
+
+<p class="ref">
+[<a name="broekstra02">Broekstra et al., 2002</a>]
+Jeen Broekstra, Arjohn Kampman, Frank van Harmelen. Sesame: An Architecture for Storing and Querying RDF and RDF Schema  [PDF]
+In Proceedings of the First International Semantic Web Conference (ISWC 2002), Sardinia, Italy, June 9-12 2002, pg. 54-68. Springer-Verlag Lecture Notes in Computer Science (LNCS) no. 2342.
+</p>
+
+
+<p class="ref">
+[<a name="cbd05">CBD, 2005</a>]
+CBD - Concise Bounded Description
+W3C Member Submission 3 June 2005;
+<a href="http://www.w3.org/Submission/2005/SUBM-CBD-20050603/">
+http://www.w3.org/Submission/2005/SUBM-CBD-20050603/</a>
+</p>
+
+<p class="ref">
+[<a name="wn:deckermelnik">Decker &amp; Melnik</a>]
+S. Decker and S. Melnik. WordNet RDF representation. 
+<a href="http://www.semanticweb.org/library/">
+http://www.semanticweb.org/library/</a>
+</p>
+
+<p class="ref">
+[<a name="fellbaum98">Fellbaum, 1998</a>]
+C. Fellbaum. <i>WordNet: An Electronic Lexical Database</i>.
+MIT Press, 1998.</p>
+
+<p class="ref">
+[<a name="gangemi03">Gangemi, 2003</a>]
+A. Gangemi, N. Guarino, C. Masolo, and
+A. Oltramari. Sweetening WORDNET 
+with DOLCE. AI Magazine, <strong>24</strong>(3):13-24, 2003.
+</p>
+
+<p class="ref">
+[<a name="graves05">Graves, 2005</a>]
+Alvaro Graves <a href="http://www.dcc.uchile.cl/~agraves/wordnet/">http://www.dcc.uchile.cl/~agraves/wordnet/</a>
+</p>
+
+<p class="ref">
+[<a name="guarino99">Guarino et al., 1999</a>]
+Nicola Guarino, Claudio Masolo, and Guido Vetere. 
+Ontoseek: Content-based access to the web. IEEE Intelligent
+Systems, 14(3):70--80, May/June.
+</p>
+
+<p class="ref">
+[<a name="hollink03">Hollink et al., 2003</a>]
+L. Hollink, A. Th. Schreiber, J. Wielemaker, and B. J.
+Wielinga.  Semantic annotation of image colletions.
+In S. Handschuh, M. Koivunen, R. Dieng, and
+S. Staab, (eds), Knowledge Capture 2003 - Proceedings
+Knowledge Markup and Semantic Annotation Workshop,
+pages 41--48.
+</p>
+
+
+<p class="ref">
+[<a name="ide98">Ide and V&#233;ronis, 1998</a>]
+Nancy Ide and Jean V&#233;ronis.  Introduction to the special
+issue on word sense disambiguation: the state of the
+art. Computational Linguistics, 24(1):2--40, March.
+</p>
+
+
+<p class="ref">
+[<a name="owl04">OWL Overview, 2004</a>]
+Deborah L. McGuinness, Frank van Harmelen (eds.).
+OWL Web Ontology Language Overview, W3C Recommendation 10 February 2004;
+<a href="http://www.w3.org/TR/owl-features/">
+http://www.w3.org/TR/owl-features/</a>
+</p>
+
+<p class="ref">
+[<a name="rdfprimer04">RDF Primer, 2004</a>]
+Brickley D., Guha R.V. (Eds).
+RDF Vocabulary Description Language 1.0: RDF Schema,  W3C Recommendation 10 February 2004; 
+<a href="http://www.w3.org/TR/2004/REC-rdf-schema-20040210/">http://www.w3.org/TR/2004/REC-rdf-schema-20040210/</a>
+</p>
+
+<p class="ref">
+[<a name="recipes06">Recipes, 2006</a>]
+Miles, A., Baker, T. and Swick, R. (Eds).
+Best Practice Recipes for Publishing RDF Vocabularies, W3C Working Draft 14 March 2006
+<a href="http://www.w3.org/TR/2006/WD-swbp-vocab-pub-20060314/">http://www.w3.org/TR/2006/WD-swbp-vocab-pub-20060314/</a>
+</p>
+
+
+<p class="ref">
+[<a name="skos05">SKOS Core Guide, 2005</a>]
+Alistair Miles and Dan Brickley (eds).
+SKOS Core Guide, W3C Working Draft 2 November 2005;
+<a href="http://www.w3.org/TR/2005/WD-swbp-skos-core-guide-20051102/">
+http://www.w3.org/TR/2005/WD-swbp-skos-core-guide-20051102/</a>
+</p>
+
+<p class="ref">
+[<a name="sparql05">SPARQL, 2005</a>]
+SPARQL Query Language for RDF
+W3C Working Draft 23 November 2005;
+<a href="http://www.w3.org/TR/2005/WD-rdf-sparql-query-20051123/">
+http://www.w3.org/TR/2005/WD-rdf-sparql-query-20051123/</a>
+</p>
+
+<p class="ref">
+[<a name="swiprolog">SWI Prolog, 2006</a>] 
+<a href="http://www.swi-prolog.org/">http://www.swi-prolog.org/</a></p> 
+
+<p class="ref">
+[<a name="wn:neuchatel">University of Neuchatel</a>]
+WordNet OWL Ontology;
+<a href="http://www2.unine.ch/imi/page11291_en.html"> 
+http://www2.unine.ch/imi/page11291_en.html</a>
+</p>
+
+
+<p class="ref">
+[<a name="uriqa04">URI QA, 2004</a>]
+The URI Query Agent Model -
+A Semantic Web Enabler;
+<a href="http://sw.nokia.com/uriqa/URIQA.html">
+http://sw.nokia.com/uriqa/URIQA.html</a>
+</p>
+
+
+<p class="ref">
+[<a name="wielemaker03">Wielemaker et al., 2003</a>]
+Jan Wielemaker, Guus Schreiber and Bob Wielinga. Prolog-based infrastructure for RDF: performance and scalability. In: D. Fensel, K. Sycara and J. Mylopoulos (eds.) The Semantic Web - Proceedings ISWC'03, Sanibel Island, Florida. Lecture Notes in Computer Science, volume 2870, pp. 644-658. Berlin/Heidelber, Springer-Verlag, 2003.
+</p>
+
+
+
+
+
+
+
+</div>
+<hr />
+<p>$Revision: 1.4 $</p>
+
+</body>
+</html>

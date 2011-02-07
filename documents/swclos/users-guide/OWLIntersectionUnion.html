@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<META http-equiv="Content-Style-Type" content="text/css">
+  <title>13. OWL Intersection and Union, and the Entailments </title>
+  <link>
+  <link href="manual.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<h2>13. &nbsp;OWL Axioms and Entailment Rules </h2>
+
+<h3>13.1 &nbsp;Intersection of Concepts </h3>
+
+<p>The intersection of concepts is represented by owl:intersectionOf property in OWL. In Wine Ontology, 
+the WhiteBurgundy definition has separated to the two parts, the intersection definition part and the subclass definition 
+part, while they are aggregated in SWCLOS. Here, the WhiteBurgundy is an intersection of the Burgundy and 
+the WhiteWine. So, a question here is whether the WhiteBurgundy is a subclass of the Burgundy and the 
+WhiteWine. The answer is, of course, yes. But, it is by one of OWL entailments upon intersection. Namely,
+every member of the intersection of the extension of the Burgundy (a set of instances of the Burgundy) 
+and the extension of the WhiteWine (a set of instances of the WhiteWine) is also a member of the 
+extension of the Burgundy and the WhiteWine.</p>
+
+<b>
+<pre><code>
+  &lt;owl:Class rdf:ID="WhiteBurgundy"&gt;
+    &lt;owl:intersectionOf rdf:parseType="Collection"&gt;
+      &lt;owl:Class rdf:about="#Burgundy" /&gt;
+      &lt;owl:Class rdf:about="#WhiteWine" /&gt;
+    &lt;/owl:intersectionOf&gt;
+  &lt;/owl:Class&gt;
+
+  &lt;owl:Class rdf:about="#WhiteBurgundy"&gt;
+    &lt;rdfs:subClassOf&gt;
+      &lt;owl:Restriction&gt;
+        &lt;owl:onProperty rdf:resource="#madeFromGrape" /&gt;
+        &lt;owl:hasValue rdf:resource="#ChardonnayGrape" /&gt;
+      &lt;/owl:Restriction&gt;
+    &lt;/rdfs:subClassOf&gt;
+    &lt;rdfs:subClassOf&gt;
+      &lt;owl:Restriction&gt;
+        &lt;owl:onProperty rdf:resource="#madeFromGrape" /&gt;
+        &lt;owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger"&gt;1&lt;/owl:maxCardinality&gt;
+      &lt;/owl:Restriction&gt;
+    &lt;/rdfs:subClassOf&gt;
+  &lt;/owl:Class&gt;
+
+gx-user(7): (get-form vin:WhiteBurgundy)
+(owl:Class vin:WhiteBurgundy
+ (rdf:about #&lt;uri http://www.w3.org/TR/2003/PR-owl-guide-20031209/wine#WhiteBurgundy&gt;)
+ (rdfs:subClassOf (owl:hasValueRestriction 
+                    (owl:onProperty vin:madeFromGrape) 
+                    (owl:hasValue vin:ChardonnayGrape))
+                  (owl:cardinalityRestriction 
+                    (owl:onProperty vin:madeFromGrape) 
+                    (owl:maxCardinality 1)))
+ (owl:intersectionOf vin:Burgundy vin:WhiteWine))
+gx-user(8): (subtypep vin:WhiteBurgundy vin:WhiteWine)
+t
+gx-user(9): (subtypep vin:WhiteBurgundy vin:Burgundy)
+t</code></pre>
+</b><br /> 
+
+<p>The role of cocept intersection is not only this entailment. The intersection definition is 
+<i>complete</i>, that is, if the intersection of concepts at the right-hand side of equality is 
+established, then the left-hand side is established. In the above example, if some wine is an 
+instance of the Burgundy and the WhiteWine, then it is also an instance of WhiteBurgundy, definitely. 
+If some wine class is subsumed by both the Burgundy class and the WhiteWine class, then it is subsumed 
+by the BurgundyWhiteWine.
+You do not need to mind the openness in the case of such complete definition.</p>
+
+<b>
+<pre><code>gx-user(2): (get-form vin:TableWine)
+(owl:Class vin:TableWine
+ (rdf:about #&lt;uri http://www.w3.org/TR/2003/PR-owl-guide-20031209/wine#TableWine&gt;)
+ (owl:intersectionOf vin:Wine
+  (owl:hasValueRestriction (owl:onProperty vin:hasSugar)
+                           (owl:hasValue vin:Dry))))
+gx-user(3): (get-form vin:DryWine)
+(owl:Class vin:DryWine
+ (owl:intersectionOf vin:Wine
+  (owl:hasValueRestriction (owl:onProperty vin:hasSugar)
+                           (owl:hasValue vin:Dry))))
+gx-user(4): (get-form vin:MariettaOldVinesRed)
+(vin:RedTableWine vin:MariettaOldVinesRed 
+  (vin:hasMaker vin:Marietta) (vin:hasFlavor vin:Moderate) 
+  (vin:hasBody vin:Medium) (vin:locatedIn vin:SonomaRegion) 
+  (vin:hasColor vin:Red) (vin:hasSugar vin:Dry))
+gx-user(5): (typep vin:MariettaOldVinesRed vin:TableWine)
+t
+gx-user(9): (typep vin:MariettaOldVinesRed vin:DryWine)
+common-lisp:nil
+gx-user(10): (classified-p vin:MariettaOldVinesRed vin:TableWine)
+t
+gx-user(11): (classified-p vin:MariettaOldVinesRed vin:DryWine)
+t
+</code></pre>
+</b><br /> <br />
+
+<h3>13.2 &nbsp;Union of Concepts</h3>
+
+In Food Ontology, the fruit is defined as union of the sweetfruit and the non-sweetfruit. See the following 
+demonstration. Of course, the fruit is a superclass of the sweetfruit and the non-sweetfruit, because 
+any member of the extension of sweetfruit (a set of instances of food:SweetFruit) or any member of the 
+extension of non-sweetfruit (as set of instances of food:NonSweetFruit) is also a member of union of both, 
+namely a member of the extension of union of both.</p>
+
+<b>
+<pre><code>gx-user(4): (get-form food:Fruit)
+(owl:Class food:Fruit (owl:unionOf food:SweetFruit food:NonSweetFruit))
+gx-user(5): (get-form food:NonSweetFruit)
+(owl:Class food:NonSweetFruit 
+           (rdfs:subClassOf food:EdibleThing)
+           (owl:disjointWith food:SweetFruit))
+</code></pre>
+</b><br /> <br />
+
+<p>So, the question here is the subsumption between 
+
+<blockquote>
+<pre><code>gx-user(6): (get-form (-> eg:courses/6.001 vocab:students rdf:rest rdf:rest rdf:first))
+(rdfs:Resource (rdf:about "http://example.org/students/Johann"))
+gx-user(7): (-> eg:courses/6.001 vocab:students rdf:rest rdf:rest rdf:rest)
+#&lt;rdf:List rdf:nil&gt;
+</code></pre>
+</blockquote>
+
+<p>However, using rdf:List is very tedious in SWCLOS. We can use the lisp list to 
+represent a collection in SWCLOS. You may represent the collection of students as 
+follows, whereas the RDF graph is not equal to Figure 10.2. </p>
+
+<p>Even though this input form does not contain rdf:first and rdf:rest, it is very 
+easy for lisp programmers to imagine the above forms from the list structure in 
+Figure 10.2. </p>
+
+<hr>
+<i><small>  Author: <a href="mailto:SeijiKoide@aol.com">Seiji Koide</a>. 
+ Copyright (c) 2005, 2006 GALAXY EXPRESS CORPORATION. Feb. 2006
+<br> </small></i></body></html>

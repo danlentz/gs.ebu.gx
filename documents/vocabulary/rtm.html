@@ -1,0 +1,609 @@
+<html>
+<head>
+<title>The RTM RDF to topic maps mapping</title>
+<link rel="stylesheet" href="whitepapers.css" type="text/css">
+</head>
+<body>
+<h1>The RTM RDF to topic maps mapping</h1>
+<h2 class="subtitle">Definition and introduction</h2>
+<table width="100%">
+<tr>
+<td>
+<table>
+<tr>
+<th>Affiliation:</th><td>Ontopia A/S</td>
+</tr>
+<tr>
+<th>Date:</th><td>&#x24;Date: 2003/12/28 12:24:42 &#x24;</td>
+</tr>
+<tr>
+<th>Version:</th><td>Version 0.2 (&#x24;Revision: 1.2 &#x24;)</td>
+</tr>
+</table>
+</td><td><a href="http://www.ontopia.net"><img src="logo.gif" alt="" align="right" border="0"></a></td>
+</tr>
+</table>
+<h2>Abstract</h2>
+<p>
+This technical report defines version 0.2 of the RTM RDF to topic maps
+mapping vocabulary.
+</p>
+
+<p>
+Please note that this document is not a formal specification from any
+recognized standards body, but a Technical Report published by <a href="http://www.ontopia.net">Ontopia</a>, a commercial company,
+for the convenience of all interested parties. The specification may
+be taken up by some standards body at some point, but no initiatives
+in this direction have been taken as yet.
+</p>
+<h2>Table of contents</h2>
+<ul>
+<li>
+<a href="#N39">1. Introduction</a>
+</li>
+<ul>
+</ul>
+<li>
+<a href="#N51">2. The vocabulary</a>
+</li>
+<ul>
+</ul>
+<li>
+<a href="#sect-algorithm">3. The mapping algorithm</a>
+</li>
+<ul>
+<li>
+<a href="#N253">3.1. rtm:basename</a>
+</li>
+<ul>
+</ul>
+<li>
+<a href="#N284">3.2. rtm:occurrence</a>
+</li>
+<ul>
+</ul>
+<li>
+<a href="#N324">3.3. rtm:association</a>
+</li>
+<ul>
+</ul>
+<li>
+<a href="#N397">3.4. rtm:instance-of</a>
+</li>
+<ul>
+</ul>
+<li>
+<a href="#N452">3.5. rtm:subject-identifier</a>
+</li>
+<ul>
+</ul>
+<li>
+<a href="#N474">3.6. rtm:subject-locator</a>
+</li>
+<ul>
+</ul>
+<li>
+<a href="#N499">3.7. rtm:source-locator</a>
+</li>
+<ul>
+</ul>
+<li>
+<a href="#sect-add-scope">3.8. Adding scope</a>
+</li>
+<ul>
+</ul>
+<li>
+<a href="#sect-add-type">3.9. Adding type</a>
+</li>
+<ul>
+</ul>
+<li>
+<a href="#sect-uri2topic">3.10. Getting a topic for a URI reference</a>
+</li>
+<ul>
+</ul>
+</ul>
+</ul>
+
+
+
+
+
+
+
+<h2>
+<a name="N39">1. Introduction</a>
+</h2>
+
+
+<p>
+RTM is a vocabulary that can be used to describe the mapping of an RDF
+vocabulary to topic maps in such a way that RDF data using that
+vocabulary can be converted automatically to topic maps. This allows
+RDF vocabularies to be used both as RDF vocabularies and as topic map
+vocabularies.
+</p>
+
+<p>
+The vocabulary annotates RDF properties to indicate which topic map
+construct the property is to be mapped to. The type and scope of the
+resulting construct can be controlled, and for associations the role
+played by the subject and the object must be indicated. The RTM
+mapping declarations can be stored as part of the data to be mapped,
+or it can be stored externally.
+</p>
+
+
+
+
+<h2>
+<a name="N51">2. The vocabulary</a>
+</h2>
+
+
+<p>
+Throughout this document the convention <tt class="symbol">rtm:foo</tt>
+should be taken to mean the URI reference
+<tt class="symbol">http://psi.ontopia.net/rdf2tm/#foo</tt>. Each of these URI
+references are published subject identifiers that together make up the
+RTM vocabulary.
+</p>
+
+<p>
+RTM consists of the following RDF properties, as well as the
+individual resources defined in <a href="#sect-algorithm">section
+        3</a>. The
+subjects of statements using these properties are always RDF
+properties whose mapping to topic maps is to be described.
+</p>
+
+<dl>
+<dt>rtm:maps-to</dt>
+<dd>
+<p>This property defines which topic map construct an RDF property
+is converted to during RDF-to-topic map mapping.  RDF properties for
+which no <tt class="symbol">rtm:maps-to</tt> statement is found are
+ignored. The possible values of this predicate are enumerated in <a href="#sect-algorithm">section
+        3</a>.</p>
+</dd>
+<dt>rtm:type</dt>
+<dd>
+<p>This property is used to override the default type otherwise
+assigned to topic map constructs created by the mapping.</p>
+</dd>
+<dt>rtm:in-scope</dt>
+<dd>
+<p>This property is used to add a topic to the scope of topic map
+constructs created by the mapping.</p>
+</dd>
+<dt>rtm:subject-role</dt>
+<dd>
+<p>This property is used to indicate the association role type
+played by the subject of an RDF statement mapped to an association.</p>
+</dd>
+<dt>rtm:object-role</dt>
+<dd>
+<p>This property is used to indicate the association role type
+played by the object of an RDF statement mapped to an
+association.</p>
+</dd>
+</dl>
+
+
+
+
+<h2>
+<a name="sect-algorithm">3. The mapping algorithm</a>
+</h2>
+
+
+<p>
+The input to the mapping consists of:
+</p>
+
+<ul>
+<li>
+<p>An RDF model containing the data to be mapped to a topic map,
+known as the <dfn>input model</dfn>.</p>
+</li>
+<li>
+<p>An RDF model containing the mapping information, known as the
+<dfn>mapping model</dfn>. This may be the same model as
+the input model, but need not be.</p>
+</li>
+<li>
+<p>The topic map into which the data is to be mapped. It may be
+empty, but need not be.</p>
+</li>
+</ul>
+
+<p>
+For precision, the topic map is here described as an instance of the
+Topic Maps Data Model defined in <a href="#tmdm">[<a href="#tmdm">TMDM</a>]</a>, while the RDF
+models are described as RDF graphs, as defined by <a href="#rdfdm">[<a href="#rdfdm">RDF</a>]</a>.
+</p>
+
+<p>
+The mapping is done by traversing all the triples in the input model
+and for each triple:
+</p>
+
+<ol>
+<li>
+<p>Let <tt class="symbol">s1</tt> be the subject of that triple,
+<tt class="symbol">p1</tt> the predicate, and <tt class="symbol">o1</tt> the
+object.</p>
+</li>
+<li>
+<p>Look for a triple in the mapping model whose subject is
+<tt class="symbol">p1</tt> and whose predicate is
+<tt class="symbol">rtm:maps-to</tt>. If no such triple is found, move on to
+the next triple of the input model. If more than one such triple is
+found, select one arbitrarily and let <tt class="symbol">o2</tt> be the
+object of that predicate.</p>
+</li>
+<li>
+<p>If <tt class="symbol">s1</tt> is a URI reference, get the topic
+produced by the procedure in <a href="#sect-uri2topic">section
+        3.10</a> for that
+URI reference and let it be known as <tt class="symbol">t1</tt>.</p>
+<p>If <tt class="symbol">s1</tt> is a blank node, and it has not been
+processed before, create a topic item to represent it and add it to
+the [topics] property of the topic map item. If it has been processed
+before, find the topic item created for it. Let this topic item be
+known as <tt class="symbol">t1</tt>.</p>
+</li>
+<li>
+<p>Now follow the instructions in the section below whose name
+corresponds to the value of <tt class="symbol">o2</tt>. It is an error if
+there is no such section, or if <tt class="symbol">o2</tt> is a literal.
+</p>
+</li>
+</ol>
+
+<h3>
+<a name="N253">3.1. rtm:basename</a>
+</h3> 
+
+
+<p>
+Create a topic name item and add it to the [topic names] property of
+<tt class="symbol">t1</tt>. Set its [value] property to the string value of
+<tt class="symbol">o1</tt>. It is an error if <tt class="symbol">o1</tt> is not a
+literal.
+</p>
+
+<p> 
+Finally, let the topic name item be known as <tt class="symbol">c</tt> and
+follow the procedure in <a href="#sect-add-scope">section
+        3.8</a>.
+Implementations which support typed names must also follow the
+procedure in <a href="#sect-add-type">section
+        3.9</a>.
+</p>
+
+
+<h3>
+<a name="N284">3.2. rtm:occurrence</a>
+</h3> 
+
+
+<p>
+Create an occurrence item and add it to the [occurrences] property of
+<tt class="symbol">t1</tt>. If <tt class="symbol">o1</tt> is a literal, set its
+[value] property to the string value of <tt class="symbol">o1</tt>, otherwise
+create a locator item and set its [notation] property to
+<tt class="literal">"URI"</tt> and its [reference] property to 
+<tt class="symbol">o1</tt>, and set the locator as the value of the
+occurrence item's [locator] property. It is an error if
+<tt class="symbol">o1</tt> is a blank node.
+</p>
+
+<p>
+Finally, let the occurrence item be known as <tt class="symbol">c</tt> and
+follow the procedures in <a href="#sect-add-scope">section
+        3.8</a> and <a href="#sect-add-type">section
+        3.9</a>.
+</p>
+
+
+<h3>
+<a name="N324">3.3. rtm:association</a>
+</h3> 
+
+
+<p>
+Create an association item and add it to the [associations] property
+of the topic map item. Let <tt class="symbol">t2</tt> be the topic for
+<tt class="symbol">o1</tt>; it is an error if <tt class="symbol">o1</tt> is a
+literal.
+</p>
+
+<p>
+Look for a triple in the mapping model whose subject is
+<tt class="symbol">p1</tt> and whose predicate is
+<tt class="symbol">rtm:subject-role</tt>; let <tt class="symbol">rt1</tt> be the
+object. It is an error if <tt class="symbol">rt1</tt> is a blank node or a
+literal. Create an association role item and add it to the [roles]
+property of the association, set its [player] property to
+<tt class="symbol">t1</tt>, and its [type] property to the topic for
+<tt class="symbol">rt1</tt>.
+</p>
+
+<p>
+Now look for a triple in the mapping model whose subject is
+<tt class="symbol">p1</tt> and whose predicate is
+<tt class="symbol">rtm:object-role</tt>; let <tt class="symbol">rt2</tt> be the
+object. It is an error if <tt class="symbol">rt2</tt> is a blank node or a
+literal. Create an association role item and add it to the [roles]
+property of the association, set its [player] property to
+<tt class="symbol">t2</tt>, and its [type] property to the topic for
+<tt class="symbol">rt2</tt>.
+</p>
+
+<p>
+Finally, let the association item be known as <tt class="symbol">c</tt> and
+follow the procedures in <a href="#sect-add-scope">section
+        3.8</a> and <a href="#sect-add-type">section
+        3.9</a>.
+</p>
+
+
+<h3>
+<a name="N397">3.4. rtm:instance-of</a>
+</h3> 
+
+
+<p>
+Create an association item. Get the topic for
+<tt class="literal">http://psi.topicmaps.org/sam/1.0/#type-instance</tt> and
+put it in the [type] property of the association item.
+</p>
+
+<p>
+Create an association role item. Get the topic for
+<tt class="literal">http://psi.topicmaps.org/sam/1.0/#type</tt> and put it
+in its [type] property. Get the topic for <tt class="symbol">o1</tt> and put
+it in the [player] property. It is an error if <tt class="symbol">o1</tt> is
+a literal.
+</p>
+
+<p>
+Create an association role item. Get the topic for
+<tt class="literal">http://psi.topicmaps.org/sam/1.0/#instance</tt> and put
+it in its [type] property, and put <tt class="symbol">t1</tt> in the [player]
+property.
+</p>
+
+<p>
+Finally, let the association item be known as <tt class="symbol">c</tt> and
+follow the procedure in <a href="#sect-add-type">section
+        3.9</a>.
+</p>
+
+<dl>
+<dt class="note">Note</dt>
+<dd>
+<p>
+The URIs used here are the ones given in the current draft of TMDM,
+but they are unlikely to be the URIs in the final version. It is
+recommended that implementations represent RDF statements mapped to
+<tt class="symbol">instance-of</tt> using their internal representation for
+the <tt class="symbol">type-instance</tt> relationship. This document will be
+updated when TMDM is finalized.
+</p>
+</dd>
+</dl>
+
+
+<h3>
+<a name="N452">3.5. rtm:subject-identifier</a>
+</h3> 
+
+
+<p>
+Create a locator item and set its [notation] property to
+<tt class="literal">"URI"</tt> and its [reference] property to
+<tt class="symbol">o1</tt>, then add it to the [subject identifiers] property
+of <tt class="symbol">t1</tt>. It is an error if <tt class="symbol">o1</tt> is a
+literal or a blank node.
+</p>
+
+
+<h3>
+<a name="N474">3.6. rtm:subject-locator</a>
+</h3> 
+
+
+<p>
+Create a locator item and set its [notation] property to
+<tt class="literal">"URI"</tt> and its [reference] property to
+<tt class="symbol">o1</tt>, then set it as the value of the [subject locator]
+property of <tt class="symbol">t1</tt>. It is an error if <tt class="symbol">o1</tt>
+is a literal or a blank node, or if <tt class="symbol">t1</tt> already has a
+different value in its [subject locator] property.
+</p>
+
+
+<h3>
+<a name="N499">3.7. rtm:source-locator</a>
+</h3> 
+
+
+<p>
+Create a locator item and set its [notation] property to
+<tt class="literal">"URI"</tt> and its [reference] property to
+<tt class="symbol">o1</tt>, then add it to the [source locators] property of
+<tt class="symbol">t1</tt>. It is an error if <tt class="symbol">o1</tt> is a
+literal or a blank node.
+</p>
+
+
+<h3>
+<a name="sect-add-scope">3.8. Adding scope</a>
+</h3> 
+
+
+<p>
+For each triple whose subject is <tt class="symbol">p1</tt> and whose
+predicate is <tt class="symbol">rtm:in-scope</tt>, get the topic for the
+object of the triple and add it to the [scope] property of
+<tt class="symbol">c</tt>. It is an error if the object is a literal.
+</p>
+
+
+<h3>
+<a name="sect-add-type">3.9. Adding type</a>
+</h3> 
+
+
+<p>
+Look for a triple whose subject is <tt class="symbol">p1</tt> and whose
+predicate is <tt class="symbol">rtm:type</tt>. If such a triple is found, get
+the topic for the object of the triple and set it as the value of the
+[type] property of <tt class="symbol">c</tt>. It is an error if the object is
+a literal.
+</p>
+
+<p>
+If not such triple is found, get the topic for <tt class="symbol">p1</tt> and
+set it as the value of the [type] property of <tt class="symbol">c</tt>.
+</p>
+
+
+<h3>
+<a name="sect-uri2topic">3.10. Getting a topic for a URI reference</a>
+</h3>
+
+
+<p>
+Look for a topic item whose [subject identifiers] property contains a
+locator item whose [notation] property is <tt class="literal">"URI"</tt> and
+whose [reference] property contains the URI reference. If no such
+topic item is found, create one.
+</p>
+
+
+
+
+
+<h2>Appendix: Bibliography</h2>
+<dl>
+<dt>
+<a name="tmdm">TMDM</a>
+</dt>
+<dd>
+<i>ISO/IEC 13250-2: Topic Maps &mdash; Data Model</i>, International Organization for Standardization, Geneva
+         , Switzerland, Forthcoming.</dd>
+<dt>
+<a name="rdfdm">RDF</a>
+</dt>
+<dd>
+<i>Resource Description Framework (RDF): Concepts and Abstract
+Syntax</i>, Graham 
+        Klyne, Jeremy J.
+        Carroll, World Wide Web Consortium, W3C Working Draft 10 October 2003.</dd>
+</dl>
+
+
+
+<h2>
+<a name="N643">A. The RTM schema</a>
+</h2>
+
+
+<p>
+This appendix provides an RDF Schema and OWL schema for the RTM
+vocabulary.
+</p>
+
+<pre>&lt;rdf:RDF 
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rtm="http://psi.ontopia.net/rdf2tm/#"&gt;
+
+  &lt;!-- ===== ONTOLOGY ===================================================== --&gt;
+  &lt;owl:Ontology rdf:about="http://psi.ontopia.net/rdf2tm/"&gt;
+    &lt;rdfs:label&gt;RTM: RDF to topic map mapping&lt;/rdfs:label&gt;
+    &lt;rdfs:comment&gt;A vocabulary for expressing mappings from RDF
+    vocabularies to topic map forms of the same vocabularies.&lt;/rdfs:comment&gt;
+    &lt;rdfs:seeAlso rdf:resource="http://www.ontopia.net/topicmaps/materials/tmrdf.html"/&gt;
+    &lt;owl:imports rdf:resource="http://www.w3.org/2000/01/rdf-schema"/&gt;
+    &lt;owl:imports rdf:resource="http://www.w3.org/2002/07/owl"/&gt;
+  &lt;/owl:Ontology&gt;
+
+
+  &lt;!-- ~~~~~ CONSTRUCT --&gt;
+  &lt;owl:Class rdf:about="http://psi.ontopia.net/rdf2tm/#Construct" 
+	rdfs:label="Construct"
+	rdfs:comment="A topic map construct to which an RDF property may be mapped."&gt;
+    &lt;rdfs:isDefinedBy rdf:resource="http://psi.ontopia.net/rdf2tm/"/&gt;
+    &lt;owl:oneOf rdf:parseType="Collection"&gt;
+      &lt;owl:Thing rdf:about="http://psi.ontopia.net/rdf2tm/#basename"/&gt;
+      &lt;owl:Thing rdf:about="http://psi.ontopia.net/rdf2tm/#occurrence"/&gt;
+      &lt;owl:Thing rdf:about="http://psi.ontopia.net/rdf2tm/#association"/&gt;
+      &lt;owl:Thing rdf:about="http://psi.ontopia.net/rdf2tm/#source-locator"/&gt;
+      &lt;owl:Thing rdf:about="http://psi.ontopia.net/rdf2tm/#subject-identifier"/&gt;
+      &lt;owl:Thing rdf:about="http://psi.ontopia.net/rdf2tm/#subject-locator"/&gt;
+      &lt;owl:Thing rdf:about="http://psi.ontopia.net/rdf2tm/#instance-of"/&gt;
+    &lt;/owl:oneOf&gt;
+    &lt;!-- disjoint with pretty much everything else --&gt;
+  &lt;/owl:Class&gt;
+
+
+  &lt;!-- ~~~~~ MAPS-TO --&gt;
+  &lt;owl:FunctionalProperty rdf:about="http://psi.ontopia.net/rdf2tm/#maps-to" 
+	rdfs:label="maps to"
+	rdfs:comment="Specifies the topic map construct to which a particular RDF 
+        property is to be mapped."&gt;
+    &lt;rdfs:domain rdf:resource="http://www.w3.org/2000/01/rdf-schema#Property"/&gt;
+    &lt;rdfs:range rdf:resource="http://psi.ontopia.net/rdf2tm/#Construct"/&gt;
+    &lt;rdfs:isDefinedBy rdf:resource="http://psi.ontopia.net/rdf2tm/"/&gt;
+  &lt;/owl:FunctionalProperty&gt;
+
+  &lt;!-- ~~~~~ TYPE --&gt;
+  &lt;owl:FunctionalProperty rdf:about="http://psi.ontopia.net/rdf2tm/#type" 
+	rdfs:label="of type"
+	rdfs:comment="Specifies the type of the topic map construct created from 
+        statements using this RDF property."&gt;
+    &lt;rdfs:domain rdf:resource="http://www.w3.org/2000/01/rdf-schema#Property"/&gt;
+    &lt;rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/&gt;
+    &lt;rdfs:isDefinedBy rdf:resource="http://psi.ontopia.net/rdf2tm/"/&gt;
+  &lt;/owl:FunctionalProperty&gt;
+
+  &lt;!-- ~~~~~ IN-SCOPE --&gt;
+  &lt;rdf:Property rdf:about="http://psi.ontopia.net/rdf2tm/#in-scope" 
+	rdfs:label="in scope"
+	rdfs:comment="Specifies a topic to be added to the scope of topic map 
+        constructs created from statements with this property."&gt;
+    &lt;rdfs:domain rdf:resource="http://www.w3.org/2000/01/rdf-schema#Property"/&gt;
+    &lt;rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/&gt;
+    &lt;rdfs:isDefinedBy rdf:resource="http://psi.ontopia.net/rdf2tm/"/&gt;
+  &lt;/rdf:Property&gt;
+
+  &lt;!-- ~~~~~ SUBJECT-ROLE --&gt;
+  &lt;owl:FunctionalProperty rdf:about="http://psi.ontopia.net/rdf2tm/#subject-role" 
+	rdfs:label="subject role"
+	rdfs:comment="Specifies the role type played by the subject in associations 
+        created from statements with this property."&gt;
+    &lt;rdfs:domain rdf:resource="http://www.w3.org/2000/01/rdf-schema#Property"/&gt;
+    &lt;rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/&gt;
+    &lt;rdfs:isDefinedBy rdf:resource="http://psi.ontopia.net/rdf2tm/"/&gt;
+  &lt;/owl:FunctionalProperty&gt;
+
+  &lt;!-- ~~~~~ OBJECT-ROLE --&gt;
+  &lt;owl:FunctionalProperty rdf:about="http://psi.ontopia.net/rdf2tm/#object-role" 
+	rdfs:label="object role"
+	rdfs:comment="Specifies the role type played by the object in associations 
+        created from statements with this property."&gt;
+    &lt;rdfs:domain rdf:resource="http://www.w3.org/2000/01/rdf-schema#Property"/&gt;
+    &lt;rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/&gt;
+    &lt;rdfs:isDefinedBy rdf:resource="http://psi.ontopia.net/rdf2tm/"/&gt;
+  &lt;/owl:FunctionalProperty&gt;
+
+&lt;/rdf:RDF&gt;</pre>
+
+
+</body>
+</html>

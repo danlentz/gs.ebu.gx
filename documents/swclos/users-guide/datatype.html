@@ -1,0 +1,491 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<META http-equiv="Content-Style-Type" content="text/css">
+  <title>String, Number, Datatype, and Lang</title>
+  <link>
+  <link href="manual.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<h2>6. &nbsp;String, Number, Datatype, and Lang</h2>
+
+<h3>6.1 &nbsp;Literal</h3>
+
+<p>The string and number that appear in RDF are called <i>literal</i>. Every literal in RDF is an instance of
+rdfs:Literal. The class rdf:XMLLiteral is a subclass of rdfs:Literal and a class of all XML Schema data,
+which includes xsd:string and xsd:decimal and so on. It implies that every XML Schema data is also an
+instance of rdfs:Literal, and every literal is also an instance of rdfs:Resource, because rdfs:Literal is a
+subclass of rdfs:Resource.
+</p>
+
+<blockquote><b>
+<pre><code>gx-user(11): (subtypep xsd:string rdfs:Literal)
+t
+t
+gx-user(12): (typep "this is a string." rdfs:Literal)
+t
+t
+gx-user(13): (typep "this is an XML string."@en rdf:XMLLiteral)
+t
+t
+gx-user(14): (typep 1.23 rdfs:Literal)
+t
+t
+gx-user(15): (typep 1.23 xsd:float)
+t
+t
+gx-user(16): (typep 1.23 rdfs:Literal)
+t
+t
+gx-user(17): (typep "1.23"^^xsd:float xsd:float)
+t
+t
+gx-user(18): (typep "1.23"^^xsd:float rdfs:Literal)
+t
+t
+gx-user(19): (typep "this is a string." rdfs:Resource)
+t
+t
+gx-user(20): (typep 1.23 rdfs:Resource)
+t
+t
+</code></pre></b>
+</blockquote>
+
+<p>Note that <b>gx:typep</b> and <b>gx:subtypep</b> are used in the above demonstration. SWCLOS can accept
+language-taged string as shown in line number 13, and xsd-typed data notation as shown in line number 17
+and 18 through special reader macro rdf::read-string for trailing character '@' and double characters '^^'
+after a string, respectively, instead of Common Lisp original reader macro for string. In read-eval-print loop
+(REPL) of lisp, a lexical token of string is read, the evaluation immediately returns the string object, if it is
+a plane string, then it is printed by lisp system as string so that the same character sequence as input is
+printed. As well as plane string, a language-taged string is read in SWCLOS's REPL. Then, the reader
+macro makes a form that creates an instance of <b>rdf:inLang</b> structure and hands it to the eval function in
+REPL. So, the lisp system returns an instance of <b>rdf:inLang</b> structure. Similarly, for a string with xsd-type,
+</p>
+
+<blockquote><b>
+<pre><code>gx-user(8): (quote "This is a test."@en)
+(@ "This is a test." "en")
+gx-user(9): (eval '"This is a test."@en)
+"This is a test."@en
+gx-user(10): "This is a test."@en
+"This is a test."@en
+gx-user(11): (quote "1.23"^^xsd:float)
+(^^ "1.23" xsd:float)
+gx-user(12): (eval '"1.23"^^xsd:float)
+"1.23"^^xsd:float
+gx-user(13): "1.23"^^xsd:float
+"1.23"^^xsd:float
+</code></pre></b>
+</blockquote>
+
+Method <b>value-of</b> allows users to get mapped value in lisp.</p>
+
+<blockquote><b>
+<pre><code>gx-user(15): (value-of "1.23"^^xsd:float)
+1.23
+</code></pre></b>
+</blockquote>
+
+
+<a id="SWCLOS@" name="SWCLOS@" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR>
+      <TH><U>@ <I>content lang</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TBODY></TR>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>makes an instance of <b>rdf:inLang</b> and returns it. <i>content</i> must be a string. <i>lang</i> may be a string, or a 
+symbol.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<a id="SWCLOS^^" name="SWCLOS^^" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>^^ <I>value type</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TBODY></TR>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>creates an instance of XML data type <i>type</i> with <i>value</i> and returns it. 
+<i>value</i> is a string or a lisp data that conforms to <i>type</i>. <i>type</i> may be an CLOS object or a symbol.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+
+<a id="SWCLOSvalue-of" name="SWCLOSvalue-of" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>value-of <I>datum</I></U></TH>
+      <TD width="70">[Method]</TD>
+  </TBODY></TR>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>When <i>datum</i> is an instance of rdf:XMLLiteral, this method returns the value of 
+<i>datum</i>.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+
+<h3>6.2 &nbsp;XSD Datatypes in SWCLOS</h3>
+
+<p>In RDF semantics, <a href="http://www.w3.org/TR/rdf-mt/#XSDtable">specific ones out of built-in datatypes in XML Schema</a> 
+are introduced in RDF. In SWCLOS, further limited numbers of datatypes out of datatypes in RDF are defined as lisp datatypes as
+follows.
+</p>
+
+<table border="1" cellpadding="5" summary="This table lists xsd types in lisp.">
+  <tr>
+    <th>Lisp Type</th> <th>Definition in Lisp</th> <th>Ex. in S-expression</th>
+  </tr><tr>
+    <td align="center">xsd:unsignedByte</td>
+    <td align="center">(cl:unsigned-byte 8)</td>
+    <td align="center">255</td>
+  </tr><tr>
+    <td align="center">xsd:unsignedShort</td>
+    <td align="center">(cl:unsigned-byte 16)</td>
+    <td align="center">65535</td>
+  </tr><tr>
+    <td align="center">xsd:unsignedInt</td>
+    <td align="center">(cl:unsigned-byte 32)</td>
+    <td align="center">4294967295</td>
+  </tr><tr>
+    <td align="center">xsd:unsignedLong</td>
+    <td align="center">(cl:unsigned-byte 64)</td>
+    <td align="center">18446744073709551615</td>
+  </tr><tr>
+    <td align="center">xsd:nonNegativeInteger</td>
+    <td align="center">cl:unsigned-byte</td>
+    <td align="center">0</td>
+  </tr><tr>
+    <td align="center">xsd:byte</td>
+    <td align="center">(cl:signed-byte 8)</td>
+    <td align="center">127</td>
+  </tr><tr>
+    <td align="center">xsd:short</td>
+    <td align="center">(cl:signed-byte 16)</td>
+    <td align="center">32767</td>
+  </tr><tr>
+    <td align="center">xsd:int</td>
+    <td align="center">(cl:signed-byte 32)</td>
+    <td align="center">2147483647</td>
+  </tr><tr>
+    <td align="center">xsd:long</td>
+    <td align="center">(cl:signed-byte 64)</td>
+    <td align="center">9223372036854775807</td>
+  </tr><tr>
+    <td align="center">xsd:integer</td>
+    <td align="center">cl:integer</td>
+    <td align="center">1234567890</td>
+  </tr><tr>
+    <td align="center">xsd:positiveInteger</td>
+    <td align="center">(cl:integer 1 *)</td>
+    <td align="center">1</td>
+  </tr><tr>
+    <td align="center">xsd:nonPositiveInteger</td>
+    <td align="center">(cl:integer * 0)</td>
+    <td align="center">0</td>
+  </tr><tr>
+    <td align="center">xsd:negativeInteger</td>
+    <td align="center">(cl:integer cl:* -1)</td>
+    <td align="center">-1</td>
+  </tr><tr>
+    <td align="center">xsd:float</td>
+    <td align="center">cl:single-float</td>
+    <td align="center">1.0</td>
+  </tr><tr>
+    <td align="center">xsd:double</td>
+    <td align="center">cl:double-float</td>
+    <td align="center">1.0d0</td>
+  </tr><tr>
+    <td align="center">xsd:decimal</td>
+    <td align="center">cl:rational</td>
+    <td align="center">(rational 1.0)</td>
+  </tr><tr>
+    <td align="center">xsd:string</td>
+    <td align="center">cl:string</td>
+    <td align="center">"string?"</td>
+  </tr><tr>
+    <td align="center">xsd:boolean</td>
+    <td align="center">(cl:member xsd:true xsd:false)</td>
+    <td align="center">xsd:false</td>
+  </tr><tr>
+    <td align="center">xsd:anyURI</td>
+    <td align="center">net.uri:uri</td>
+    <td align="center">(uri "http://somewhere/")</td>
+  </tr><tr>
+    <td align="center">xsd:anySimpleType</td>
+    <td align="center">(or xsd:boolean xsd:anyURI xsd:string xsd:float xsd:double xsd:decimal)</td>
+    <td align="center">"simple-type?"</td>
+  </tr>
+</table>
+
+<p>Therefore, you may check a lisp datum in S-expression against the xsd types 
+defined as lisp type as follows.</p>
+
+<blockquote><b>
+<pre><code>gx-user(7): (cl:typep 1 'xsd:positiveInteger)
+t
+gx-user(8): (cl:typep 1 'xsd:nonNegativeInteger)
+t
+gx-user(9): (cl:typep 1 'xsd:integer)
+t
+gx-user(10): (cl:typep 1 'xsd:int)
+t
+gx-user(11): (cl:typep 1 'xsd:decimal)
+t
+gx-user(12): (cl:typep 1 'xsd:unsignedByte)
+t
+gx-user(13): (cl:typep 1 'xsd:anySimpleType)
+t
+</code></pre></b>
+</blockquote>
+
+<p>Moreover, each xsd type in lisp has an RDF datatype object as symbol value of the datatype, and gx:typep
+interprets a datum in lisp not only as lisp datatype but also as RDF datatype, if it is a plane literal
+(non-typed-literal) or a lisp datum.
+</p>
+
+<blockquote><b>
+<pre><code>gx-user(14): xsd:positiveInteger
+#&lt;rdfs:Datatype xsd:positiveInteger&gt;
+gx-user(15): xsd:integer
+#&lt;rdfs:Datatype xsd:integer&gt;
+gx-user(16): (typep 1 xsd:positiveInteger)
+t
+t
+gx-user(17): (typep 1 xsd:nonNegativeInteger)
+t
+t
+gx-user(18): (typep 1 xsd:integer)
+t
+t
+gx-user(19): (typep 1 xsd:int)
+t
+t
+gx-user(20): (typep 1 xsd:decimal)
+t
+t
+gx-user(21): (typep 1 xsd:unsignedByte)
+t
+t
+gx-user(22): (typep 1 xsd:anySimpleType)
+t</code></pre></b>
+</blockquote>
+
+<p>On the other hand, a typed literal in RDF is mapped to an instance of RDF data type 
+class in SWCLOS, and each typed-data instance is also interpreted by 
+<b>gx:typep</b> as follows.</p>
+
+<blockquote><b>
+<pre><code>gx-user(8): (typep "1"^^xsd:integer xsd:integer)
+t
+t
+gx-user(9): (typep "1"^^xsd:integer xsd:positiveInteger)
+common-lisp:nil
+t
+gx-user(10): (typep "1"^^xsd:positiveInteger xsd:integer)
+t
+t
+gx-user(11): (typep "1"^^xsd:positiveInteger xsd:positiveInteger)
+t
+t</code></pre></b>
+</blockquote>
+
+<p>Note that xsd:integer subsumes xsd:positiveInteger, so that "1"^^positiveInteger is an instance of
+xsd:positiveInteger and xsd:integer, too, but "1"^^integer is not an instance of xsd:positiveInteger, although
+the values of both in the value space are equal.</p>
+
+<p>
+Every datatype is an instance of rdfs:Datatype. Note that rdf:XMLLiteral and xsd:integer, etc. are a class.
+So, rdfs:Datatype is a metaclass.
+</p>
+
+<blockquote><b>
+<pre><code>gx-user(21): (typep xsd:integer rdfs:Datatype)
+t
+t
+gx-user(22): (typep rdf:XMLLiteral rdfs:Datatype)
+t
+t
+gx-user(23): (strict-class-p xsd:integer)
+t
+gx-user(24): (rdf-metaclass-p rdfs:Datatype)
+t</code></pre></b>
+</blockquote>
+
+<p>Function <b>datatype?</b> checks whether it is an XSD datatype or not for a 
+symbol parameter, and <b>datatype-p</b> checks for a datatype object (an instance 
+of rdfs:Datatype).</p>
+
+<blockquote><b>
+<pre><code>gx-user(31): (datatype? 'xsd:integer)
+t
+gx-user(32): (datatype-p xsd:integer)
+t
+</code></pre></b>
+</blockquote>
+
+<a id="SWCLOSdatatype?" name="SWCLOSdatatype?" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>datatype? <I>symbol</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TBODY></TR>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>This predicate returns 
+<a href="http://www.franz.com/support/documentation/8.0/ansicl/glossary/t.htm#true">true</a> 
+if <i>symbol</i> is bound, and the symbol-value is an instance of rdfs:Datatype.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<a id="SWCLOSdatatype-p" name="SWCLOSdatatype-p" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR align="left">
+      <TH><U>datatype-p <I>x</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TBODY></TR>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>This predicate returns 
+<a href="http://www.franz.com/support/documentation/8.0/ansicl/glossary/t.htm#true">true</a> 
+if <i>x</i> an instance of rdfs:Datatype.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+
+<h3>6.3 &nbsp;xml:lang in SWCLOS</h3>
+
+<p>The <a href="http://www.w3.org/TR/2004/REC-rdf-syntax-grammar-20040210/#section-Syntax-languages">xml:lang</a> 
+attribute in RDF syntax can be used on any node element or property element in
+RDF/XML syntax to indicate that the included content is in the given language. See the following example,
+which is taken from W3C <a href="http://www.w3.org/TR/rdf-syntax-grammar/#section-Syntax-languages">RDF/XML Syntax Specification (Revised)</a>.
+</p>
+
+<pre class="box" ><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;
+  &lt;rdf:Description rdf:about="http://www.w3.org/TR/rdf-syntax-grammar"&gt;
+    &lt;dc:title&gt;RDF/XML Syntax Specification (Revised)&lt;/dc:title&gt;
+    &lt;dc:title xml:lang="en"&gt;RDF/XML Syntax Specification (Revised)&lt;/dc:title&gt;
+    &lt;dc:title xml:lang="en-US"&gt;RDF/XML Syntax Specification (Revised)&lt;/dc:title&gt;
+  &lt;/rdf:Description&gt;
+
+  &lt;rdf:Description rdf:about="http://example.org/buecher/baum" xml:lang="de"&gt;
+    &lt;dc:title&gt;Der Baum&lt;/dc:title&gt;
+    &lt;dc:description&gt;Das Buch ist außergewöhnlich&lt;/dc:description&gt;
+    &lt;dc:title xml:lang="en"&gt;The Tree&lt;/dc:title&gt;
+  &lt;/rdf:Description&gt;
+&lt;/rdf:RDF&gt;</code></pre></b>
+
+<p>In reading RDF/XML forms, the xml:lang attribute on node elements is parsed as it is an attribute. The
+xml:lang attribute on property element is transformed as if it envelopes the role value as sub-role. Therefore,
+the above RDF/XML forms are interpreted and transformed to the following S-expressions.
+</p>
+
+<pre class="box"><code>(rdf:Description (rdf:about &lt;uri http://www.w3.org/TR/rdf-syntax-grammar&gt;)
+                 (dc:title "RDF/XML Syntax Specification (Revised)")
+                 (dc:title (:en "RDF/XML Syntax Specification (Revised)"))
+                 (dc:title (:en-us "RDF/XML Syntax Specification (Revised)")))
+(rdf:Description (rdf:about &lt;uri http://example.org/buecher/baum&gt;)
+                 (xml:lang :de)
+                 (dc:title "Der Baum")
+                 (dc:description "Das Buch ist außergewöhnlich")
+                 (dc:title (:en "The Tree")))</code></pre></b>
+
+<p>SWCLOS keeps and maintains the language environment according to the order and the nest structure of
+RDF/XML language designation. Therefore, at the second rdf:Description form in the above example, the
+German environment is set up at the language tag ':de' at first, then the English environment is established
+in the German environment at the ':en' envelope. As a result, We obtain the followings.
+</p>
+
+<b>
+<pre><code>gx-user(9): (read-rdf-file #'addRdfXml "SWCLOS/example08.rdf")
+Warning: Entail by rdf1: dc:title rdf:type rdf:Property.
+Warning: Entail by rdf1: dc:description rdf:type rdf:Property.
+:done
+gx-user(10): (slot-value &lt;&lt;http://www.w3.org/TR/rdf-syntax-grammar&gt;&gt; 'dc:title)
+("RDF/XML Syntax Specification (Revised)"
+ "RDF/XML Syntax Specification (Revised)"@en
+ "RDF/XML Syntax Specification (Revised)"@en-US)
+gx-user(11): (slot-value &lt;&lt;http://example.org/buecher/baum&gt;&gt; 'dc:title)
+("Der Baum"@de "The Tree"@en)
+gx-user(12): (slot-value &lt;&lt;http://example.org/buecher/baum&gt;&gt; 'dc:description)
+"Das Buch ist außergewöhnlich"@de
+</code></pre></b>
+
+<p>Where such an expression as <code><b>"Der Baum"@de</b></code> and 
+<code><b>"The Tree"@en</b></code> is an instance of <b>rdf:inLang</b> structure, which is 
+printed as it looks like a lexcal form of plain literal with language option. 
+See <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php">
+ISO 639-1 alpha-2 language code</a> about the optional lang code. 
+</p>
+
+
+<a id="SWCLOSinLang" name="SWCLOSinLang" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR>
+      <TH><U>rdf:inLang</U></TH>
+      <TD width="70">[Structure]</TD>
+  </TBODY></TR>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>A structure for plain literal with language option. The instance has two 
+values for lang slot and content slot. Lisp prints this object like plain literal with 
+option, <b><i>content</i>@<i>lang</i></b>.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<a id="SWCLOSlang?" name="SWCLOSlang?" />
+<TABLE width="100%" cellpadding="0">
+  <TBODY><TR>
+      <TH><U>lang? <I>x</I></U></TH>
+      <TD width="70">[Function]</TD>
+  </TBODY></TR>
+</TABLE>
+<DIV align="right">
+<TABLE width="85%" cellpadding="0">
+  <TBODY><TR>
+      <TD>returns true if <i>x</i> is the keyword symbol that matches one of the 
+<a href="http://www.loc.gov/standards/iso639-2/php/code_list.php">
+ISO 639-1 alpha-2 language code</a>.</TD>
+  </TR></TBODY>
+</TABLE>
+</DIV>
+<br />
+
+<hr>
+<i><small>  Author: <a href="mailto:koide@nii.ac.jp">Seiji Koide</a>. 
+ Copyright (c) 2005, 2006 GALAXY EXPRESS CORPORATION. Feb. 2006
+<br> Copyright (c) 2007-2009 Seiji Koide. Oct. 2009
+<br> </small></i></body></html>

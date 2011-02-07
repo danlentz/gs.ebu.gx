@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+ <head>
+  <title>RDF Site Summary 1.0 Modules: Content</title>
+  <link rel="stylesheet" type="text/css" href="../../style.css" />
+ </head>
+ <body>
+  <h1>RDF Site Summary 1.0 Modules: Content</h1>
+
+   <h2><a name="authors">Authors</a></h2>
+<dl>
+     <dt><a href="mailto:begeddov@jfinity.com">Gabe Beged-Dov</a>, 
+      <a href="http://www.jfinity.com">JFinity Systems LLC</a></dt>
+     <dt><a href="mailto:me@aaronsw.com">Aaron Swartz</a>, 
+      <a href="http://www.aaronsw.com/">AaronSw.com</a></dt>
+      <dt><a href="mailto:vdv@dyomedea.com">Eric van der Vlist</a>, 
+      <a href="http://www.dyomedea.com">Dyomedea</a></dt>
+</dl>
+
+<!-- Version -->
+
+   <h2><a name="version">Version</a></h2>
+
+	<p><strong>Latest Version:</strong> <a href="http://purl.org/rss/1.0/modules/content/">http://purl.org/rss/1.0/modules/content/</a></p>
+
+<div class="version">DRAFT 2.01 2002-10-04 (Renamed headings - thanks, Bijan!) - <a href="mailto:me@aaronsw.com">ASw</a></div>
+<div class="version">DRAFT 2.0 2002-08-06 (Added content:encoded -- not yet approved; changed affiliation) - <a href="mailto:me@aaronsw.com">AS</a></div>
+ <div class="version">1.02 2001-04-05 (Tweaked the copyright) <a href="mailto:aaron@theinfo.org">as</a></div>
+ <div class="version">1.01 2001-3-8 (Made content:encoding more clear) <a href="mailto:aaron@theinfo.org">as</a></div>
+ <div class="version">1.0 2001-3-8 (Approved by the WG and moved to standard)</div>
+	<div class="version">DRAFT 0.4 2001-2-6 (Cleaned up syntax and added encoding)  <a href="mailto:aaron@theinfo.org">as</a></div>
+	<div class="version">DRAFT 0.31 2000-12-26 (Updated stylesheet)  <a href="mailto:aaron@theinfo.org">as</a></div>
+    <div class="version">DRAFT 0.3 2000-12-13 (Removed content:stylesheet attribute; changed content:format to an rdf:resource) <a href="mailto:aaron@theinfo.org">as</a></div>
+    <div class="version">DRAFT 0.2 2000-08-17 (Added content:stylesheet attribute) <a href="mailto:aaron@theinfo.org">as</a></div>
+	<div class="version">DRAFT 0.1 2000-08-16</div>
+
+<!-- Status -->
+
+   <h2><a name="status">Status</a></h2>
+
+    <p>
+	 Section one is official, <a href="http://logicerror.com/rss-votes-content">approved 2001-3-1</a>.<br />
+	 Section two is a draft, please send feedback to <a href="mailto:me@aaronsw.com">Aaron</a> or <a href="mailto:rss-dev@yahoogroups.com">the list</a>.
+    </p>
+
+<!-- Rights -->
+
+   <h2><a name="rights">Rights</a></h2>
+
+    <p>
+     Copyright &copy; 2000-2002 by the Authors.
+    </p>
+    <p>
+     Permission to use, copy, modify and distribute the RDF Site Summary
+     1.0 Content Module Specification and its accompanying documentation for any purpose
+     and without fee is hereby granted in perpetuity, provided that the
+     above copyright notice and this paragraph appear in all copies.
+     The copyright holders make no representation about the suitability
+     of the specification for any purpose.  It is provided "as is"
+     without expressed or implied warranty.
+    </p>
+    <p>
+     This copyright applies to the RDF Site Summary 1.0 Content Module Specification
+     and accompanying documentation and does not extend to the RSS Module's
+     format itself.
+    </p>
+
+   <h2><a name="description">Description</a></h2>
+
+    <p>
+	 A module for the actual content of websites, in multiple formats.
+    </p>
+
+   <h2><a name="namespaces">Namespace Declarations</a></h2>
+
+			 <ul>
+			  <li><b>xmlns:content="http://purl.org/rss/1.0/modules/content/"</b></li>
+			 </ul>
+
+<h2 id="syntax2">Updated Syntax</h2>
+<p><strong>This section is a draft and has not yet been approved by the WG.</strong></p>
+
+<h3>content:encoded</h3>
+<p>An element whose contents are the entity-encoded or CDATA-escaped version of the content of the item. Example:</p>
+
+<pre>&lt;content:encoded>&lt;![CDATA[&lt;p>What a &lt;em>beautiful&lt;/em> day!&lt;/p>]]&gt;&lt;/content:encoded></pre>
+
+<h3>Example</h3>
+
+<pre>&lt;?xml version="1.0" encoding="utf-8"?&gt; 
+
+&lt;rdf:RDF 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  <span class="example-other">xmlns:content="http://purl.org/rss/1.0/modules/content/"</span>
+  xmlns="http://purl.org/rss/1.0/"
+&gt; 
+
+  &lt;channel rdf:about="http://example.org/rss.rdf"&gt;
+    &lt;title&gt;Example Feed&lt;/title&gt;
+    &lt;link&gt;http://www.example.org&lt;/link&gt;
+    &lt;description&gt;Simply for the purpose of demonstration.&lt;/description&gt;
+
+    &lt;items&gt;
+      &lt;rdf:Seq&gt;
+        &lt;rdf:li resource="http://example.org/item/" /&gt;
+      &lt;/rdf:Seq&gt;
+    &lt;/items&gt;
+    
+  &lt;/channel&gt;
+
+  &lt;item rdf:about="http://example.org/item/"&gt;
+    &lt;title&gt;The Example Item&lt;/title&gt; 
+    &lt;link&gt;http://example.org/item/&lt;/link&gt;
+    <span class="example-other">&lt;content:encoded></span>&lt;![CDATA[&lt;p>What a &lt;em>beautiful&lt;/em> day!&lt;/p>]]&gt;<span class="example-other">&lt;/content:encoded></span>
+  &lt;/item&gt; 
+&lt;/rdf:RDF&gt;</pre>
+
+   <h2><a name="syntax">Original Syntax</a></h2>
+
+	<h3>content:items</h3>
+	<p><strong>content:items</strong> is a sub-element of an RSS item or channel. It is used as follows:</p>
+<pre>&lt;content:items>
+  &lt;rdf:Bag>
+    &lt;rdf:li>
+      &lt;content:item>
+        <span class="example-other">&lt;!-- Use content:item as described below --></span>
+      &lt;/content:item>
+    &lt;/rdf:li>
+    <span class="example-other">&lt;!-- Optionally, include as many more content:item elements as needed. --></span>
+  &lt;/rdf:Bag>
+&lt;/content:items></pre>
+
+	<h3>content:item</h3>
+	<p>A content:item describes a single version of the content for its parent item. If the content is available on the Web at a specific address, content:item has an rdf:about attribute containg the URI of the content.</p>
+
+<pre>
+<span class="example-other">&lt;!-- Without a URI: --></span>
+&lt;content:item>
+  <span class="example-other">&lt;!-- information about the item goes here --></span>
+&lt;/content:item>
+
+<span class="example-other">&lt;!-- With a URI: --></span>
+&lt;content:item <span class="example-rdf">rdf:about="http://example.org/item/content.png"</span>>
+  <span class="example-other">&lt;!-- information about the item goes here --></span>
+&lt;/content:item>
+</pre>
+
+<p>A content:item can include the following sub-elements:</p>
+
+	<h3>content:format</h3>
+	
+	<p><strong>Required.</strong> An empty element with an rdf:resource attribute that points to a URI representing the format of the content:item. Suggested best practice is to use <a href="http://www.rddl.org/natures">the list of RDDL natures</a>.</p>
+
+	<pre>&lt;content:format rdf:resource="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict" /></pre>
+	
+	<h3>rdf:value</h3>
+	<p><strong>Required if no URI is defined for the content:item.</strong> Includes the content of the content:item. This is encoded as specified by content:encoding. If the content is included as unencoded XML, then the attribute rdf:parseType="Literal" should be used as to not confuse RDF parsers.</p>
+
+	<h3>content:encoding</h3>
+	<p><strong>Optional.</strong> An empty element with an rdf:resource attribute that points to a URI representing the encoding of the content:item. An encoding is a reversable method of including content within the RSS file.</p>
+
+<p>If no encoding is specified, it should be assumed that the content is included as character data, like so:</p>
+
+<pre><span class="example-rdf">&lt;rdf:value&gt;</span>This is &amp;lt;em&amp;gt;very&amp;lt;/em&amp;gt; cool.<span class="example-rdf">&lt;/rdf:value&gt;</span></pre>
+
+<p>or</p>
+
+<pre><span class="example-rdf">&lt;rdf:value&gt;</span>&lt;![CDATA[This is &lt;em&gt;very&lt;/em&gt; cool.]]!><span class="example-rdf">&lt;/rdf:value&gt;</span></pre>
+
+<p>If the document is encoded as well-formed XML, the URI <a href="http://www.w3.org/TR/REC-xml#dt-wellformed">http://www.w3.org/TR/REC-xml#dt-wellformed</a> should be used. An example of well-formed XML is:</p>
+
+<pre><span class="example-rdf">&lt;rdf:value&gt;</span>This is &lt;em&gt;very&lt;/em&gt; cool.<span class="example-rdf">&lt;/rdf:value&gt;</span></pre>
+
+<p>An example of a content:encoding exlement is:</p>
+
+	<pre>&lt;content:encoding rdf:resource="http://www.w3.org/TR/REC-xml#dt-wellformed" /></pre>
+
+   <h3><a name="example">Example</a></h3>
+
+<pre>&lt;?xml version="1.0" encoding="utf-8"?&gt; 
+
+&lt;rdf:RDF 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  <span class="example-other">xmlns:content="http://purl.org/rss/1.0/modules/content/"</span>
+  xmlns="http://purl.org/rss/1.0/"
+&gt; 
+
+  &lt;channel rdf:about="http://example.org/rss.rdf"&gt;
+    &lt;title&gt;Example Feed&lt;/title&gt;
+    &lt;link&gt;http://www.example.org&lt;/link&gt;
+    &lt;description&gt;Simply for the purpose of demonstration.&lt;/description&gt;
+
+    &lt;items&gt;
+      &lt;rdf:Seq&gt;
+        &lt;rdf:li resource="http://example.org/item/" /&gt;
+      &lt;/rdf:Seq&gt;
+    &lt;/items&gt;
+    
+  &lt;/channel&gt;
+
+  &lt;item rdf:about="http://example.org/item/"&gt;
+    &lt;title&gt;The Example Item&lt;/title&gt; 
+    &lt;link&gt;http://example.org/item/&lt;/link&gt;
+    <span class="example-other">&lt;content:items></span><span class="example-rdf">&lt;rdf:Bag>
+      &lt;rdf:li></span><span class="example-other">&lt;content:item>
+        &lt;content:format</span> <span class="example-rdf">rdf:resource="http://www.w3.org/1999/xhtml"</span><span class="example-other"> />
+        &lt;content:encoding</span> <span class="example-rdf">rdf:resource="http://www.w3.org/TR/REC-xml#dt-wellformed"</span> <span class="example-other">/></span>
+        <span class="example-rdf">&lt;rdf:value rdf:parseType="Literal" xmlns="http://www.w3.org/1999/xhtml"></span>
+          &lt;em>This is &lt;strong>very&lt;/strong>&lt;/em> &lt;strong>cool&lt;/strong>.
+        <span class="example-rdf">&lt;/rdf:value></span>
+      <span class="example-other">&lt;/content:item></span><span class="example-rdf">&lt;/rdf:li>&lt;rdf:li></span><span class="example-other">&lt;content:item>
+        &lt;content:format</span> <span class="example-rdf">rdf:resource="http://www.w3.org/TR/html4/"</span> <span class="example-other">/></span>
+        <span class="example-rdf">&lt;rdf:value></span>&lt;![CDATA[&lt;em>This is&lt;strong>very&lt;/em> cool&lt;/strong>.]]&gt;<span class="example-rdf">&lt;/rdf:value></span>
+      <span class="example-other">&lt;/content:item></span><span class="example-rdf">&lt;/rdf:li>&lt;rdf:li></span><span class="example-other">&lt;content:item rdf:about="http://example.org/item/content-here.txt">
+        &lt;content:format rdf:resource="http://www.isi.edu/in-notes/iana/assignments/media-types/text/plain" /></span>
+        <span class="example-rdf">&lt;rdf:value></span>This is &amp;gt;very cool&amp;lt;.<span class="example-rdf">&lt;/rdf:value></span>
+      <span class="example-other">&lt;/content:item></span><span class="example-rdf">&lt;/rdf:li>&lt;rdf:li></span><span class="example-other">&lt;content:item rdf:about="http://example.org/item/content.svg">
+        &lt;content:format rdf:resource="http://www.w3.org/2000/svg" />
+      &lt;/content:item></span><span class="example-rdf">&lt;/rdf:li>
+    &lt;/rdf:Bag></span><span class="example-other">&lt;/content:items></span>
+
+  &lt;/item&gt; 
+
+&lt;/rdf:RDF&gt;</pre>
+ </body>
+</html>

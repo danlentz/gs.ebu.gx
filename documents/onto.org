@@ -1,0 +1,230 @@
+#+TITLE: GX
+#+AUTHOR: Dan Lentz
+#+EMAIL:  danlentz@gmail.com
+
+* GX NamedSpace
+  
+** Package/Ontology/Namespace definition
+   
+*** gx-user> (collect-all-instances-of owl:Ontology)
+#+begin_src text
+
+   (#<owl:Ontology #:|http://www.w3.org/2002/07/owl|>)
+
+#+end_src
+
+*** gx-user> (describe (car (collect-all-instances-of owl:Ontology)))
+#+begin_src text
+
+  #<owl:Ontology #:|http://www.w3.org/2002/07/owl|> is an instance of #<rdfs:Class owl:Ontology>:
+   The following slots have :instance allocation:
+    mclasses                  (#<rdfs:Class owl:Ontology>)
+    type-tag                  owl:Ontology
+    name                      #:|http://www.w3.org/2002/07/owl|
+    about                     #<uri http://www.w3.org/2002/07/owl>
+    ID                        <unbound>
+    lang                      nil
+    label                     <unbound>
+    isDefinedBy               (#<uri http://www.w3.org/TR/2004/REC-owl-semantics-20040210/>
+                               #<uri http://www.w3.org/TR/2004/REC-owl-test-20040210/>
+                               #<uri http://www.w3.org/TR/2004/REC-owl-features-20040210/>)
+    comment                   "This file specifies in RDF Schema format the
+      built-in classes and properties that together form the basis of
+      the RDF/XML syntax of OWL Full, OWL DL and OWL Lite.
+      We do not expect people to import this file
+      explicitly into their ontology. People that do import this file
+      should expect their ontology to be an OWL Full ontology."
+    type                      <unbound>
+    funprop-inverse           nil
+    inverse-funprop-inverse   nil
+    priorVersion              #<uri http://www.daml.org/2001/03/daml+oil>
+    versionInfo               "10 February 2004, revised $Date: 2004/09/24 18:12:02 $"
+    imports                   #<uri http://www.w3.org/2000/01/rdf-schema>
+    backwardCompatibleWith    <unbound>
+    incompatibleWith          <unbound>
+
+#+end_src
+
+*** gx-user> (get-form  (car (collect-all-instances-of owl:Ontology)))
+#+begin_src text
+
+  (owl:Ontology #:|http://www.w3.org/2002/07/owl|
+   (rdf:about #<uri http://www.w3.org/2002/07/owl>)
+   (rdfs:isDefinedBy
+    #<uri http://www.w3.org/TR/2004/REC-owl-semantics-20040210/>
+    #<uri http://www.w3.org/TR/2004/REC-owl-test-20040210/>
+    #<uri http://www.w3.org/TR/2004/REC-owl-features-20040210/>)
+   (rdfs:comment "This file specifies in RDF Schema format the
+      built-in classes and properties that together form the basis of
+      the RDF/XML syntax of OWL Full, OWL DL and OWL Lite.
+      We do not expect people to import this file
+      explicitly into their ontology. People that do import this file
+      should expect their ontology to be an OWL Full ontology.")
+   (owl:priorVersion #<uri http://www.daml.org/2001/03/daml+oil>)
+   (owl:versionInfo
+    "10 February 2004, revised $Date: 2004/09/24 18:12:02 $")
+    (owl:imports #<uri http://www.w3.org/2000/01/rdf-schema>))
+
+#+end_src
+    
+*** gx-user> (list-all-uri-namedspaces)
+#+begin_src text
+
+  (#<uri-namedspace http://www.w3.org/2002/07/owl>
+   #<uri-namedspace http://www.w3.org/1999/02/22-rdf-syntax-ns>
+   #<uri-namedspace http://www.w3.org/2001/XMLSchema>
+  #<uri-namedspace http://www.w3.org/2000/01/rdf-schema>)
+
+#+end_src
+  
+*** gx-user> (describe (car (list-all-uri-namedspaces)))
+#+begin_src text
+
+ #<uri-namedspace http://www.w3.org/2002/07/owl> is an instance of
+ #<standard-class uri-namedspace>:
+   The following slots have :instance allocation:
+    scheme        :http
+    host          "www.w3.org"
+    userinfo      nil
+    port          nil
+    path          "/2002/07/owl"
+    query         nil
+    fragment      nil
+    plist         nil
+    escaped       nil
+    string        "http://www.w3.org/2002/07/owl"
+    parsed-path   nil
+    hashcode      83003053
+    package       #<The owl package>
+    env           nil
+#+end_src text
+
+*** gx-user> (get-form owl:Ontology)
+#+BEGIN_SRC text
+
+  (rdfs:Class owl:Ontology (rdfs:label "Ontology"))
+
+#+END_SRC
+
+*** gx-user> (describe  owl:Ontology)
+#+BEGIN_SRC text
+  
+  #<rdfs:Class owl:Ontology> is an instance of #<_rdfsClass rdfs:Class>:
+   The following slots have :instance allocation:
+    flags                     0
+    direct-methods            (nil)
+    plist                     nil
+    direct-superclasses       (#<rdfs:Class rdfs:Resource>)
+    direct-subclasses         nil
+    class-precedence-list     (#<rdfs:Class owl:Ontology>
+                               #<rdfs:Class rdfs:Resource>
+                               #<gx::meta-galaxy gx::galaxy>
+                               #<standard-class standard-object>
+                               #<built-in-class t>)
+    wrapper                   #(7737716924452716 t
+                                (mclasses gx::type-tag excl::name
+                                          rdf:about rdf:ID xml:lang
+                                          rdfs:label rdfs:isDefinedBy
+                                          rdfs:comment rdf:type
+                                          gx::funprop-inverse
+                                          gx::inverse-funprop-inverse
+                                          owl:priorVersion
+                                          owl:versionInfo owl:imports
+                                          owl:backwardCompatibleWith
+                                          owl:incompatibleWith)
+                                #() #<rdfs:Class owl:Ontology> 0 nil)
+    direct-slots              (#<gx::OwlProperty-direct-slot-definition
+                                 owl:priorVersion @ #x10034f6442>
+                               #<gx::OwlProperty-direct-slot-definition
+                                 owl:versionInfo @ #x10034f6462>
+                               #<gx::OwlProperty-direct-slot-definition
+                                 owl:imports @ #x10034f6482>
+                               #<gx::OwlProperty-direct-slot-definition
+                                 owl:backwardCompatibleWith @
+                                 #x10034f64a2>
+                               #<gx::OwlProperty-direct-slot-definition
+                                 owl:incompatibleWith @ #x10034f64c2>)
+    slots                     (#<aclmop:standard-effective-slot-definition
+                                 mclasses @ #x10034f64e2>
+                               #<aclmop:standard-effective-slot-definition
+                                 gx::type-tag @ #x10034f6502>
+                               #<aclmop:standard-effective-slot-definition
+                                 excl::name @ #x10034f6522>
+                               #<aclmop:standard-effective-slot-definition
+                                 rdf:about @ #x10034f6542>
+                               #<aclmop:standard-effective-slot-definition
+                                 rdf:ID @ #x10034f6562>
+                               #<aclmop:standard-effective-slot-definition
+                                 xml:lang @ #x10034f6582>
+                               #<gx::Property-effective-slot-definition
+                                 rdfs:label @ #x10034f5b62>
+                               #<gx::Property-effective-slot-definition
+                                 rdfs:isDefinedBy @ #x10034f5ac2>
+                               #<gx::Property-effective-slot-definition
+                                 rdfs:comment @ #x10034f5a22>
+                               #<gx::Property-effective-slot-definition
+                                 rdf:type @ #x10034a4002>
+                               #<aclmop:standard-effective-slot-definition
+                                 gx::funprop-inverse @ #x10034f65a2>
+                               #<aclmop:standard-effective-slot-definition
+                                 gx::inverse-funprop-inverse @
+                                 #x10034f65c2>
+                               #<gx::OwlProperty-effective-slot-definition
+                                 owl:priorVersion @ #x10034f65e2>
+                               #<gx::OwlProperty-effective-slot-definition
+                                 owl:versionInfo @ #x10034f6602>
+                               #<gx::OwlProperty-effective-slot-definition
+                                 owl:imports @ #x10034f6622>
+                               #<gx::OwlProperty-effective-slot-definition
+                                 owl:backwardCompatibleWith @
+                                 #x10034f6642>
+                               #<gx::OwlProperty-effective-slot-definition
+                                 owl:incompatibleWith @ #x10034f6662>)
+    prototype                 nil
+    direct-instances          (#<owl:Ontology
+                                 #:|http://www.w3.org/2002/07/owl|>)
+    mclasses                  (#<_rdfsClass rdfs:Class>)
+    type-tag                  rdfs:Class
+    name                      owl:Ontology
+    about                     <unbound>
+    ID                        <unbound>
+    lang                      nil
+    label                     "Ontology"
+    isDefinedBy               <unbound>
+    comment                   <unbound>
+    type                      <unbound>
+    funprop-inverse           nil
+    inverse-funprop-inverse   nil
+    subClassOf                nil
+    oneOf                     <unbound>
+
+#+END_SRC
+
+
+** Vocabulary Construction
+   
+*** Ontologies implemented in Lisp
+**** SKOS
+     #+begin_src emacs-lisp
+       
+     #+end_src
+**** WordNet
+#+begin_src emacs-lisp
+  
+#+end_src
+
+**** Umbel
+#+begin_src emacs-lisp
+  
+#+end_src
+     
+     
+
+     
+**** EARL
+#+srcname:  ../ontology/earl.lisp
+#+begin_src common-lisp 
+  
+#+end_src
+
+     

@@ -1,0 +1,31 @@
+cg-user(1): 
+; Fast loading C:\allegro-projects\SWCLOS\SWCLOSsys.fasl
+
+;=========== System Description ================
+;   System: "SWCLOS: A Semantic Web Processor on CLOS"
+;     default package: #<The common-graphics-user package>
+;     default pathname: #P"C:\\allegro-projects\\SWCLOS\\"
+;     default module class: defsystem:lisp-module
+;     the system contains the following modules:
+;       System: "RDFS subsystem of SWCLOS"
+;       System: "OWL subsystem of SWCLOS"
+;       System: "NTriple subsystem of SWCLOS"
+;===============================================
+
+;;To recompile, execute this form:
+(compile-system :swclos :recompile t)
+
+;;To load, execute this form:
+(load-system :swclos)
+cg-user(1): (compile-system :swclos :recompile t)
+; Compiling system: "SWCLOS: A Semantic Web Processor on CLOS".
+                      ...
+
+cg-user(2): (load-system :swclos)
+                      ...
+cg-user(3): 
+; Fast loading C:\allegro-projects\SWCLOS\swclos.fasl
+; Fast loading C:\allegro-projects\SWCLOS\utilities.fasl
+; Fast loading C:\allegro-projects\SWCLOS\hyperspec.fasl
+; Fast loading C:\allegro-projects\SWCLOS\index.fasl
+cg-user(3): (gen-index)

@@ -1,0 +1,1775 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en-US" xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<title>SWRL:  A Semantic Web Rule Language Combining OWL and RuleML</title>
+
+
+<link rel="alternate" media="print" href="rules-all.html"/>
+<link rel="section" href="#2"/>
+<link rel="section" href="#3"/>
+<link rel="section" href="#4"/>
+<link rel="section" href="#5"/>
+<link rel="section" href="#6"/>
+<link rel="section" href="#7"/>
+
+<link rel="stylesheet" type="text/css" href="spec.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="owl-xml.css" /> -->
+
+</head>
+
+
+<body>
+
+<div class="head">
+
+<h1><a name="ST"></a>
+SWRL:  A Semantic Web Rule Language <br/> Combining OWL and RuleML</h1>
+
+<h2><a name="SW"></a>Version 0.5 of 19 November 2003 </h2> 
+
+<dl>
+<dt>This version:</dt><dd> 
+<a href="http://www.daml.org/2003/11/swrl/">http://www.daml.org/2003/11/swrl/</a>
+</dd>
+<dt>Latest published version:</dt><dd> 
+<a href="http://www.daml.org/2003/11/swrl/">http://www.daml.org/2003/11/swrl/</a></dd>
+<dt>Latest working draft:</dt><dd> 
+<a href="http://www.daml.org/rules/proposal/">http://www.daml.org/rules/proposal/</a></dd>
+<!--
+<dt>Previous version:</dt><dd> 
+<a href="http://www.cs.man.ac.uk/~horrocks/DAML/Rules/WD-OWL-rules-20031016/">http://www.cs.man.ac.uk/~horrocks/DAML/Rules/WD-OWL-rules-20031016/</a></dd>
+-->
+<dt>Authors:</dt><dd> 
+<a  href="http://www.cs.man.ac.uk/%7Ehorrocks/">Ian Horrocks</a>,
+Department of Computer Science, University of Manchester<br/> 
+<a href="http://www-db.research.bell-labs.com/user/pfps/">Peter
+F. Patel-Schneider</a>, Bell Labs Research, Lucent Technologies<br/>
+<a href="http://www.cs.unb.ca/~boley/">Harold Boley</a>, National Research Council of Canada<br />
+<a href="http://home.comcast.net/~stabet/">Said Tabet</a>, Macgregor, Inc.<br />
+<a href="http://ebusiness.mit.edu/bgrosof/">Benjamin Grosof</a>, Sloan School of Management, MIT<br/>
+<a href="http://www.daml.org/people/mdean/">Mike Dean</a>, BBN Technologies
+</dd></dl>
+
+<p>
+
+</p>
+
+<hr/>
+
+</div>
+
+<h2><a id="abstract" name="abstract">Abstract</a></h2>
+
+<div class="abstract">
+<p>
+This document contains a proposal for a Semantic Web Rule Language (SWRL)
+based on a combination of the OWL DL and OWL Lite sublanguages of the
+OWL Web Ontology Language with the Unary/Binary Datalog RuleML sublanguages of the Rule Markup Language.  SWRL
+includes a high-level abstract syntax for Horn-like rules in both
+the OWL DL and OWL Lite sublanguages of OWL.  A model-theoretic
+semantics is given to provide the formal meaning for OWL ontologies
+including rules written in this abstract syntax. An XML syntax based
+on RuleML and the OWL XML Presentation Syntax as well as an 
+RDF concrete syntax based
+on the OWL RDF/XML exchange syntax are also given, along with several
+examples.
+</p>
+</div>
+
+
+<h2><a id="status" name="status">Status of this document</a></h2>
+
+<div class="status">
+<p>
+This document was approved by the
+<a href="http://www.daml.org/committee/">Joint Committee</a>
+on 18 November 2003.
+</p>
+
+
+
+<p>
+Comments on this document are invited.
+Discussion should take place on 
+<a href="mailto:www-rdf-rules@w3.org">www-rdf-rules@w3.org</a>.
+A repository of issues is being maintained
+<a href="issuesList.html">here</a>.
+</p>
+
+<hr/>
+
+</div>
+
+<div class="toc">
+
+<h2><a id="contents" name="contents">Table of contents</a></h2>
+
+<ul class="toc">
+<li class="tocline1">1. <a href="#1">Introduction</a>
+    </li>
+<li class="tocline1">2. <a href="#2">Abstract Syntax</a>
+    <ul class="toc">
+    <li class="tocline2">2.1 <a href="#2.1">Rules</a></li>
+    <li class="tocline2">2.2 <a href="#2.2">Human Readable Syntax</a></li>
+    </ul>
+    </li>
+<li class="tocline1">3. <a href="#3">Direct Model-Theoretic Semantics</a>
+    <ul class="toc">
+    <li class="tocline2">3.1 <a href="#3.1">Interpreting Rules</a></li>
+    </ul>
+    </li>
+<li class="tocline1">4. <a href="#4">Rule Examples</a></li>
+<li class="tocline1">5. <a href="#5">XML Concrete Syntax</a>
+    <ul class="toc">
+    <li class="tocline2">5.1 <a href="#5.1">Rule Examples in XML Concrete Syntax</a></li>
+    </ul>
+    </li>
+<li class="tocline1">6. <a href="#6">RDF Concrete Syntax</a>
+    <ul class="toc">
+    <li class="tocline2">6.1 <a href="#6.1">Rule Examples in RDF Concrete Syntax</a></li>
+    </ul>
+    </li>
+<li class="tocline1">7. <a href="#7">Usage Suggestions</a>
+    <ul class="toc">
+    <li class="tocline2">7.1 <a href="#7.1">Extensibility and Interoperability Cautions</a></li>
+    </ul>
+    </li>
+</ul>
+
+<ul class="toc">
+<li class="tocline1"><a href="#acknowledgments">Acknowledgments</a> </li>
+<li class="tocline1"><a href="#references">References</a> </li>
+</ul>
+
+<hr/>
+
+</div>
+
+<h2><a name="1"></a>1. Introduction </h2>
+
+<p>
+This document contains a proposal for a Semantic Web Rule Language (SWRL)
+based on a combination of the OWL DL and OWL Lite sublanguages of the
+<a href="http://www.w3.org/2001/sw/WebOnt/">OWL Web Ontology
+Language</a> with 
+the Unary/Binary Datalog RuleML sublanguages of the
+<a href="http://www.ruleml.org">Rule Markup Language</a>.
+The proposal extends the set of OWL axioms to include Horn-like
+rules.  It thus enables Horn-like rules to be combined with an OWL
+knowledge base.  A high-level abstract syntax is provided that extends
+the OWL abstract syntax described in the OWL Semantics and Abstract
+Syntax document [<cite><a href="#owl-sas">OWL S&amp;AS</a></cite>]. An
+extension of the OWL model-theoretic semantics is also given to
+provide a formal meaning for OWL ontologies including rules written in
+this abstract syntax.
+</p>
+
+<p>
+The proposed rules are of the form of an implication between an
+antecedent (body) and consequent (head). The intended meaning can be
+read as: whenever the conditions specified in the antecedent hold,
+then the conditions specified in the consequent must also hold.
+</p>
+
+<p>
+Both the antecedent (body) and consequent (head) consist of zero or
+more atoms. An empty antecedent is treated as trivially true
+(i.e. satisfied by every interpretation), so the consequent must also
+be satisfied by every interpretation; an empty consequent is treated
+as trivially false (i.e., not satisfied by any interpretation), so the
+antecedent must also not be satisfied by any interpretation. Multiple
+atoms are treated as a conjunction. Note that rules with conjunctive
+consequents could easily be transformed (via the Lloyd-Topor
+transformations [<cite><a href="#Lloyd87">Lloyd87</a></cite>]) into
+multiple rules each with an atomic consequent.
+</p>
+
+<p>
+Atoms in these rules can be of the form C(x), P(x,y), sameAs(x,y) or
+differentFrom(x,y), where C is an OWL description, P is an OWL
+property, and x,y are either variables, OWL individuals or OWL data
+values. It is easy to see that OWL DL becomes undecidable when
+extended in this way as rules can be used to simulate role value maps
+[<cite><a href="#Schmidt-Schauss89">Schmidt-Schau&#223;89</a></cite>].
+</p>
+
+<p>
+An XML syntax is also given for these rules based on RuleML and the OWL XML presentation syntax.
+Furthermore, an RDF concrete syntax based on the OWL RDF/XML exchange syntax is presented.
+The rule syntaxes are illustrated with several running examples.
+Finally, we give usage suggestions and cautions.  
+</p>
+
+
+<hr/>
+
+<h2><a name="2"></a>2. Abstract Syntax</h2>
+
+<p>
+The syntax for SWRL in this section abstracts from any exchange
+syntax for OWL and thus facilitates access to and evaluation of the
+language. This syntax extends the abstract syntax of OWL described in
+the OWL Semantcs and Abstract Syntax document [<cite><a
+href="#owl-sas">OWL S&amp;AS</a></cite>].
+Even this abstract syntax is not particularly readable for rules.
+Examples will thus often be given in an informal syntax.
+This informal syntax will neither be given an exact syntax nor a mapping to
+any of the fully-specified syntaxes for SWRL.
+</p>
+
+
+<p>
+The abstract syntax is specified here by means of a version of Extended
+BNF, very similar to the 
+<a href="http://www.w3.org/TR/REC-xml#sec-notation">EBNF notation</a> 
+used for XML [<cite><a href="#ref-xml">XML</a></cite>]. 
+Terminals are quoted; non-terminals are bold and not quoted.  
+Alternatives are either separated 
+by vertical bars (|) or are given in different productions.  Components that
+can occur at most once are enclosed in square brackets ([&#8230;]);
+components that can occur any number of times (including zero) are enclosed
+in braces ({&#8230;}). 
+Whitespace is ignored in the productions here.
+</p>
+
+<p>
+Names in the abstract syntax are <a
+href="http://www.w3.org/TR/2003/WD-rdf-concepts-20030123/#dfn-URI-reference">
+RDF URI references</a> [<cite><a href="#ref-rdfconcepts">RDF
+Concepts</a></cite>].  These names may be abbreviated into qualified
+names, using one of the following namespace names:
+</p>
+<table border="1" cellspacing="0">
+<tbody><tr><th><a name="standard-namespaces">
+	Namespace name</a></th><th>Namespace</th></tr>
+<tr><td>rdf</td><td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td></tr>
+<tr><td>rdfs</td><td>http://www.w3.org/2000/01/rdf-schema#</td></tr>
+<tr><td>xsd</td><td>http://www.w3.org/2001/XMLSchema#</td></tr>
+<tr><td>owl</td><td>http://www.w3.org/2002/07/owl#</td></tr>
+</tbody></table>
+
+<p>
+The meaning of each construct in the abstract syntax is informally
+described when it is introduced.  The formal meaning of these
+constructs is given in <a href="#3">Section 3</a> via an extension of
+the OWL DL model-theoretic semantics [<cite><a
+href="#owl-sas">OWL S&amp;AS</a></cite>].
+</p>
+
+
+<h3><a name="2.1"></a>2.1. Rules </h3>
+
+<p>
+An OWL ontology in the abstract syntax contains a sequence of axioms
+and facts. Axioms may be of various kinds, e.g., subClass axioms and
+equivalentClass axioms. It is proposed to extend this with rule
+axioms.
+</p>
+
+<pre><span class="nonterminal">axiom</span> ::= <span
+class="nonterminal">rule</span> </pre>
+
+<p>
+A rule axiom consists of an antecedent (body) and a consequent
+(head), each of which consists of a (posibly empty) set of atoms. 
+</p>
+
+
+<pre><span class="nonterminal">rule</span> ::= '<span class="syntax">Implies(</span>' { <span class="nonterminal">annotation</span> } <span class="nonterminal">antecedent</span> <span class="nonterminal">consequent</span> '<span class="syntax">)</span>'
+<span class="nonterminal">antecedent</span> ::= '<span class="syntax">Antecedent(</span>' { <span class="nonterminal">atom</span> } '<span class="syntax">)</span>'
+<span class="nonterminal">consequent</span> ::= '<span class="syntax">Consequent(</span>' { <span class="nonterminal">atom</span> } '<span class="syntax">)</span>'
+</pre>
+
+
+<p>
+Informally, a rule may be read as meaning that if the antecedent holds
+(is "true"), then the consequent must also hold. An empty antecedent
+is treated as trivially holding (true), and an empty consequent is
+treated as trivially not holding (false).  Rules with an empty antecedent
+can thus be used to provide unconditional facts; however such unconditional
+facts are better stated in OWL itself, i.e., without the use of the rule
+construct.
+Non-empty antecedents and
+consequents hold iff all of their constituent atoms hold, i.e., they
+are treated as conjunctions of their atoms. As mentioned above, rules
+with conjunctive consequents could easily transformed (via the
+Lloyd-Topor transformations [<cite><a
+href="#Lloyd87">Lloyd87</a></cite>]) into multiple rules each with
+an atomic consequent.
+</p>
+
+<pre><span class="nonterminal">atom</span> ::= <span class="nonterminal">description</span> '<span class="syntax">(</span>' <span class="nonterminal">i-object</span> '<span class="syntax">)</span>'
+	 | <span class="nonterminal">individualvaluedPropertyID</span> '<span class="syntax">(</span>' <span class="nonterminal">i-object</span> <span class="nonterminal">i-object</span> '<span class="syntax">)</span>'
+	 | <span class="nonterminal">datavaluedPropertyID</span> '<span class="syntax">(</span>' <span class="nonterminal">i-object</span> <span class="nonterminal">d-object</span> '<span class="syntax">)</span>'
+	 | <span class="syntax">sameAs</span> '<span class="syntax">(</span>' <span class="nonterminal">i-object</span> <span class="nonterminal">i-object</span> '<span class="syntax">)</span>'
+	 | <span class="syntax">differentFrom</span> '<span class="syntax">(</span>' <span class="nonterminal">i-object</span> <span class="nonterminal">i-object</span> '<span class="syntax">)</span>'
+</pre>
+
+
+<p>
+Atoms can be of the form C(x), P(x,y), sameAs(x,y) or
+differentFrom(x,y), where C is an OWL description, P is
+an OWL property, and x,y are either variables, OWL individuals or OWL
+data values. In the context of OWL Lite, descriptions in atoms of the
+form C(x) may be restricted to class names.
+</p>
+
+<p>
+Informally, an atom C(x) holds if x is an instance of the class
+description C, an atom P(x,y) holds if x is related to y by property
+P, an atom sameAs(x,y) holds if x is interpreted as the same object as
+y, and an atom differentFrom(x,y) holds if x and y are interpreted as
+different objects. Note that the latter two forms can be seen as
+"syntactic sugar": they are convenient, but do not increase the
+expressive power of the language (i.e., such (in)equalities can
+already be expressed using the combined power of OWL and rules without
+explicit (in)equality atoms).
+</p>
+
+<pre><span class="nonterminal">i-object</span> ::= <span class="nonterminal">i-variable</span> | <span class="nonterminal">individualID</span>
+<span class="nonterminal">d-object</span> ::= <span class="nonterminal">d-variable</span> | <span class="nonterminal">dataLiteral</span>
+</pre>
+
+<p>
+Atoms may refer to individuals, data literals, individual variables or
+data variables. Variables are treated as universally quantified,
+with their scope limited to a given rule.  As usual, only variables that
+occur in the antecedent of a rule may occur in the consequent (a
+condition usually referred to as "safety"). This safety condition does
+not, in fact, restrict the expressive power of the language (because
+existentials can already be captured using OWL someValuesFrom
+restrictions).
+</p>
+
+<pre><span class="nonterminal">i-variable</span> ::= '<span class="syntax">I-variable(</span>' <span class="nonterminal">URIreference</span> '<span class="syntax">)</span>'
+<span class="nonterminal">d-variable</span> ::= '<span class="syntax">D-variable(</span>' <span class="nonterminal">URIreference</span> '<span class="syntax">)</span>'
+</pre>
+
+
+<h3><a name="2.2"></a>2.2. Human Readable Syntax </h3>
+
+<p>
+While the abstract EBNF syntax is consistent with the OWL
+specification, and is useful for defining XML and RDF serialisations,
+it is rather verbose and not particularly easy to read. In the
+following we will, therefore, often use a relatively informal "human
+readable" form similar to that used in many published works on rules.
+</p>
+
+<p>
+In this syntax, a rule has the form:
+</p>
+
+<pre><span class="syntax">antecedent</span> &rArr; <span class="syntax">consequent</span>
+</pre>
+
+<p>
+where both <span class="syntax">antecedent</span> and <span
+class="syntax">consequent</span> are conjunctions of atoms written
+<span class="syntax">a<sub>1</sub></span> &and; ... &and; <span
+class="syntax">a<sub>n</sub></span>. Variables are indicated using the
+standard convention of prefixing them with a question mark (e.g.,
+?x). Using this syntax, a rule asserting that the composition of
+parent and brother properties implies the uncle property would be
+written:
+</p>
+
+<pre>parent(?x,?y) &and; brother(?y,?z) &rArr; uncle(?x,?z)
+</pre>
+
+
+<hr/>
+
+
+<h2><a name="3"></a>3. Direct Model-Theoretic Semantics </h2>
+
+<p>
+The model-theoretic semantics for SWRL is a straightforward
+extension of the semantics for OWL given in the OWL Semantics and Abstract Syntax document [<cite><a
+href="#owl-sas">OWL S&amp;AS</a></cite>]. The basic idea is that we define
+<strong>bindings</strong>, extensions of OWL interpretations that also
+map variables to elements of the domain. A rule is satisfied by an
+interpretation iff every binding that satisfies the antecedent also
+satisfies the consequent. The semantic conditions relating to axioms
+and ontologies are unchanged, e.g., an interpretation satisfies an
+ontology iff it satisfies every axiom (including rules) and fact in
+the ontology.
+</p>
+
+
+<h3><a name="3.1"></a>3.1. Interpreting Rules</h3>
+
+<p>
+From the OWL Semantics and Abstract Syntax document
+we recall that an abstract OWL interpretation
+is a tuple of the form</p>
+
+<pre>I = &lt;R, EC, ER, L, S, LV&gt;
+</pre>
+
+<p>
+where R is a set of resources, LV &sube; R is a set of literal
+values, EC is a mapping from classes and datatypes to subsets of
+R and LV respectively, ER is a mapping from properties to binary
+relations on R, L is a mapping from typed literals to elements of
+LV, and S is a mapping from individual names to elements of
+EC(owl:Thing).</p>
+
+<p>
+Given an abstract OWL interpretation &Iota;, a binding B(&Iota;) is an abstract
+OWL interpretation that extends &Iota; such that S maps i-variables to
+elements of EC(owl:Thing) and L maps d-variables to elements of LV
+respectively.  An atom is satisfied by an interpretation &Iota; under the
+conditions given in the <a
+href="#interpretation-conditions-table">Interpretation Conditions
+Table</a>, where C is an OWL DL description, P is an OWL DL
+individualvalued property, Q is an OWL DL datavalued property, x,y are
+variables or OWL individuals, and z is a variable or an OWL data
+value.
+</p>
+
+<table border="1" cellspacing="0">
+<caption><a id="interpretation-conditions-table"
+name="interpretation-conditions-table">Interpretation Conditions
+Table</a></caption>
+
+<thead>
+<tr><th>Atom</th><th>Condition on Interpretation</th></tr>
+</thead>
+<tbody>
+<tr><td><a name="description_atom_semantics"> <span
+        class="syntax">C(</span>x<span
+        class="syntax">)</span> </a></td> <td>S(x) &#8712;
+        EC(C)</td></tr> 
+
+<tr><td><a name="property_atom_semantics"> <span
+        class="syntax">P(</span>x,y<span
+        class="syntax">)</span> </a></td> <td>&lt;S(x),S(y)&gt;
+        &#8712; ER(P)</td></tr>
+
+<tr><td><a name="property_atom_semantics"> <span
+        class="syntax">Q(</span>x,z<span
+        class="syntax">)</span> </a></td> <td>&lt;S(x),L(z)&gt;
+        &#8712; ER(Q)</td></tr>
+
+<tr><td><a name="sameas_atom_semantics"> <span
+        class="syntax">sameAs(</span>x,y<span
+        class="syntax">)</span> </a></td> <td>S(x) = S(y)</td></tr>
+
+<tr><td><a name="differentfrom_atom_semantics"> <span
+        class="syntax">differentFrom(</span>x,y<span
+        class="syntax">)</span> </a></td> <td>S(x) &#8800; S(y)</td></tr>
+</tbody>
+</table>
+
+<p>
+ A binding B(&Iota;) satisfies an antecedent A iff A is empty or B(&Iota;)
+satisfies every atom in A. A binding B(&Iota;) satisfies a consequent C iff
+C is not empty and B(&Iota;) satisfies every atom in C.  A rule is satisfied
+by an interpretation &Iota; iff for every binding B such that B(&Iota;)
+satisfies the antecedent, B(&Iota;) also satisfies the consequent.
+</p>
+
+<p>
+The semantic conditions relating to axioms and ontologies are
+unchanged. In particular, an interpretation satisfies an ontology iff
+it satisfies every axiom (including rules) and fact in the ontology;
+an ontology is consistent iff it is satisfied by at least one
+interpretation; an ontology O<sub>2</sub> is entailed by an ontology
+O<sub>1</sub> iff every interpretation that satisfies O<sub>1</sub>
+also satisfies O<sub>2</sub>.
+</p>
+
+<hr/>
+
+<h2><a name="4"></a>4. Example Rules</h2>
+
+
+<div class="egLabel" id="eg4_1-1">
+  <b>Example 4.1-1</b>
+</div>
+<p>
+A simple use of these rules would be to assert that the combination of the <tt>hasParent</tt>
+and <tt>hasBrother</tt> properties implies the <tt>hasUncle</tt> property.
+Informally, this rule could be written as:
+</p>
+
+<pre class="egOwl">
+hasParent(?x1,?x2) &and; hasBrother(?x2,?x3) &rArr; hasUncle(?x1,?x3) 
+</pre>
+
+<p>
+In the abstract syntax the rule would be written like:
+</p>
+
+<pre class="egOwl">
+Implies(Antecedent(hasParent(I-variable(x1) I-variable(x2))
+		   hasBrother(I-variable(x2) I-variable(x3)))
+	Consequent(hasUncle(I-variable(x1) I-variable(x3))))
+</pre>
+
+<p>
+From this rule, if John has Mary as a parent and Mary has Bill has a
+brother then John has Bill as an uncle.  
+</p>
+
+<div class="egLabel" id="eg4_1-2">
+  <b>Example 4.1-2</b>
+</div>
+
+<p>
+An even simpler rule would be to assert that <tt>Student</tt>s are
+<tt>Person</tt>s, as in 
+<tt>Student(?x1) &rArr; Person(?x1)</tt>.
+</p>
+
+<pre class="egOwl">
+Implies(Antecedent(Student(I-variable(x1)))
+	Consequent(Person(I-variable(x1))))
+</pre>
+
+<p>
+However, this kind of use for rules in OWL just duplicates the OWL
+subclass facility.  It is logically equivalent to write instead
+</p>
+<pre class="egOwl">
+Class(Student partial Person)
+</pre>
+<p>
+or
+</p>
+<pre class="egOwl">
+SubClassOf(Student Person)
+</pre>
+<p>
+which would make the information directly available to 
+an OWL reasoner. 
+</p> 
+
+<div class="egLabel" id="eg4_1-3">
+  <b>Example 4.1-3</b>
+</div>
+
+<p>
+A very common use for rules is to move property values from one individual
+to a related individual, as in the
+following example that expresses the fact that the style of an art object
+is the same as the style of the creator.
+</p>
+
+<pre>
+Artist(?x) &amp; artistStyle(?x,?y) &amp; Style(?y) &amp; creator(?z,?x) &rArr; style/period(?z,?y)
+</pre>
+
+<pre class="egOwl">
+Implies(Antecedent(Artist(I-variable(x)) 
+		   artistStyle(I-variable(x) I-variable(y))
+		   Style(I-variable(y))
+		   creator(I-variable(z) I-variable(x)))
+	Consequent(style/period(I-variable(z) I-variable(y))))
+</pre>
+
+<div class="egLabel" id="eg4_1-4">
+  <b>Example 4.1-4</b>
+</div>
+
+<p>
+It is useful to include OWL descriptions in rules, instead of using
+named classes.  The above rule could be augmented with a separate rule to
+provide information about exclusivity of style (assuming that style is not
+always exclusive). 
+</p>
+
+<pre>
+Artist(?x) &amp; (&le;1 artistStyle)(?x) &amp; creator(?z,?x) &rArr; (&le;1 style/period)(?z)
+</pre>
+
+<pre class="egOwl">
+Implies(Antecedent(Artist(I-variable(x)) 
+		   (restriction(artistStyle maxCardinality(1)))(I-variable(x))
+		   Style(I-variable(y))
+		   creator(I-variable(z) I-variable(x)))
+	Consequent((restriction(style/period maxCardinality(1)))(I-variable(z))))
+</pre>
+
+<hr />
+
+<h2><a name="5"></a>5. XML Concrete Syntax</h2>
+
+
+
+<p>
+The XML Concrete Syntax is a combination of the
+OWL Web Ontology Language XML Presentation Syntax
+[<cite><a href="#owl-xml">OWL XML</a></cite>]
+with
+the RuleML XML syntax
+[<cite><a href="#ruleml">RuleML</a></cite>].
+This has several advantages:
+</p>
+<ul>
+
+<li>arbitrary OWL classes (e.g., descriptions) can be used as
+predicates in rules;</li>
+
+<li>rules and ontology axioms can be freely mixed;</li> 
+
+<li>the existing XSLT stylesheet (<a
+href="http://www.w3.org/TR/owl-xmlsyntax/owlxml2rdf.xsl">owlxml2rdf.xsl</a>)
+can easily be extended to provide a mapping to RDF graphs that extends the OWL RDF/XML exchange syntax (see <a href="#6">Section 6</a>);</li>
+
+<li>interoperability between OWL and RuleML is simplified, 
+existing RuleML tools can be adapted to SWRL,
+and an evolutionary extension path to 
+additional rule expressive features cf. RuleML 
+(e.g., n-ary, function-term, etc.) is prepared.</li>
+
+</ul>
+
+<p>The Ontology root
+element of the OWL XML Presentation Syntax 
+is extended to include "<tt>imp</tt>" (implication rule) 
+and "<tt>var</tt>" (variable declaration) 
+axioms as found under the rulebase root of RuleML.
+</p>
+
+<div class="exampleOuter" id="owls_Ontology">
+<div class="exampleHeader">
+  element <b>Ontology</b> 
+</div>
+<div class="exampleInner bgXsd">
+<pre>&lt;swrlx:Ontology
+  swrlx:name = <a href="http://www.w3.org/TR/2001/REC-xmlschema-2-20010502/datatypes.html#anyURI">xsd:anyURI</a> 
+&gt;
+  <i>Content:</i> (<a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_VersionInfo">owlx:VersionInfo</a> | <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_PriorVersion">owlx:PriorVersion</a> | <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_BackwardCompatibleWith">owlx:BackwardCompatibleWith</a> | 
+            <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_IncompatibleWith">owlx:IncompatibleWith</a> | <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_Imports">owlx:Imports</a> | <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_Annotation">owlx:Annotation</a> | 
+            <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_ClassAxiom">owlx:Class</a><span class="sup">[axiom]</span> | <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_EnumeratedClass">owlx:EnumeratedClass</a><span class="sub">(D,F)</span> | 
+            <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_SubClassOf">owlx:SubClassOf</a><span class="sub">(D,F)</span> | <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_EquivalentClasses">owlx:EquivalentClasses</a> | <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_DisjointClasses">owlx:DisjointClasses</a><span class="sub">(D,F)</span> | 
+            <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_DatatypeProperty">owlx:DatatypeProperty</a> | <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_ObjectProperty">owlx:ObjectProperty</a> | 
+            <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_SubPropertyOf">owlx:SubPropertyOf</a> | <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_EquivalentProperties">owlx:EquivalentProperties</a> | 
+            <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_Individual">owlx:Individual</a><span class="sup">[axiom]</span> | <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_SameIndividual">owlx:SameIndividual</a> | <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_DifferentIndividuals">owlx:DifferentIndividuals</a> |
+            <a href="#owls_Rule">ruleml:imp</a><span class="sup">[axiom]</span> | <a href="#owls_Variable">ruleml:var</a><span class="sup">[axiom]</span>)* 
+&lt;/swrlx:Ontology&gt;</pre>
+</div>
+<div class="exampleWrapper">
+<table>
+<tr>
+  <td class="elementHeader">Attribute: </td>
+  <td><b class="attr">swrlx:name</b> - refers to a name of this ontology, which 
+      is the base URI of this element. 
+</td>
+</tr>
+<tr>
+  <td class="elementHeader">Note: </td> 
+  <td>This is the root element of OWL documents in the XML presentation 
+      syntax, while <tt>rdf:RDF</tt> is used as the document root for 
+      OWL in RDF/XML. 
+  </td>
+
+</tr>
+</table>
+
+</div>
+</div>
+
+<p>
+We then simply need to add the relevant syntax for variables and rules.
+</p>
+
+<p>Variable (var) axioms are statements about variables, indicating that the
+given string is to be used as a variable.</p>
+
+<div class="exampleOuter" id="owls_Variable">
+<div class="exampleHeader">
+  element <b>ruleml:var</b><sup>[axiom]</sup>
+</div>
+<div class="exampleInner bgXsd">
+<pre>&lt;ruleml:var&gt;<a href="http://www.w3.org/TR/2001/REC-xmlschema-2-20010502/datatypes.html#string">xsd:string</a>&lt;/ruleml:var&gt;
+</pre>
+
+</div>
+<div class="exampleWrapper">
+<table>
+<tr>
+  <td class="elementHeader">Parents: </td> 
+  <td><tt><a href="#owls_Ontology">swrlx:Ontology</a></tt></td>
+
+</tr>
+</table>
+</div>
+</div>
+
+<p>A var axiom simply defines the existence of a 
+variable.
+This is taken from the RuleML namespace.
+For example:</p>
+
+<div class="egLabel" id="eg5-1">
+  <b>Example 5-1</b>
+</div>
+<pre class="egOwl">
+&lt;ruleml:var&gt;x1&lt;/ruleml:var&gt; 
+</pre>
+
+
+<p>Rule axioms (imp elements) are similar to <a
+href="http://www.w3.org/TR/owl-xmlsyntax/#owls_SubClassOf">SubClassOf</a>
+axioms.
+They are taken from the RuleML namespace.  A rule axiom can be read as
+a logical implication between the antecedent (_body)
+and consequent (_head). Like SubClassOf axioms, rules may include annotations.</p>
+
+<div class="exampleOuter" id="owls_Rule">
+<div class="exampleHeader">
+  element <b>ruleml:imp</b><sup>[axiom]</sup>
+</div>
+<div class="exampleInner bgXsd">
+
+<pre>&lt;ruleml:imp&gt;
+  <i>Content:</i> ( <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_Annotation">owlx:Annotation</a>*, <a href="#owls_antecedent">_body</a>, <a href="#owls_consequent">_head</a> )
+&lt;/ruleml:imp&gt;</pre>
+</div>
+<div class="exampleWrapper">
+<table>
+<tr>
+
+  <td class="elementHeader">Parents: </td> 
+  <td><tt><a href="#owls_Ontology">swrlx:Ontology</a></tt></td>
+</tr>
+<tr>
+  <td class="elementHeader">Note: </td> <td>This element allows one to
+  say that every binding that satisfies the _body of the rule
+  must also satisfy the _head of the rule.</td> 
+</tr>
+</table>
+</div>
+</div>
+
+<p>Both _body and _head are lists of atoms and are read as the
+conjunction of the component atoms.</p>
+
+<div class="exampleOuter" id="owls_antecedent">
+<div class="exampleHeader">
+  element <b>ruleml:_body</b> 
+</div>
+<div class="exampleInner bgXsd">
+<pre>&lt;ruleml:_body&gt;
+  <i>Content:</i> ( <i><a href="#owls_atom">swrlx:atom</a></i>* )
+&lt;/ruleml:_body&gt;</pre>
+</div>
+<div class="exampleWrapper">
+<table>
+<tr>
+  <td class="elementHeader">Parents: </td> 
+  <td><tt><a href="#owls_Rule">ruleml:imp</a></tt></td>
+
+</tr>
+</table>
+</div>
+</div>
+
+<div class="exampleOuter" id="owls_consequent">
+<div class="exampleHeader">
+  element <b>ruleml:_head</b> 
+</div>
+<div class="exampleInner bgXsd">
+<pre>&lt;ruleml:_head&gt;
+  <i>Content:</i> ( <i><a href="#owls_atom">swrlx:atom</a></i>* )
+&lt;/ruleml:_head&gt;</pre>
+</div>
+<div class="exampleWrapper">
+<table>
+<tr>
+  <td class="elementHeader">Parents: </td> 
+  <td><tt><a href="#owls_Rule">ruleml:imp</a></tt></td>
+
+</tr>
+</table>
+</div>
+</div>
+
+<p>Atoms can be formed from unary predicates (classes), binary predicates
+(properties), equalities or inequalities.</p>
+
+<div class="exampleOuter" id="owls_atom">
+<div class="exampleHeader">
+  Model group <b><i>swrlx:atom</i></b>
+
+</div>
+<div class="exampleInner bgXsd">
+<pre>
+  <i>Content:</i> (<a href="#owls_classAtom">swrlx:classAtom</a> | <a href="#owls_individualPropertyAtom">swrlx:individualPropertyAtom</a> | <a href="#owls_datavaluedPropertyAtom">swrlx:datavaluedPropertyAtom</a> | 
+            <a href="#owls_sameIndividualAtom">swrlx:sameIndividualAtom</a> | <a href="#owls_differentIndividualsAtom">swrlx:differentIndividualsAtom</a>)</pre>
+
+</div>
+<div class="exampleWrapper">
+<table>
+<tr>
+  <td class="elementHeader">Parents: </td> 
+  <td><tt><a href="#owls_antecedent">ruleml:_body</a></tt>, 
+      <tt><a href="#owls_consequent">ruleml:_head</a></tt> 
+  </td>
+
+</tr>
+</table>
+</div>
+</div>
+
+<p>Class atoms consist of a description and
+either an individual name or a variable name.</p>
+
+<div class="exampleOuter" id="owls_classAtom">
+<div class="exampleHeader">
+  element <b>swrlx:classAtom</b>
+</div>
+<div class="exampleInner bgXsd">
+<pre>&lt;swrlx:classAtom&gt;
+  <i>Content:</i> ( <i><a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_description">owlx:description</a></i>, <i><a href="#owls_iObject">swrlx:iObject</a></i> )
+&lt;/swrlx:classAtom&gt;</pre>
+</div>
+<div class="exampleWrapper">
+<table>
+<tr>
+  <td class="elementHeader">Parents: </td> 
+  <td><tt><a href="#owls_atom"><i>swrlx:atom</i></a></tt></td>
+
+</tr>
+</table>
+</div>
+</div>
+
+<p>The description in a class atom may be a class name, or may be a
+complex description using boolean combinations, restrictions, etc.
+For example:</p>
+
+<div class="egLabel" id="eg5-2">
+  <b>Example 5-2</b>
+</div>
+<pre class="egOwl">
+&lt;swrlx:classAtom&gt; 
+  &lt;owlx:Class owlx:name="Person" /&gt;
+  &lt;ruleml:var&gt;x1&lt;/ruleml:var&gt;
+&lt;/swrlx:classAtom&gt; 
+
+&lt;swrlx:classAtom&gt; 
+  &lt;owlx:IntersectionOf&gt;
+    &lt;owlx:Class owlx:name="Person" /&gt;
+    &lt;owlx:ObjectRestriction owlx:property="hasParent"&gt; 
+      &lt;owlx:someValuesFrom owlx:class="Physician" /&gt;
+    &lt;/owlx:ObjectRestriction&gt; 
+  &lt;/owlx:IntersectionOf&gt;
+  &lt;ruleml:var&gt;x2&lt;/ruleml:var&gt;
+&lt;/swrlx:classAtom&gt; 
+</pre>
+
+
+<p>Property atoms consist of a property name and two elements that can
+be individual names, variable names or data values.</p>
+
+<div class="exampleOuter" id="owls_individualPropertyAtom">
+<div class="exampleHeader">
+  element <b>swrlx:individualPropertyAtom</b>
+</div>
+<div class="exampleInner bgXsd">
+<pre>&lt;swrlx:individualPropertyAtom
+  swrlx:property = <a href="http://www.w3.org/TR/2001/REC-xmlschema-2-20010502/datatypes.html#anyURI">xsd:anyURI</a> {required} 
+&gt;
+  <i>Content:</i> ( <i><a href="#owls_iObject">swrlx:iObject</a></i>, <i><a href="#swrlx_iObject">swrlx:iObject</a></i> )
+&lt;/swrlx:individualPropertyAtom&gt;</pre>
+</div>
+<div class="exampleWrapper">
+<table>
+<tr>
+  <td class="elementHeader">Attribute: </td>
+  <td><b class="attr">swrlx:property</b> - a reference to an individual property name</td>
+</tr>
+<tr>
+  <td class="elementHeader">Parents: </td> 
+  <td><tt><a href="#owls_atom"><i>swrlx:atom</i></a></tt></td>
+
+</tr>
+</table>
+</div>
+</div>
+
+
+<div class="exampleOuter" id="owls_datavaluedPropertyAtom">
+<div class="exampleHeader">
+  element <b>swrlx:datavaluedPropertyAtom</b>
+</div>
+<div class="exampleInner bgXsd">
+<pre>&lt;swrlx:datavaluedPropertyAtom
+  swrlx:property = <a href="http://www.w3.org/TR/2001/REC-xmlschema-2-20010502/datatypes.html#anyURI">xsd:anyURI</a> {required} 
+&gt;
+  <i>Content:</i> ( <i><a href="#owls_iObject">swrlx:iObject</a></i>, <i><a href="#owls_dObject">swrlx:dObject</a></i> )
+&lt;/swrlx:datavaluedPropertyAtom&gt;</pre>
+</div>
+<div class="exampleWrapper">
+<table>
+<tr>
+  <td class="elementHeader">Attribute: </td>
+  <td><b class="attr">swrlx:property</b> - a reference to an datavalued property name</td>
+</tr>
+<tr>
+  <td class="elementHeader">Parents: </td> 
+  <td><tt><a href="#owls_atom"><i>swrlx:atom</i></a></tt></td>
+
+</tr>
+</table>
+</div>
+</div>
+
+<p>As OWL does not support complex property descriptions, a property
+atom takes only a property name.  For example:</p>
+
+<div class="egLabel" id="eg5-3">
+  <b>Example 5-3</b>
+</div>
+<pre class="egOwl">
+&lt;swrlx:individualPropertyAtom  swrlx:property="hasParent"&gt; 
+  &lt;ruleml:var&gt;x1&lt;/ruleml:var&gt;
+  &lt;owlx:Individual owlx:name="John" /&gt;
+&lt;/swrlx:individualPropertyAtom&gt; 
+
+&lt;swrlx:datavaluedPropertyAtom  swrlx:property="grade"&gt; 
+  &lt;ruleml:var&gt;x1&lt;/ruleml:var&gt;
+  &lt;owlx:DataValue owlx:datatype="&amp;xsd;integer"&gt;4&lt;/owlx:DataValue&gt;
+&lt;/swrlx:datavaluedPropertyAtom&gt; 
+</pre>
+
+
+<p>Same (different) individual atoms assert equality (inequality)
+between sets of individual and variable names.</p>
+
+<div class="exampleOuter" id="owls_sameIndividualAtom">
+<div class="exampleHeader">
+  element <b>swrlx:sameIndividualAtom</b>
+</div>
+<div class="exampleInner bgXsd">
+<pre>&lt;swrlx:sameIndividualAtom&gt;
+  <i>Content:</i> ( <i><a href="#owls_iObject">swrlx:iObject</a></i>* )
+&lt;/swrlx:sameIndividualAtom&gt;</pre>
+</div>
+<div class="exampleWrapper">
+<table>
+<tr>
+  <td class="elementHeader">Parents: </td> 
+  <td><tt><a href="#owls_atom"><i>swrlx:atom</i></a></tt></td>
+
+</tr>
+</table>
+</div>
+</div>
+
+
+<div class="exampleOuter" id="owls_differentIndividualsAtom">
+<div class="exampleHeader">
+  element <b>swrlx:differentIndividualsAtom</b>
+</div>
+<div class="exampleInner bgXsd">
+<pre>&lt;swrlx:differentIndividualsAtom&gt;
+  <i>Content:</i> ( <i><a href="#owls_iObject">swrlx:iObject</a></i>* )
+&lt;/swrlx:differentIndividualsAtom&gt;</pre>
+</div>
+<div class="exampleWrapper">
+<table>
+<tr>
+  <td class="elementHeader">Parents: </td> 
+  <td><tt><a href="#owls_atom"><i>swrlx:atom</i></a></tt></td>
+
+</tr>
+</table>
+</div>
+</div>
+
+<p>Note that (in)equalities can be asserted between arbitrary
+combinations of variable names and individual names. For example:</p>
+
+<div class="egLabel" id="eg5-4">
+  <b>Example 5-4</b>
+</div>
+<pre class="egOwl">
+&lt;swrlx:sameIndividualAtom&gt; 
+  &lt;ruleml:var&gt;x1&lt;/ruleml:var&gt;
+  &lt;ruleml:var&gt;x2&lt;/ruleml:var&gt;
+  &lt;owlx:Individual owlx:name="Clinton" /&gt;
+  &lt;owlx:Individual owlx:name="Bill_Clinton" /&gt;
+&lt;/swrlx:sameIndividualAtom&gt; 
+</pre>
+
+
+<div class="exampleOuter" id="owls_iObject">
+<div class="exampleHeader">
+  Model group <b><i>swrlx:iObject</i></b>
+
+</div>
+<div class="exampleInner bgXsd">
+<pre>
+  <i>Content:</i> ( <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_IndividualID">owlx:Individual</a><span class="sup">[ID]</span> | <a href="#owls_VariableID">ruleml:var</a><span class="sup">[ID]</span> )</pre>
+
+</div>
+<div class="exampleWrapper">
+<table>
+<tr>
+  <td class="elementHeader">Parents: </td> 
+  <td><tt><a href="#owls_classAtom">swrlx:classAtom</a></tt>, 
+      <tt><a href="#owls_individualPropertyAtom">swrlx:individualPropertyAtom</a></tt>, 
+      <tt><a href="#owls_sameIndividualAtom">swrlx:sameIndividualAtom</a></tt>, 
+      <tt><a href="#owls_differentIndividualsAtom">swrlx:differentIndividualsAtom</a></tt>
+  </td>
+
+</tr>
+</table>
+</div>
+</div>
+
+
+<div class="exampleOuter" id="owls_dObject">
+<div class="exampleHeader">
+  Model group <b><i>swrlx:dObject</i></b>
+
+</div>
+<div class="exampleInner bgXsd">
+<pre>
+  <i>Content:</i> ( <a href="http://www.w3.org/TR/owl-xmlsyntax/#owls_DataValue">owlx:DataValue</a> | <a href="#owls_VariableID">ruleml:var</a><span class="sup">[ID]</span> )</pre>
+
+</div>
+<div class="exampleWrapper">
+<table>
+<tr>
+  <td class="elementHeader">Parents: </td> 
+  <td><tt><a href="#owls_datavaluedPropertyAtom">swrlx:datavaluedPropertyAtom</a></tt> 
+  </td>
+
+</tr>
+</table>
+</div>
+</div>
+
+
+<div class="exampleOuter" id="owls_VariableID">
+<div class="exampleHeader">
+  element <b>ruleml:var</b><sup>[ID]</sup>
+</div>
+<div class="exampleInner bgXsd">
+<pre>&lt;ruleml:var&gt;<a href="http://www.w3.org/TR/2001/REC-xmlschema-2-20010502/datatypes.html#string">xsd:string</a>&lt;/ruleml:var&gt;
+</pre>
+</div>
+<div class="exampleWrapper">
+<table>
+<tr>
+  <td class="elementHeader">Parents: </td> 
+  <td><tt><i><a href="#owls_iObject">swrlx:iObject</a></i></tt>, 
+      <tt><i><a href="#owls_dObject">swrlx:dObject</a></i></tt></td> 
+</tr>
+
+<tr>
+  <td class="elementHeader">Note: </td> 
+  <td>This element is used for solely referring to a variable ID, 
+      and does not actually define any variable, unlike a 
+      <a href="#owls_Variable">var axiom</a>. 
+  </td>
+</tr>
+</table>
+</div>
+</div>
+
+
+
+
+<h3><a name="5.1"></a>5.1. Rule Examples</h3>
+
+<p>
+We can use SWRL to assert that the combination of the <tt>hasParent</tt>
+and <tt>hasBrother</tt> properties implies the <tt>hasUncle</tt> property:
+</p>
+
+<div class="egLabel" id="eg5_1-1">
+  <b>Example 5.1-1</b>
+</div>
+<pre class="egOwl">
+&lt;ruleml:imp&gt; 
+  &lt;ruleml:_body&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="hasParent"&gt; 
+      &lt;ruleml:var&gt;x1&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;x2&lt;/ruleml:var&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="hasBrother"&gt; 
+      &lt;ruleml:var&gt;x2&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;x3&lt;/ruleml:var&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+  &lt;/ruleml:_body&gt; 
+  &lt;ruleml:_head&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="hasUncle"&gt; 
+      &lt;ruleml:var&gt;x1&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;x3&lt;/ruleml:var&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+  &lt;/ruleml:_head&gt; 
+&lt;/ruleml:imp&gt; 
+</pre>
+
+
+<p>
+An alternative formulation for the <tt>hasUncle</tt> rule given in <a
+href="#eg5_1-1">Example 5.1-1</a> would be to assert that if
+<tt>x1</tt> <tt>hasParent</tt> <tt>x2</tt>, <tt>x2</tt>
+<tt>hasSibling</tt> <tt>x3</tt>, and <tt>x3</tt> <tt>hasSex</tt>
+<tt>male</tt>, then <tt>x1</tt> <tt>hasUncle</tt> <tt>x3</tt>:
+</p>
+
+<div class="egLabel" id="eg5_1-2">
+  <b>Example 5.1-2</b>
+</div>
+<pre class="egOwl">
+&lt;ruleml:imp&gt; 
+  &lt;ruleml:_body&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="hasParent"&gt; 
+      &lt;ruleml:var&gt;x1&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;x2&lt;/ruleml:var&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="hasSibling"&gt; 
+      &lt;ruleml:var&gt;x2&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;x3&lt;/ruleml:var&gt;
+    &lt;swrlx:individualPropertyAtom  swrlx:property="hasSex"&gt; 
+      &lt;ruleml:var&gt;x3&lt;/ruleml:var&gt;
+      &lt;owlx:Individual owlx:name="#male" /&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+  &lt;/ruleml:_body&gt; 
+  &lt;ruleml:_head&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="hasUncle"&gt; 
+      &lt;ruleml:var&gt;x1&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;x3&lt;/ruleml:var&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+  &lt;/ruleml:_head&gt; 
+&lt;/ruleml:imp&gt; 
+</pre>
+
+<p>
+The following example is due to <a
+href="http://www.cs.vu.nl/~guus/">Guus Schreiber</a>, and is based on
+ontologies used in an <a
+href="http://www.cs.vu.nl/~guus/papers/Hollink03c.pdf">image
+annotation demo</a>.
+</p>
+
+<p>
+The rule expresses the fact that, given knowledge about the AAT style
+of certain ULAN artists (e.g., van Gogh is an Impressionist painter),
+we can derive the style of an art object (represented with the VRA
+element "style/period") from the value of the creator of the art
+object (represented by the VRA element "creator", a subproperty of
+dc:creator):
+</p>
+
+<div class="egLabel" id="eg5_1-3">
+  <b>Example 5.1-3</b>
+</div>
+<pre class="egOwl">
+&lt;ruleml:imp&gt; 
+  &lt;ruleml:_body&gt; 
+    &lt;swrlx:classAtom&gt; 
+      &lt;owlx:Class owlx:name="&amp;ulan;Artist" /&gt;
+      &lt;ruleml:var&gt;x&lt;/ruleml:var&gt;
+    &lt;/swrlx:classAtom&gt; 
+    &lt;swrlx:classAtom&gt; 
+      &lt;owlx:Class owlx:name="&amp;aat;Style" /&gt;
+      &lt;ruleml:var&gt;y&lt;/ruleml:var&gt;
+    &lt;/swrlx:classAtom&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="&amp;aatulan;artistStyle"&gt; 
+      &lt;ruleml:var&gt;x&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;y&lt;/ruleml:var&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="&amp;vra;creator"&gt; 
+      &lt;ruleml:var&gt;x&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;z&lt;/ruleml:var&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+  &lt;/ruleml:_body&gt; 
+  &lt;ruleml:_head&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="&amp;vra;style/period"&gt; 
+      &lt;ruleml:var&gt;z&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;y&lt;/ruleml:var&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+  &lt;/ruleml:_head&gt; 
+&lt;/ruleml:imp&gt; 
+</pre>
+
+
+<p>
+The following is taken from <a
+href="http://www.daml.org/2003/06/ruletests/translation-3.n3">an
+extended example due to Mike Dean</a>. It expresses the fact that for
+every <tt>Airport</tt> there is a map <tt>Point</tt> that has the same
+<tt>location</tt> (<tt>latitude</tt> and <tt>longitude</tt>) as the Airport and that
+is an object of "<tt>layer</tt>" (a map
+<tt>DrawingLayer</tt>). Moreover, this map point has the Airport as an
+<tt>underlyingObject</tt> and has the Airport name as its
+<tt>Label</tt></p>
+
+
+<p>
+Note how the expressive power of SWRL allows "existentials" to be
+expressed in the head of a rule&#151;it is asserted that, for every
+airport, there must exist such a map point.  </p>
+
+<div class="egLabel" id="eg5_1-4">
+  <b>Example 5.1-4</b>
+</div>
+<pre class="egOwl">
+&lt;!--
+Background knowledge about airports and maps:
+--&gt;
+
+&lt;owlx:DatatypeProperty owlx:name="latitude"/&gt;
+&lt;owlx:DatatypeProperty owlx:name="longitude"/&gt;
+
+&lt;owlx:SubClassOf&gt; 
+  &lt;owlx:sub&gt; 
+    &lt;owlx:class="Location" /&gt;
+  &lt;/owlx:sub&gt; 
+  &lt;owlx:super&gt; 
+    &lt;owlx:IntersectionOf&gt;
+      &lt;owlx:ObjectRestriction owlx:property="latitude"&gt; 
+        &lt;owlx:allValuesFrom owlx:datatype="&amp;xsd;double"/&gt;
+      &lt;/owlx:ObjectRestriction&gt; 
+      &lt;owlx:ObjectRestriction owlx:property="longitude"&gt; 
+        &lt;owlx:allValuesFrom owlx:datatype="&amp;xsd;double"/&gt;
+      &lt;/owlx:ObjectRestriction&gt; 
+    &lt;/owlx:IntersectionOf&gt;
+  &lt;/owlx:super&gt; 
+&lt;/owlx:SubClassOf&gt; 
+
+&lt;owlx:Individual owlx:name="&amp;airport;GEG"&gt;
+  &lt;owlx:type owlx:name="&amp;airport-ont;Airport" /&gt; 
+  &lt;owlx:DataPropertyValue swrlx:property="airport-ont:name"&gt;
+    &lt;owlx:DataValue owlx:datatype="&amp;xsd;string"&gt;Spokane Intl&lt;/owlx:DataValue&gt; 
+  &lt;/owlx:DataPropertyValue&gt;
+  &lt;owlx:ObjectPropertyValue owlx:property="location"&gt;
+    &lt;owlx:Individual&gt;
+      &lt;owlx:DataPropertyValue owlx:property="latitude"&gt;
+        &lt;owlx:DataValue&gt;47.6197&lt;/owlx:DataValue&gt; 
+      &lt;/owlx:DataPropertyValue&gt;
+      &lt;owlx:DataPropertyValue owlx:property="longitude"&gt;
+        &lt;owlx:DataValue&gt;-117.5336&lt;/owlx:DataValue&gt; 
+      &lt;/owlx:DataPropertyValue&gt;
+    &lt;/owlx:Individual&gt;
+  &lt;/owlx:ObjectPropertyValue&gt;
+&lt;/owlx:Individual&gt;
+ 
+&lt;owlx:Individual owlx:name="layer"&gt;
+  &lt;owlx:type owlx:name="&amp;map;DrawingLayer" /&gt; 
+&lt;/owlx:Individual&gt;
+ 
+&lt;owlx:Individual owlx:name="map"&gt;
+  &lt;owlx:type owlx:name="&amp;map;Map" /&gt; 
+  &lt;owlx:DataPropertyValue owlx:property="&amp;map;name"&gt;
+    &lt;owlx:DataValue owlx:datatype="&amp;xsd;string"&gt;Airports&lt;/owlx:DataValue&gt; 
+  &lt;/owlx:DataPropertyValue&gt;
+  &lt;owlx:ObjectPropertyValue owlx:property="map:layer"&gt;
+    &lt;owlx:Individual owlx:name="layer"/&gt;
+  &lt;/owlx:ObjectPropertyValue&gt;
+&lt;/owlx:Individual&gt;
+
+&lt;!--
+A map:Location has latitude and longitude, both of which are doubles:
+--&gt;
+
+&lt;owlx:SubClassOf&gt; 
+  &lt;owlx:sub&gt; 
+    &lt;owlx:class="&amp;map;Location" /&gt;
+  &lt;/owlx:sub&gt; 
+  &lt;owlx:super&gt; 
+    &lt;owlx:IntersectionOf&gt;
+      &lt;owlx:ObjectRestriction owlx:property="&amp;map;latitude"&gt; 
+        &lt;owlx:someValuesFrom owlx:datatype="&amp;xsd;double"/&gt;
+      &lt;/owlx:ObjectRestriction&gt; 
+      &lt;owlx:ObjectRestriction owlx:property="&amp;map;latitude"&gt; 
+        &lt;owlx:allValuesFrom owlx:datatype="&amp;xsd;double"/&gt;
+      &lt;/owlx:ObjectRestriction&gt; 
+      &lt;owlx:ObjectRestriction owlx:property="&amp;map;longitude"&gt; 
+        &lt;owlx:someValuesFrom owlx:datatype="&amp;xsd;double"/&gt;
+      &lt;/owlx:ObjectRestriction&gt; 
+      &lt;owlx:ObjectRestriction owlx:property="&amp;map;longitude"&gt; 
+        &lt;owlx:allValuesFrom owlx:datatype="&amp;xsd;double"/&gt;
+      &lt;/owlx:ObjectRestriction&gt; 
+    &lt;/owlx:IntersectionOf&gt;
+  &lt;/owlx:super&gt; 
+&lt;/owlx:SubClassOf&gt; 
+
+&lt;!--
+If a map:Location is the sameLocation as another location, 
+then it has the same values for latitude and longitude.
+--&gt;
+
+&lt;ruleml:imp&gt; 
+  &lt;ruleml:_body&gt; 
+    &lt;swrlx:classAtom&gt; 
+      &lt;owlx:Class owlx:name="&amp;map;Location" /&gt;
+      &lt;ruleml:var&gt;maploc&lt;/ruleml:var&gt;
+    &lt;/swrlx:classAtom&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="sameLocation"&gt; 
+      &lt;ruleml:var&gt;loc&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;maploc&lt;/ruleml:var&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+    &lt;swrlx:datavaluedPropertyAtom  swrlx:property="latitude"&gt; 
+      &lt;ruleml:var&gt;loc&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;lat&lt;/ruleml:var&gt;
+    &lt;/swrlx:datavaluedPropertyAtom&gt; 
+    &lt;swrlx:datavaluedPropertyAtom  swrlx:property="longitude"&gt; 
+      &lt;ruleml:var&gt;loc&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;lon&lt;/ruleml:var&gt;
+    &lt;/swrlx:datavaluedPropertyAtom&gt; 
+  &lt;/ruleml:_body&gt; 
+  &lt;ruleml:_head&gt; 
+    &lt;swrlx:datavaluedPropertyAtom  swrlx:property="&amp;map;latitude"&gt; 
+      &lt;ruleml:var&gt;maploc&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;lat&lt;/ruleml:var&gt;
+    &lt;/swrlx:datavaluedPropertyAtom&gt; 
+    &lt;swrlx:datavaluedPropertyAtom  swrlx:property="&amp;map;longitude"&gt; 
+      &lt;ruleml:var&gt;maploc&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;lon&lt;/ruleml:var&gt;
+    &lt;/swrlx:datavaluedPropertyAtom&gt; 
+  &lt;/ruleml:_head&gt; 
+&lt;/ruleml:imp&gt; 
+
+&lt;!--
+Wherever an Airport is located, there is some map:Location
+that is the sameLocation as the Airport's location, and that
+is the location of a map Point that is an object of the
+map:DrawingLayer "layer":
+--&gt;
+
+&lt;owlx:ObjectProperty owlx:name="&amp;map;location" owlx:inverseOf="&amp;map;isLocationOf" /&gt;
+&lt;owlx:ObjectProperty owlx:name="&amp;map;object" owlx:inverseOf="&amp;map;isObjectOf" /&gt;
+
+&lt;ruleml:imp&gt; 
+  &lt;ruleml:_body&gt; 
+    &lt;swrlx:classAtom&gt; 
+      &lt;owlx:Class owlx:name="&amp;airport-ont;Airport" /&gt;
+      &lt;ruleml:var&gt;airport&lt;/ruleml:var&gt;
+    &lt;/swrlx:classAtom&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="location"&gt; 
+      &lt;ruleml:var&gt;airport&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;loc&lt;/ruleml:var&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+    &lt;swrlx:datavaluedPropertyAtom  swrlx:property="latitude"&gt; 
+      &lt;ruleml:var&gt;loc&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;lat&lt;/ruleml:var&gt;
+    &lt;/swrlx:datavaluedPropertyAtom&gt; 
+    &lt;swrlx:datavaluedPropertyAtom  swrlx:property="longitude"&gt; 
+      &lt;ruleml:var&gt;loc&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;lon&lt;/ruleml:var&gt;
+    &lt;/swrlx:datavaluedPropertyAtom&gt; 
+  &lt;/ruleml:_body&gt; 
+  &lt;ruleml:_head&gt; 
+    &lt;swrlx:classAtom&gt; 
+      &lt;owlx:ObjectRestriction owlx:property="sameLocation"&gt; 
+        &lt;owlx:someValuesFrom&gt;
+          &lt;owlx:IntersectionOf&gt;
+            &lt;owlx:class="&amp;map;Location" /&gt;
+            &lt;owlx:ObjectRestriction owlx:property="&amp;map;isLocationOf"&gt; 
+              &lt;owlx:someValuesFrom&gt;
+                &lt;owlx:IntersectionOf&gt;
+                  &lt;owlx:class="&amp;map;Point" /&gt;
+                  &lt;owlx:ObjectRestriction owlx:property="&amp;map;isObjectOf"&gt; 
+                    &lt;owlx:someValuesFrom&gt;
+                      &lt;owlx:OneOf&gt;
+                        &lt;owlx:Individual owlx:name="#layer" /&gt; 
+                      &lt;/owlx:OneOf&gt;
+                    &lt;/owlx:someValuesFrom&gt;
+                  &lt;/owlx:ObjectRestriction owlx:property="&amp;map;isObjectOf"&gt; 
+                &lt;/owlx:IntersectionOf&gt;
+              &lt;/owlx:someValuesFrom&gt;
+            &lt;/owlx:ObjectRestriction owlx:property="&amp;map;isLocationOf"&gt; 
+          &lt;/owlx:IntersectionOf&gt;
+        &lt;/owlx:someValuesFrom&gt;
+      &lt;/owlx:ObjectRestriction&gt; 
+      &lt;ruleml:var&gt;loc&lt;/ruleml:var&gt;
+    &lt;/swrlx:classAtom&gt; 
+  &lt;/ruleml:_head&gt; 
+&lt;/ruleml:imp&gt; 
+
+&lt;!--
+The map:Point whose map:location is the map:Location of an Airport 
+has the airport as a map:underlyingObject and has a map:label 
+which is the name of the Airport.
+--&gt;
+
+&lt;ruleml:imp&gt; 
+  &lt;ruleml:_body&gt; 
+    &lt;swrlx:classAtom&gt; 
+      &lt;owlx:Class owlx:name="&amp;airport-ont;Airport" /&gt;
+      &lt;ruleml:var&gt;airport&lt;/ruleml:var&gt;
+    &lt;/swrlx:classAtom&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="location"&gt; 
+      &lt;ruleml:var&gt;airport&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;loc&lt;/ruleml:var&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="sameLocation"&gt; 
+      &lt;ruleml:var&gt;loc&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;maploc&lt;/ruleml:var&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="&amp;map;location"&gt; 
+      &lt;ruleml:var&gt;point&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;maploc&lt;/ruleml:var&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+    &lt;swrlx:datavaluedPropertyAtom  swrlx:property="&amp;airport-ont;name"&gt; 
+      &lt;ruleml:var&gt;airport&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;name&lt;/ruleml:var&gt;
+    &lt;/swrlx:datavaluedPropertyAtom&gt; 
+  &lt;/ruleml:_body&gt; 
+  &lt;ruleml:_head&gt; 
+    &lt;swrlx:individualPropertyAtom  swrlx:property="&amp;map;underlyingObject"&gt; 
+      &lt;ruleml:var&gt;point&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;airport&lt;/ruleml:var&gt;
+    &lt;/swrlx:individualPropertyAtom&gt; 
+    &lt;swrlx:datavaluedPropertyAtom  swrlx:property="&amp;map;label"&gt; 
+      &lt;ruleml:var&gt;point&lt;/ruleml:var&gt;
+      &lt;ruleml:var&gt;name&lt;/ruleml:var&gt;
+    &lt;/swrlx:datavaluedPropertyAtom&gt; 
+  &lt;/ruleml:_head&gt; 
+&lt;/ruleml:imp&gt; 
+</pre>
+
+
+<hr />
+
+
+<h2><a name="6"></a>6. RDF Concrete Syntax</h2>
+
+<p>
+In this section we present an RDF concrete syntax for the rules.  
+It is straightforward to provide such an RDF concrete syntax for rules, but the
+presence of variables in rules goes beyond the 
+<a href="http://www.w3.org/TR/rdf-mt/">RDF Semantics</a>. We do
+not yet know if the intended semantics of the resultant RDF graphs can
+be described as a semantic extension of RDF. 
+</p>
+<p>
+An RDF Schema for SWRL is
+<a href="swrl.rdf">swrl.rdf</a>.
+An OWL ontology for SWRL is 
+<a href="swrl.owl">swrl.owl</a>.
+Each of these provides only a partial description of the syntax for SWRL;
+the OWL ontology is more complete than the RDF Schema.  
+</p>
+<p>
+Translation from the XML Concrete Syntax 
+to RDF/XML could be easily 
+accomplished by extending the
+<a href="http://www.w3.org/TR/owl-xmlsyntax/owlxml2rdf.xsl">XSLT
+transformation</a> for the OWL XML Presentation syntax
+[<cite><a href="#owl-xml">OWL XML</a></cite>].
+</p>
+
+
+<h3><a name="6.1"></a>6.1. Rule Examples in RDF Concrete Syntax</h3>
+
+<p>
+These examples illustrate a suitable rules extension of the OWL
+RDF/XML syntax.  The first example is a repetition of <a
+href="#eg5_1-2">Example 5.1-2</a> using RDF/XML syntax:
+</p>
+
+<div class="egLabel" id="eg6_1-1">
+  <b>Example 6.1-1</b>
+</div>
+<pre class="egOwl">
+&lt;swrl:Variable rdf:ID="x1"/&gt;
+&lt;swrl:Variable rdf:ID="x2"/&gt;
+&lt;swrl:Variable rdf:ID="x3"/&gt;
+&lt;ruleml:Imp&gt; 
+  &lt;ruleml:body rdf:parseType="Collection"&gt;
+    &lt;swrl:individualPropertyAtom&gt; 
+      &lt;swrl:propertyPredicate rdf:resource="&amp;eg;hasParent"/&gt; 
+      &lt;swrl:argument1 rdf:resource="#x1" /&gt;
+      &lt;swrl:argument2 rdf:resource="#x2" /&gt;
+    &lt;/swrl:individualPropertyAtom&gt;
+    &lt;swrl:individualPropertyAtom&gt; 
+      &lt;swrl:propertyPredicate rdf:resource="&amp;eg;hasSibling"/&gt; 
+      &lt;swrl:argument1 rdf:resource="#x2" /&gt;
+      &lt;swrl:argument2 rdf:resource="#x3" /&gt;
+    &lt;/swrl:individualPropertyAtom&gt;
+    &lt;swrl:individualPropertyAtom&gt; 
+      &lt;swrl:propertyPredicate rdf:resource="&amp;eg;hasSex"/&gt; 
+      &lt;swrl:argument1 rdf:resource="#x3" /&gt;
+      &lt;swrl:argument2 rdf:resource="#male" /&gt;
+    &lt;/swrl:individualPropertyAtom&gt;
+  &lt;/ruleml:body&gt;
+  &lt;ruleml:head rdf:parseType="Collection"&gt; 
+    &lt;swrl:individualPropertyAtom&gt; 
+      &lt;swrl:propertyPredicate rdf:resource="&amp;eg;hasUncle"/&gt; 
+      &lt;swrl:argument1 rdf:resource="#x1" /&gt;
+      &lt;swrl:argument2 rdf:resource="#x3" /&gt;
+    &lt;/swrl:individualPropertyAtom&gt;
+  &lt;/ruleml:head&gt; 
+&lt;/ruleml:Imp&gt; 
+</pre>
+
+
+<p>
+This example is a repetition of <a href="#eg5_1-3">Example 5.1-3</a>
+using RDF/XML syntax:
+</p>
+
+<div class="egLabel" id="eg6_1-2">
+  <b>Example 6.1-2</b>
+</div>
+<pre class="egOwl">
+&lt;swrl:Variable rdf:ID="x"/&gt;
+&lt;swrl:Variable rdf:ID="y"/&gt;
+&lt;swrl:Variable rdf:ID="z"/&gt;
+&lt;ruleml:Imp&gt; 
+  &lt;ruleml:body rdf:parseType="Collection"&gt;
+    &lt;swrl:classAtom&gt; 
+      &lt;swrl:classPredicate rdf:resource="&amp;ulan;Artist"/&gt; 
+      &lt;swrl:argument1 rdf:resource="#x" /&gt;
+    &lt;/swrl:classAtom&gt;
+    &lt;swrl:classAtom&gt; 
+      &lt;swrl:classPredicate rdf:resource="&amp;aat;Style"/&gt; 
+      &lt;swrl:argument1 rdf:resource="#y" /&gt;
+    &lt;/swrl:classAtom&gt;
+    &lt;swrl:individualPropertyAtom&gt; 
+      &lt;swrl:propertyPredicate rdf:resource="&amp;aatulan;artistStyle"/&gt; 
+      &lt;swrl:argument1 rdf:resource="#x" /&gt;
+      &lt;swrl:argument2 rdf:resource="#y" /&gt;
+    &lt;/swrl:individualPropertyAtom&gt;
+    &lt;swrl:individualPropertyAtom&gt; 
+      &lt;swrl:propertyPredicate rdf:resource="&amp;vra;creator"/&gt; 
+      &lt;swrl:argument1 rdf:resource="#x" /&gt;
+      &lt;swrl:argument2 rdf:resource="#z" /&gt;
+    &lt;/swrl:individualPropertyAtom&gt;
+  &lt;/ruleml:body&gt;
+  &lt;ruleml:head rdf:parseType="Collection"&gt; 
+    &lt;swrl:individualPropertyAtom&gt; 
+      &lt;swrl:propertyPredicate rdf:resource="&amp;vra;style/period"/&gt; 
+      &lt;swrl:argument1 rdf:resource="#z" /&gt;
+      &lt;swrl:argument2 rdf:resource="#y" /&gt;
+    &lt;/swrl:individualPropertyAtom&gt;
+  &lt;/ruleml:head&gt; 
+&lt;/ruleml:Imp&gt; 
+</pre>
+
+
+<p>
+This example is a repetition of the complex rule from <a
+href="#eg5_1-4">Example 5.1-4</a> using RDF/XML syntax:
+</p>
+
+<div class="egLabel" id="eg6_1-3">
+  <b>Example 6.1-3</b>
+</div>
+<pre class="egOwl">
+&lt;swrl:Variable rdf:ID="airport"/&gt;
+&lt;swrl:Variable rdf:ID="loc"/&gt;
+&lt;swrl:Variable rdf:ID="name"/&gt;
+&lt;swrl:Variable rdf:ID="lat"/&gt;
+&lt;swrl:Variable rdf:ID="lon"/&gt;
+&lt;ruleml:Imp&gt; 
+  &lt;ruleml:body rdf:parseType="Collection"&gt;
+    &lt;swrl:classAtom&gt; 
+      &lt;swrl:classPredicate rdf:resource="&amp;airport-ont;Airport"/&gt; 
+      &lt;swrl:argument1 rdf:resource="#airport" /&gt;
+    &lt;/swrl:classAtom&gt;
+    &lt;swrl:individualPropertyAtom&gt; 
+      &lt;swrl:propertyPredicate rdf:resource="#location"/&gt; 
+      &lt;swrl:argument1 rdf:resource="#airport" /&gt;
+      &lt;swrl:argument2 rdf:resource="#loc" /&gt;
+    &lt;/swrl:individualPropertyAtom&gt;
+    &lt;swrl:datavaluedPropertyAtom&gt; 
+      &lt;swrl:propertyPredicate rdf:resource="#latitude"/&gt; 
+      &lt;swrl:argument1 rdf:resource="#loc" /&gt;
+      &lt;swrl:argument2 rdf:resource="#lat" /&gt;
+    &lt;/swrl:datavaluedPropertyAtom&gt;
+    &lt;swrl:datavaluedPropertyAtom&gt; 
+      &lt;swrl:propertyPredicate rdf:resource="#longitude"/&gt; 
+      &lt;swrl:argument1 rdf:resource="#loc" /&gt;
+      &lt;swrl:argument2 rdf:resource="#lon" /&gt;
+    &lt;/swrl:datavaluedPropertyAtom&gt;
+  &lt;/ruleml:body&gt;
+  &lt;ruleml:head rdf:parseType="Collection"&gt; 
+    &lt;swrl:classAtom&gt; 
+      &lt;swrl:classPredicate&gt;
+        &lt;owl:Restriction&gt;
+          &lt;owl:onProperty rdf:resource="#sameLocation"/&gt;
+          &lt;owl:someValuesFrom&gt;
+            &lt;owl:intersectionOf rdf:parseType="Collection"&gt;
+              &lt;owl:Class rdf:about="&amp;map;Location"/&gt;
+              &lt;owl:Restriction&gt;
+                &lt;owl:onProperty rdf:resource="&amp;map;isLocationOf"/&gt;
+                &lt;owl:someValuesFrom&gt;
+                  &lt;owl:intersectionOf rdf:parseType="Collection"&gt;
+                    &lt;owl:Class rdf:about="&amp;map;Point"/&gt;
+                    &lt;owl:Restriction&gt;
+                      &lt;owl:onProperty rdf:resource="&amp;map;isObjectOf"/&gt;
+                      &lt;owl:someValuesFrom&gt;
+                        &lt;owl:oneOf rdf:parseType="Collection"&gt;
+                          &lt;owl:Item rdf:resource="#layer"/&gt;
+                        &lt;/owl:oneOf&gt;
+                      &lt;/owl:someValuesFrom&gt;
+                    &lt;/owl:Restriction&gt;
+                  &lt;/owl:intersectionOf rdf:parseType="Collection"&gt;
+                &lt;/owl:someValuesFrom&gt;
+              &lt;/owl:Restriction&gt;
+            &lt;/owl:intersectionOf rdf:parseType="Collection"&gt;
+          &lt;/owl:someValuesFrom&gt;
+        &lt;/owl:Restriction&gt;
+      &lt;/swrl:classPredicate&gt; 
+      &lt;swrl:argument1 rdf:resource="#airport" /&gt;
+    &lt;/swrl:classAtom&gt;
+  &lt;/ruleml:head&gt; 
+&lt;/ruleml:Imp&gt; 
+</pre>
+
+<hr/>
+
+
+<h2><a name="7"></a>7. Usage Suggestions</h2>
+
+<p>
+The general intent of this proposal is to 
+extend OWL DL, and thus to use OWL constructs wherever possible.
+</p>
+
+
+<h3><a name="7.1"></a>7.1. Extensibility and Interoperability Cautions</h3>
+
+<p>
+If users are making extensive use of rules, 
+they may want to restrict the form or expressiveness of the rules
+they employ, in order to increase interoperability, reusability,
+extensibility, computational scaleability, or ease of implementation.
+</p>
+
+<p>
+A useful restriction in the form of the rules is to limit
+antecedent and consequent classAtoms to be named classes, where the
+classes are defined purely in OWL (in the same document or in external
+OWL documents).  Adhering to this format makes it easier to translate
+rules to or from existing (or future) rule systems, including:
+</p>
+<ol>
+  <li>Prolog;</li>
+  <li>production rules (descended from OPS5);</li>
+  <li>event-condition-action rules; and</li>
+  <li>SQL (where views, queries, and facts are all rules).</li>
+</ol>
+<p>
+Adhering to this form also maximises reuse and
+interoperability of the ontology knowledge in the rules with other
+OWL-speaking systems that do not necessarily support SWRL.
+</p>
+
+<p>Users also may want to restrict the expressiveness of the OWL
+classes and descriptions appearing in rules.  One useful restriction
+on expressivity is <i>Description Logic Programs</i> [<cite><a
+href="#Grosof_et_al_2003">Grosof et al 2003</a></cite>] which, e.g.,
+prohibits existentially-quantified knowledge in consequents.
+Suitably-restricted SWRL rules can be straightforwardly extended to
+enable procedural attachments and/or nonmonotonic reasoning
+(negation-as-failure and/or prioritised conflict handling) of the
+kinds supported in CCI rule systems and in RuleML [<cite><a
+href="#RuleML">RuleML</a></cite>] which facilitates interoperability
+between those CCI rule systems.  Such adherence may thus facilitate
+combining SWRL knowledge with knowledge from those other rules
+languages.  Suitable restrictions can also improve the empirical
+tractability of reasoning with rules.</p>
+
+<p>A longer, more detailed version of the above usage suggestions 
+and cautions is available at <a
+href="http://www.daml.org/listarchive/joint-committee/1491.html">http://www.daml.org/listarchive/joint-committee/1491.html</a>.
+</p>
+
+<hr/>
+
+
+<h2><a name="acknowledgments"></a>Acknowledgments</h2>
+
+<p>
+This document was produced as part of the <a
+href="http://www.daml.org/">DARPA DAML Program</a>, and has benefited
+from extensive discussion in the <a
+href="http://www.daml.org/committee/">Joint US/EU ad hoc Agent Markup
+Language Committee</a>, with contributions from <a
+href="http://www.w3.org/People/Sandro/">Sandro Hawke</a> and <a
+href="http://www.coginst.uwf.edu/~phayes/">Pat Hayes</a> being worthy
+of particular mention. It has also benefited from the close
+cooperation of the <a href="http://www.ruleml.org/">RuleML
+initiative</a>, and input from the <a
+href="http://www.swsi.org/">Semantic Web Services Initiative
+(SWSI)</a>.
+</p>
+
+<hr/>
+
+
+
+<h2><a id="references" name="references">References</a></h2>
+
+<dl><dt><a id="owl-sas">[OWL S&amp;AS]</a></dt><dd> <cite><a
+href="http://www.w3.org/TR/2003/WD-owl-semantics-20030203/">OWL Web
+Ontology Language Semantics and Abstract Syntax</a></cite>.  Peter
+F. Patel-Schneider, Pat Hayes and Ian Horrocks, eds.  </dd></dl>
+
+<dl><dt><a id="ref-ref">[OWL Reference]</a></dt><dd> <cite><a
+href="http://www.w3.org/TR/2002/WD-owl-ref-20021112/">OWL Web Ontology
+Language 1.0 Reference</a></cite>.  Mike Dean, Dan Connolly, Frank van
+Harmelen, James Hendler, Ian Horrocks, Deborah L. McGuinness, Peter
+F. Patel-Schneider, and Lynn Andrea Stein.  W3C Working Draft 12
+November 2002.  Latest version is available at <a
+href="http://www.w3.org/TR/owl-ref/">http://www.w3.org/TR/owl-ref/</a>.
+</dd></dl>
+
+<dl><dt><a id="owl-xml">[OWL XML]</a></dt><dd> <cite><a
+href="http://www.w3.org/TR/owl-xmlsyntax/">OWL Web Ontology Language
+XML Presentation Syntax</a></cite>.  Masahiro Hori, Jérôme Euzenat, Peter F. Patel-Schneider. W3C Note 11 June 2003 </dd></dl>
+
+<dl><dt><a id="ref-xml">[XML]</a></dt>
+<dd>
+<cite><a href="http://www.w3.org/TR/2000/REC-xml-20001006">
+Extensible Markup Language (XML) 1.0 (Second Edition)</a></cite>.
+Tim Bray, Jean Paoli, C. M. Sperberg-McQueen, and Eve Maler, eds.
+W3C Recommendation 6 October 2000.
+Latest version is available at 
+<a href="http://www.w3.org/TR/REC-xml">http://www.w3.org/TR/REC-xml</a>.
+</dd></dl>
+
+<dl><dt><a id="Lloyd87">[Lloyd87]</a></dt><dd>
+<cite>Foundations of logic programming (second,
+extended edition)</cite>. J. W. Lloyd. 
+Springer series in symbolic
+computation. Springer-Verlag, New York, 1987.
+</dd></dl>
+
+<dl><dt><a id="Schmidt-Schauss89">[Schmidt-Schau&#223;89]</a></dt><dd>
+<cite>Subsumption in KL-ONE is Undecidable</cite>. M. Schmidt-Schau&#223;. 
+Proc. of KR'89, pages 421-431, Morgan Kaufmann.
+</dd></dl>
+
+<dl><dt><a id="Grosof_et_al_2003">[Grosof et al 2003]</a></dt><dd>
+<cite>Description Logic Programs: Combining Logic Programs with
+Description Logic</cite>.  Benjamin Grosof, Ian Horrocks, Raphael
+Volz, Stefan Decker.  Proc.  WWW2003, Budapest, May 2003. <a
+href="http://www2003.org/cdrom/papers/refereed/p117/p117-grosof.html">http://www2003.org/cdrom/papers/refereed/p117/p117-grosof.html</a>
+(also <a
+href="http://ebusiness.mit.edu/bgrosof/#DLP">http://ebusiness.mit.edu/bgrosof/#DLP</a>).
+</dd></dl> 
+
+<dl><dt><a id="RuleML">[RuleML]</a></dt><dd> <cite><a
+href="http://www.ruleml.org">Rule Markup Language
+Initiative</a></cite>.</dd></dl>
+
+<dl><dt><a id="ref-rdfconcepts">[RDF Concepts]</a></dt><dd> <cite><a
+href="http://www.w3.org/TR/2003/WD-rdf-concepts-20031010/">Resource Description Framework (RDF) Concepts and Abstract Syntax</a></cite>.  Graham Klyne, Jeremy J. Carroll, and Brian McBride, eds.  W3C Working Draft 10
+October 2003.  Latest version is available at <a
+href="http://www.w3.org/TR/rdf-concepts/">http://www.w3.org/TR/rdf-concepts/</a>.
+</dd></dl>
+
+<hr/>
+
+
+
+</body> </html>
